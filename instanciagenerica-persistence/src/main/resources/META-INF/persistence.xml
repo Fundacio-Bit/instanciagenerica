@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- FITXER AUTOGENERAT -->
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             version="2.2">
+    <persistence-unit name="instanciagenericaPU" transaction-type="JTA">
+        <provider>org.fundaciobit.instanciagenerica.hibernate.CustomHibernatePersistenceProvider</provider>
+        <jta-data-source>java:jboss/datasources/instanciagenericaDS</jta-data-source>
+        
+		<class>org.fundaciobit.instanciagenerica.persistence.FitxerJPA</class>
+		<class>org.fundaciobit.instanciagenerica.persistence.IdiomaJPA</class>
+		<class>org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA</class>
+		<class>org.fundaciobit.instanciagenerica.persistence.TraduccioJPA</class>
+		<class>org.fundaciobit.instanciagenerica.persistence.TraduccioMapJPA</class>
+
+        <!-- Activar cache només per aquelles entitats on volguem expressament -->
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+        <!-- Sempre activar la validació de les propietats -->
+        <validation-mode>CALLBACK</validation-mode>
+
+    </persistence-unit>
+</persistence>

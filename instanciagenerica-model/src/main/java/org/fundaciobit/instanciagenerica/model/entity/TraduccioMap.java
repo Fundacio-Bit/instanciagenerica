@@ -1,0 +1,12 @@
+package org.fundaciobit.instanciagenerica.model.entity;
+
+public interface TraduccioMap extends org.fundaciobit.genapp.common.IGenAppEntity {
+
+	public java.lang.String getValor();
+	public void setValor(java.lang.String _valor_);
+
+
+
+  // ======================================
+
+}
