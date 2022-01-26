@@ -36,8 +36,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 public abstract class AbstractInstanciaGenericaController extends InstanciaGenericaController {
 
-	public static final int NOU_TELEFON_COLUMN = 1;
-	public static final int CALCULAT_COLUMN = -1;
 
 	@Override
 	public String getTileForm() {
@@ -107,23 +105,6 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 			instanciaGenericaFilterForm.setEditButtonVisible(false);
 			instanciaGenericaFilterForm.setVisibleMultipleSelection(false);
 
-			// Telefon columna final
-			AdditionalField<Long, String> adfield5 = new AdditionalField<Long, String>();
-			adfield5.setPosition(NOU_TELEFON_COLUMN);
-			adfield5.setValueField(InstanciaGenericaFields.SOLICITANTTELEFON);
-			adfield5.setEscapeXml(true); // Convertira caracter XML en texto, si fuera false, el tractaria com XML
-			adfield5.setCodeName(InstanciaGenericaFields.SOLICITANTTELEFON.fullName);
-			adfield5.setOrderBy(InstanciaGenericaFields.SOLICITANTTELEFON);// Lo des +43
-
-			instanciaGenericaFilterForm.addAdditionalField(adfield5);
-
-			AdditionalField<Long, String> adfield4 = new AdditionalField<Long, String>();
-			adfield4.setCodeName("calculat");
-			adfield4.setPosition(CALCULAT_COLUMN);
-
-			// Els valors s'ompliran al mètode postList()
-			adfield4.setValueMap(new HashMap<Long, String>());
-			instanciaGenericaFilterForm.addAdditionalField(adfield4);
 
 			instanciaGenericaFilterForm.setOrderBy(InstanciaGenericaFields.DATACREACIO.javaName);
 
@@ -186,23 +167,6 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 		return instanciaGenericaForm;
 	}
 
-	@Override
-	public void postList(HttpServletRequest request, ModelAndView mav, InstanciaGenericaFilterForm filterForm,
-			List<InstanciaGenerica> list) throws I18NException {
-
-		Map<Long, String> map;
-		map = (Map<Long, String>) filterForm.getAdditionalField(CALCULAT_COLUMN).getValueMap();
-		map.clear();
-
-		long key;
-		String value;
-		for (InstanciaGenerica ig : list) {
-			key = ig.getInstanciaGenericaID();
-			value = ig.getSolicitantNom() + " - " + ig.getSolicitantEmail();
-
-			map.put(key, value);
-		}
-	}
 
 	@Override
 	public List<StringKeyValue> getReferenceListForIdiomaID(HttpServletRequest request, ModelAndView mav, Where where)

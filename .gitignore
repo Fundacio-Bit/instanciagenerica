@@ -39,3 +39,13 @@
 /instanciagenerica-back/.settings/org.eclipse.wst.jsdt.ui.superType.name
 /instanciagenerica-back/.settings/org.eclipse.wst.validation.prefs
 /doc/(CAT) Manual Instal.lació InstanciaGenerica.odt
+/back.bat
+/instanciagenerica-back/src/main/resources/genapp_ca.properties
+/instanciagenerica-back/src/main/resources/genapp_en.properties
+/instanciagenerica-back/src/main/resources/genapp_es.properties
+/instanciagenerica-back/src/main/resources/instanciagenerica_genapp_ca.properties
+/instanciagenerica-back/src/main/resources/instanciagenerica_genapp_es.properties
+/instanciagenerica-back/src/main/resources/logicmissatges_ca.properties
+/instanciagenerica-back/src/main/resources/logicmissatges_en.properties
+/instanciagenerica-back/src/main/resources/logicmissatges_es.properties
+target

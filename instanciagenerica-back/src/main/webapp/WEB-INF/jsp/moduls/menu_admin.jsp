@@ -6,13 +6,13 @@
   <ul class="tree" style="margin: 3px; padding: 0px;">
 
 
-    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
+<%--     <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/option1"/>">
         <span style="${(fn:contains(url, 'option1'))? "font-weight: bold;" : ""}">ADMIN: Option 1</span>
       </a>
     </li>
-
+ --%>
    <%-- Example with security: virtual roles  --%>
    <%--
    <sec:authorize access="hasAnyRole('ROLE_SOLI', 'ROLE_DEST', 'ROLE_COLA', 'ROLE_DELE')">
@@ -27,10 +27,16 @@
     <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/instanciaGenerica/list"/>">
-        <span style="${(fn:contains(url, 'list'))? "font-weight: bold;" : ""}">ADMIN: Llistar instancies</span>
+        <span style="${(fn:contains(url, 'instanciaGenerica/list'))? "font-weight: bold;" : ""}">Llistar instancies</span>
       </a>
     </li>
 
+    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
+    <li style="list-style-type: disc; list-style-position: inside;">
+      <a href="<c:url value="/admin/instanciaGenericaProves/list"/>">
+        <span style="${(fn:contains(url, 'instanciaGenericaProves/list'))? "font-weight: bold;" : ""}">Proves Llistar instancies</span>
+      </a>
+    </li>
   <%--   <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
       <a href="<c:url value="/admin/instanciaGenerica/new"/>">
