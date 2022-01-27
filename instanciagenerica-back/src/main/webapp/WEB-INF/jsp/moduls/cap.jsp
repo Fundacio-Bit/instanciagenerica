@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="logoGovern">
-				<img src="<c:url value="/img/app-logo.png"/>" alt="InstanciaGenerica"
+				<img src="<c:url value="/img/app-logo.png"/>" alt="InstanciaGenerica" width="60px" height="60px"
 					title="InstanciaGenerica" />
 			</div>
 
@@ -34,11 +34,19 @@
 			</div>
 			<div>
 				<div>
-					<strong class="subtitol llevarMobil"><fmt:message key="usuari" />: </strong>
-					<span class="subtitolMay">
-                        <%=request.getUserPrincipal()== null? "ANONIM": request.getUserPrincipal().getName()%>
-						|   <%= request.getRemoteUser() %>
-					</span>
+
+<%-- 					<c:if test="${ empty loginInfo  }">
+						<strong class="subtitol llevarMobil"><fmt:message key="usuariNoRegistrat" /> </strong>
+					</c:if> --%>
+					
+					<c:if test="${ not empty loginInfo  }">
+						<strong class="subtitol llevarMobil"><fmt:message key="usuari" />: </strong>
+					
+						<span class="subtitolMay">
+		                       <%=request.getUserPrincipal()== null? "": request.getUserPrincipal().getName()%>
+							|   <%= request.getRemoteUser() %>
+						</span>
+					</c:if>
 				</div>
 			</div>
 		</div>

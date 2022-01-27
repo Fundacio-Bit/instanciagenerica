@@ -33,7 +33,7 @@
 		<div
 			class="col-4 text-center pt-2 text-decoration-none bg-transparent text-uppercase p-2 opcionsPeu elementPeuResponsive">
 
-			<a styleClass="text-dark linkPeu" href="/mapaweb"> <fmt:message
+		<%-- 	<a styleClass="text-dark linkPeu" href="/mapaweb"> <fmt:message
 					key="labels.mapaweb" />
 			</a><br /> <a styleClass="text-dark linkPeu" href="/accessibilitat">
 				<fmt:message key="labels.accessibilitat" />
@@ -41,12 +41,12 @@
 				<fmt:message key="labels.protecciodades" />
 			</a><br /> <a styleClass="text-dark linkPeu" href="/avislegal"> <fmt:message
 					key="labels.avislegal" />
-			</a>
+			</a> --%>
 
 		</div>
 
 		<!-- Dreta -->
-		<div class="col-4 text-center" >
+		<div class="col-4 pt-2 text-center" >
 		  <center>
 			<a href="http://otaeweb.ibit.org/" style="padding-top: 10px" target="_blank"> <img
 				src="<c:url value="/img/fundaciobit-logo-peu.png"/>"
@@ -80,10 +80,10 @@
                         <fmt:message key="ajuda.missatge" />
                     </p>
                     <ul>
-                        <li><fmt:message key="ajuda.viatelefon" /> 123456789</li>
-                        <li><fmt:message key="ajuda.viaweb" /> http://www.help.hl/help</li>
+                        <li><fmt:message key="ajuda.viatelefon" /> 971 17 60 60</li>
+                        <li><fmt:message key="ajuda.viaweb" /> http://www.fundaciobit.org/</li>
                         <li><fmt:message key="ajuda.viaemail" /><a
-                    href="mailto: help@help.hl"> help@help.hl</a></li>
+                    href="mailto: otae@fundaciobit.org"> otae@fundaciobit.org</a></li>
                     </ul>
                 </div>
                 <div class="modal-footer">

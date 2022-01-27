@@ -27,7 +27,7 @@ a:hover{
 	background-color: #fff !important;
 }
 .colorVerd{
-	background-color: #265d3c;
+	background-color: #265d5c;
 	margin-left: 5px;
 }
 .colorVerd:hover:enabled{
@@ -259,7 +259,7 @@ a:hover{
 	content: '\e024\0000a0' !important;
 }
 .bg-aplicacio{
-	background-color: #4dba79 !important;
+	background-color: #4d8179 !important;
 	padding-left: 0px;
 	padding-right: 0px;
 }
