@@ -1,7 +1,4 @@
-# instanciagenerica
-
-
-# ![Logo](https://github.com/GovernIB/maven/blob/binaris/genapp/projectinfo_Attachments/icon.jpg) InstanciaGenerica (instanciagenerica)  
+# ![Logo](https://github.com/Fundacio-Bit/instanciagenerica/blob/instanciagenerica-1.0/instanciagenerica-back/src/main/webapp/img/app-logo.png) InstanciaGenerica (instanciagenerica)  
 *Aplicació d'instancia genèrica*
 
 
