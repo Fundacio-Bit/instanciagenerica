@@ -1,4 +1,4 @@
-# ![Logo](./instanciagenerica-back/src/main/webapp/img/app-logo.png) InstanciaGenerica 1.0 (instanciagenerica-1.0)
+# ![Logo](https://github.com/Fundacio-Bit/instanciagenerica/blob/instanciagenerica-1.0/instanciagenerica-back/src/main/webapp/img/app-logo.png) InstanciaGenerica 1.0 (instanciagenerica-1.0)
  *Registre de Instàncies Genèriques*
 
 ***Versió estable***
