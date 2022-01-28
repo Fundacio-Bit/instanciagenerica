@@ -36,7 +36,8 @@ public class PrincipalController {
 			session.setAttribute("inicialitzat", true);
 		}
 
-		return new ModelAndView("principal");
+//		return new ModelAndView("principal");
+		return new ModelAndView(new RedirectView("/public/instanciagenerica/new", true));
 
 	}
 
@@ -68,11 +69,12 @@ public class PrincipalController {
 			 */
 
 			if ("admin".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/admin/option1", true));
+				return new ModelAndView(new RedirectView("/admin/instanciaGenerica/list/1", true));
 			}
 
 			if ("user".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/user/option1", true));
+//				return new ModelAndView(new RedirectView("/user/option1", true));
+				return new ModelAndView("user");
 			}
 
 			if ("webdb".equals(pipella)) {
@@ -86,7 +88,7 @@ public class PrincipalController {
 			log.error("S'ha accedit a canviarPipella amb un paràmetre desconegut: " + pipella);
 		}
 
-		return new ModelAndView("principal");
+		return new ModelAndView(new RedirectView("/public/instanciagenerica/new", true));
 	}
 
 }

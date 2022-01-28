@@ -14,6 +14,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.LongField;
 import org.fundaciobit.genapp.common.query.StringField;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalField;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.controller.webdb.InstanciaGenericaController;
@@ -35,7 +36,6 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 public abstract class AbstractInstanciaGenericaController extends InstanciaGenericaController {
-
 
 	@Override
 	public String getTileForm() {
@@ -63,7 +63,7 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 
 		if (instanciaGenericaFilterForm.isNou()) {
 
-			List <LongField> longFields = new ArrayList<LongField>();
+			List<LongField> longFields = new ArrayList<LongField>();
 			longFields.add(FITXER1ID);
 			longFields.add(FITXER2ID);
 			longFields.add(FITXER3ID);
@@ -73,19 +73,18 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 			longFields.add(FITXER7ID);
 			longFields.add(FITXER8ID);
 			longFields.add(FITXER9ID);
-			
+
 			longFields.add(INSTANCIAGENERICAID);
-			
-			List <StringField> stringFields = new ArrayList<StringField>();
+
+			List<StringField> stringFields = new ArrayList<StringField>();
 			stringFields.add(EXPOSA);
 			stringFields.add(SOLICITA);
-			
+
 			stringFields.add(NUMREGISTRE);
 			stringFields.add(UUID);
 
 			stringFields.add(SOLICITANTDIRECCIO);
 
-		
 			for (int i = 0; i < longFields.size(); i++) {
 				instanciaGenericaFilterForm.addHiddenField(longFields.get(i));
 			}
@@ -104,7 +103,6 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 			instanciaGenericaFilterForm.setDeleteSelectedButtonVisible(false);
 			instanciaGenericaFilterForm.setEditButtonVisible(false);
 			instanciaGenericaFilterForm.setVisibleMultipleSelection(false);
-
 
 			instanciaGenericaFilterForm.setOrderBy(InstanciaGenericaFields.DATACREACIO.javaName);
 
@@ -136,6 +134,13 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 	@Override
 	public InstanciaGenericaForm getInstanciaGenericaForm(InstanciaGenericaJPA _jpa, boolean __isView,
 			HttpServletRequest request, ModelAndView mav) throws I18NException {
+//
+//		Boolean initialized = (Boolean) session.getAttribute("inicialitzat");
+//
+//		if (initialized == null) {
+//			HtmlUtils.saveMessageInfo(request, "MessageInfo : Benvingut a InstanciaGenerica");
+//			session.setAttribute("inicialitzat", true);
+//		}
 
 		InstanciaGenericaForm instanciaGenericaForm = super.getInstanciaGenericaForm(_jpa, __isView, request, mav);
 
@@ -166,7 +171,6 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 
 		return instanciaGenericaForm;
 	}
-
 
 	@Override
 	public List<StringKeyValue> getReferenceListForIdiomaID(HttpServletRequest request, ModelAndView mav, Where where)

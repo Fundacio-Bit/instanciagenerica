@@ -35,9 +35,9 @@
 			<div>
 				<div>
 
-<%-- 					<c:if test="${ empty loginInfo  }">
-						<strong class="subtitol llevarMobil"><fmt:message key="usuariNoRegistrat" /> </strong>
-					</c:if> --%>
+					<c:if test="${ empty loginInfo  }">
+<%-- 						<strong class="subtitol llevarMobil"><fmt:message key="usuariNoRegistrat" /> </strong>
+ --%>					</c:if>
 					
 					<c:if test="${ not empty loginInfo  }">
 						<strong class="subtitol llevarMobil"><fmt:message key="usuari" />: </strong>
