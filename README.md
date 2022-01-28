@@ -1,7 +1,6 @@
 # ![Logo](https://github.com/Fundacio-Bit/instanciagenerica/blob/instanciagenerica-1.0/instanciagenerica-back/src/main/webapp/img/app-logo.png) InstanciaGenerica (instanciagenerica)  
 *Aplicació d'instancia genèrica*
 
-
 ***Versions***
 
 > - Versió en Desenvolupament: __instanciagenerica-1.0__ (branca [instanciagenerica-1.0](../../tree/instanciagenerica-1.0)) (Correcta)
