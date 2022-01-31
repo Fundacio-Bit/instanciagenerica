@@ -13,6 +13,6 @@ Aplicació per dur el registre de Instàncies Genèriques, amb totes les dades d
 
 Nom | Descripció | Enllaç
 ------------ | ------------- | -------------
-(CAT) Manual Instal.lació.odt | Manual d'instal·lació de l'aplicació | [Document](./doc/(CAT)%20Manual%20Instal.laci%C3%B3.odt)
+(CAT) Manual Instal.lació InstanciaGenerica.odt | Manual d'instal·lació de l'aplicació | [Document](./doc/(CAT)%20Manual%20Instal.laci%C3%B3%20InstanciaGenerica.odt)
 
 
