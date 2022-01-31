@@ -44,7 +44,27 @@
 			console.log(elem.options);
 			console.log(elem.selectedIndex);
 		}
-	</script>
+		
+		for (var i = 1; i <= 9; i++) {
+/* 			$("#instanciaGenerica_fitxer" + i + "ID_rowid").hide();
+ */			$("#fitxer" + i + "ID").on('change', mifunc(i));
+		}
+
+		function mifunc(i){
+			console.log("hola fichero " + i);
+			var ruta = $('#fitxer' + i + 'ID').val(); 
+			var rutaArray = ruta.split('\\');
+
+			console.log(ruta);
+			console.log(rutaArray);
+			
+/* 			$('#fitxer' + i + 'ID-custom-file-label').css('display','block');
+			$('#fitxer' + i + 'ID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+ */		
+		}
+/* 		instanciaGenerica_fitxer6ID_rowid
+		fitxer6ID
+ */	</script>
 </c:if>
 
 
