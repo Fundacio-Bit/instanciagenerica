@@ -3,7 +3,7 @@
 
 ***Versió estable***
 
-> __instanciagenerica-1.0.0-caib__ (branca [instanciagenerica-1.0](../../tree/instanciagenerica-1.0))
+> __instanciagenerica-1.0.0__ (branca [instanciagenerica-1.0](../../tree/instanciagenerica-1.0))
 
 ***Descripció***
 
