@@ -7,7 +7,7 @@
 
 ***Descripció***
 
-Aplicació generada amb GenApp per dur el registre d'instancies genèriques de la caib. Caracteristiques:
+Aplicació generada amb GenApp per dur el registre d'instancies genèriques de la Fundació BIT. Caracteristiques:
 * Es poden afegir instancies del tipus exposa-solicita
 * Les instancies poden incloure fins a 9 fitxers
 * Llistat de instances. Es pot ordenar, filtrar i agrupar.
