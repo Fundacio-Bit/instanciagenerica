@@ -209,6 +209,22 @@ public class InstanciaGenericaValidator<I extends InstanciaGenerica>
       }
     }
 
+    if (__vr.getFieldErrorCount(ERROR) == 0) {
+      java.lang.String __error = __target__.getError();
+      if (__error!= null && __error.length() > 2147483647) {
+        __vr.rejectValue(ERROR, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ERROR)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(EXCEPTION) == 0) {
+      java.lang.String __exception = __target__.getException();
+      if (__exception!= null && __exception.length() > 2147483647) {
+        __vr.rejectValue(EXCEPTION, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(EXCEPTION)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+      }
+    }
+
     if (__isNou__) { // Creació
       // ================ CREATION
       // Fitxers 

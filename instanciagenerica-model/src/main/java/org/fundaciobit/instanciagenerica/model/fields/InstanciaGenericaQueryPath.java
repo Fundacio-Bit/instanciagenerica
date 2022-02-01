@@ -119,6 +119,22 @@ public class InstanciaGenericaQueryPath extends org.fundaciobit.genapp.common.qu
     return new LongField(getQueryPath(), InstanciaGenericaFields.FITXER9ID);
   }
 
+  public IntegerField ESTAT() {
+    return new IntegerField(getQueryPath(), InstanciaGenericaFields.ESTAT);
+  }
+
+  public StringField ERROR() {
+    return new StringField(getQueryPath(), InstanciaGenericaFields.ERROR);
+  }
+
+  public StringField EXCEPTION() {
+    return new StringField(getQueryPath(), InstanciaGenericaFields.EXCEPTION);
+  }
+
+  public TimestampField DATAFINALITZACIO() {
+    return new TimestampField(getQueryPath(), InstanciaGenericaFields.DATAFINALITZACIO);
+  }
+
 
 
   @Override

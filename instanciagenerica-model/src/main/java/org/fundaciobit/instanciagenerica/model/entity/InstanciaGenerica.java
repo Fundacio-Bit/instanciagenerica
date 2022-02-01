@@ -83,6 +83,18 @@ public interface InstanciaGenerica extends org.fundaciobit.genapp.common.IGenApp
 	public java.lang.Long getFitxer9ID();
 	public void setFitxer9ID(java.lang.Long _fitxer9ID_);
 
+	public int getEstat();
+	public void setEstat(int _estat_);
+
+	public java.lang.String getError();
+	public void setError(java.lang.String _error_);
+
+	public java.lang.String getException();
+	public void setException(java.lang.String _exception_);
+
+	public java.sql.Timestamp getDatafinalitzacio();
+	public void setDatafinalitzacio(java.sql.Timestamp _datafinalitzacio_);
+
   // Fitxer
   public <F extends Fitxer> F getFitxer1();
   // Fitxer

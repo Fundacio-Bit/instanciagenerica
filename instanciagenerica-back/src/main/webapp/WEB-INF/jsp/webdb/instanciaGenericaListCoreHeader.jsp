@@ -93,6 +93,18 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.FITXER9ID)}">
         <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.FITXER9ID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.ESTAT)}">
+        <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.ESTAT)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.ERROR)}">
+        <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.ERROR)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.EXCEPTION)}">
+        <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.EXCEPTION)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.DATAFINALITZACIO)}">
+        <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.DATAFINALITZACIO)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

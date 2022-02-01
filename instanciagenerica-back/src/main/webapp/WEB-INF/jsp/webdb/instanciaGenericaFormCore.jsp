@@ -929,3 +929,123 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.ESTAT)}">
+        <tr id="instanciaGenerica_estat_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.ESTAT])?'instanciaGenerica.estat':__theForm.labels[InstanciaGenericaFields.ESTAT]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[InstanciaGenericaFields.ESTAT]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[InstanciaGenericaFields.ESTAT]}" ></i>
+              </c:if>
+            </td>
+            <td>
+            <form:errors path="instanciaGenerica.estat" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.ESTAT)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.ESTAT)? ' uneditable-input' : ''}"  style=""  path="instanciaGenerica.estat"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.ERROR)}">
+        <tr id="instanciaGenerica_error_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.ERROR])?'instanciaGenerica.error':__theForm.labels[InstanciaGenericaFields.ERROR]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[InstanciaGenericaFields.ERROR]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[InstanciaGenericaFields.ERROR]}" ></i>
+              </c:if>
+            </td>
+            <td>
+              <form:errors path="instanciaGenerica.error" cssClass="errorField alert alert-danger" />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.ERROR)? 'true' : 'false'}" path="instanciaGenerica.error"  />
+      <div id="dropdownMenuButton_error" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_error" class="dropdown-menu">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.error'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.error'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.error'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
+      <script type="text/javascript">
+			$('#dropdownMenuButton_error').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_error').css('display') != 'none') ? 'none' : 'block';
+                 $('#dropdownMenuContainer_error').css('display', valor);
+                 return false;
+				});
+      </script>           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.EXCEPTION)}">
+        <tr id="instanciaGenerica_exception_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.EXCEPTION])?'instanciaGenerica.exception':__theForm.labels[InstanciaGenericaFields.EXCEPTION]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[InstanciaGenericaFields.EXCEPTION]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[InstanciaGenericaFields.EXCEPTION]}" ></i>
+              </c:if>
+            </td>
+            <td>
+              <form:errors path="instanciaGenerica.exception" cssClass="errorField alert alert-danger" />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.EXCEPTION)? 'true' : 'false'}" path="instanciaGenerica.exception"  />
+      <div id="dropdownMenuButton_exception" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_exception" class="dropdown-menu">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.exception'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.exception'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.exception'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
+      <script type="text/javascript">
+			$('#dropdownMenuButton_exception').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_exception').css('display') != 'none') ? 'none' : 'block';
+                 $('#dropdownMenuContainer_exception').css('display', valor);
+                 return false;
+				});
+      </script>           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.DATAFINALITZACIO)}">
+        <tr id="instanciaGenerica_datafinalitzacio_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.DATAFINALITZACIO])?'instanciaGenerica.datafinalitzacio':__theForm.labels[InstanciaGenericaFields.DATAFINALITZACIO]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[InstanciaGenericaFields.DATAFINALITZACIO]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[InstanciaGenericaFields.DATAFINALITZACIO]}" ></i>
+              </c:if>
+            </td>
+            <td>
+              <form:errors path="instanciaGenerica.datafinalitzacio" cssClass="errorField alert alert-danger" />
+    <div class="container">
+      <div class="row">
+            <div class="form-group">
+                <div class="input-group date" id="instanciaGenerica_datafinalitzacio" data-target-input="nearest">
+                      <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.DATAFINALITZACIO)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#instanciaGenerica_datafinalitzacio" path="instanciaGenerica.datafinalitzacio" />
+                    <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.DATAFINALITZACIO)}" >
+                    <div class="input-group-append"  data-target="#instanciaGenerica_datafinalitzacio"  data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                    </c:if>
+                </div>
+            </div>
+          <script type="text/javascript">
+            $(function () {
+                $('#instanciaGenerica_datafinalitzacio').datetimepicker({
+                    format: '${gen:getJSDateTimePattern()}',
+                    locale: '${lang}',
+                    icons: {
+                       time: 'far fa-clock'
+                    }
+                });
+            });
+          </script>        </div>
+      </div>
+           </td>
+        </tr>
+        </c:if>
+        

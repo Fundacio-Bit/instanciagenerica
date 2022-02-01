@@ -56,7 +56,7 @@
 
 			if (ruta == "") {
 				action = "eliminar";
-				if()
+//				if()
 				
 			} else if (fitxrersArray[i] == "") {
 				action = "afegir";

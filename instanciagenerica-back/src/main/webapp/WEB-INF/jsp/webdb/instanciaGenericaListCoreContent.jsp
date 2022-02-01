@@ -187,6 +187,24 @@
             </c:if>
            </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.ESTAT)}">
+          <td>
+          ${instanciaGenerica.estat}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.ERROR)}">
+          <td>
+          ${instanciaGenerica.error}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.EXCEPTION)}">
+          <td>
+          ${instanciaGenerica.exception}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.DATAFINALITZACIO)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${instanciaGenerica.datafinalitzacio}" /></td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

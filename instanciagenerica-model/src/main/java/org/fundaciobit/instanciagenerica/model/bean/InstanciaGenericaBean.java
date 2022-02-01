@@ -37,6 +37,10 @@ private static final long serialVersionUID = -814318814L;
 	java.lang.Long fitxer7ID;
 	java.lang.Long fitxer8ID;
 	java.lang.Long fitxer9ID;
+	int estat;
+	java.lang.String error;
+	java.lang.String exception;
+	java.sql.Timestamp datafinalitzacio;
 
 
   /** Constructor Buit */
@@ -44,7 +48,7 @@ private static final long serialVersionUID = -814318814L;
   }
 
   /** Constructor amb tots els camps  */
-  public InstanciaGenericaBean(long instanciaGenericaID , java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , long titolID , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID) {
+  public InstanciaGenericaBean(long instanciaGenericaID , java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , long titolID , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , int estat , java.lang.String error , java.lang.String exception , java.sql.Timestamp datafinalitzacio) {
     this.instanciaGenericaID=instanciaGenericaID;
     this.numRegistre=numRegistre;
     this.uuid=uuid;
@@ -72,9 +76,13 @@ private static final long serialVersionUID = -814318814L;
     this.fitxer7ID=fitxer7ID;
     this.fitxer8ID=fitxer8ID;
     this.fitxer9ID=fitxer9ID;
+    this.estat=estat;
+    this.error=error;
+    this.exception=exception;
+    this.datafinalitzacio=datafinalitzacio;
 }
   /** Constructor sense valors autoincrementals */
-  public InstanciaGenericaBean(java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , long titolID , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID) {
+  public InstanciaGenericaBean(java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , long titolID , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , int estat , java.lang.String error , java.lang.String exception , java.sql.Timestamp datafinalitzacio) {
     this.numRegistre=numRegistre;
     this.uuid=uuid;
     this.dataCreacio=dataCreacio;
@@ -101,6 +109,10 @@ private static final long serialVersionUID = -814318814L;
     this.fitxer7ID=fitxer7ID;
     this.fitxer8ID=fitxer8ID;
     this.fitxer9ID=fitxer9ID;
+    this.estat=estat;
+    this.error=error;
+    this.exception=exception;
+    this.datafinalitzacio=datafinalitzacio;
 }
   /** Constructor dels valors Not Null */
   public InstanciaGenericaBean(long instanciaGenericaID , java.lang.String numRegistre , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , long titolID , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita) {
@@ -146,6 +158,10 @@ private static final long serialVersionUID = -814318814L;
     this.setFitxer7ID(__bean.getFitxer7ID());
     this.setFitxer8ID(__bean.getFitxer8ID());
     this.setFitxer9ID(__bean.getFitxer9ID());
+    this.setEstat(__bean.getEstat());
+    this.setError(__bean.getError());
+    this.setException(__bean.getException());
+    this.setDatafinalitzacio(__bean.getDatafinalitzacio());
     // Fitxer
     this.setFitxer1(FitxerBean.toBean(__bean.getFitxer1()));
     // Fitxer
@@ -355,6 +371,34 @@ private static final long serialVersionUID = -814318814L;
 		this.fitxer9ID = _fitxer9ID_;
 	};
 
+	public int getEstat() {
+		return(estat);
+	};
+	public void setEstat(int _estat_) {
+		this.estat = _estat_;
+	};
+
+	public java.lang.String getError() {
+		return(error);
+	};
+	public void setError(java.lang.String _error_) {
+		this.error = _error_;
+	};
+
+	public java.lang.String getException() {
+		return(exception);
+	};
+	public void setException(java.lang.String _exception_) {
+		this.exception = _exception_;
+	};
+
+	public java.sql.Timestamp getDatafinalitzacio() {
+		return(datafinalitzacio);
+	};
+	public void setDatafinalitzacio(java.sql.Timestamp _datafinalitzacio_) {
+		this.datafinalitzacio = _datafinalitzacio_;
+	};
+
 
 
   // ======================================
@@ -389,6 +433,10 @@ private static final long serialVersionUID = -814318814L;
     __tmp.setFitxer7ID(__bean.getFitxer7ID());
     __tmp.setFitxer8ID(__bean.getFitxer8ID());
     __tmp.setFitxer9ID(__bean.getFitxer9ID());
+    __tmp.setEstat(__bean.getEstat());
+    __tmp.setError(__bean.getError());
+    __tmp.setException(__bean.getException());
+    __tmp.setDatafinalitzacio(__bean.getDatafinalitzacio());
     // Fitxer
     __tmp.setFitxer1(FitxerBean.toBean(__bean.getFitxer1()));
     // Fitxer
