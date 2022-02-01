@@ -26,15 +26,15 @@
 
     <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
-      <a href="<c:url value="/admin/instanciaGenerica/list"/>">
-        <span style="${(fn:contains(url, 'instanciaGenerica/list'))? "font-weight: bold;" : ""}">Llistar instancies</span>
+      <a href="<c:url value="/admin/instanciagenerica/list"/>">
+        <span style="${(fn:contains(url, 'instanciagenerica/list'))? "font-weight: bold;" : ""}">Llistar instancies</span>
       </a>
     </li>
 
     <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
-      <a href="<c:url value="/admin/instanciaGenericaProves/list"/>">
-        <span style="${(fn:contains(url, 'instanciaGenericaProves/list'))? "font-weight: bold;" : ""}">Proves Llistar instancies</span>
+      <a href="<c:url value="/admin/instanciagenericaproves/list"/>">
+        <span style="${(fn:contains(url, 'instanciagenericaproves/list'))? "font-weight: bold;" : ""}">Proves Llistar instancies</span>
       </a>
     </li>
   <%--   <hr  style="margin-top: 6px;  margin-bottom: 6px;" />

@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-@RequestMapping(value = "/admin/instanciaGenerica")
+@RequestMapping(value = "/admin/instanciagenerica")
 @SessionAttributes(types = { InstanciaGenericaForm.class, InstanciaGenericaFilterForm.class })
 public class InstanciaGenericaAdminController extends AbstractInstanciaGenericaController {
 

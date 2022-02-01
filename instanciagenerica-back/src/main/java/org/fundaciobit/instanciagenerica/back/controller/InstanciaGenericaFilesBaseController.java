@@ -22,47 +22,46 @@ import javax.ejb.EJB;
  * 
  */
 @Controller
-public abstract class InstanciaGenericaFilesBaseController<I extends IGenAppEntity,PK extends Object,F extends BaseForm> extends CommonFilesBaseController<I,PK,F,Fitxer>{
+public abstract class InstanciaGenericaFilesBaseController<I extends IGenAppEntity, PK extends Object, F extends BaseForm>
+		extends CommonFilesBaseController<I, PK, F, Fitxer> {
 
-
-	@EJB(mappedName=FitxerService.JNDI_NAME)
+	@EJB(mappedName = FitxerService.JNDI_NAME)
 	protected FitxerService fitxerEjb;
-
 
 	/**
 	 * 
 	 * @return
 	 */
-	protected FilesFormManager<Fitxer>
-
-	getFilesFormManager() {
-    return new InstanciaGenericaFilesFormManager(fitxerEjb);
-  }
+	protected FilesFormManager<Fitxer> getFilesFormManager() {
+		return new InstanciaGenericaFilesFormManager(fitxerEjb);
+	}
 
 	/**
-   * 
-   * @param arxiu
-   * @return
-   */
-  public boolean deleteFile(Long fileID) {
-    if (fileID != null) {
-      Fitxer file = null;
-      try {
-        file = fitxerEjb.findByPrimaryKey(fileID);
-        if (file != null) {
-          fitxerEjb.delete(file);
-        }
-      } catch (I18NException e) {
-            log.error("Error esborrant arxiu fisic amb id=" + fileID +
-                ((file == null)? "" : ("("+ file.getNom() + ")")) + ": " + I18NUtils.getMessage(e),e);
-      } catch (Exception e) {
-            log.error("Error esborrant arxiu fisic amb id=" + fileID +
-              ((file == null)? "" : ("("+ file.getNom() + ")")) + ": " + e.getMessage(),e);
-      }
+	 * 
+	 * @param arxiu
+	 * @return
+	 */
+	public boolean deleteFile(Long fileID) {
+		if (fileID != null) {
+			Fitxer file = null;
+			try {
+				file = fitxerEjb.findByPrimaryKey(fileID);
+				if (file != null) {
+					fitxerEjb.delete(file);
+				}
+			} catch (I18NException e) {
+				log.error(
+						"Error esborrant arxiu fisic amb id=" + fileID
+								+ ((file == null) ? "" : ("(" + file.getNom() + ")")) + ": " + I18NUtils.getMessage(e),
+						e);
+			} catch (Exception e) {
+				log.error("Error esborrant arxiu fisic amb id=" + fileID
+						+ ((file == null) ? "" : ("(" + file.getNom() + ")")) + ": " + e.getMessage(), e);
+			}
 
-      return FileSystemManager.eliminarArxiu(fileID);
-    }
-    return true;
-  }
+			return FileSystemManager.eliminarArxiu(fileID);
+		}
+		return true;
+	}
 
 }

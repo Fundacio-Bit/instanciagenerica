@@ -69,7 +69,7 @@ public class PrincipalController {
 			 */
 
 			if ("admin".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/admin/instanciaGenerica/list/1", true));
+				return new ModelAndView(new RedirectView("/admin/instanciagenerica/list/1", true));
 			}
 
 			if ("user".equals(pipella)) {

@@ -37,34 +37,52 @@
 			}
 		}
 
-//		onChangeSolicitantPersonaFisica($("#instanciaGenerica_solicitantPersonaFisica"));
-
-		function onChangeSolicitantTipusAdminID(elem) {
-			console.log(elem.value);
-			console.log(elem.options);
-			console.log(elem.selectedIndex);
-		}
-		
+		var fitxrersArray = Array(9);
+		var contador = 3;
 		for (var i = 1; i <= 9; i++) {
-/* 			$("#instanciaGenerica_fitxer" + i + "ID_rowid").hide();
- */			$("#fitxer" + i + "ID").on('change', mifunc(i));
+			$("#fitxer" + i + "ID").on("change", {
+				pepito : i
+			}, mifunc);
+			if (i > contador) {
+				$("#instanciaGenerica_fitxer" + i + "ID_rowid").hide();
+			}
 		}
 
-		function mifunc(i){
-			console.log("hola fichero " + i);
-			var ruta = $('#fitxer' + i + 'ID').val(); 
-			var rutaArray = ruta.split('\\');
+		function mifunc(event) {
+			var i = event.data.pepito;
+			var ruta = $("#fitxer" + i + "ID").val();
 
-			console.log(ruta);
-			console.log(rutaArray);
+			var action;
+
+			if (ruta == "") {
+				action = "eliminar";
+				if()
+				
+			} else if (fitxrersArray[i] == "") {
+				action = "afegir";
+				fitxrersArray[i] = ruta;
+
+			} else if (fitxrersArray[i] == ruta) {
+				action = "modificar";
+			}
+
 			
-/* 			$('#fitxer' + i + 'ID-custom-file-label').css('display','block');
-			$('#fitxer' + i + 'ID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
- */		
+			
+			
+			console.log("Fichero " + i + ": " + ruta);
+
+			if (ruta == "") {
+				//S'ha eliminat un fitxer
+			} else {
+
+			}
+			contador++;
+
 		}
-/* 		instanciaGenerica_fitxer6ID_rowid
-		fitxer6ID
- */	</script>
+		/* 		instanciaGenerica_fitxer6ID_rowid
+		 fitxer6ID
+		 */
+	</script>
 </c:if>
 
 

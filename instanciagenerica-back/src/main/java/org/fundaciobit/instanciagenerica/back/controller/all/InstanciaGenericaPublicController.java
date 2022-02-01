@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.controller.AbstractInstanciaGenericaController;
+import org.fundaciobit.instanciagenerica.back.controller.InstanciaGenericaFilesFormManager;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaFilterForm;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaForm;
+import org.fundaciobit.instanciagenerica.model.entity.Fitxer;
 import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 import org.springframework.stereotype.Controller;
@@ -33,6 +36,16 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 	@EJB(mappedName = org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicService.JNDI_NAME)
 	protected org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicService instanciaGenericaLogicEjb;
 
+	@EJB(mappedName = org.fundaciobit.instanciagenerica.logic.FitxerLogicService.JNDI_NAME)
+	protected org.fundaciobit.instanciagenerica.logic.FitxerLogicService fitxerLogicEjb;
+
+		
+	@Override
+	protected FilesFormManager<Fitxer> getFilesFormManager() {
+		return new InstanciaGenericaFilesFormManager(fitxerLogicEjb);
+	}
+
+	
 	@Override
 	public InstanciaGenericaFilterForm getInstanciaGenericaFilterForm(Integer pagina, ModelAndView mav,
 			HttpServletRequest request) throws I18NException {

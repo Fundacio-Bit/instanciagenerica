@@ -32,7 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 @Controller
-@RequestMapping(value = "/admin/instanciaGenericaProves")
+@RequestMapping(value = "/admin/instanciagenericaproves")
 @SessionAttributes(types = { InstanciaGenericaForm.class, InstanciaGenericaFilterForm.class })
 public class InstanciaGenericaProvesAdminController extends InstanciaGenericaAdminController {
 
