@@ -37,13 +37,14 @@
 			}
 		}
 
-		var fitxrersArray = Array(9);
-		var contador = 3;
+		var fitxrersArray = Array(10).fill("");
+		var contador = 0;
+		var idx_files = 3;
 		for (var i = 1; i <= 9; i++) {
 			$("#fitxer" + i + "ID").on("change", {
 				pepito : i
 			}, mifunc);
-			if (i > contador) {
+			if (i > idx_files) {
 				$("#instanciaGenerica_fitxer" + i + "ID_rowid").hide();
 			}
 		}
@@ -54,29 +55,38 @@
 
 			var action;
 
-			if (ruta == "") {
-				action = "eliminar";
-//				if()
-				
-			} else if (fitxrersArray[i] == "") {
-				action = "afegir";
-				fitxrersArray[i] = ruta;
+			if (ruta.localeCompare("") == 0) {
+				console.log("eliminar");
+				contador--;
+				console.log("	cont:" + contador + " - idx:" + idx_files);
 
-			} else if (fitxrersArray[i] == ruta) {
-				action = "modificar";
-			}
+				if (contador == idx_files - 3) {
+					$("#instanciaGenerica_fitxer" + idx_files + "ID_rowid")
+							.hide();
+					idx_files--;
+				}
+				console.log("	cont:" + contador + " - idx:" + idx_files);
 
-			
-			
-			
+			} else if (fitxrersArray[i].localeCompare("") == 0) {
+				console.log("afegir");
+				contador++;
+				console.log("	cont:" + contador + " - idx:" + idx_files);
+				if (contador == idx_files - 1) {
+					idx_files++;
+					$("#instanciaGenerica_fitxer" + idx_files + "ID_rowid").show();
+				}
+				console.log("	cont:" + contador + " - idx:" + idx_files);
+
+				/* 	} else if (!fitxrersArray[i].equals(ruta)) {
+						action = "modificar";
+				 */}
+
+			fitxrersArray[i] = ruta;
+
 			console.log("Fichero " + i + ": " + ruta);
+			console.log(fitxrersArray);
 
-			if (ruta == "") {
-				//S'ha eliminat un fitxer
-			} else {
-
-			}
-			contador++;
+			
 
 		}
 		/* 		instanciaGenerica_fitxer6ID_rowid

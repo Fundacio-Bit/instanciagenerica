@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
@@ -20,6 +21,7 @@ import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.controller.webdb.InstanciaGenericaController;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaFilterForm;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaForm;
+import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.instanciagenerica.model.fields.IdiomaFields;
 import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
@@ -36,6 +38,9 @@ import org.springframework.web.servlet.ModelAndView;
  */
 
 public abstract class AbstractInstanciaGenericaController extends InstanciaGenericaController {
+
+	@EJB(mappedName = org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicService.JNDI_NAME)
+	protected org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicService instanciaGenericaLogicEjb;
 
 	@Override
 	public String getTileForm() {
@@ -63,41 +68,34 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 
 		if (instanciaGenericaFilterForm.isNou()) {
 
-			List<LongField> longFields = new ArrayList<LongField>();
-			longFields.add(FITXER1ID);
-			longFields.add(FITXER2ID);
-			longFields.add(FITXER3ID);
-			longFields.add(FITXER4ID);
-			longFields.add(FITXER5ID);
-			longFields.add(FITXER6ID);
-			longFields.add(FITXER7ID);
-			longFields.add(FITXER8ID);
-			longFields.add(FITXER9ID);
+			instanciaGenericaFilterForm.addHiddenField(INSTANCIAGENERICAID);
 
-			longFields.add(INSTANCIAGENERICAID);
+			instanciaGenericaFilterForm.addHiddenField(NUMREGISTRE);
+			instanciaGenericaFilterForm.addHiddenField(UUID);
 
-			List<StringField> stringFields = new ArrayList<StringField>();
-			stringFields.add(EXPOSA);
-			stringFields.add(SOLICITA);
-
-			stringFields.add(NUMREGISTRE);
-			stringFields.add(UUID);
-
-			stringFields.add(SOLICITANTDIRECCIO);
-
-			for (int i = 0; i < longFields.size(); i++) {
-				instanciaGenericaFilterForm.addHiddenField(longFields.get(i));
-			}
-
-			for (int i = 0; i < stringFields.size(); i++) {
-				instanciaGenericaFilterForm.addHiddenField(stringFields.get(i));
-			}
-
+			instanciaGenericaFilterForm.addHiddenField(SOLICITANTDIRECCIO);
 			instanciaGenericaFilterForm.addHiddenField(SOLICITANTTIPUSADMINID); // TIPO DE DOCUMENT
 			instanciaGenericaFilterForm.addHiddenField(SOLICITANTPERSONAFISICA);
 
-//			instanciaGenericaFilterForm.addHiddenField(InstanciaGenericaFields.);
+			instanciaGenericaFilterForm.addHiddenField(EXPOSA);
+			instanciaGenericaFilterForm.addHiddenField(SOLICITA);
 
+			instanciaGenericaFilterForm.addHiddenField(FITXER1ID);
+			instanciaGenericaFilterForm.addHiddenField(FITXER2ID);
+			instanciaGenericaFilterForm.addHiddenField(FITXER3ID);
+			instanciaGenericaFilterForm.addHiddenField(FITXER4ID);
+			instanciaGenericaFilterForm.addHiddenField(FITXER5ID);
+			instanciaGenericaFilterForm.addHiddenField(FITXER6ID);
+			instanciaGenericaFilterForm.addHiddenField(FITXER7ID);
+			instanciaGenericaFilterForm.addHiddenField(FITXER8ID);
+			instanciaGenericaFilterForm.addHiddenField(FITXER9ID);
+
+			instanciaGenericaFilterForm.addHiddenField(InstanciaGenericaFields.ESTAT);
+			instanciaGenericaFilterForm.addHiddenField(InstanciaGenericaFields.ERROR);
+			instanciaGenericaFilterForm.addHiddenField(InstanciaGenericaFields.EXCEPTION);
+			instanciaGenericaFilterForm.addHiddenField(InstanciaGenericaFields.DATAFINALITZACIO);
+
+			
 			instanciaGenericaFilterForm.setAddButtonVisible(false);
 			instanciaGenericaFilterForm.setDeleteButtonVisible(false);
 			instanciaGenericaFilterForm.setDeleteSelectedButtonVisible(false);
@@ -105,6 +103,7 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 			instanciaGenericaFilterForm.setVisibleMultipleSelection(false);
 
 			instanciaGenericaFilterForm.setOrderBy(InstanciaGenericaFields.DATACREACIO.javaName);
+			instanciaGenericaFilterForm.setOrderAsc(false);
 
 			instanciaGenericaFilterForm.setVisibleExportList(true);
 		}
@@ -144,7 +143,22 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 
 		InstanciaGenericaForm instanciaGenericaForm = super.getInstanciaGenericaForm(_jpa, __isView, request, mav);
 
-		if (instanciaGenericaForm.isNou()) {
+		if (__isView) {
+			log.info("Vista de Instancia Generica amb id="
+					+ instanciaGenericaForm.getInstanciaGenerica().getInstanciaGenericaID());
+			// Ocultar campos que sean de la vista
+
+			if (instanciaGenericaForm.getInstanciaGenerica().getEstat() == Constants.ESTAT_ERROR) {
+
+			} else {
+				String url = "";
+				HtmlUtils.saveMessageInfo(request, "La seva Instancia Genèrica s'ha creat correctamente");
+				HtmlUtils.saveMessageInfo(request,
+						"Per poder veure informació de la seva instancia guardi's aquesta URL: " + url);
+
+			}
+
+		} else if (instanciaGenericaForm.isNou()) {
 			log.info("Formulari per nou element");
 
 			instanciaGenericaForm.addHelpToField(SOLICITANTPERSONAFISICA,
@@ -161,6 +175,13 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 			instanciaGenericaForm.addReadOnlyField(DATACREACIO);
 
 			instanciaGenericaForm.getInstanciaGenerica().setSolicitantEmail("hola.bones@abstract.com");
+
+
+			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.ESTAT);
+			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.ERROR);
+			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.EXCEPTION);
+			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.DATAFINALITZACIO);
+
 
 		} else {
 			log.info("Formulari per editar un element:"

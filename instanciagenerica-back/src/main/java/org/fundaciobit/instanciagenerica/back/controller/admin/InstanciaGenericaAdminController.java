@@ -35,6 +35,8 @@ public class InstanciaGenericaAdminController extends AbstractInstanciaGenericaC
 
 		if (instanciaGenericaFilterForm.isNou()) {
 			instanciaGenericaFilterForm.addHiddenField(InstanciaGenericaFields.SOLICITANTTIPUSADMINID); // TIPO DE
+			instanciaGenericaFilterForm.setOrderBy(_TABLE_MODEL);
+		
 		}
 
 		return instanciaGenericaFilterForm;

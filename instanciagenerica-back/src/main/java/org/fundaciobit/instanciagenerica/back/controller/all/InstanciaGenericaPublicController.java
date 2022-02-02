@@ -4,9 +4,11 @@ import java.util.Random;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.controller.AbstractInstanciaGenericaController;
@@ -18,7 +20,9 @@ import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,19 +37,15 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(types = { InstanciaGenericaForm.class, InstanciaGenericaFilterForm.class })
 public class InstanciaGenericaPublicController extends AbstractInstanciaGenericaController {
 
-	@EJB(mappedName = org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicService.JNDI_NAME)
-	protected org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicService instanciaGenericaLogicEjb;
 
 	@EJB(mappedName = org.fundaciobit.instanciagenerica.logic.FitxerLogicService.JNDI_NAME)
 	protected org.fundaciobit.instanciagenerica.logic.FitxerLogicService fitxerLogicEjb;
 
-		
 	@Override
 	protected FilesFormManager<Fitxer> getFilesFormManager() {
 		return new InstanciaGenericaFilesFormManager(fitxerLogicEjb);
 	}
 
-	
 	@Override
 	public InstanciaGenericaFilterForm getInstanciaGenericaFilterForm(Integer pagina, ModelAndView mav,
 			HttpServletRequest request) throws I18NException {
@@ -68,12 +68,13 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 		mav.addObject("mostrarScript", true);
 
+		
 		if (instanciaGenericaForm.isNou()) {
 			log.info("PUBLIC: Formulari per nou element");
 			// TODO: Modificar tema cost
 
 			InstanciaGenericaJPA ig = instanciaGenericaForm.getInstanciaGenerica();
-			
+
 			String valorDado = new Random().nextInt(1000) + "";
 			ig.setNumRegistre(valorDado);
 
@@ -120,16 +121,18 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 	@Override
 	public boolean isActiveFormView() {
-		return false;
+		return true;
 	}
 
 	// Despres de crear, a on ha d'anar
 	@Override
 	public String getRedirectWhenCreated(HttpServletRequest request, InstanciaGenericaForm instanciaGenericaForm) {
-		return "redirect:/";
+
+
+		return "redirect:" + getContextWeb() + "/v/" + instanciaGenericaForm.getInstanciaGenerica().getUuid();
+
 	}
 
-	
 	@Override
 	public void postValidate(HttpServletRequest request, InstanciaGenericaForm instanciaGenericaForm,
 			BindingResult result) throws I18NException {
@@ -137,9 +140,9 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 		InstanciaGenericaJPA ig = instanciaGenericaForm.getInstanciaGenerica();
 
 		if (ig.isSolicitantPersonaFisica()) {
-			
+
 			ig.setSolicitantRaoSocial(null);
-			
+
 			if (ig.getSolicitantNom() == null || ig.getSolicitantNom().trim().length() == 0) {
 				result.rejectValue(get(InstanciaGenericaFields.SOLICITANTNOM), "genapp.validation.required",
 						new String[] { I18NUtils.tradueix(get(InstanciaGenericaFields.SOLICITANTNOM)) }, null);
@@ -155,12 +158,39 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			ig.setSolicitantNom(null);
 			ig.setSolicitantLlinatge1(null);
 			ig.setSolicitantLlinatge2(null);
-			
+
 			if (ig.getSolicitantRaoSocial() == null || ig.getSolicitantRaoSocial().trim().length() == 0) {
 				result.rejectValue(get(InstanciaGenericaFields.SOLICITANTRAOSOCIAL), "genapp.validation.required",
 						new String[] { I18NUtils.tradueix(get(InstanciaGenericaFields.SOLICITANTRAOSOCIAL)) }, null);
 			}
 		}
+	}
+
+	@Override
+	@RequestMapping(value = "/view/{instanciaGenericaID}", method = RequestMethod.GET)
+	public ModelAndView veureInstanciaGenericaGet(
+			@PathVariable("instanciaGenericaID") java.lang.Long instanciaGenericaID, HttpServletRequest request,
+			HttpServletResponse response) throws I18NException {
+		// return editAndViewInstanciaGenericaGet(instanciaGenericaID, request,
+		// response, true);
+		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		return null;
+	}
+
+	@RequestMapping(value = "/v/{uuid}", method = RequestMethod.GET)
+	public ModelAndView veureInstanciaGenericaUuidGet(@PathVariable("uuid") String uuid, HttpServletRequest request,
+			HttpServletResponse response) throws I18NException {
+
+		long instanciaGenericaID = instanciaGenericaLogicEjb
+				.executeQueryOne(InstanciaGenericaFields.INSTANCIAGENERICAID, InstanciaGenericaFields.UUID.equal(uuid));
+
+		return editAndViewInstanciaGenericaGet(instanciaGenericaID, request, response, true);
+	}
+
+	@Override
+	public InstanciaGenericaJPA findByPrimaryKey(HttpServletRequest request, java.lang.Long instanciaGenericaID)
+			throws I18NException {
+		return (InstanciaGenericaJPA) instanciaGenericaLogicEjb.findByPrimaryKey(instanciaGenericaID);
 	}
 
 }

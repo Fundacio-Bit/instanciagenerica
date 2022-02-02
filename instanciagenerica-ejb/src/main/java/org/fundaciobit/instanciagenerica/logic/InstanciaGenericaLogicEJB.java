@@ -6,11 +6,15 @@ import javax.ejb.Stateless;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Timestamp;
+import java.util.Random;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
+import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.ejb.InstanciaGenericaEJB;
 import org.fundaciobit.instanciagenerica.hibernate.HibernateFileUtil;
@@ -26,13 +30,20 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 	@Override
 	@PermitAll
 	public InstanciaGenerica create(InstanciaGenerica instance) throws I18NException {
-		
+
 		String uuid = java.util.UUID.randomUUID().toString();
-		instance.setUuid(uuid);
-				
-				
+
+		instance.setUuid(uuid.replace("-", ""));
+
 		InstanciaGenerica ig = super.create(instance);
 
+		registrarInstanciaGenerica(ig);
+
+		return ig;
+	}
+
+	@Override
+	public InstanciaGenerica registrarInstanciaGenerica(InstanciaGenerica ig) throws I18NException {
 		InfoRegistre ir = cridarAPIRegistre(ig);
 
 		if (ir.getEstat() == InfoRegistre.ESTAT_ERROR) {
@@ -44,22 +55,27 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			ig.setNumRegistre(ir.getNumRegistre());
 		}
 		ig.setDatafinalitzacio(new Timestamp(System.currentTimeMillis()));
-		
-		this.update(ig);
 
+		this.update(ig);
 		return ig;
 	}
 
 	public InfoRegistre cridarAPIRegistre(InstanciaGenerica ig) {
-		//Pot pasar 3 coses: Ok, Error, Exception
-		
+		// Pot pasar 3 coses: Ok, Error, Exception
+
 		try {
 			// Simulam cridada a registre amb error
-			//return new InfoRegistre("Error inventat", null);
 
+			Random rand = new Random();
+			int int_random = rand.nextInt(1000);
+
+			if (int_random < 500) {
+				return new InfoRegistre("Error numeric, " + int_random + "ha de ser major que 200", null);
+			} else {
+				return new InfoRegistre("" + int_random);
+			}
 
 			// Simulam cridada a registre ok
-			return new InfoRegistre("555888222");
 
 		} catch (Exception e) {
 
@@ -67,7 +83,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
 			String sStackTrace = sw.toString(); // stack trace as a string
-			
+
 			return new InfoRegistre(e.getMessage(), sStackTrace);
 
 		}
@@ -76,7 +92,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 	public static class InfoRegistre {
 
-		/** Valors possibles de estat */
+		/* Valors possibles de estat */
 
 		public static final int ESTAT_OK = 0;
 		public static final int ESTAT_ERROR = -1;
@@ -134,6 +150,12 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			this.numRegistre = numRegistre;
 		}
 
+	}
+
+	@Override
+	@PermitAll
+	public InstanciaGenericaJPA findByPrimaryKey(Long _ID_) {
+		return (InstanciaGenericaJPA) super.findByPrimaryKey(_ID_);
 	}
 
 }

@@ -37,12 +37,13 @@
         <span style="${(fn:contains(url, 'instanciagenericaproves/list'))? "font-weight: bold;" : ""}">Proves Llistar instancies</span>
       </a>
     </li>
-  <%--   <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
+
+    <hr  style="margin-top: 6px;  margin-bottom: 6px;" />
     <li style="list-style-type: disc; list-style-position: inside;">
-      <a href="<c:url value="/admin/instanciaGenerica/new"/>">
-        <span style="${(fn:contains(url, 'new'))? "font-weight: bold;" : ""}">Menú ADMIN Formulari</span>
+      <a href="<c:url value="/admin/instanciagenericaerrors/list"/>">
+        <span style="${(fn:contains(url, 'instanciagenericaerrors/list'))? "font-weight: bold;" : ""}">Instancies no registrades</span>
       </a>
-    </li> --%>
+    </li>
    
   </ul>
 </div>
