@@ -61,6 +61,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			ig.setEstat(Constants.ESTAT_ERROR);
 			ig.setError(ir.getError());
 			ig.setException(ir.getExccepcio());
+			//Aqui habría que añadir un mensaje de "Error con llamada a registro"
 		} else {
 			ig.setEstat(Constants.ESTAT_FINALITZAT);
 			ig.setNumRegistre(ir.getNumRegistre());
@@ -85,8 +86,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			} else {
 				return new InfoRegistre("" + int_random);
 			}
-
-			// Simulam cridada a registre ok
 
 		} catch (Exception e) {
 

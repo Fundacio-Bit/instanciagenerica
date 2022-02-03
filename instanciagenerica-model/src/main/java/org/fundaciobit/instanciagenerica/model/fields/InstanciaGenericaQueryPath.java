@@ -67,10 +67,6 @@ public class InstanciaGenericaQueryPath extends org.fundaciobit.genapp.common.qu
     return new StringField(getQueryPath(), InstanciaGenericaFields.SOLICITANTTELEFON);
   }
 
-  public LongField TITOLID() {
-    return new LongField(getQueryPath(), InstanciaGenericaFields.TITOLID);
-  }
-
   public StringField IDIOMAID() {
     return new StringField(getQueryPath(), InstanciaGenericaFields.IDIOMAID);
   }
@@ -143,14 +139,6 @@ public class InstanciaGenericaQueryPath extends org.fundaciobit.genapp.common.qu
         : this.parentQueryPath.getQueryPath());
   }
 
-
-  public TraduccioQueryPath TITOL() {
-    return new TraduccioQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return InstanciaGenericaQueryPath.this.getQueryPath() + "titol" + ".";
-      }
-    });
-  }
 
   public IdiomaQueryPath IDIOMA() {
     return new IdiomaQueryPath(new QueryPath() {

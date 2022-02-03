@@ -52,9 +52,6 @@ import org.fundaciobit.instanciagenerica.model.fields.*;
 public class InstanciaGenericaController
     extends org.fundaciobit.instanciagenerica.back.controller.InstanciaGenericaFilesBaseController<InstanciaGenerica, java.lang.Long, InstanciaGenericaForm> implements InstanciaGenericaFields {
 
-  @EJB(mappedName = org.fundaciobit.instanciagenerica.ejb.IdiomaService.JNDI_NAME)
-  protected org.fundaciobit.instanciagenerica.ejb.IdiomaService idiomaEjb;
-
   @EJB(mappedName = org.fundaciobit.instanciagenerica.ejb.InstanciaGenericaService.JNDI_NAME)
   protected org.fundaciobit.instanciagenerica.ejb.InstanciaGenericaService instanciaGenericaEjb;
 
@@ -63,10 +60,6 @@ public class InstanciaGenericaController
 
   @Autowired
   protected InstanciaGenericaRefList instanciaGenericaRefList;
-
-  // References 
-  @Autowired
-  protected TraduccioRefList traduccioRefList;
 
   // References 
   @Autowired
@@ -205,16 +198,6 @@ public class InstanciaGenericaController
 
       fillValuesToGroupByItemsBoolean("personafisica", groupByItemsMap, SOLICITANTPERSONAFISICA);
 
-    // Field titolID
-    {
-      _listSKV = getReferenceListForTitolID(request, mav, filterForm, list, groupByItemsMap, null);
-      _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfTraduccioForTitolID(_tmp);
-      if (filterForm.getGroupByFields().contains(TITOLID)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, TITOLID, false);
-      };
-    }
-
     // Field idiomaID
     {
       _listSKV = getReferenceListForIdiomaID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -241,7 +224,6 @@ public class InstanciaGenericaController
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(SOLICITANTTIPUSADMINID, filterForm.getMapOfValuesForSolicitantTipusAdminID());
-    __mapping.put(TITOLID, filterForm.getMapOfTraduccioForTitolID());
     __mapping.put(IDIOMAID, filterForm.getMapOfIdiomaForIdiomaID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
@@ -262,15 +244,6 @@ public class InstanciaGenericaController
     }
     ModelAndView mav = new ModelAndView(getTileForm());
     InstanciaGenericaForm instanciaGenericaForm = getInstanciaGenericaForm(null, false, request, mav);
-    
-    if (instanciaGenericaForm.getInstanciaGenerica().getTitol() == null){
-      org.fundaciobit.instanciagenerica.persistence.TraduccioJPA trad = new org.fundaciobit.instanciagenerica.persistence.TraduccioJPA();
-      for (org.fundaciobit.instanciagenerica.model.entity.Idioma idioma : instanciaGenericaForm.getIdiomesTraduccio()) {
-        trad.addTraduccio(idioma.getIdiomaID(), new org.fundaciobit.instanciagenerica.persistence.TraduccioMapJPA());
-      }
-      instanciaGenericaForm.getInstanciaGenerica().setTitol(trad);
-    }
-
     mav.addObject("instanciaGenericaForm" ,instanciaGenericaForm);
     fillReferencesForForm(instanciaGenericaForm, request, mav);
   
@@ -294,7 +267,6 @@ public class InstanciaGenericaController
     instanciaGenericaForm.setContexte(getContextWeb());
     instanciaGenericaForm.setEntityNameCode(getEntityNameCode());
     instanciaGenericaForm.setEntityNameCodePlural(getEntityNameCodePlural());
-    instanciaGenericaForm.setIdiomesTraduccio(getIdiomesSuportats());
     return instanciaGenericaForm;
   }
 
@@ -329,13 +301,6 @@ public class InstanciaGenericaController
     }
     
   }
-
-
-  public List<org.fundaciobit.instanciagenerica.model.entity.Idioma> getIdiomesSuportats() throws I18NException {
-    List<org.fundaciobit.instanciagenerica.model.entity.Idioma> idiomes = idiomaEjb.select(org.fundaciobit.instanciagenerica.model.fields.IdiomaFields.SUPORTAT.equal(true));
-    return idiomes;
-  }
-
 
   /**
    * Guardar un nou InstanciaGenerica
@@ -817,31 +782,6 @@ public java.lang.Long stringToPK(String value) {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
     __tmp.add(new StringKeyValue("personafisica" , "personafisica"));
     return __tmp;
-  }
-
-  public List<StringKeyValue> getReferenceListForTitolID(HttpServletRequest request,
-       ModelAndView mav, InstanciaGenericaFilterForm instanciaGenericaFilterForm,
-       List<InstanciaGenerica> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (instanciaGenericaFilterForm.isHiddenField(TITOLID)
-      && !instanciaGenericaFilterForm.isGroupByField(TITOLID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _w = null;
-    if (!_groupByItemsMap.containsKey(TITOLID)) {
-      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
-      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
-      for (InstanciaGenerica _item : list) {
-        _pkList.add(_item.getTitolID());
-        }
-        _w = TraduccioFields.TRADUCCIOID.in(_pkList);
-      }
-    return getReferenceListForTitolID(request, mav, Where.AND(where,_w));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForTitolID(HttpServletRequest request,
-       ModelAndView mav, Where where)  throws I18NException {
-    return traduccioRefList.getReferenceList(TraduccioFields.TRADUCCIOID, where );
   }
 
 

@@ -297,41 +297,6 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.TITOLID)}">
-        <tr id="instanciaGenerica_titolID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.TITOLID])?'instanciaGenerica.titolID':__theForm.labels[InstanciaGenericaFields.TITOLID]}" /> &nbsp;(*)
-             </label>
-              <c:if test="${not empty __theForm.help[InstanciaGenericaFields.TITOLID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[InstanciaGenericaFields.TITOLID]}" ></i>
-              </c:if>
-            </td>
-            <td>
-       <form:errors path="instanciaGenerica.titol" cssClass="errorField alert alert-danger" />
-       <div class="row-fluid col-md-9-optional">
-         <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
-             <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
-            <li class="nav-item ">
-                 <a class="nav-link ${(counter.index == 0)? 'active':''}" href="#${counter.index}_tab_titol_${idioma.idiomaID}" data-toggle="tab">${idioma.nom}</a>
-            </li>
-          </c:forEach>
-           
-         </ul>
-         <div class="tab-content well well-white" style="padding:8px;margin:0px;">
-           <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
-           <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_titol_${idioma.idiomaID}">
-               <form:errors path="instanciaGenerica.titol.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="instanciaGenerica.titol.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.TITOLID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.TITOLID)}" maxlength="4000" />
-           </div>
-           </c:forEach>
-         </div>
-       </div>
-
-           </td>
-        </tr>
-        </c:if>
-        
         <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.IDIOMAID)}">
         <tr id="instanciaGenerica_idiomaID_rowid">
           <td>

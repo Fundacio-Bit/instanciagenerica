@@ -54,9 +54,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTTELEFON)}">
         <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.SOLICITANTTELEFON)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.TITOLID)}">
-        <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.TITOLID)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.IDIOMAID)}">
         <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.IDIOMAID)}</th>
         </c:if>

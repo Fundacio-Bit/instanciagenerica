@@ -38,9 +38,6 @@ public class InstanciaGenericaWebValidator extends AbstractWebValidator<Instanci
   @javax.ejb.EJB(mappedName = org.fundaciobit.instanciagenerica.ejb.InstanciaGenericaService.JNDI_NAME)
   protected org.fundaciobit.instanciagenerica.ejb.InstanciaGenericaService instanciaGenericaEjb;
 
-  @javax.ejb.EJB(mappedName = org.fundaciobit.instanciagenerica.ejb.TraduccioService.JNDI_NAME)
-  protected org.fundaciobit.instanciagenerica.ejb.TraduccioService traduccioEjb;
-
 
 
   public InstanciaGenericaWebValidator() {
@@ -60,10 +57,8 @@ public class InstanciaGenericaWebValidator extends AbstractWebValidator<Instanci
   @Override
   public void validate(InstanciaGenericaForm __form, InstanciaGenerica __bean, Errors errors) {
 
-java.util.List<Field<?>> _ignoreFields = new java.util.ArrayList<Field<?>>();
-_ignoreFields.add(TITOLID);
     WebValidationResult<InstanciaGenericaForm> wvr;
-    wvr = new WebValidationResult<InstanciaGenericaForm>(errors, _ignoreFields);
+    wvr = new WebValidationResult<InstanciaGenericaForm>(errors);
 
     boolean isNou;
     {
@@ -83,49 +78,13 @@ _ignoreFields.add(TITOLID);
   public void validate(InstanciaGenericaForm __form, InstanciaGenerica __bean, Errors errors,
     WebValidationResult<InstanciaGenericaForm> wvr, boolean isNou) {
 
-  {
-      org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA __jpa;
-      __jpa = (org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA)__bean;
-    {
-      // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
-      org.fundaciobit.instanciagenerica.persistence.TraduccioJPA tradJPA = __jpa.getTitol();
-      if (tradJPA != null) {
-        // TODO ERROR
-        java.util.Map<String,org.fundaciobit.instanciagenerica.persistence.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
-        int countNotNull = 0;
-        for (String _idioma : _trad.keySet()) {
-          org.fundaciobit.instanciagenerica.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
-          if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
-          } else {
-            countNotNull++;
-          }
-        }
-
-          if (countNotNull  == _trad.size()) {
-            // OK Tot esta ple
-          } else {
-            for (String _idioma : _trad.keySet()) {
-              org.fundaciobit.instanciagenerica.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
-              if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
-                errors.rejectValue("instanciaGenerica.titol", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(TITOLID.fullName)}, null);
-                errors.rejectValue("instanciaGenerica.titol.traduccions["+ _idioma +"].valor",
-                  "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(TITOLID.fullName)}, null);
-              }
-            }
-          }
-      } else {
-        errors.rejectValue("instanciaGenerica.titol", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(TITOLID.fullName)}, null);
-      }
-    }
-
-  }
     if (isNou) { // Creacio
       // ================ CREATION
       // Fitxers 
     }
     BeanValidatorResult<InstanciaGenerica> __vr = new BeanValidatorResult<InstanciaGenerica>();
     validator.validate(__vr, __bean,
-      isNou, idiomaEjb, instanciaGenericaEjb, traduccioEjb);
+      isNou, idiomaEjb, instanciaGenericaEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

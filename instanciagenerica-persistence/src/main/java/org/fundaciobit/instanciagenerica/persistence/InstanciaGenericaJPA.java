@@ -79,11 +79,6 @@ private static final long serialVersionUID = 389380649L;
     @Column(name="solicitanttelefon",nullable = false,length = 50)
     java.lang.String solicitantTelefon;
 
-  /** Prova per ser traduible */
-    @Index(name="ige_instgen_titolid_fk_i")
-    @Column(name="titolid",nullable = false,length = 19)
-    long titolID;
-
   /** Idioma en que del que esta exposat */
     @Index(name="ige_instgen_idiomaid_fk_i")
     @Column(name="idiomaid",nullable = false,length = 20)
@@ -158,7 +153,7 @@ private static final long serialVersionUID = 389380649L;
   }
 
   /** Constructor amb tots els camps  */
-  public InstanciaGenericaJPA(long instanciaGenericaID , java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , long titolID , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , int estat , java.lang.String error , java.lang.String exception , java.sql.Timestamp datafinalitzacio) {
+  public InstanciaGenericaJPA(long instanciaGenericaID , java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , int estat , java.lang.String error , java.lang.String exception , java.sql.Timestamp datafinalitzacio) {
     this.instanciaGenericaID=instanciaGenericaID;
     this.numRegistre=numRegistre;
     this.uuid=uuid;
@@ -173,7 +168,6 @@ private static final long serialVersionUID = 389380649L;
     this.solicitantDireccio=solicitantDireccio;
     this.solicitantEmail=solicitantEmail;
     this.solicitantTelefon=solicitantTelefon;
-    this.titolID=titolID;
     this.idiomaID=idiomaID;
     this.exposa=exposa;
     this.solicita=solicita;
@@ -192,7 +186,7 @@ private static final long serialVersionUID = 389380649L;
     this.datafinalitzacio=datafinalitzacio;
 }
   /** Constructor sense valors autoincrementals */
-  public InstanciaGenericaJPA(java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , long titolID , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , int estat , java.lang.String error , java.lang.String exception , java.sql.Timestamp datafinalitzacio) {
+  public InstanciaGenericaJPA(java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , int estat , java.lang.String error , java.lang.String exception , java.sql.Timestamp datafinalitzacio) {
     this.numRegistre=numRegistre;
     this.uuid=uuid;
     this.dataCreacio=dataCreacio;
@@ -206,7 +200,6 @@ private static final long serialVersionUID = 389380649L;
     this.solicitantDireccio=solicitantDireccio;
     this.solicitantEmail=solicitantEmail;
     this.solicitantTelefon=solicitantTelefon;
-    this.titolID=titolID;
     this.idiomaID=idiomaID;
     this.exposa=exposa;
     this.solicita=solicita;
@@ -225,7 +218,7 @@ private static final long serialVersionUID = 389380649L;
     this.datafinalitzacio=datafinalitzacio;
 }
   /** Constructor dels valors Not Null */
-  public InstanciaGenericaJPA(long instanciaGenericaID , java.lang.String numRegistre , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , long titolID , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita) {
+  public InstanciaGenericaJPA(long instanciaGenericaID , java.lang.String numRegistre , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita) {
     this.instanciaGenericaID=instanciaGenericaID;
     this.numRegistre=numRegistre;
     this.dataCreacio=dataCreacio;
@@ -235,7 +228,6 @@ private static final long serialVersionUID = 389380649L;
     this.solicitantDireccio=solicitantDireccio;
     this.solicitantEmail=solicitantEmail;
     this.solicitantTelefon=solicitantTelefon;
-    this.titolID=titolID;
     this.idiomaID=idiomaID;
     this.exposa=exposa;
     this.solicita=solicita;
@@ -255,7 +247,6 @@ private static final long serialVersionUID = 389380649L;
     this.setSolicitantDireccio(__bean.getSolicitantDireccio());
     this.setSolicitantEmail(__bean.getSolicitantEmail());
     this.setSolicitantTelefon(__bean.getSolicitantTelefon());
-    this.setTitolID(__bean.getTitolID());
     this.setIdiomaID(__bean.getIdiomaID());
     this.setExposa(__bean.getExposa());
     this.setSolicita(__bean.getSolicita());
@@ -390,13 +381,6 @@ private static final long serialVersionUID = 389380649L;
 		this.solicitantTelefon = _solicitantTelefon_;
 	};
 
-	public long getTitolID() {
-		return(titolID);
-	};
-	public void setTitolID(long _titolID_) {
-		this.titolID = _titolID_;
-	};
-
 	public java.lang.String getIdiomaID() {
 		return(idiomaID);
 	};
@@ -523,31 +507,6 @@ private static final long serialVersionUID = 389380649L;
     }
     return __result;
   }
-
-// IMP Field:traduccioid | Table: ige_traduccio | Type: 1  
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="ige_instgen_traduccio_titol_fk")
-    @JoinColumn(name = "titolid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
-    private TraduccioJPA titol;
-
-    public TraduccioJPA getTitol() {
-    return this.titol;
-  }
-
-    public  void setTitol(TraduccioJPA titol) {
-    this.titol = titol;
-  }
-
-  @javax.xml.bind.annotation.XmlTransient
-  public java.util.Map<String, org.fundaciobit.instanciagenerica.persistence.TraduccioMapJPA> getTitolTraduccions() {
-    return this.titol.getTraduccions();
-  }
-
-  public void setTitolTraduccions(java.util.Map<String, org.fundaciobit.instanciagenerica.persistence.TraduccioMapJPA> __traduccions__) {
-    this.titol.setTraduccions(__traduccions__);
-  }
-
 
 // IMP Field:idiomaid | Table: ige_idioma | Type: 1  
 
@@ -718,7 +677,6 @@ private static final long serialVersionUID = 389380649L;
     __tmp.setSolicitantDireccio(__bean.getSolicitantDireccio());
     __tmp.setSolicitantEmail(__bean.getSolicitantEmail());
     __tmp.setSolicitantTelefon(__bean.getSolicitantTelefon());
-    __tmp.setTitolID(__bean.getTitolID());
     __tmp.setIdiomaID(__bean.getIdiomaID());
     __tmp.setExposa(__bean.getExposa());
     __tmp.setSolicita(__bean.getSolicita());
@@ -786,10 +744,6 @@ private static final long serialVersionUID = 389380649L;
     if(!"IdiomaJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.idioma) || org.hibernate.Hibernate.isInitialized(__jpa.getIdioma()) ) ) {
       __tmp.setIdioma(IdiomaJPA.copyJPA(__jpa.getIdioma(), __alreadyCopied,"InstanciaGenericaJPA"));
-    }
-    if(!"TraduccioJPA".equals(origenJPA) && 
-       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.titol) || org.hibernate.Hibernate.isInitialized(__jpa.getTitol()) ) ) {
-      __tmp.setTitol(TraduccioJPA.copyJPA(__jpa.getTitol(), __alreadyCopied,"InstanciaGenericaJPA"));
     }
 
     return __tmp;

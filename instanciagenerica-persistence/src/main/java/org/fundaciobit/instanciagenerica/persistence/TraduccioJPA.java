@@ -7,11 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinTable;
 import org.hibernate.annotations.ForeignKey;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import java.util.Set;
 import java.util.HashMap;
 import org.hibernate.annotations.Cascade;
-import java.util.HashSet;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import org.hibernate.annotations.Index;
@@ -76,19 +73,6 @@ private static final long serialVersionUID = -326205279L;
     }
     return __result;
   }
-
-// EXP  Field:titolid | Table: ige_instanciagenerica | Type: 0  
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "titolID")
-    private Set<InstanciaGenericaJPA> instanciaGenericas = new HashSet<InstanciaGenericaJPA>(0);
-    public  Set<InstanciaGenericaJPA> getInstanciaGenericas() {
-    return this.instanciaGenericas;
-  }
-
-    public void setInstanciaGenericas(Set<InstanciaGenericaJPA> instanciaGenericas) {
-      this.instanciaGenericas = instanciaGenericas;
-    }
-
 
   @ElementCollection(fetch= FetchType.EAGER, targetClass = org.fundaciobit.instanciagenerica.persistence.TraduccioMapJPA.class)
   @Cascade(value=org.hibernate.annotations.CascadeType.ALL)
@@ -156,10 +140,6 @@ private static final long serialVersionUID = -326205279L;
     __tmp = toJPA(__jpa);
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
-    if(!"InstanciaGenericaJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.instanciaGenericas) || org.hibernate.Hibernate.isInitialized(__jpa.getInstanciaGenericas())) ) {
-      __tmp.setInstanciaGenericas(InstanciaGenericaJPA.copyJPA(__jpa.getInstanciaGenericas(), __alreadyCopied,"TraduccioJPA"));
-    }
     // Copia de beans complexes (IMP)
     // Aquesta linia s'afeix de forma manual
     __tmp.setTraduccions(new HashMap<String, TraduccioMapJPA>(__jpa.getTraduccions()));

@@ -26,7 +26,6 @@ public interface InstanciaGenericaFields extends java.io.Serializable {
 	 public static final StringField SOLICITANTDIRECCIO = new StringField(_TABLE_MODEL, "solicitantDireccio", "solicitantdireccio");
 	 public static final StringField SOLICITANTEMAIL = new StringField(_TABLE_MODEL, "solicitantEmail", "solicitantemail");
 	 public static final StringField SOLICITANTTELEFON = new StringField(_TABLE_MODEL, "solicitantTelefon", "solicitanttelefon");
-	 public static final LongField TITOLID = new LongField(_TABLE_MODEL, "titolID", "titolid");
 	 public static final StringField IDIOMAID = new StringField(_TABLE_MODEL, "idiomaID", "idiomaid");
 	 public static final StringField EXPOSA = new StringField(_TABLE_MODEL, "exposa", "exposa");
 	 public static final StringField SOLICITA = new StringField(_TABLE_MODEL, "solicita", "solicita");
@@ -60,7 +59,6 @@ public interface InstanciaGenericaFields extends java.io.Serializable {
     SOLICITANTDIRECCIO,
     SOLICITANTEMAIL,
     SOLICITANTTELEFON,
-    TITOLID,
     IDIOMAID,
     EXPOSA,
     SOLICITA,

@@ -44,9 +44,6 @@ public interface InstanciaGenerica extends org.fundaciobit.genapp.common.IGenApp
 	public java.lang.String getSolicitantTelefon();
 	public void setSolicitantTelefon(java.lang.String _solicitantTelefon_);
 
-	public long getTitolID();
-	public void setTitolID(long _titolID_);
-
 	public java.lang.String getIdiomaID();
 	public void setIdiomaID(java.lang.String _idiomaID_);
 

@@ -280,24 +280,6 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.TITOLID)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="instanciaGenerica.titolID" />:</span>
-
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="titolIDDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="titolIDFins" />
-
-            </div>
-
-
-        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.IDIOMAID)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">

@@ -6,7 +6,6 @@ import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
 import org.fundaciobit.instanciagenerica.model.fields.IdiomaFields;
-import org.fundaciobit.instanciagenerica.model.fields.TraduccioFields;
 
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
@@ -30,8 +29,7 @@ public class InstanciaGenericaValidator<I extends InstanciaGenerica>
   /** Constructor */
   public void validate(IValidatorResult<I> __vr,I __target__, boolean __isNou__
     ,org.fundaciobit.instanciagenerica.model.dao.IIdiomaManager __idiomaManager
-    ,org.fundaciobit.instanciagenerica.model.dao.IInstanciaGenericaManager __instanciaGenericaManager
-    ,org.fundaciobit.instanciagenerica.model.dao.ITraduccioManager __traduccioManager) {
+    ,org.fundaciobit.instanciagenerica.model.dao.IInstanciaGenericaManager __instanciaGenericaManager) {
 
     // Valors Not Null
     __vr.rejectIfEmptyOrWhitespace(__target__,NUMREGISTRE, 
@@ -65,10 +63,6 @@ public class InstanciaGenericaValidator<I extends InstanciaGenerica>
     __vr.rejectIfEmptyOrWhitespace(__target__,SOLICITANTTELEFON, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SOLICITANTTELEFON)));
-
-    __vr.rejectIfEmptyOrWhitespace(__target__,TITOLID, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TITOLID)));
 
     __vr.rejectIfEmptyOrWhitespace(__target__,IDIOMAID, 
         "genapp.validation.required",
@@ -241,18 +235,6 @@ public class InstanciaGenericaValidator<I extends InstanciaGenerica>
     }
 
     // Fields with References to Other tables 
-    if (__vr.getFieldErrorCount(TITOLID) == 0) {
-      java.lang.Long __titolid = __target__.getTitolID();
-      Long __count_ = null;
-      try { __count_ = __traduccioManager.count(TraduccioFields.TRADUCCIOID.equal(__titolid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-      if (__count_ == null || __count_ == 0) {        
-        __vr.rejectValue(TITOLID, "error.notfound",
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__titolid)));
-      }
-    }
-
     if (__vr.getFieldErrorCount(IDIOMAID) == 0) {
       java.lang.String __idiomaid = __target__.getIdiomaID();
       Long __count_ = null;

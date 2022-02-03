@@ -98,14 +98,6 @@
           ${instanciaGenerica.solicitantTelefon}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.TITOLID)}">
-          <td>
-          <c:set var="tmp">${instanciaGenerica.titolID}</c:set>
-          <c:if test="${not empty tmp}">
-          ${instanciaGenerica.titol.traduccions[lang].valor}
-          </c:if>
-          </td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.IDIOMAID)}">
           <td>
           <c:set var="tmp">${instanciaGenerica.idiomaID}</c:set>

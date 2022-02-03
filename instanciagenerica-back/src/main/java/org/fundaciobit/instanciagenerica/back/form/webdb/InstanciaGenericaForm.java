@@ -58,7 +58,6 @@ public class InstanciaGenericaForm extends InstanciaGenericaBaseForm {
       this.instanciaGenerica = __toClone.instanciaGenerica;
     this.listOfValuesForSolicitantTipusAdminID = __toClone.listOfValuesForSolicitantTipusAdminID;
     this.listOfValuesForSolicitantPersonaFisica = __toClone.listOfValuesForSolicitantPersonaFisica;
-    this.listOfTraduccioForTitolID = __toClone.listOfTraduccioForTitolID;
     this.listOfIdiomaForIdiomaID = __toClone.listOfIdiomaForIdiomaID;
   }
   
@@ -74,15 +73,6 @@ public class InstanciaGenericaForm extends InstanciaGenericaBaseForm {
     this.instanciaGenerica = instanciaGenerica;
   }
   
-  java.util.List<org.fundaciobit.instanciagenerica.model.entity.Idioma> idiomesTraduccio = null;
-
-  public java.util.List<org.fundaciobit.instanciagenerica.model.entity.Idioma> getIdiomesTraduccio() {
-    return idiomesTraduccio;
-  }
-
-  public void setIdiomesTraduccio(java.util.List<org.fundaciobit.instanciagenerica.model.entity.Idioma> idiomesTraduccio) {
-    this.idiomesTraduccio = idiomesTraduccio;
-  }
   
   public CommonsMultipartFile getFitxer1ID() {
     return fitxer1ID;
@@ -230,18 +220,6 @@ public class InstanciaGenericaForm extends InstanciaGenericaBaseForm {
 
   public void setListOfValuesForSolicitantPersonaFisica(List<StringKeyValue> listOfValuesForSolicitantPersonaFisica) {
     this.listOfValuesForSolicitantPersonaFisica = listOfValuesForSolicitantPersonaFisica;
-  }
-
-
-
-  private List<StringKeyValue> listOfTraduccioForTitolID;
-
-  public List<StringKeyValue> getListOfTraduccioForTitolID() {
-    return this.listOfTraduccioForTitolID;
-  }
-
-  public void setListOfTraduccioForTitolID(List<StringKeyValue> listOfTraduccioForTitolID) {
-    this.listOfTraduccioForTitolID = listOfTraduccioForTitolID;
   }
 
 

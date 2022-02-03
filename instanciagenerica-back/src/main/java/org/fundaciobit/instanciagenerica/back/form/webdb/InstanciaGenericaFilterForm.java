@@ -197,28 +197,6 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
   }
 
 
-  private java.lang.Long titolIDDesde;
-
-  public java.lang.Long getTitolIDDesde() {
-    return this.titolIDDesde;
-  }
-
-  public void setTitolIDDesde(java.lang.Long titolIDDesde) {
-    this.titolIDDesde = titolIDDesde;
-  }
-
-
-  private java.lang.Long titolIDFins;
-
-  public java.lang.Long getTitolIDFins() {
-    return this.titolIDFins;
-  }
-
-  public void setTitolIDFins(java.lang.Long titolIDFins) {
-    this.titolIDFins = titolIDFins;
-  }
-
-
   private java.lang.String idiomaID;
 
   public java.lang.String getIdiomaID() {
@@ -339,8 +317,6 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
     this.solicitantDireccio = __toClone.solicitantDireccio;
     this.solicitantEmail = __toClone.solicitantEmail;
     this.solicitantTelefon = __toClone.solicitantTelefon;
-    this.titolIDDesde = __toClone.titolIDDesde;
-    this.titolIDFins = __toClone.titolIDFins;
     this.idiomaID = __toClone.idiomaID;
     this.exposa = __toClone.exposa;
     this.solicita = __toClone.solicita;
@@ -352,7 +328,6 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
     this.datafinalitzacioFins = __toClone.datafinalitzacioFins;
     this.mapOfValuesForSolicitantTipusAdminID = __toClone.mapOfValuesForSolicitantTipusAdminID;
     this.mapOfValuesForSolicitantPersonaFisica = __toClone.mapOfValuesForSolicitantPersonaFisica;
-    this.mapOfTraduccioForTitolID = __toClone.mapOfTraduccioForTitolID;
     this.mapOfIdiomaForIdiomaID = __toClone.mapOfIdiomaForIdiomaID;
   }
   
@@ -408,18 +383,6 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
 
   public void setMapOfValuesForSolicitantPersonaFisica(Map<String, String> mapOfValuesForSolicitantPersonaFisica) {
     this.mapOfValuesForSolicitantPersonaFisica = mapOfValuesForSolicitantPersonaFisica;
-  }
-
-
-
-  private Map<String, String> mapOfTraduccioForTitolID;
-
-  public Map<String, String> getMapOfTraduccioForTitolID() {
-    return this.mapOfTraduccioForTitolID;
-  }
-
-  public void setMapOfTraduccioForTitolID(Map<String, String> mapOfTraduccioForTitolID) {
-    this.mapOfTraduccioForTitolID = mapOfTraduccioForTitolID;
   }
 
 

@@ -43,14 +43,14 @@
 	    --%>
 	    
 	    <sec:authorize access="hasRole('ROLE_USER')">
-	    <li class="nav-item">
+<%-- 	    <li class="nav-item">
 	       <a class="nav-link ${(pipella eq 'user')?'active' : '' }" href="<c:url value="/canviarPipella/user"/>">ROLE_USER</a>
 	    </li>
-	    </sec:authorize>
+ --%>	    </sec:authorize>
 	    
 	    <sec:authorize access="hasRole('ROLE_ADMIN')">
 	    <li class="nav-item">
-	       <a class="nav-link ${(pipella eq 'admin')?'active' : '' }" href="<c:url value="/canviarPipella/admin"/>">ROLE_ADMIN</a>
+	       <a class="nav-link ${(pipella eq 'admin')?'active' : '' }" href="<c:url value="/canviarPipella/admin"/>">LLISTATS</a>
 	    </li>
 	    </sec:authorize>
 	

@@ -95,7 +95,6 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 			instanciaGenericaFilterForm.addHiddenField(InstanciaGenericaFields.EXCEPTION);
 			instanciaGenericaFilterForm.addHiddenField(InstanciaGenericaFields.DATAFINALITZACIO);
 
-			
 			instanciaGenericaFilterForm.setAddButtonVisible(false);
 			instanciaGenericaFilterForm.setDeleteButtonVisible(false);
 			instanciaGenericaFilterForm.setDeleteSelectedButtonVisible(false);
@@ -149,13 +148,12 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 			// Ocultar campos que sean de la vista
 
 			if (instanciaGenericaForm.getInstanciaGenerica().getEstat() == Constants.ESTAT_ERROR) {
-
+				HtmlUtils.saveMessageError(request, instanciaGenericaForm.getInstanciaGenerica().getError());
 			} else {
 				String url = "";
 				HtmlUtils.saveMessageInfo(request, "La seva Instancia Genèrica s'ha creat correctamente");
 				HtmlUtils.saveMessageInfo(request,
 						"Per poder veure informació de la seva instancia guardi's aquesta URL: " + url);
-
 			}
 
 		} else if (instanciaGenericaForm.isNou()) {
@@ -176,12 +174,10 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 
 			instanciaGenericaForm.getInstanciaGenerica().setSolicitantEmail("hola.bones@abstract.com");
 
-
 			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.ESTAT);
 			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.ERROR);
 			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.EXCEPTION);
 			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.DATAFINALITZACIO);
-
 
 		} else {
 			log.info("Formulari per editar un element:"
