@@ -1,23 +1,28 @@
 
 package org.fundaciobit.instanciagenerica.logic;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.transaction.TransactionSynchronizationRegistry;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
+import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 
+
+import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
-import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.ejb.InstanciaGenericaEJB;
-import org.fundaciobit.instanciagenerica.hibernate.HibernateFileUtil;
 
 /**
  * 
@@ -26,6 +31,12 @@ import org.fundaciobit.instanciagenerica.hibernate.HibernateFileUtil;
  */
 @Stateless
 public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements InstanciaGenericaLogicService {
+
+	@EJB(mappedName = org.fundaciobit.instanciagenerica.ejb.FitxerService.JNDI_NAME)
+	protected org.fundaciobit.instanciagenerica.ejb.FitxerService fitxerEjb;
+
+	@Resource(mappedName = "jboss.naming.context.java.jboss.java:TransactionSynchronizationRegistry")
+	protected TransactionSynchronizationRegistry transactionSynchronizationRegistry;
 
 	@Override
 	@PermitAll
@@ -70,7 +81,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			int int_random = rand.nextInt(1000);
 
 			if (int_random < 500) {
-				return new InfoRegistre("Error numeric, " + int_random + "ha de ser major que 200", null);
+				return new InfoRegistre("Error numeric, " + int_random + " ha de ser major que 500", null);
 			} else {
 				return new InfoRegistre("" + int_random);
 			}
@@ -156,6 +167,67 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 	@PermitAll
 	public InstanciaGenericaJPA findByPrimaryKey(Long _ID_) {
 		return (InstanciaGenericaJPA) super.findByPrimaryKey(_ID_);
+	}
+
+	@Override
+	@PermitAll
+	public void deleteFull(InstanciaGenerica instanciaGenerica) throws I18NException {
+		log.info("Comença deleteFull");
+
+		// Borram instancia a BD
+		delete(instanciaGenerica);
+
+		Long[] fitxers = { instanciaGenerica.getFitxer1(), instanciaGenerica.getFitxer2(),
+				instanciaGenerica.getFitxer3(), instanciaGenerica.getFitxer4(), instanciaGenerica.getFitxer5(),
+				instanciaGenerica.getFitxer6(), instanciaGenerica.getFitxer7(), instanciaGenerica.getFitxer8(),
+				instanciaGenerica.getFitxer9() };
+
+		Set<Long> fitxersEsborrar = new HashSet<Long>();
+
+		// Borram fitxers a BD
+		for (Long f : fitxers) {
+			if (f != null) {
+
+				fitxerEjb.delete(f);
+				fitxersEsborrar.add(f);
+			}
+		}
+
+		// Borram fitxers fisic
+		FileSystemManager.eliminarArxius(fitxersEsborrar);
+//		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " +transactionSynchronizationRegistry );
+//		transactionSynchronizationRegistry.registerInterposedSynchronization(new CleanFilesSynchronization(fitxersEsborrar));
+
+		log.info("Final deleteFull");
+		// log.error("Passa per netejaFitxers => FINAL");
+
+	}
+
+	public class CleanFilesSynchronization implements javax.transaction.Synchronization {
+
+		protected final Set<Long> filesToDelete;
+
+		public CleanFilesSynchronization(Set<Long> filesToDelete) {
+			super();
+			this.filesToDelete = filesToDelete;
+		}
+
+		@Override
+		public void beforeCompletion() {
+		}
+
+		@Override
+		public void afterCompletion(int status) {
+
+			log.info("Inici CleanFilesSynchronization::afterCompletion()");
+
+			if (!FileSystemManager.eliminarArxius(filesToDelete)) {
+				log.error("No s'ha pogut esborrar alguns dels següents fitxers: "
+						+ Arrays.toString(filesToDelete.toArray()));
+			}
+
+			log.info("Final CleanFilesSynchronization::afterCompletion()");
+		}
 	}
 
 }
