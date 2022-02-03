@@ -76,11 +76,15 @@ public class InstanciaGenericaProvesAdminController extends InstanciaGenericaAdm
 
 			instanciaGenericaFilterForm.addAdditionalButton(
 					new AdditionalButton("fas fa-star", "mostrarinstancies", "javascript:ferSubmit()", "btn-primary"));
-			//new AdditionalButton("class del icono de fontawesome5", "codigo del boton (traducciones)" , "javascript:funcion definida en el jsp modificable()", "class de bootstrap 4 (color)"));
-			
+			// new AdditionalButton("class del icono de fontawesome5", "codigo del boton
+			// (traducciones)" , "javascript:funcion definida en el jsp modificable()",
+			// "class de bootstrap 4 (color)"));
+
 			instanciaGenericaFilterForm.setAttachedAdditionalJspCode(true);
 
 			// feralgunacosaambseleccionats
+
+			instanciaGenericaFilterForm.setDeleteButtonVisible(true);
 
 		}
 
@@ -123,22 +127,37 @@ public class InstanciaGenericaProvesAdminController extends InstanciaGenericaAdm
 	}
 
 	@RequestMapping(value = "/feralgunacosaambseleccionats", method = RequestMethod.POST)
-	public String feralgunacosaambseleccionats (HttpServletRequest request, HttpServletResponse response,
+	public String feralgunacosaambseleccionats(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute InstanciaGenericaFilterForm filterForm) throws Exception {
 
 		String[] seleccionats = filterForm.getSelectedItems();
-	
+
 		if (seleccionats != null && seleccionats.length != 0) {
 			for (int i = 0; i < seleccionats.length; i++) {
-				//fer coses per cada element dels seleccionats
+				// fer coses per cada element dels seleccionats
 
-				HtmlUtils.saveMessageError(request, "Has seleccionat la instancia: ID=" + seleccionats[i] );
+				HtmlUtils.saveMessageError(request, "Has seleccionat la instancia: ID=" + seleccionats[i]);
 //				redirect = eliminarInstanciaGenerica(stringToPK(seleccionats[i]), request, response);
 			}
 		}
 		String redirect = getRedirectWhenDelete(request, null, null);
 
-		
 		return redirect;
 	}
+
+	@Override
+	public void delete(HttpServletRequest request, InstanciaGenerica instanciaGenerica)
+			throws Exception, I18NException {
+		log.info("Inici delete web");
+
+		instanciaGenericaLogicEjb.deleteFull(instanciaGenerica);
+
+		log.info("Final delete web");
+	}
+	
+	@Override
+	public boolean isActiveDelete() {
+		return true;
+	}
+
 }

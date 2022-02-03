@@ -37,7 +37,6 @@ import org.springframework.web.servlet.ModelAndView;
 @SessionAttributes(types = { InstanciaGenericaForm.class, InstanciaGenericaFilterForm.class })
 public class InstanciaGenericaPublicController extends AbstractInstanciaGenericaController {
 
-
 	@EJB(mappedName = org.fundaciobit.instanciagenerica.logic.FitxerLogicService.JNDI_NAME)
 	protected org.fundaciobit.instanciagenerica.logic.FitxerLogicService fitxerLogicEjb;
 
@@ -68,29 +67,43 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 		mav.addObject("mostrarScript", true);
 
-		
 		if (instanciaGenericaForm.isNou()) {
 			log.info("PUBLIC: Formulari per nou element");
 			// TODO: Modificar tema cost
 
+			String[] nombres = { "Paco", "Alex", "Toni", "Joan", "Marilen", "Oscar", "Pau", "Mateu", "Xavi", "Leo",
+					"Giovanni", "Aragorn", "Naruto", "Sasuke", "Rafa" };
+			String[] apellidos = { "Garcia", "Perez", "Gaita", "Macia", "Gonzalez", "Ronaldo", "Nadal", "Trobat",
+					"Hernandez", "Messi", "Lo Celso", "Guiterrez del Alamo", "Sureda", "Martin", "Pernia", "Uzumaki",
+					"Uchiha" };
+
 			InstanciaGenericaJPA ig = instanciaGenericaForm.getInstanciaGenerica();
 
-			String valorDado = new Random().nextInt(1000) + "";
+			Random rnd = new Random();
+			String valorDado = rnd.nextInt(1000) + "";
 			ig.setNumRegistre(valorDado);
 
-			ig.setSolicitantTipusAdminID(2); // DNI i hope
-			ig.setSolicitantAdminID("87654323A");
+			ig.setSolicitantTipusAdminID(rnd.nextInt(4)); // DNI i hope
+
+			char[] c = {(char) ('A' + rnd.nextInt(26))};
+
+			String s = c.toString();
+			
+			ig.setSolicitantAdminID((10000000 + rnd.nextInt(90000000)) + s) ;
 
 			ig.setSolicitantPersonaFisica(true);
 
-			ig.setSolicitantNom("Alex");
-			ig.setSolicitantLlinatge1("Macià");
-			ig.setSolicitantLlinatge2("Martín");
+			String nom = nombres[rnd.nextInt(nombres.length)];
+			String llinatge = apellidos[rnd.nextInt(apellidos.length)];
+			String llinatge2 = apellidos[rnd.nextInt(apellidos.length)];
+			ig.setSolicitantNom(nom);
+			ig.setSolicitantLlinatge1(llinatge);
+			ig.setSolicitantLlinatge2(llinatge2);
 
-			ig.setSolicitantDireccio("Casa den Alex");
-			ig.setSolicitantRaoSocial("INDRA");
-			ig.setSolicitantTelefon("123654879");
-			ig.setSolicitantEmail("alex.macia@common.com");
+			ig.setSolicitantDireccio("Casa den " + nom);
+//			ig.setSolicitantRaoSocial("INDRA");
+			ig.setSolicitantTelefon(900000000 + rnd.nextInt(100000000) + "");
+			ig.setSolicitantEmail(nom.toLowerCase() + "." + llinatge.toLowerCase() + "@common.com");
 
 			ig.setExposa("Expongo mis circunstancias");
 			ig.setSolicita("Solicito que se cumplan mis demandas");
@@ -114,6 +127,12 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 		return (InstanciaGenericaJPA) instanciaGenericaLogicEjb.create(instanciaGenerica);
 	}
 
+	// Despres de crear, a on ha d'anar
+	@Override
+	public String getRedirectWhenCreated(HttpServletRequest request, InstanciaGenericaForm instanciaGenericaForm) {
+		return "redirect:" + getContextWeb() + "/v/" + instanciaGenericaForm.getInstanciaGenerica().getUuid();
+	}
+
 	@Override
 	public boolean isActiveList() {
 		return false;
@@ -122,15 +141,6 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 	@Override
 	public boolean isActiveFormView() {
 		return true;
-	}
-
-	// Despres de crear, a on ha d'anar
-	@Override
-	public String getRedirectWhenCreated(HttpServletRequest request, InstanciaGenericaForm instanciaGenericaForm) {
-
-
-		return "redirect:" + getContextWeb() + "/v/" + instanciaGenericaForm.getInstanciaGenerica().getUuid();
-
 	}
 
 	@Override
