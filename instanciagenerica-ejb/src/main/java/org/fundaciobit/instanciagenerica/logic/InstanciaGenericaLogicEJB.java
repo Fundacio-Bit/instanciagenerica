@@ -3,6 +3,7 @@ package org.fundaciobit.instanciagenerica.logic;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.transaction.Status;
 import javax.transaction.TransactionSynchronizationRegistry;
 
 import java.io.PrintWriter;
@@ -15,7 +16,6 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
-
 
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -35,7 +35,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 	@EJB(mappedName = org.fundaciobit.instanciagenerica.ejb.FitxerService.JNDI_NAME)
 	protected org.fundaciobit.instanciagenerica.ejb.FitxerService fitxerEjb;
 
-	@Resource(mappedName = "jboss.naming.context.java.jboss.java:TransactionSynchronizationRegistry")
+	@Resource(mappedName = "java:comp/TransactionSynchronizationRegistry")
 	protected TransactionSynchronizationRegistry transactionSynchronizationRegistry;
 
 	@Override
@@ -61,7 +61,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			ig.setEstat(Constants.ESTAT_ERROR);
 			ig.setError(ir.getError());
 			ig.setException(ir.getExccepcio());
-			//Aqui habría que añadir un mensaje de "Error con llamada a registro"
+			// Aqui habría que añadir un mensaje de "Error con llamada a registro"
 		} else {
 			ig.setEstat(Constants.ESTAT_FINALITZAT);
 			ig.setNumRegistre(ir.getNumRegistre());
@@ -176,10 +176,10 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		// Borram instancia a BD
 		delete(instanciaGenerica);
 
-		Long[] fitxers = { instanciaGenerica.getFitxer1(), instanciaGenerica.getFitxer2(),
-				instanciaGenerica.getFitxer3(), instanciaGenerica.getFitxer4(), instanciaGenerica.getFitxer5(),
-				instanciaGenerica.getFitxer6(), instanciaGenerica.getFitxer7(), instanciaGenerica.getFitxer8(),
-				instanciaGenerica.getFitxer9() };
+		Long[] fitxers = new Long[] { instanciaGenerica.getFitxer1ID(), instanciaGenerica.getFitxer2ID(),
+				instanciaGenerica.getFitxer3ID(), instanciaGenerica.getFitxer4ID(), instanciaGenerica.getFitxer5ID(),
+				instanciaGenerica.getFitxer6ID(), instanciaGenerica.getFitxer7ID(), instanciaGenerica.getFitxer8ID(),
+				instanciaGenerica.getFitxer9ID() };
 
 		Set<Long> fitxersEsborrar = new HashSet<Long>();
 
@@ -193,9 +193,11 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		}
 
 		// Borram fitxers fisic
-		FileSystemManager.eliminarArxius(fitxersEsborrar);
+
+//		FileSystemManager.eliminarArxius(fitxersEsborrar);
 //		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " +transactionSynchronizationRegistry );
-//		transactionSynchronizationRegistry.registerInterposedSynchronization(new CleanFilesSynchronization(fitxersEsborrar));
+		transactionSynchronizationRegistry
+				.registerInterposedSynchronization(new CleanFilesSynchronization(fitxersEsborrar));
 
 		log.info("Final deleteFull");
 		// log.error("Passa per netejaFitxers => FINAL");
@@ -219,12 +221,12 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		public void afterCompletion(int status) {
 
 			log.info("Inici CleanFilesSynchronization::afterCompletion()");
-
-			if (!FileSystemManager.eliminarArxius(filesToDelete)) {
-				log.error("No s'ha pogut esborrar alguns dels següents fitxers: "
-						+ Arrays.toString(filesToDelete.toArray()));
+			if (status == Status.STATUS_COMMITTED) {
+				if (!FileSystemManager.eliminarArxius(filesToDelete)) {
+					log.error("No s'ha pogut esborrar alguns dels següents fitxers: "
+							+ Arrays.toString(filesToDelete.toArray()));
+				}
 			}
-
 			log.info("Final CleanFilesSynchronization::afterCompletion()");
 		}
 	}
