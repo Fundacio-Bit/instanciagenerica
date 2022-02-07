@@ -37,26 +37,9 @@
 		<dependency>
 			<groupId>org.fundaciobit.genapp</groupId>
 			<artifactId>genapp-sqlgenerator</artifactId>
-			<!-- XXX -->
 			<version>${genapp.version}</version>
 		</dependency>
-		<!--
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>
-		-->
-		<!-- XXX -->
+
 		<dependency>
 			<groupId>org.jboss.logging</groupId>
 			<artifactId>jboss-logging</artifactId>
@@ -69,7 +52,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
-				<!-- XXX -->
 				<version>3.0.0</version>
 			</plugin>
 		</plugins>
