@@ -238,10 +238,15 @@
             </td>
           <td id="instanciaGenerica_solicitantDireccio_columnvalueid">
               <form:errors path="instanciaGenerica.solicitantDireccio" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTDIRECCIO)? 'true' : 'false'}" path="instanciaGenerica.solicitantDireccio"  />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTDIRECCIO)? 'true' : 'false'}" path="instanciaGenerica.solicitantDireccio"  />
+   </td>
+   <td style="width:40px">
       <div id="dropdownMenuButton_solicitantDireccio" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_solicitantDireccio" class="dropdown-menu">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_solicitantDireccio" class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.solicitantDireccio'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.solicitantDireccio'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.solicitantDireccio'); ta.wrap='hard';">Hard Wrap</a>
@@ -253,7 +258,10 @@
                  $('#dropdownMenuContainer_solicitantDireccio').css('display', valor);
                  return false;
 				});
-      </script>           </td>
+      </script>   </td>
+   </tr>
+   </table>
+           </td>
         </tr>
         </c:if>
         
@@ -336,10 +344,15 @@
             </td>
           <td id="instanciaGenerica_exposa_columnvalueid">
               <form:errors path="instanciaGenerica.exposa" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.EXPOSA)? 'true' : 'false'}" path="instanciaGenerica.exposa"  />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.EXPOSA)? 'true' : 'false'}" path="instanciaGenerica.exposa"  />
+   </td>
+   <td style="width:40px">
       <div id="dropdownMenuButton_exposa" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_exposa" class="dropdown-menu">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_exposa" class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.exposa'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.exposa'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.exposa'); ta.wrap='hard';">Hard Wrap</a>
@@ -351,7 +364,10 @@
                  $('#dropdownMenuContainer_exposa').css('display', valor);
                  return false;
 				});
-      </script>           </td>
+      </script>   </td>
+   </tr>
+   </table>
+           </td>
         </tr>
         </c:if>
         
@@ -367,10 +383,15 @@
             </td>
           <td id="instanciaGenerica_solicita_columnvalueid">
               <form:errors path="instanciaGenerica.solicita" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITA)? 'true' : 'false'}" path="instanciaGenerica.solicita"  />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITA)? 'true' : 'false'}" path="instanciaGenerica.solicita"  />
+   </td>
+   <td style="width:40px">
       <div id="dropdownMenuButton_solicita" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_solicita" class="dropdown-menu">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_solicita" class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.solicita'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.solicita'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.solicita'); ta.wrap='hard';">Hard Wrap</a>
@@ -382,7 +403,10 @@
                  $('#dropdownMenuContainer_solicita').css('display', valor);
                  return false;
 				});
-      </script>           </td>
+      </script>   </td>
+   </tr>
+   </table>
+           </td>
         </tr>
         </c:if>
         
@@ -920,10 +944,15 @@
             </td>
           <td id="instanciaGenerica_error_columnvalueid">
               <form:errors path="instanciaGenerica.error" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.ERROR)? 'true' : 'false'}" path="instanciaGenerica.error"  />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.ERROR)? 'true' : 'false'}" path="instanciaGenerica.error"  />
+   </td>
+   <td style="width:40px">
       <div id="dropdownMenuButton_error" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_error" class="dropdown-menu">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_error" class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.error'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.error'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.error'); ta.wrap='hard';">Hard Wrap</a>
@@ -935,7 +964,10 @@
                  $('#dropdownMenuContainer_error').css('display', valor);
                  return false;
 				});
-      </script>           </td>
+      </script>   </td>
+   </tr>
+   </table>
+           </td>
         </tr>
         </c:if>
         
@@ -951,10 +983,15 @@
             </td>
           <td id="instanciaGenerica_exception_columnvalueid">
               <form:errors path="instanciaGenerica.exception" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.EXCEPTION)? 'true' : 'false'}" path="instanciaGenerica.exception"  />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.EXCEPTION)? 'true' : 'false'}" path="instanciaGenerica.exception"  />
+   </td>
+   <td style="width:40px">
       <div id="dropdownMenuButton_exception" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_exception" class="dropdown-menu">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_exception" class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.exception'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.exception'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('instanciaGenerica.exception'); ta.wrap='hard';">Hard Wrap</a>
@@ -966,7 +1003,10 @@
                  $('#dropdownMenuContainer_exception').css('display', valor);
                  return false;
 				});
-      </script>           </td>
+      </script>   </td>
+   </tr>
+   </table>
+           </td>
         </tr>
         </c:if>
         
