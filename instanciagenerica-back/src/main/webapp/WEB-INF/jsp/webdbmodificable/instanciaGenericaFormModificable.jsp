@@ -11,10 +11,7 @@
 
 			if (isPersonaFisica == "true") { //persona fisica
 				console.log(" -> Persona fisica");
-				/* 				$("#instanciaGenerica_solicitantNom_rowid").show();
-				 $("#instanciaGenerica_solicitantLlinatge1_rowid").show();
-				 $("#instanciaGenerica_solicitantLlinatge2_rowid").show();
-				 */
+
 				$("#instanciaGenerica_solicitantNom_columnlabelid").html(
 						"<label>Nom solicitant</label>");
 				$("#instanciaGenerica_solicitantLlinatge1_columnlabelid").html(
