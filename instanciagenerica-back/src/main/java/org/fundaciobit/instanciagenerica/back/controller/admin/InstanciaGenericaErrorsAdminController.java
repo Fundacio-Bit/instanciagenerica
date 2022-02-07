@@ -109,8 +109,8 @@ public class InstanciaGenericaErrorsAdminController extends InstanciaGenericaAdm
 		ig = instanciaGenericaLogicEjb.registrarInstanciaGenerica(ig);
 
 		if (ig.getEstat() == Constants.ESTAT_ERROR) {
-			HtmlUtils.saveMessageError(request, "No s'ha pogut reenviar la instancia: ID=" + ig.getInstanciaGenericaID()
-					+ ". Error:" + ig.getError());
+			HtmlUtils.saveMessageError(request, "No s'ha pogut registrar la seva Instancia Genèrica (ID="
+					+ ig.getInstanciaGenericaID() + "). Error:" + ig.getError());
 		} else {
 			HtmlUtils.saveMessageSuccess(request,
 					"La instancia ID=" + ig.getInstanciaGenericaID() + " s'ha registrat correctament");

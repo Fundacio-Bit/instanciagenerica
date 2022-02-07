@@ -19,6 +19,7 @@ import javax.annotation.security.PermitAll;
 
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
@@ -61,6 +62,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			ig.setEstat(Constants.ESTAT_ERROR);
 			ig.setError(ir.getError());
 			ig.setException(ir.getExccepcio());
+
 			// Aqui habría que añadir un mensaje de "Error con llamada a registro"
 		} else {
 			ig.setEstat(Constants.ESTAT_FINALITZAT);
@@ -193,15 +195,10 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		}
 
 		// Borram fitxers fisic
-
-//		FileSystemManager.eliminarArxius(fitxersEsborrar);
-//		log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX " +transactionSynchronizationRegistry );
 		transactionSynchronizationRegistry
 				.registerInterposedSynchronization(new CleanFilesSynchronization(fitxersEsborrar));
 
 		log.info("Final deleteFull");
-		// log.error("Passa per netejaFitxers => FINAL");
-
 	}
 
 	public class CleanFilesSynchronization implements javax.transaction.Synchronization {
