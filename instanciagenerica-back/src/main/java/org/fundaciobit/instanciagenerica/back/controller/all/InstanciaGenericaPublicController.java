@@ -98,20 +98,6 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			hidden.remove(SOLICITANTEMAIL);
 			hidden.remove(SOLICITANTTELEFON);
 
-			hidden.remove(IDIOMAID);
-			hidden.remove(EXPOSA);
-			hidden.remove(SOLICITA);
-
-			hidden.remove(FITXER1ID);
-			hidden.remove(FITXER2ID);
-			hidden.remove(FITXER3ID);
-			hidden.remove(FITXER4ID);
-			hidden.remove(FITXER5ID);
-			hidden.remove(FITXER6ID);
-			hidden.remove(FITXER7ID);
-			hidden.remove(FITXER8ID);
-			hidden.remove(FITXER9ID);
-
 			boolean developer = false;
 			if (developer && ig.getEstat() == Constants.ESTAT_ERROR) {
 				hidden.remove(ESTAT);
@@ -121,6 +107,8 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			hidden.remove(DATAFINALITZACIO);
 
 			instanciaGenericaForm.setHiddenFields(hidden);
+
+			
 		}
 
 		if (instanciaGenericaForm.isNou()) {
@@ -161,6 +149,33 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 			ig.setExposa("Expongo mis circunstancias");
 			ig.setSolicita("Solicito que se cumplan mis demandas");
+			
+			
+				/*
+			Set<Field<?>> hidden = new HashSet(Arrays.asList(InstanciaGenericaFields.ALL_INSTANCIAGENERICA_FIELDS));
+
+			hidden.remove(SOLICITANTNOM);
+			hidden.remove(DATACREACIO);
+			
+			instanciaGenericaForm.setHiddenFields(hidden);
+			
+		
+			instanciaGenericaForm.addHiddenField(FITXER1ID);
+			instanciaGenericaForm.addHiddenField(FITXER2ID);
+			instanciaGenericaForm.addHiddenField(FITXER3ID);
+			instanciaGenericaForm.addHiddenField(FITXER4ID);
+			instanciaGenericaForm.addHiddenField(FITXER5ID);
+			instanciaGenericaForm.addHiddenField(FITXER6ID);
+			instanciaGenericaForm.addHiddenField(FITXER7ID);
+			instanciaGenericaForm.addHiddenField(FITXER8ID);
+			instanciaGenericaForm.addHiddenField(FITXER9ID);
+	         
+			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.SOLICITANTDIRECCIO);
+			
+            instanciaGenericaForm.addHiddenField(SOLICITA);
+            instanciaGenericaForm.addHiddenField(EXPOSA);
+            */
+            
 
 		} else {
 			log.info("PUBLIC: Formulari per editar un element:"
