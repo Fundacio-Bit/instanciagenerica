@@ -8,26 +8,31 @@
 		function onChangeSolicitantPersonaFisica(elem) {
 
 			var isPersonaFisica = elem.value;
-			console.log(elem.value ? 'Fisica' : 'Juridica');
-
-			console.log(elem.value);
-			console.log(elem.value == "true");
-			console.log(isPersonaFisica);
-			console.log(isPersonaFisica == "Fisica");
 
 			if (isPersonaFisica == "true") { //persona fisica
 				console.log(" -> Persona fisica");
-				$("#instanciaGenerica_solicitantNom_rowid").show();
-				$("#instanciaGenerica_solicitantLlinatge1_rowid").show();
-				$("#instanciaGenerica_solicitantLlinatge2_rowid").show();
+				/* 				$("#instanciaGenerica_solicitantNom_rowid").show();
+				 $("#instanciaGenerica_solicitantLlinatge1_rowid").show();
+				 $("#instanciaGenerica_solicitantLlinatge2_rowid").show();
+				 */
+				$("#instanciaGenerica_solicitantNom_columnlabelid").html(
+						"<label>Nom solicitant</label>");
+				$("#instanciaGenerica_solicitantLlinatge1_columnlabelid").html(
+						"<label>Llinatge solicitant</label>");
+				$("#instanciaGenerica_solicitantLlinatge2_columnlabelid").html(
+						"<label>Segon llinatge solicitant</label>");
 
 				$("#instanciaGenerica_solicitantRaoSocial_rowid").hide();
 
 			} else {
 				console.log(" -> Persona juridica");
-				$("#instanciaGenerica_solicitantNom_rowid").hide();
-				$("#instanciaGenerica_solicitantLlinatge1_rowid").hide();
-				$("#instanciaGenerica_solicitantLlinatge2_rowid").hide();
+
+				$("#instanciaGenerica_solicitantNom_columnlabelid").html(
+						"<label>Nom representant</label>");
+				$("#instanciaGenerica_solicitantLlinatge1_columnlabelid").html(
+						"<label>Llinatge representant</label>");
+				$("#instanciaGenerica_solicitantLlinatge2_columnlabelid").html(
+						"<label>Segon llinatge representant</label>");
 
 				$("#instanciaGenerica_solicitantRaoSocial_rowid").show();
 				// "table-row";
@@ -68,22 +73,22 @@
 				console.log("afegir");
 				contador++;
 				console.log("	cont:" + contador + " - idx:" + idx_files);
+
 				if (contador == idx_files - 1) {
 					idx_files++;
-					$("#instanciaGenerica_fitxer" + idx_files + "ID_rowid").show();
+					$("#instanciaGenerica_fitxer" + idx_files + "ID_rowid")
+							.show();
 				}
 				console.log("	cont:" + contador + " - idx:" + idx_files);
 
-				/* 	} else if (!fitxrersArray[i].equals(ruta)) {
-						action = "modificar";
-				 */}
+				// 	} else if (!fitxrersArray[i].equals(ruta)) {
+				//		action = "modificar";
+			}
 
 			fitxrersArray[i] = ruta;
 
 			console.log("Fichero " + i + ": " + ruta);
 			console.log(fitxrersArray);
-
-			
 
 		}
 		/* 		instanciaGenerica_fitxer6ID_rowid
