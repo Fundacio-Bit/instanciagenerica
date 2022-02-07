@@ -1,6 +1,3 @@
-
-<h1>Hola caracola 2</h1>
-
 <c:if test="${mostrarScript}">
 	<script type="text/javascript">
 		var isFisica = $("#instanciaGenerica_solicitantPersonaFisica").val();

@@ -19,7 +19,6 @@ import javax.annotation.security.PermitAll;
 
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
