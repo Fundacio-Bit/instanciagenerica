@@ -21,6 +21,7 @@ import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaFilter
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaForm;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.model.entity.Fitxer;
+import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,8 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 	@EJB(mappedName = org.fundaciobit.instanciagenerica.logic.FitxerLogicService.JNDI_NAME)
 	protected org.fundaciobit.instanciagenerica.logic.FitxerLogicService fitxerLogicEjb;
+	
+	
 
 	@Override
 	protected FilesFormManager<Fitxer> getFilesFormManager() {
@@ -114,42 +117,9 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 		if (instanciaGenericaForm.isNou()) {
 			log.info("PUBLIC: Formulari per nou element");
 			// TODO: Modificar tema cost
-
-			String[] nombres = { "Paco", "Alex", "Toni", "Joan", "Marilen", "Oscar", "Pau", "Mateu", "Xavi", "Leo",
-					"Giovanni", "Aragorn", "Naruto", "Sasuke", "Rafa" };
-			String[] apellidos = { "Garcia", "Perez", "Gaita", "Macia", "Gonzalez", "Ronaldo", "Nadal", "Trobat",
-					"Hernandez", "Messi", "Lo Celso", "Guiterrez del Alamo", "Sureda", "Martin", "Pernia", "Uzumaki",
-					"Uchiha" };
-
 			InstanciaGenericaJPA ig = instanciaGenericaForm.getInstanciaGenerica();
 
-			Random rnd = new Random();
-			String valorDado = rnd.nextInt(1000) + "";
-			ig.setNumRegistre(valorDado);
-
-			ig.setSolicitantTipusAdminID(rnd.nextInt(4)); // DNI i hope
-
-			char[] c = { (char) ('A' + rnd.nextInt(26)) };
-			String s = "" + c[0] + "";
-			ig.setSolicitantAdminID((10000000 + rnd.nextInt(90000000)) + s);
-
-			ig.setSolicitantPersonaFisica(true);
-
-			String nom = nombres[rnd.nextInt(nombres.length)];
-			String llinatge = apellidos[rnd.nextInt(apellidos.length)];
-			String llinatge2 = apellidos[rnd.nextInt(apellidos.length)];
-			ig.setSolicitantNom(nom);
-			ig.setSolicitantLlinatge1(llinatge);
-			ig.setSolicitantLlinatge2(llinatge2);
-
-			ig.setSolicitantDireccio("Casa den " + nom);
-//			ig.setSolicitantRaoSocial("INDRA");
-			ig.setSolicitantTelefon(900000000 + rnd.nextInt(100000000) + "");
-			ig.setSolicitantEmail(nom.toLowerCase() + "." + llinatge.toLowerCase() + "@common.com");
-
-			ig.setExposa("Expongo mis circunstancias");
-			ig.setSolicita("Solicito que se cumplan mis demandas");
-			
+			ig = instanciaGenericaLogicEjb.generarInstanciaGenericaAleatoria(ig);
 			
 				/*
 			Set<Field<?>> hidden = new HashSet(Arrays.asList(InstanciaGenericaFields.ALL_INSTANCIAGENERICA_FIELDS));
@@ -184,6 +154,7 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 		return instanciaGenericaForm;
 	}
+
 
 	@Override
 	public boolean isAdmin() {
