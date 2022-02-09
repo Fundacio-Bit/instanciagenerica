@@ -52,3 +52,5 @@ target
 /instanciagenerica-back/src/main/webapp/img/app-logo2.png
 /doc/(CAT) Manual Instal.lació.odt
 /instanciagenerica-ejb/connection.properties
+/scripts/sqlgenerator/create_schema.sql
+/scripts/sqlgenerator/drop_schema.sql

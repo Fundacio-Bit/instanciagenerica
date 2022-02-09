@@ -1,0 +1,13 @@
+﻿<datasources>
+    ...
+    <datasource jndi-name="java:jboss/datasources/instanciagenericaDS" pool-name="instanciagenericaDS" enabled="true"
+                use-java-context="true">
+        <connection-url>jdbc:postgresql://localhost:5432/instanciagenerica</connection-url>
+        <driver>postgresql</driver>
+        <security>
+            <user-name>instanciagenerica</user-name>
+            <password>instanciagenerica</password>
+        </security>
+    </datasource>
+    ...
+</datasources>
