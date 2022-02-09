@@ -32,6 +32,9 @@ public interface InstanciaGenerica extends org.fundaciobit.genapp.common.IGenApp
 	public java.lang.String getSolicitantLlinatge2();
 	public void setSolicitantLlinatge2(java.lang.String _solicitantLlinatge2_);
 
+	public java.lang.String getSolicitantCif();
+	public void setSolicitantCif(java.lang.String _solicitantCif_);
+
 	public java.lang.String getSolicitantRaoSocial();
 	public void setSolicitantRaoSocial(java.lang.String _solicitantRaoSocial_);
 

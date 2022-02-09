@@ -78,6 +78,11 @@
           ${instanciaGenerica.solicitantLlinatge2}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTCIF)}">
+          <td>
+          ${instanciaGenerica.solicitantCif}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTRAOSOCIAL)}">
           <td>
           ${instanciaGenerica.solicitantRaoSocial}

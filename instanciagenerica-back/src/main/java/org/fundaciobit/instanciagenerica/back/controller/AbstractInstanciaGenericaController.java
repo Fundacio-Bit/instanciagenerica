@@ -151,7 +151,7 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 				HtmlUtils.saveMessageError(request, instanciaGenericaForm.getInstanciaGenerica().getError());
 			} else {
 				String url = "";
-				HtmlUtils.saveMessageInfo(request, "La seva Instancia Genèrica s'ha creat correctamente");
+				HtmlUtils.saveMessageInfo(request, "La seva Instancia Genèrica s'ha creat correctament");
 				HtmlUtils.saveMessageInfo(request,
 						"Per poder veure informació de la seva instancia guardi's aquesta URL: " + url);
 			}
@@ -172,12 +172,12 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 			instanciaGenericaForm.getInstanciaGenerica().setDataCreacio(new Timestamp(System.currentTimeMillis()));
 			instanciaGenericaForm.addReadOnlyField(DATACREACIO);
 
-			instanciaGenericaForm.getInstanciaGenerica().setSolicitantEmail("hola.bones@abstract.com");
-
 			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.ESTAT);
 			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.ERROR);
 			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.EXCEPTION);
 			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.DATAFINALITZACIO);
+
+			instanciaGenericaForm.getInstanciaGenerica().setSolicitantTipusAdminID(0);
 
 		} else {
 			log.info("Formulari per editar un element:"

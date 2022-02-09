@@ -42,6 +42,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTLLINATGE2)}">
         <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.SOLICITANTLLINATGE2)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTCIF)}">
+        <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.SOLICITANTCIF)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTRAOSOCIAL)}">
         <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.SOLICITANTRAOSOCIAL)}</th>
         </c:if>

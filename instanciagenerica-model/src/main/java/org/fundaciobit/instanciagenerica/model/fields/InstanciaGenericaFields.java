@@ -22,6 +22,7 @@ public interface InstanciaGenericaFields extends java.io.Serializable {
 	 public static final StringField SOLICITANTNOM = new StringField(_TABLE_MODEL, "solicitantNom", "solicitantnom");
 	 public static final StringField SOLICITANTLLINATGE1 = new StringField(_TABLE_MODEL, "solicitantLlinatge1", "solicitantllinatge1");
 	 public static final StringField SOLICITANTLLINATGE2 = new StringField(_TABLE_MODEL, "solicitantLlinatge2", "solicitantllinatge2");
+	 public static final StringField SOLICITANTCIF = new StringField(_TABLE_MODEL, "solicitantCif", "solicitantcif");
 	 public static final StringField SOLICITANTRAOSOCIAL = new StringField(_TABLE_MODEL, "solicitantRaoSocial", "solicitantraosocial");
 	 public static final StringField SOLICITANTDIRECCIO = new StringField(_TABLE_MODEL, "solicitantDireccio", "solicitantdireccio");
 	 public static final StringField SOLICITANTEMAIL = new StringField(_TABLE_MODEL, "solicitantEmail", "solicitantemail");
@@ -55,6 +56,7 @@ public interface InstanciaGenericaFields extends java.io.Serializable {
     SOLICITANTNOM,
     SOLICITANTLLINATGE1,
     SOLICITANTLLINATGE2,
+    SOLICITANTCIF,
     SOLICITANTRAOSOCIAL,
     SOLICITANTDIRECCIO,
     SOLICITANTEMAIL,

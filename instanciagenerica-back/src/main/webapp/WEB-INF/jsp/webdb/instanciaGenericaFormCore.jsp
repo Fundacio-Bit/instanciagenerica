@@ -6,7 +6,7 @@
         <tr id="instanciaGenerica_numRegistre_rowid">
           <td id="instanciaGenerica_numRegistre_columnlabelid">
             <label>
-              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.NUMREGISTRE])?'instanciaGenerica.numRegistre':__theForm.labels[InstanciaGenericaFields.NUMREGISTRE]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.NUMREGISTRE])?'instanciaGenerica.numRegistre':__theForm.labels[InstanciaGenericaFields.NUMREGISTRE]}" />
              </label>
               <c:if test="${not empty __theForm.help[InstanciaGenericaFields.NUMREGISTRE]}">
               <i class="fas fa-info-circle" title="${__theForm.help[InstanciaGenericaFields.NUMREGISTRE]}" ></i>
@@ -203,6 +203,24 @@
           <td id="instanciaGenerica_solicitantLlinatge2_columnvalueid">
             <form:errors path="instanciaGenerica.solicitantLlinatge2" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTLLINATGE2)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTLLINATGE2)? ' uneditable-input' : ''}"  style="" maxlength="100" path="instanciaGenerica.solicitantLlinatge2"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.SOLICITANTCIF)}">
+        <tr id="instanciaGenerica_solicitantCif_rowid">
+          <td id="instanciaGenerica_solicitantCif_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.SOLICITANTCIF])?'instanciaGenerica.solicitantCif':__theForm.labels[InstanciaGenericaFields.SOLICITANTCIF]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[InstanciaGenericaFields.SOLICITANTCIF]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[InstanciaGenericaFields.SOLICITANTCIF]}" ></i>
+              </c:if>
+            </td>
+          <td id="instanciaGenerica_solicitantCif_columnvalueid">
+            <form:errors path="instanciaGenerica.solicitantCif" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTCIF)? 'true' : 'false'}" cssClass="w-75 form-control  ${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTCIF)? ' uneditable-input' : ''}"  style="" maxlength="50" path="instanciaGenerica.solicitantCif"   />
 
            </td>
         </tr>

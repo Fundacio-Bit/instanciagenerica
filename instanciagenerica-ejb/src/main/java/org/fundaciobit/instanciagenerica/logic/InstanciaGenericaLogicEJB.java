@@ -14,6 +14,7 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
@@ -26,6 +27,7 @@ import javax.xml.ws.BindingProvider;
 
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.instanciagenerica.model.entity.Fitxer;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 
@@ -35,6 +37,7 @@ import es.caib.regweb3.ws.api.v3.DatosInteresadoWs;
 import es.caib.regweb3.ws.api.v3.InteresadoWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
+import es.caib.regweb3.ws.api.v3.TipoDocumentalWs;
 
 import org.fundaciobit.instanciagenerica.commons.utils.Configuracio;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
@@ -240,10 +243,37 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 			asientoRegistral.getInteresados().add(i);
 
-//			AnexoWs anex = new AnexoWs();
-//			anex.set
-//			
-//			asientoRegistral.getAnexos().add(anex);
+			Fitxer[] fitxers = new Fitxer[] { ig.getFitxer1(), ig.getFitxer2(), ig.getFitxer3(), ig.getFitxer4(),
+					ig.getFitxer5(), ig.getFitxer6(), ig.getFitxer7(), ig.getFitxer8(), ig.getFitxer9() };
+
+			for (Fitxer f : fitxers) {
+				if (f != null) {
+
+					AnexoWs anex = new AnexoWs();
+
+					anex.setConfidencial(false);
+					anex.setCsv(null);
+					anex.setFechaCaptura(new Timestamp(System.currentTimeMillis()));
+					anex.setFicheroAnexado(FileSystemManager.getFileContent(f.getFitxerID()));
+					anex.setFirmaAnexada(null);
+					anex.setHash(null);
+					anex.setJustificante(false);
+					anex.setModoFirma(0);
+					anex.setNombreFicheroAnexado(f.getNom());
+					anex.setNombreFirmaAnexada(null);
+					anex.setObservaciones(null);
+					anex.setOrigenCiudadanoAdmin(0);
+					anex.setTamanoFichero(0);
+					anex.setTipoDocumental("TD99");
+					anex.setTipoDocumento("02");
+					anex.setTipoMIMEFicheroAnexado(f.getMime());
+					anex.setTipoMIMEFirmaAnexada(null);
+					anex.setTitulo(f.getNom());
+					anex.setValidezDocumento("01");
+
+					asientoRegistral.getAnexos().add(anex);
+				}
+			}
 
 			asientoRegistral.setVersion(null); // ersió de la aplicació que fa l’assentament. Camp intern que es omplit
 												// per REGWEB3.
@@ -433,10 +463,10 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 	@Override
 	public InstanciaGenericaJPA generarInstanciaGenericaAleatoria(InstanciaGenericaJPA ig) {
 		String[] nombres = { "Paco", "Alex", "Toni", "Joan", "Marilen", "Oscar", "Pau", "Mateu", "Xavi", "Leo",
-				"Giovanni", "Aragorn", "Naruto", "Sasuke", "Rafa" };
-		String[] apellidos = { "Garcia", "Perez", "Gaita", "Macia", "Gonzalez", "Ronaldo", "Nadal", "Trobat",
-				"Hernandez", "Messi", "Lo Celso", "Guiterrez del Alamo", "Sureda", "Martin", "Pernia", "Uzumaki",
-				"Uchiha" };
+				"Giovanni", "Aragorn", "Naruto", "Sasuke", "Rafa", "Guillem", "Miquel", "Xisco", "David", "Kakashi" };
+		String[] apellidos = { "Garcia", "Perez", "Gaita", "Macia", "Gonzalez", "Ronaldo", "Nadal", "Trobat", "Trias",
+				"Segura", "Zidane", "Hernandez", "Messi", "Lo Celso", "Guiterrez", "Sureda", "Martin", "Pernia",
+				"Uzumaki", "Rodriguez", "Garí", "Soriano", "Mascaró", "Bennasar", "Uchiha", "Hatake", "", "", "Lopez" };
 
 		Random rnd = new Random();
 

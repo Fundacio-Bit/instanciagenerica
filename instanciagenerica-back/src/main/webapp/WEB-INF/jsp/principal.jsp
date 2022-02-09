@@ -29,14 +29,21 @@
 </div>
 
 <br />
-<%-- Username: ${loginInfo.username}<br/>
-&#36;{ige:hasRole(ROLE_ADMIN)}= ${ige:hasRole('ROLE_ADMIN')}<br/>
-&#36;{ige:hasRole(ROLE_USER) }= ${ige:hasRole('ROLE_USER') }<br/>
-Locale = <%=LocaleContextHolder.getLocale() %> <br/>
-lang = ${lang} <br/>
- --%>
+<%-- --%>
 <br />
 
 <c:if test="${ige:isDesenvolupament()}">
-Only in Development Mode
+	Only in Development Mode
+	<br>
+
+	Username: ${loginInfo.username}<br />
+	&#36;{ige:hasRole(ROLE_ADMIN)}= ${ige:hasRole('ROLE_ADMIN')}<br />
+	&#36;{ige:hasRole(ROLE_USER) }= ${ige:hasRole('ROLE_USER') }<br />
+	Locale = <%=LocaleContextHolder.getLocale()%>
+	<br>
+
+	lang = ${lang} <br />
+
+
+
 </c:if>

@@ -142,10 +142,10 @@ public class Configuracio implements Constants {
 	}
 
 	public static String getRegistreUnitatTramitacioDestiCodi() {
-		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.oficinadesti.codi");
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.unitattramitacio.codi");
 	}
 
 	public static String getRegistreUnitatTramitacioDestiDenominacio() {
-		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.oficinadesti.denominacio");
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.unitattramitacio.denominacio");
 	}
 }

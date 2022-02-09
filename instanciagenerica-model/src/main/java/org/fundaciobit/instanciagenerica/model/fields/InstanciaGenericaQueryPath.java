@@ -51,6 +51,10 @@ public class InstanciaGenericaQueryPath extends org.fundaciobit.genapp.common.qu
     return new StringField(getQueryPath(), InstanciaGenericaFields.SOLICITANTLLINATGE2);
   }
 
+  public StringField SOLICITANTCIF() {
+    return new StringField(getQueryPath(), InstanciaGenericaFields.SOLICITANTCIF);
+  }
+
   public StringField SOLICITANTRAOSOCIAL() {
     return new StringField(getQueryPath(), InstanciaGenericaFields.SOLICITANTRAOSOCIAL);
   }

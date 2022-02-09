@@ -32,10 +32,6 @@ public class InstanciaGenericaValidator<I extends InstanciaGenerica>
     ,org.fundaciobit.instanciagenerica.model.dao.IInstanciaGenericaManager __instanciaGenericaManager) {
 
     // Valors Not Null
-    __vr.rejectIfEmptyOrWhitespace(__target__,NUMREGISTRE, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NUMREGISTRE)));
-
     __vr.rejectIfEmptyOrWhitespace(__target__,DATACREACIO, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATACREACIO)));
@@ -133,6 +129,14 @@ public class InstanciaGenericaValidator<I extends InstanciaGenerica>
       if (__solicitantllinatge2!= null && __solicitantllinatge2.length() > 100) {
         __vr.rejectValue(SOLICITANTLLINATGE2, "genapp.validation.sizeexceeds",
             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SOLICITANTLLINATGE2)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(100)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(SOLICITANTCIF) == 0) {
+      java.lang.String __solicitantcif = __target__.getSolicitantCif();
+      if (__solicitantcif!= null && __solicitantcif.length() > 50) {
+        __vr.rejectValue(SOLICITANTCIF, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SOLICITANTCIF)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(50)));
       }
     }
 

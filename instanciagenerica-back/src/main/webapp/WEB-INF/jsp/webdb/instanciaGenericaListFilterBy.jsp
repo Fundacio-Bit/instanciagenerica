@@ -228,6 +228,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.SOLICITANTCIF)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="instanciaGenerica.solicitantCif" var="solicitantCif" />
+              <fmt:message key="genapp.form.searchby" var="cercapersolicitantCif" >                
+                 <fmt:param value="${solicitantCif}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${solicitantCif}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapersolicitantCif}" path="solicitantCif" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.SOLICITANTRAOSOCIAL)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">

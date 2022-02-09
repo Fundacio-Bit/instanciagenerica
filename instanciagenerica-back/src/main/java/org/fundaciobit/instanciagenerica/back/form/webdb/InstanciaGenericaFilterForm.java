@@ -153,6 +153,17 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
   }
 
 
+  private java.lang.String solicitantCif;
+
+  public java.lang.String getSolicitantCif() {
+    return this.solicitantCif;
+  }
+
+  public void setSolicitantCif(java.lang.String solicitantCif) {
+    this.solicitantCif = solicitantCif;
+  }
+
+
   private java.lang.String solicitantRaoSocial;
 
   public java.lang.String getSolicitantRaoSocial() {
@@ -313,6 +324,7 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
     this.solicitantNom = __toClone.solicitantNom;
     this.solicitantLlinatge1 = __toClone.solicitantLlinatge1;
     this.solicitantLlinatge2 = __toClone.solicitantLlinatge2;
+    this.solicitantCif = __toClone.solicitantCif;
     this.solicitantRaoSocial = __toClone.solicitantRaoSocial;
     this.solicitantDireccio = __toClone.solicitantDireccio;
     this.solicitantEmail = __toClone.solicitantEmail;

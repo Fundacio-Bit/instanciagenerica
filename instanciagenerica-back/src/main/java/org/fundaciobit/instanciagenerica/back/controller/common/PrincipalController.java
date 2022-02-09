@@ -36,8 +36,8 @@ public class PrincipalController {
 			session.setAttribute("inicialitzat", true);
 		}
 
-//		return new ModelAndView("principal");
-		return new ModelAndView(new RedirectView("/public/instanciagenerica/new", true));
+		return new ModelAndView("principal");
+//		return new ModelAndView(new RedirectView("/public/instanciagenerica/new", true));
 
 	}
 

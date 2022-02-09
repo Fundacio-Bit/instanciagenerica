@@ -19,6 +19,7 @@ import org.fundaciobit.instanciagenerica.back.controller.AbstractInstanciaGeneri
 import org.fundaciobit.instanciagenerica.back.controller.InstanciaGenericaFilesFormManager;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaFilterForm;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaForm;
+import org.fundaciobit.instanciagenerica.commons.utils.Configuracio;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.model.entity.Fitxer;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
@@ -119,7 +120,9 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			// TODO: Modificar tema cost
 			InstanciaGenericaJPA ig = instanciaGenericaForm.getInstanciaGenerica();
 
-			ig = instanciaGenericaLogicEjb.generarInstanciaGenericaAleatoria(ig);
+			if (Configuracio.isDesenvolupament()) {
+				ig = instanciaGenericaLogicEjb.generarInstanciaGenericaAleatoria(ig);
+			}
 			
 				/*
 			Set<Field<?>> hidden = new HashSet(Arrays.asList(InstanciaGenericaFields.ALL_INSTANCIAGENERICA_FIELDS));
