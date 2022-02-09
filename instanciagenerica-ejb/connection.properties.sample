@@ -1,0 +1,8 @@
+url=http://registre3.fundaciobit.org/regweb3/ws/v3/RegWebAsientoRegistral
+user=setuser
+pass=setpassword
+entidad=A04003003
+oficinadesti.codi=setcodioficina
+oficinadesti.denominacio=setdenominaciooficina
+unitattramitacio.codi=setcodiunitat
+unitattramitacio.denominacio=setdenominaciounitat

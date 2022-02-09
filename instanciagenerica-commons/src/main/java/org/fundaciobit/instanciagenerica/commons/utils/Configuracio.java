@@ -15,105 +15,137 @@ import java.util.Properties;
  */
 public class Configuracio implements Constants {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Configuracio.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Configuracio.class);
 
-    private static final Properties fileProperties = new Properties();
-    
-    private static final Properties fileAndSystemProperties = new Properties();
+	private static final Properties fileProperties = new Properties();
 
-    /*
-     * Agafa els fitxers de propietats definits a l'standalone
-     *
-     * Seguim els estandars de la CAIB 
-     */
-    public static Properties getFilesProperties() {
-        
-        if (fileProperties.isEmpty()) {
-            // matches the property name as defined in the system-properties element in
-            // WildFly
-            String propertyFile = System.getProperty(Constants.INSTANCIAGENERICA_PROPERTY_BASE + "properties");
-            File file = new File(propertyFile);
-    
-            String propertySystemFile = System.getProperty(Constants.INSTANCIAGENERICA_PROPERTY_BASE + "system.properties");
-            File systemFile = new File(propertySystemFile);
-    
-            try {
-                fileProperties.load(new FileInputStream(file));
-                fileProperties.load(new FileInputStream(systemFile));
-            } catch (IOException e) {
-                LOG.error("No es pot carregar algun dels fitxers de propietats ... ", e);
-            }
-        }
-        
-        return fileProperties;
+	private static final Properties fileAndSystemProperties = new Properties();
 
-    }
+	/*
+	 * Agafa els fitxers de propietats definits a l'standalone
+	 *
+	 * Seguim els estandars de la CAIB
+	 */
+	public static Properties getFilesProperties() {
 
-    public static Properties getSystemAndFileProperties() {
+		if (fileProperties.isEmpty()) {
+			// matches the property name as defined in the system-properties element in
+			// WildFly
+			String propertyFile = System.getProperty(Constants.INSTANCIAGENERICA_PROPERTY_BASE + "properties");
+			File file = new File(propertyFile);
 
-        if (fileAndSystemProperties.isEmpty()) {
-            fileAndSystemProperties.putAll(getFilesProperties());
-            fileAndSystemProperties.putAll(System.getProperties());
-        }
-        return fileAndSystemProperties;
-    }
+			String propertySystemFile = System
+					.getProperty(Constants.INSTANCIAGENERICA_PROPERTY_BASE + "system.properties");
+			File systemFile = new File(propertySystemFile);
 
-    public static String getProperty(String key) {
+			try {
+				fileProperties.load(new FileInputStream(file));
+				fileProperties.load(new FileInputStream(systemFile));
+			} catch (IOException e) {
+				LOG.error("No es pot carregar algun dels fitxers de propietats ... ", e);
+			}
+		}
 
-        return  getFilesProperties().getProperty(key);
+		return fileProperties;
 
-    }
+	}
 
-    public static String getProperty(String key, String def) {
-        
-        return getFilesProperties().getProperty(key, def);
+	public static Properties getSystemAndFileProperties() {
 
-    }
+		if (fileAndSystemProperties.isEmpty()) {
+			fileAndSystemProperties.putAll(getFilesProperties());
+			fileAndSystemProperties.putAll(System.getProperties());
+		}
+		return fileAndSystemProperties;
+	}
 
-    public static boolean isDesenvolupament() {
+	public static String getProperty(String key) {
 
-        return Boolean.parseBoolean(getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "development"));
-    }
+		return getFilesProperties().getProperty(key);
 
-    public static boolean isCAIB() {
-        return Boolean.parseBoolean(getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "iscaib"));
-    }
+	}
 
-    public static String getAppUrl() {
-        return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "url");
-    }
+	public static String getProperty(String key, String def) {
 
-    public static String getAppEmail() {
-        return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "email.from");
-    }
+		return getFilesProperties().getProperty(key, def);
 
-    public static String getAppName() {
-        return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "name", "InstanciaGenerica");
-    }
+	}
 
-    public static String getDefaultLanguage() {
-        return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "defaultlanguage", "ca");
-    }
+	public static boolean isDesenvolupament() {
 
-    public static byte[] getEncryptKey() {
-        return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "encryptkey", "0123456789123456").getBytes();
-    }
+		return Boolean.parseBoolean(getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "development"));
+	}
 
-    public static Long getMaxUploadSizeInBytes() {
-        return Long.getLong(INSTANCIAGENERICA_PROPERTY_BASE + "maxuploadsizeinbytes");
-    }
+	public static boolean isCAIB() {
+		return Boolean.parseBoolean(getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "iscaib"));
+	}
 
-    public static Long getMaxFitxerAdaptatSizeInBytes() {
-        return Long.getLong(INSTANCIAGENERICA_PROPERTY_BASE + "maxfitxeradaptatsizeinbytes");
-    }
+	public static String getAppUrl() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "url");
+	}
 
-    public static File getFilesDirectory() {
-        String path = getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "filesdirectory");
-        return new File(path);
-    }
+	public static String getAppEmail() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "email.from");
+	}
 
-    public static String getFileSystemManager() {
-        return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "filesystemmanagerclass");
-    }
+	public static String getAppName() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "name", "InstanciaGenerica");
+	}
 
+	public static String getDefaultLanguage() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "defaultlanguage", "ca");
+	}
+
+	public static byte[] getEncryptKey() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "encryptkey", "0123456789123456").getBytes();
+	}
+
+	public static Long getMaxUploadSizeInBytes() {
+		return Long.getLong(INSTANCIAGENERICA_PROPERTY_BASE + "maxuploadsizeinbytes");
+	}
+
+	public static Long getMaxFitxerAdaptatSizeInBytes() {
+		return Long.getLong(INSTANCIAGENERICA_PROPERTY_BASE + "maxfitxeradaptatsizeinbytes");
+	}
+
+	public static File getFilesDirectory() {
+		String path = getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "filesdirectory");
+		return new File(path);
+	}
+
+	public static String getFileSystemManager() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "filesystemmanagerclass");
+	}
+
+	public static String getRegistreUrl() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.url");
+	}
+
+	public static String getRegistreUser() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.user");
+	}
+
+	public static String getRegistrePass() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.pass");
+	}
+
+	public static String getRegistreEntidad() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.entidad");
+	}
+
+	public static String getRegistreOficinaDestiCodi() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.oficinadesti.codi");
+	}
+
+	public static String getRegistreOficinaDestiDenominacio() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.oficinadesti.denominacio");
+	}
+
+	public static String getRegistreUnitatTramitacioDestiCodi() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.oficinadesti.codi");
+	}
+
+	public static String getRegistreUnitatTramitacioDestiDenominacio() {
+		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.oficinadesti.denominacio");
+	}
 }
