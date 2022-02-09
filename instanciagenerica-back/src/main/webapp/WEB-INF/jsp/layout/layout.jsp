@@ -80,7 +80,7 @@
   <%-- FINAL DIV PIPELLES --%>
   </div>
 
-  <div class="container row-fluid">
+  <div class="container-fluid">
     <tiles:insertAttribute name="peu">     
     </tiles:insertAttribute>
   </div>

@@ -7,7 +7,7 @@
 <footer id="footer">
 	<div class="row mr-auto ml-3 mr-3 peuResponsive">
 		<!-- Esquerra -->
-		<div class="col-4 pt-2 elementPeuResponsive">
+		<div class="col-4 pt-2 elementPeuResponsive text-left">
 			<strong class="font-weight-bold h6">
 				${versio.projectName}
 				v${versio.version}<%=Configuracio.isCAIB() ? "-caib" : ""%>
@@ -46,8 +46,7 @@
 		</div>
 
 		<!-- Dreta -->
-		<div class="col-4 pt-2 text-center" >
-		  <center>
+		<div class="col-4 pt-2 text-right" >
 			<a href="http://otaeweb.ibit.org/" style="padding-top: 10px" target="_blank"> <img
 				src="<c:url value="/img/fundaciobit-logo-peu.png"/>"
 				alt="Fundacio Bit" />
@@ -56,7 +55,6 @@
 			<!-- Button to trigger modal -->
 			<small><a href="#modalAjuda" role="button"
 				data-toggle="modal"><fmt:message key="ajuda.necessitau" /></a></small>
-		  </center>
 		</div>
 
 	</div>
