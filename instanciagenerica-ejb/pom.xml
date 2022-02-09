@@ -59,13 +59,20 @@
             <version>3.2.4</version>
         </dependency>
 
+
+
 		<dependency>
 		    <groupId>org.jboss.spec.javax.xml.ws</groupId>
 		    <artifactId>jboss-jaxws-api_2.3_spec</artifactId>
 		    <version>2.0.0.Final</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>jakarta.activation-api</artifactId>
+					<groupId>jakarta.activation</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-
-
 
         <dependency>
             <groupId>jakarta.xml.ws</groupId>
