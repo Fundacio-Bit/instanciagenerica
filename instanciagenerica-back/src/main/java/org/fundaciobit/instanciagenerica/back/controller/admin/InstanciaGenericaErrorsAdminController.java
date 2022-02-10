@@ -67,13 +67,18 @@ public class InstanciaGenericaErrorsAdminController extends InstanciaGenericaAdm
 			hidden.remove(InstanciaGenericaFields.DATACREACIO);
 			hidden.remove(InstanciaGenericaFields.DATAFINALITZACIO);
 			hidden.remove(InstanciaGenericaFields.ERROR);
-			hidden.remove(InstanciaGenericaFields.NUMREGISTRE);
+//			hidden.remove(InstanciaGenericaFields.NUMREGISTRE);
 			hidden.remove(InstanciaGenericaFields.UUID);
 			hidden.remove(InstanciaGenericaFields.SOLICITANTEMAIL);
 			hidden.remove(InstanciaGenericaFields.ERROR);
+			hidden.remove(InstanciaGenericaFields.DATACREACIO);
+			hidden.remove(InstanciaGenericaFields.DATAFINALITZACIO);
 
+			mav.addObject("llistat", "errors");
 			instanciaGenericaFilterForm.setHiddenFields(hidden);
 
+			instanciaGenericaFilterForm.addLabel(InstanciaGenericaFields.DATAFINALITZACIO, "datafinalitzacio");
+			
 			instanciaGenericaFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-redo",
 					"regisitre.reintentar", getContextWeb() + "/reintentarregistre/{0}", "btn-primary"));
 			// new AdditionalButton("class del icono de fontawesome5", "codigo del boton

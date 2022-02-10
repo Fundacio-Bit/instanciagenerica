@@ -9,8 +9,8 @@
 		configFisicaJuridica(true);
 
 		function configFisicaJuridica(personaFisica) {
-			var aCambiar = [ "solicitantAdminID", "solicitantNom", "solicitantLlinatge1",
-					"solicitantLlinatge2" ];
+			var aCambiar = [ "solicitantAdminID", "solicitantNom",
+					"solicitantLlinatge1", "solicitantLlinatge2" ];
 
 			$.each(aCambiar, function(key, value) {
 
@@ -61,27 +61,17 @@
 			if (ruta.localeCompare("") == 0) {
 				console.log("eliminar");
 				contador--;
-				console.log("	cont:" + contador + " - idx:" + idx_files);
-
 				if (contador == idx_files - 3) {
-					$("#instanciaGenerica_fitxer" + idx_files + "ID_rowid")
-							.hide();
+					$("#instanciaGenerica_fitxer" + idx_files + "ID_rowid").hide();
 					idx_files--;
 				}
-				console.log("	cont:" + contador + " - idx:" + idx_files);
-
 			} else if (fitxrersArray[i].localeCompare("") == 0) {
 				console.log("afegir");
 				contador++;
-				console.log("	cont:" + contador + " - idx:" + idx_files);
-
 				if (contador == idx_files - 1) {
 					idx_files++;
-					$("#instanciaGenerica_fitxer" + idx_files + "ID_rowid")
-							.show();
+					$("#instanciaGenerica_fitxer" + idx_files + "ID_rowid").show();
 				}
-				console.log("	cont:" + contador + " - idx:" + idx_files);
-
 				// 	} else if (!fitxrersArray[i].equals(ruta)) {
 				//		action = "modificar";
 			}
@@ -93,19 +83,7 @@
 
 		}
 
-		function reemplazarCadena(cadenaVieja, cadenaNueva, cadenaCompleta) {
-			// Reemplaza cadenaVieja por cadenaNueva en cadenaCompleta
 
-			for (var i = 0; i < cadenaCompleta.length; i++) {
-				if (cadenaCompleta.substring(i, i + cadenaVieja.length) == cadenaVieja) {
-					cadenaCompleta = cadenaCompleta.substring(0, i)
-							+ cadenaNueva
-							+ cadenaCompleta.substring(i + cadenaVieja.length,
-									cadenaCompleta.length);
-				}
-			}
-			return cadenaCompleta;
-		}
 	</script>
 </c:if>
 
