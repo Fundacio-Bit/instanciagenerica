@@ -45,14 +45,6 @@
    </sec:authorize>
 		</c:if>
 --%>
-		<hr style="margin-top: 6px; margin-bottom: 6px;" />
-		<li style="list-style-type: disc; list-style-position: inside;">
-			<a href="<c:url value="/common/principal.html"/>"> <span
-				style="${(fn:contains(url, 'common/principal.htm'))? "font-weight:bold;" : ""}">
-					About</span>
-		</a>
-		</li>
-
 
 		<hr style="margin-top: 6px; margin-bottom: 6px;" />
 		<li style="list-style-type: disc; list-style-position: inside;">
@@ -62,6 +54,13 @@
 		</a>
 		</li>
 
+		<hr style="margin-top: 6px; margin-bottom: 6px;" />
+		<li style="list-style-type: disc; list-style-position: inside;">
+			<a href="<c:url value="/common/principal.html"/>"> <span
+				style="${(fn:contains(url, 'common/principal.htm'))? "font-weight:bold;" : ""}">
+					About</span>
+		</a>
+		</li>
 
 	</ul>
 </div>
