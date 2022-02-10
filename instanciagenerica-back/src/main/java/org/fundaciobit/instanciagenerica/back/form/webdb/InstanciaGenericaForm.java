@@ -56,8 +56,8 @@ public class InstanciaGenericaForm extends InstanciaGenericaBaseForm {
   public InstanciaGenericaForm(InstanciaGenericaForm __toClone) {
     super(__toClone);
       this.instanciaGenerica = __toClone.instanciaGenerica;
-    this.listOfValuesForSolicitantTipusAdminID = __toClone.listOfValuesForSolicitantTipusAdminID;
     this.listOfValuesForSolicitantPersonaFisica = __toClone.listOfValuesForSolicitantPersonaFisica;
+    this.listOfValuesForSolicitantTipusAdminID = __toClone.listOfValuesForSolicitantTipusAdminID;
     this.listOfIdiomaForIdiomaID = __toClone.listOfIdiomaForIdiomaID;
   }
   
@@ -200,18 +200,6 @@ public class InstanciaGenericaForm extends InstanciaGenericaBaseForm {
   public void setFitxer9IDDelete(boolean fitxer9IDDelete) {
     this.fitxer9IDDelete = fitxer9IDDelete;
    }
-  private List<StringKeyValue> listOfValuesForSolicitantTipusAdminID;
-
-  public List<StringKeyValue> getListOfValuesForSolicitantTipusAdminID() {
-    return this.listOfValuesForSolicitantTipusAdminID;
-  }
-
-  public void setListOfValuesForSolicitantTipusAdminID(List<StringKeyValue> listOfValuesForSolicitantTipusAdminID) {
-    this.listOfValuesForSolicitantTipusAdminID = listOfValuesForSolicitantTipusAdminID;
-  }
-
-
-
   private List<StringKeyValue> listOfValuesForSolicitantPersonaFisica;
 
   public List<StringKeyValue> getListOfValuesForSolicitantPersonaFisica() {
@@ -220,6 +208,18 @@ public class InstanciaGenericaForm extends InstanciaGenericaBaseForm {
 
   public void setListOfValuesForSolicitantPersonaFisica(List<StringKeyValue> listOfValuesForSolicitantPersonaFisica) {
     this.listOfValuesForSolicitantPersonaFisica = listOfValuesForSolicitantPersonaFisica;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForSolicitantTipusAdminID;
+
+  public List<StringKeyValue> getListOfValuesForSolicitantTipusAdminID() {
+    return this.listOfValuesForSolicitantTipusAdminID;
+  }
+
+  public void setListOfValuesForSolicitantTipusAdminID(List<StringKeyValue> listOfValuesForSolicitantTipusAdminID) {
+    this.listOfValuesForSolicitantTipusAdminID = listOfValuesForSolicitantTipusAdminID;
   }
 
 

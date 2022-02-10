@@ -24,14 +24,14 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.DATACREACIO)}">
         <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.DATACREACIO)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}">
+        <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTTIPUSADMINID)}">
         <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.SOLICITANTTIPUSADMINID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTADMINID)}">
         <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.SOLICITANTADMINID)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}">
-        <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTNOM)}">
         <th>${ige:getSortIcons(__theFilterForm,InstanciaGenericaFields.SOLICITANTNOM)}</th>

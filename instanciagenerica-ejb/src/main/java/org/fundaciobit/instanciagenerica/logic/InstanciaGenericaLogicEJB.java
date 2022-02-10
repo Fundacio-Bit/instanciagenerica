@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -462,15 +463,15 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 	@Override
 	public InstanciaGenericaJPA generarInstanciaGenericaAleatoria(InstanciaGenericaJPA ig) {
-		String[] nombres = { "Paco", "Alex", "Toni", "Joan", "Marilen", "Oscar", "Pau", "Mateu", "Xavi", "Leo",
+		String[] nombres = { "Paco", "Alex", "Toni", "Joan", "Marilén", "Óscar", "Pau", "Mateu", "Xavi", "Leo",
 				"Giovanni", "Aragorn", "Naruto", "Sasuke", "Rafa", "Guillem", "Miquel", "Xisco", "David", "Kakashi" };
-		String[] apellidos = { "Garcia", "Perez", "Gaita", "Macia", "Gonzalez", "Ronaldo", "Nadal", "Trobat", "Trias",
-				"Segura", "Zidane", "Hernandez", "Messi", "Lo Celso", "Guiterrez", "Sureda", "Martin", "Pernia",
-				"Uzumaki", "Rodriguez", "Garí", "Soriano", "Mascaró", "Bennasar", "Uchiha", "Hatake", "", "", "Lopez" };
+		String[] apellidos = { "García", "Pérez", "Gaita", "Macià", "Gonzalez", "Ronaldo", "Nadal", "Trobat", "Trias",
+				"Segura", "Zidane", "Hernandez", "Messi", "LoCelso", "Guiterrez", "Sureda", "Martín", "Pernia",
+				"Uzumaki", "Rodriguez", "Garí", "Soriano", "Mascaró", "Bennasar", "Uchiha", "Hatake", "López" };
 
 		Random rnd = new Random();
 
-		ig.setSolicitantTipusAdminID(rnd.nextInt(1)); // DNI
+		ig.setSolicitantTipusAdminID(rnd.nextInt(2)); // DNI
 
 		char[] c = { (char) ('A' + rnd.nextInt(26)) };
 		String s = "" + c[0] + "";
@@ -492,7 +493,12 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		ig.setSolicitantDireccio("Casa den " + nom);
 		ig.setSolicitantRaoSocial("INDRA");
 		ig.setSolicitantTelefon(900000000 + rnd.nextInt(100000000) + "");
-		ig.setSolicitantEmail(nom.toLowerCase() + "." + llinatge.toLowerCase() + "@common.com");
+
+		String correo = nom + "." + llinatge;
+		String cadenaNormalize = Normalizer.normalize(correo, Normalizer.Form.NFD);   
+		correo = cadenaNormalize.replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+
+		ig.setSolicitantEmail(correo + "@common.com");
 
 		ig.setExposa("Expongo mis circunstancias");
 		ig.setSolicita("Solicito que se cumplan mis demandas");

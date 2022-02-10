@@ -14,14 +14,14 @@ public interface InstanciaGenerica extends org.fundaciobit.genapp.common.IGenApp
 	public java.sql.Timestamp getDataCreacio();
 	public void setDataCreacio(java.sql.Timestamp _dataCreacio_);
 
+	public boolean isSolicitantPersonaFisica();
+	public void setSolicitantPersonaFisica(boolean _solicitantPersonaFisica_);
+
 	public int getSolicitantTipusAdminID();
 	public void setSolicitantTipusAdminID(int _solicitantTipusAdminID_);
 
 	public java.lang.String getSolicitantAdminID();
 	public void setSolicitantAdminID(java.lang.String _solicitantAdminID_);
-
-	public boolean isSolicitantPersonaFisica();
-	public void setSolicitantPersonaFisica(boolean _solicitantPersonaFisica_);
 
 	public java.lang.String getSolicitantNom();
 	public void setSolicitantNom(java.lang.String _solicitantNom_);

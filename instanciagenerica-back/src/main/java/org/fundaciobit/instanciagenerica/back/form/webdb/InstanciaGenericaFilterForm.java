@@ -338,8 +338,8 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
     this.exception = __toClone.exception;
     this.datafinalitzacioDesde = __toClone.datafinalitzacioDesde;
     this.datafinalitzacioFins = __toClone.datafinalitzacioFins;
-    this.mapOfValuesForSolicitantTipusAdminID = __toClone.mapOfValuesForSolicitantTipusAdminID;
     this.mapOfValuesForSolicitantPersonaFisica = __toClone.mapOfValuesForSolicitantPersonaFisica;
+    this.mapOfValuesForSolicitantTipusAdminID = __toClone.mapOfValuesForSolicitantTipusAdminID;
     this.mapOfIdiomaForIdiomaID = __toClone.mapOfIdiomaForIdiomaID;
   }
   
@@ -352,7 +352,7 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
 
   @Override
   public List<Field<?>> getDefaultGroupByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { SOLICITANTTIPUSADMINID ,SOLICITANTPERSONAFISICA ,IDIOMAID }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { SOLICITANTPERSONAFISICA ,SOLICITANTTIPUSADMINID ,IDIOMAID }));
   }
 
 
@@ -375,18 +375,6 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfValuesForSolicitantTipusAdminID;
-
-  public Map<String, String> getMapOfValuesForSolicitantTipusAdminID() {
-    return this.mapOfValuesForSolicitantTipusAdminID;
-  }
-
-  public void setMapOfValuesForSolicitantTipusAdminID(Map<String, String> mapOfValuesForSolicitantTipusAdminID) {
-    this.mapOfValuesForSolicitantTipusAdminID = mapOfValuesForSolicitantTipusAdminID;
-  }
-
-
-
   private Map<String, String> mapOfValuesForSolicitantPersonaFisica;
 
   public Map<String, String> getMapOfValuesForSolicitantPersonaFisica() {
@@ -395,6 +383,18 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
 
   public void setMapOfValuesForSolicitantPersonaFisica(Map<String, String> mapOfValuesForSolicitantPersonaFisica) {
     this.mapOfValuesForSolicitantPersonaFisica = mapOfValuesForSolicitantPersonaFisica;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForSolicitantTipusAdminID;
+
+  public Map<String, String> getMapOfValuesForSolicitantTipusAdminID() {
+    return this.mapOfValuesForSolicitantTipusAdminID;
+  }
+
+  public void setMapOfValuesForSolicitantTipusAdminID(Map<String, String> mapOfValuesForSolicitantTipusAdminID) {
+    this.mapOfValuesForSolicitantTipusAdminID = mapOfValuesForSolicitantTipusAdminID;
   }
 
 

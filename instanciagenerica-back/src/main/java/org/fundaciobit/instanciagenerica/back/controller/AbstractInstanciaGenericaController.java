@@ -177,7 +177,8 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.EXCEPTION);
 			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.DATAFINALITZACIO);
 
-			instanciaGenericaForm.getInstanciaGenerica().setSolicitantTipusAdminID(0);
+			instanciaGenericaForm.getInstanciaGenerica().setSolicitantTipusAdminID(2);
+			instanciaGenericaForm.getInstanciaGenerica().setSolicitantPersonaFisica(true);
 
 		} else {
 			log.info("Formulari per editar un element:"

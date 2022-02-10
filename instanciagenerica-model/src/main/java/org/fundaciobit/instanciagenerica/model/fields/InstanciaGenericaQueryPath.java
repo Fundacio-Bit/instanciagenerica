@@ -27,16 +27,16 @@ public class InstanciaGenericaQueryPath extends org.fundaciobit.genapp.common.qu
     return new TimestampField(getQueryPath(), InstanciaGenericaFields.DATACREACIO);
   }
 
+  public BooleanField SOLICITANTPERSONAFISICA() {
+    return new BooleanField(getQueryPath(), InstanciaGenericaFields.SOLICITANTPERSONAFISICA);
+  }
+
   public IntegerField SOLICITANTTIPUSADMINID() {
     return new IntegerField(getQueryPath(), InstanciaGenericaFields.SOLICITANTTIPUSADMINID);
   }
 
   public StringField SOLICITANTADMINID() {
     return new StringField(getQueryPath(), InstanciaGenericaFields.SOLICITANTADMINID);
-  }
-
-  public BooleanField SOLICITANTPERSONAFISICA() {
-    return new BooleanField(getQueryPath(), InstanciaGenericaFields.SOLICITANTPERSONAFISICA);
   }
 
   public StringField SOLICITANTNOM() {

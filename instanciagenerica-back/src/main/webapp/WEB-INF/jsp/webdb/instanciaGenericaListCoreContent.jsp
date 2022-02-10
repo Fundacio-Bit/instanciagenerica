@@ -42,6 +42,14 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.DATACREACIO)}">
           <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${instanciaGenerica.dataCreacio}" /></td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}">
+          <td>
+          <c:set var="tmp">${instanciaGenerica.solicitantPersonaFisica}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForSolicitantPersonaFisica[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTTIPUSADMINID)}">
           <td>
           <c:set var="tmp">${instanciaGenerica.solicitantTipusAdminID}</c:set>
@@ -53,14 +61,6 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTADMINID)}">
           <td>
           ${instanciaGenerica.solicitantAdminID}
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}">
-          <td>
-          <c:set var="tmp">${instanciaGenerica.solicitantPersonaFisica}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForSolicitantPersonaFisica[tmp]}
-          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTNOM)}">

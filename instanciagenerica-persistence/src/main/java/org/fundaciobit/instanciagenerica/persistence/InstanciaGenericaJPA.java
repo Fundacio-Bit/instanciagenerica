@@ -45,6 +45,11 @@ private static final long serialVersionUID = 389380649L;
     @Column(name="datacreacio",nullable = false,length = 29,precision = 6)
     java.sql.Timestamp dataCreacio;
 
+  /** Per saber si es persona física o jurídica
+ */
+    @Column(name="solicitantpersonafisica",nullable = false,length = 1)
+    boolean solicitantPersonaFisica;
+
   /** Tipus de document (DNI, NIE, Passaport, etc) */
     @Column(name="solicitanttipusadminid",nullable = false,length = 10)
     int solicitantTipusAdminID;
@@ -52,11 +57,6 @@ private static final long serialVersionUID = 389380649L;
   /** Nombre del docmuent (pot tenir lletres) */
     @Column(name="solicitantadminid",nullable = false,length = 50)
     java.lang.String solicitantAdminID;
-
-  /** Per saber si es persona física o jurídica
- */
-    @Column(name="solicitantpersonafisica",nullable = false,length = 1)
-    boolean solicitantPersonaFisica;
 
     @Column(name="solicitantnom",length = 100)
     java.lang.String solicitantNom;
@@ -157,14 +157,14 @@ private static final long serialVersionUID = 389380649L;
   }
 
   /** Constructor amb tots els camps  */
-  public InstanciaGenericaJPA(long instanciaGenericaID , java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantCif , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , int estat , java.lang.String error , java.lang.String exception , java.sql.Timestamp datafinalitzacio) {
+  public InstanciaGenericaJPA(long instanciaGenericaID , java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , boolean solicitantPersonaFisica , int solicitantTipusAdminID , java.lang.String solicitantAdminID , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantCif , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , int estat , java.lang.String error , java.lang.String exception , java.sql.Timestamp datafinalitzacio) {
     this.instanciaGenericaID=instanciaGenericaID;
     this.numRegistre=numRegistre;
     this.uuid=uuid;
     this.dataCreacio=dataCreacio;
+    this.solicitantPersonaFisica=solicitantPersonaFisica;
     this.solicitantTipusAdminID=solicitantTipusAdminID;
     this.solicitantAdminID=solicitantAdminID;
-    this.solicitantPersonaFisica=solicitantPersonaFisica;
     this.solicitantNom=solicitantNom;
     this.solicitantLlinatge1=solicitantLlinatge1;
     this.solicitantLlinatge2=solicitantLlinatge2;
@@ -191,13 +191,13 @@ private static final long serialVersionUID = 389380649L;
     this.datafinalitzacio=datafinalitzacio;
 }
   /** Constructor sense valors autoincrementals */
-  public InstanciaGenericaJPA(java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantCif , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , int estat , java.lang.String error , java.lang.String exception , java.sql.Timestamp datafinalitzacio) {
+  public InstanciaGenericaJPA(java.lang.String numRegistre , java.lang.String uuid , java.sql.Timestamp dataCreacio , boolean solicitantPersonaFisica , int solicitantTipusAdminID , java.lang.String solicitantAdminID , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantCif , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , int estat , java.lang.String error , java.lang.String exception , java.sql.Timestamp datafinalitzacio) {
     this.numRegistre=numRegistre;
     this.uuid=uuid;
     this.dataCreacio=dataCreacio;
+    this.solicitantPersonaFisica=solicitantPersonaFisica;
     this.solicitantTipusAdminID=solicitantTipusAdminID;
     this.solicitantAdminID=solicitantAdminID;
-    this.solicitantPersonaFisica=solicitantPersonaFisica;
     this.solicitantNom=solicitantNom;
     this.solicitantLlinatge1=solicitantLlinatge1;
     this.solicitantLlinatge2=solicitantLlinatge2;
@@ -224,12 +224,12 @@ private static final long serialVersionUID = 389380649L;
     this.datafinalitzacio=datafinalitzacio;
 }
   /** Constructor dels valors Not Null */
-  public InstanciaGenericaJPA(long instanciaGenericaID , java.sql.Timestamp dataCreacio , int solicitantTipusAdminID , java.lang.String solicitantAdminID , boolean solicitantPersonaFisica , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita) {
+  public InstanciaGenericaJPA(long instanciaGenericaID , java.sql.Timestamp dataCreacio , boolean solicitantPersonaFisica , int solicitantTipusAdminID , java.lang.String solicitantAdminID , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita) {
     this.instanciaGenericaID=instanciaGenericaID;
     this.dataCreacio=dataCreacio;
+    this.solicitantPersonaFisica=solicitantPersonaFisica;
     this.solicitantTipusAdminID=solicitantTipusAdminID;
     this.solicitantAdminID=solicitantAdminID;
-    this.solicitantPersonaFisica=solicitantPersonaFisica;
     this.solicitantDireccio=solicitantDireccio;
     this.solicitantEmail=solicitantEmail;
     this.solicitantTelefon=solicitantTelefon;
@@ -242,9 +242,9 @@ private static final long serialVersionUID = 389380649L;
     this.setNumRegistre(__bean.getNumRegistre());
     this.setUuid(__bean.getUuid());
     this.setDataCreacio(__bean.getDataCreacio());
+    this.setSolicitantPersonaFisica(__bean.isSolicitantPersonaFisica());
     this.setSolicitantTipusAdminID(__bean.getSolicitantTipusAdminID());
     this.setSolicitantAdminID(__bean.getSolicitantAdminID());
-    this.setSolicitantPersonaFisica(__bean.isSolicitantPersonaFisica());
     this.setSolicitantNom(__bean.getSolicitantNom());
     this.setSolicitantLlinatge1(__bean.getSolicitantLlinatge1());
     this.setSolicitantLlinatge2(__bean.getSolicitantLlinatge2());
@@ -317,6 +317,13 @@ private static final long serialVersionUID = 389380649L;
 		this.dataCreacio = _dataCreacio_;
 	};
 
+	public boolean isSolicitantPersonaFisica() {
+		return(solicitantPersonaFisica);
+	};
+	public void setSolicitantPersonaFisica(boolean _solicitantPersonaFisica_) {
+		this.solicitantPersonaFisica = _solicitantPersonaFisica_;
+	};
+
 	public int getSolicitantTipusAdminID() {
 		return(solicitantTipusAdminID);
 	};
@@ -329,13 +336,6 @@ private static final long serialVersionUID = 389380649L;
 	};
 	public void setSolicitantAdminID(java.lang.String _solicitantAdminID_) {
 		this.solicitantAdminID = _solicitantAdminID_;
-	};
-
-	public boolean isSolicitantPersonaFisica() {
-		return(solicitantPersonaFisica);
-	};
-	public void setSolicitantPersonaFisica(boolean _solicitantPersonaFisica_) {
-		this.solicitantPersonaFisica = _solicitantPersonaFisica_;
 	};
 
 	public java.lang.String getSolicitantNom() {
@@ -680,9 +680,9 @@ private static final long serialVersionUID = 389380649L;
     __tmp.setNumRegistre(__bean.getNumRegistre());
     __tmp.setUuid(__bean.getUuid());
     __tmp.setDataCreacio(__bean.getDataCreacio());
+    __tmp.setSolicitantPersonaFisica(__bean.isSolicitantPersonaFisica());
     __tmp.setSolicitantTipusAdminID(__bean.getSolicitantTipusAdminID());
     __tmp.setSolicitantAdminID(__bean.getSolicitantAdminID());
-    __tmp.setSolicitantPersonaFisica(__bean.isSolicitantPersonaFisica());
     __tmp.setSolicitantNom(__bean.getSolicitantNom());
     __tmp.setSolicitantLlinatge1(__bean.getSolicitantLlinatge1());
     __tmp.setSolicitantLlinatge2(__bean.getSolicitantLlinatge2());

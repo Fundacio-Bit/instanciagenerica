@@ -1,39 +1,43 @@
 <c:if test="${mostrarScript}">
 	<script type="text/javascript">
-		var isFisica = $("#instanciaGenerica_solicitantPersonaFisica").val();
-		console.log(isFisica ? '1-Fisica' : '1-Juridica');
-
-		$("#instanciaGenerica_solicitantRaoSocial_rowid").hide();
-
 		function onChangeSolicitantPersonaFisica(elem) {
+			var personaFisica = elem.value == "true"
+			configFisicaJuridica(personaFisica);
+		}
 
-			var isPersonaFisica = elem.value;
+		//Per defecte, serà persona fisica
+		configFisicaJuridica(true);
 
-			if (isPersonaFisica == "true") { //persona fisica
-				console.log(" -> Persona fisica");
+		function configFisicaJuridica(personaFisica) {
+			var aCambiar = [ "solicitantAdminID", "solicitantNom", "solicitantLlinatge1",
+					"solicitantLlinatge2" ];
 
-				$("#instanciaGenerica_solicitantNom_columnlabelid").html(
-						"<label>Nom solicitant</label>");
-				$("#instanciaGenerica_solicitantLlinatge1_columnlabelid").html(
-						"<label>Llinatge solicitant</label>");
-				$("#instanciaGenerica_solicitantLlinatge2_columnlabelid").html(
-						"<label>Segon llinatge solicitant</label>");
+			$.each(aCambiar, function(key, value) {
 
-				$("#instanciaGenerica_solicitantRaoSocial_rowid").hide();
+				var id = "#instanciaGenerica_" + value + "_columnlabelid"
+				var html = $(id).html();
+				var cadenaNueva;
 
-			} else {
-				console.log(" -> Persona juridica");
+				if (personaFisica) {
+					cadenaNueva = '<fmt:message key="solicitant"/>';
+				} else {
+					cadenaNueva = '<fmt:message key="representant"/>';
+				}
 
-				$("#instanciaGenerica_solicitantNom_columnlabelid").html(
-						"<label>Nom representant</label>");
-				$("#instanciaGenerica_solicitantLlinatge1_columnlabelid").html(
-						"<label>Llinatge representant</label>");
-				$("#instanciaGenerica_solicitantLlinatge2_columnlabelid").html(
-						"<label>Segon llinatge representant</label>");
+				html = html.substring(0, (html.indexOf("(")) + 1) + cadenaNueva
+						+ html.substring(html.indexOf(")"), html.length);
 
-				$("#instanciaGenerica_solicitantRaoSocial_rowid").show();
-				// "table-row";
-			}
+				$(id).html(html);
+			});
+
+			var aEsconder = [ "solicitantRaoSocial", "solicitantCif" ];
+			$.each(aEsconder, function(key, value) {
+				var id = "#instanciaGenerica_" + value + "_rowid";
+				if (personaFisica)
+					$(id).hide();
+				else
+					$(id).show();
+			});
 		}
 
 		var fitxrersArray = Array(10).fill("");
@@ -88,9 +92,20 @@
 			console.log(fitxrersArray);
 
 		}
-		/* 		instanciaGenerica_fitxer6ID_rowid
-		 fitxer6ID
-		 */
+
+		function reemplazarCadena(cadenaVieja, cadenaNueva, cadenaCompleta) {
+			// Reemplaza cadenaVieja por cadenaNueva en cadenaCompleta
+
+			for (var i = 0; i < cadenaCompleta.length; i++) {
+				if (cadenaCompleta.substring(i, i + cadenaVieja.length) == cadenaVieja) {
+					cadenaCompleta = cadenaCompleta.substring(0, i)
+							+ cadenaNueva
+							+ cadenaCompleta.substring(i + cadenaVieja.length,
+									cadenaCompleta.length);
+				}
+			}
+			return cadenaCompleta;
+		}
 	</script>
 </c:if>
 

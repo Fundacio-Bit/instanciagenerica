@@ -185,6 +185,9 @@ public class InstanciaGenericaController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
+
+      fillValuesToGroupByItemsBoolean("personafisica", groupByItemsMap, SOLICITANTPERSONAFISICA);
+
     // Field solicitantTipusAdminID
     {
       _listSKV = getReferenceListForSolicitantTipusAdminID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -194,9 +197,6 @@ public class InstanciaGenericaController
         fillValuesToGroupByItems(_tmp, groupByItemsMap, SOLICITANTTIPUSADMINID, false);
       };
     }
-
-
-      fillValuesToGroupByItemsBoolean("personafisica", groupByItemsMap, SOLICITANTPERSONAFISICA);
 
     // Field idiomaID
     {
@@ -273,15 +273,6 @@ public class InstanciaGenericaController
   public void fillReferencesForForm(InstanciaGenericaForm instanciaGenericaForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
-    if (instanciaGenericaForm.getListOfValuesForSolicitantTipusAdminID() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForSolicitantTipusAdminID(request, mav, instanciaGenericaForm, null);
-
-      if(_listSKV != null && !_listSKV.isEmpty()) { 
-          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      }
-      instanciaGenericaForm.setListOfValuesForSolicitantTipusAdminID(_listSKV);
-    }
-    // Comprovam si ja esta definida la llista
     if (instanciaGenericaForm.getListOfValuesForSolicitantPersonaFisica() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForSolicitantPersonaFisica(request, mav, instanciaGenericaForm, null);
 
@@ -289,6 +280,15 @@ public class InstanciaGenericaController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       instanciaGenericaForm.setListOfValuesForSolicitantPersonaFisica(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (instanciaGenericaForm.getListOfValuesForSolicitantTipusAdminID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForSolicitantTipusAdminID(request, mav, instanciaGenericaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      instanciaGenericaForm.setListOfValuesForSolicitantTipusAdminID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (instanciaGenericaForm.getListOfIdiomaForIdiomaID() == null) {
@@ -724,6 +724,35 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  public List<StringKeyValue> getReferenceListForSolicitantPersonaFisica(HttpServletRequest request,
+       ModelAndView mav, InstanciaGenericaForm instanciaGenericaForm, Where where)  throws I18NException {
+    if (instanciaGenericaForm.isHiddenField(SOLICITANTPERSONAFISICA)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForSolicitantPersonaFisica(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForSolicitantPersonaFisica(HttpServletRequest request,
+       ModelAndView mav, InstanciaGenericaFilterForm instanciaGenericaFilterForm,
+       List<InstanciaGenerica> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (instanciaGenericaFilterForm.isHiddenField(SOLICITANTPERSONAFISICA)
+      && !instanciaGenericaFilterForm.isGroupByField(SOLICITANTPERSONAFISICA)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForSolicitantPersonaFisica(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForSolicitantPersonaFisica(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("personafisica" , "personafisica"));
+    return __tmp;
+  }
+
+
   public List<StringKeyValue> getReferenceListForSolicitantTipusAdminID(HttpServletRequest request,
        ModelAndView mav, InstanciaGenericaForm instanciaGenericaForm, Where where)  throws I18NException {
     if (instanciaGenericaForm.isHiddenField(SOLICITANTTIPUSADMINID)) {
@@ -752,35 +781,6 @@ public java.lang.Long stringToPK(String value) {
     __tmp.add(new StringKeyValue("2" , "2"));
     __tmp.add(new StringKeyValue("3" , "3"));
     __tmp.add(new StringKeyValue("4" , "4"));
-    return __tmp;
-  }
-
-
-  public List<StringKeyValue> getReferenceListForSolicitantPersonaFisica(HttpServletRequest request,
-       ModelAndView mav, InstanciaGenericaForm instanciaGenericaForm, Where where)  throws I18NException {
-    if (instanciaGenericaForm.isHiddenField(SOLICITANTPERSONAFISICA)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    return getReferenceListForSolicitantPersonaFisica(request, mav, where);
-  }
-
-
-  public List<StringKeyValue> getReferenceListForSolicitantPersonaFisica(HttpServletRequest request,
-       ModelAndView mav, InstanciaGenericaFilterForm instanciaGenericaFilterForm,
-       List<InstanciaGenerica> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (instanciaGenericaFilterForm.isHiddenField(SOLICITANTPERSONAFISICA)
-      && !instanciaGenericaFilterForm.isGroupByField(SOLICITANTPERSONAFISICA)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _w = null;
-    return getReferenceListForSolicitantPersonaFisica(request, mav, Where.AND(where,_w));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForSolicitantPersonaFisica(HttpServletRequest request,
-       ModelAndView mav, Where where)  throws I18NException {
-    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    __tmp.add(new StringKeyValue("personafisica" , "personafisica"));
     return __tmp;
   }
 

@@ -36,6 +36,10 @@ public class InstanciaGenericaValidator<I extends InstanciaGenerica>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATACREACIO)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,SOLICITANTPERSONAFISICA, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SOLICITANTPERSONAFISICA)));
+
     __vr.rejectIfEmptyOrWhitespace(__target__,SOLICITANTTIPUSADMINID, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SOLICITANTTIPUSADMINID)));
@@ -43,10 +47,6 @@ public class InstanciaGenericaValidator<I extends InstanciaGenerica>
     __vr.rejectIfEmptyOrWhitespace(__target__,SOLICITANTADMINID, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SOLICITANTADMINID)));
-
-    __vr.rejectIfEmptyOrWhitespace(__target__,SOLICITANTPERSONAFISICA, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SOLICITANTPERSONAFISICA)));
 
     __vr.rejectIfEmptyOrWhitespace(__target__,SOLICITANTDIRECCIO, 
         "genapp.validation.required",

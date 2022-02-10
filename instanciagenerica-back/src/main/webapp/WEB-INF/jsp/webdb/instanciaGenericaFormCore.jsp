@@ -74,6 +74,37 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}">
+        <tr id="instanciaGenerica_solicitantPersonaFisica_rowid">
+          <td id="instanciaGenerica_solicitantPersonaFisica_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.SOLICITANTPERSONAFISICA])?'instanciaGenerica.solicitantPersonaFisica':__theForm.labels[InstanciaGenericaFields.SOLICITANTPERSONAFISICA]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[InstanciaGenericaFields.SOLICITANTPERSONAFISICA]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[InstanciaGenericaFields.SOLICITANTPERSONAFISICA]}" ></i>
+              </c:if>
+            </td>
+          <td id="instanciaGenerica_solicitantPersonaFisica_columnvalueid">
+          <form:errors path="instanciaGenerica.solicitantPersonaFisica" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}" >
+          <form:hidden path="instanciaGenerica.solicitantPersonaFisica"/>
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.instanciaGenerica.solicitantPersonaFisica,__theForm.listOfValuesForSolicitantPersonaFisica)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}" >
+          <c:set var="containEmptyValue"  value="false" />
+          <form:select id="instanciaGenerica_solicitantPersonaFisica"  onchange="if(typeof onChangeSolicitantPersonaFisica == 'function') {  onChangeSolicitantPersonaFisica(this); };"  cssClass="form-control col-md-9-optional" path="instanciaGenerica.solicitantPersonaFisica">
+            <c:forEach items="${__theForm.listOfValuesForSolicitantPersonaFisica}" var="tmp">
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.SOLICITANTTIPUSADMINID)}">
         <tr id="instanciaGenerica_solicitantTipusAdminID_rowid">
           <td id="instanciaGenerica_solicitantTipusAdminID_columnlabelid">
@@ -119,37 +150,6 @@
             <form:errors path="instanciaGenerica.solicitantAdminID" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTADMINID)? 'true' : 'false'}" cssClass="w-75 form-control  ${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTADMINID)? ' uneditable-input' : ''}"  style="" maxlength="50" path="instanciaGenerica.solicitantAdminID"   />
 
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}">
-        <tr id="instanciaGenerica_solicitantPersonaFisica_rowid">
-          <td id="instanciaGenerica_solicitantPersonaFisica_columnlabelid">
-            <label>
-              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.SOLICITANTPERSONAFISICA])?'instanciaGenerica.solicitantPersonaFisica':__theForm.labels[InstanciaGenericaFields.SOLICITANTPERSONAFISICA]}" />
-             </label>
-              <c:if test="${not empty __theForm.help[InstanciaGenericaFields.SOLICITANTPERSONAFISICA]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[InstanciaGenericaFields.SOLICITANTPERSONAFISICA]}" ></i>
-              </c:if>
-            </td>
-          <td id="instanciaGenerica_solicitantPersonaFisica_columnvalueid">
-          <form:errors path="instanciaGenerica.solicitantPersonaFisica" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}" >
-          <form:hidden path="instanciaGenerica.solicitantPersonaFisica"/>
-          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.instanciaGenerica.solicitantPersonaFisica,__theForm.listOfValuesForSolicitantPersonaFisica)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}" >
-          <c:set var="containEmptyValue"  value="false" />
-          <form:select id="instanciaGenerica_solicitantPersonaFisica"  onchange="if(typeof onChangeSolicitantPersonaFisica == 'function') {  onChangeSolicitantPersonaFisica(this); };"  cssClass="form-control col-md-9-optional" path="instanciaGenerica.solicitantPersonaFisica">
-            <c:forEach items="${__theForm.listOfValuesForSolicitantPersonaFisica}" var="tmp">
-                <form:option value="${tmp.key}">${tmp.value}</form:option>
-                <c:if test="${empty tmp.key}">
-                  <c:set var="containEmptyValue"  value="true" />
-                </c:if>
-            </c:forEach>
-          </form:select>
-          </c:if>
            </td>
         </tr>
         </c:if>

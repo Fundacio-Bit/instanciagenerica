@@ -16,9 +16,9 @@ public interface InstanciaGenericaFields extends java.io.Serializable {
 	 public static final StringField NUMREGISTRE = new StringField(_TABLE_MODEL, "numRegistre", "numregistre");
 	 public static final StringField UUID = new StringField(_TABLE_MODEL, "uuid", "uuid");
 	 public static final TimestampField DATACREACIO = new TimestampField(_TABLE_MODEL, "dataCreacio", "datacreacio");
+	 public static final BooleanField SOLICITANTPERSONAFISICA = new BooleanField(_TABLE_MODEL, "solicitantPersonaFisica", "solicitantpersonafisica");
 	 public static final IntegerField SOLICITANTTIPUSADMINID = new IntegerField(_TABLE_MODEL, "solicitantTipusAdminID", "solicitanttipusadminid");
 	 public static final StringField SOLICITANTADMINID = new StringField(_TABLE_MODEL, "solicitantAdminID", "solicitantadminid");
-	 public static final BooleanField SOLICITANTPERSONAFISICA = new BooleanField(_TABLE_MODEL, "solicitantPersonaFisica", "solicitantpersonafisica");
 	 public static final StringField SOLICITANTNOM = new StringField(_TABLE_MODEL, "solicitantNom", "solicitantnom");
 	 public static final StringField SOLICITANTLLINATGE1 = new StringField(_TABLE_MODEL, "solicitantLlinatge1", "solicitantllinatge1");
 	 public static final StringField SOLICITANTLLINATGE2 = new StringField(_TABLE_MODEL, "solicitantLlinatge2", "solicitantllinatge2");
@@ -50,9 +50,9 @@ public interface InstanciaGenericaFields extends java.io.Serializable {
     NUMREGISTRE,
     UUID,
     DATACREACIO,
+    SOLICITANTPERSONAFISICA,
     SOLICITANTTIPUSADMINID,
     SOLICITANTADMINID,
-    SOLICITANTPERSONAFISICA,
     SOLICITANTNOM,
     SOLICITANTLLINATGE1,
     SOLICITANTLLINATGE2,
