@@ -39,9 +39,6 @@
           ${instanciaGenerica.uuid}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.DATACREACIO)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${instanciaGenerica.dataCreacio}" /></td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}">
           <td>
           <c:set var="tmp">${instanciaGenerica.solicitantPersonaFisica}</c:set>
@@ -184,6 +181,12 @@
             </c:if>
            </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.DATAFINALITZACIO)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${instanciaGenerica.datafinalitzacio}" /></td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.DATACREACIO)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${instanciaGenerica.dataCreacio}" /></td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.ESTAT)}">
           <td>
           ${instanciaGenerica.estat}
@@ -198,9 +201,6 @@
           <td>
           ${instanciaGenerica.exception}
           </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.DATAFINALITZACIO)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${instanciaGenerica.datafinalitzacio}" /></td>
         </c:if>
 
 

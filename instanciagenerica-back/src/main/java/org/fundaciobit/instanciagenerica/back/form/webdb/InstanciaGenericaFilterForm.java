@@ -65,28 +65,6 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
   }
 
 
-  private java.sql.Timestamp dataCreacioDesde;
-
-  public java.sql.Timestamp getDataCreacioDesde() {
-    return this.dataCreacioDesde;
-  }
-
-  public void setDataCreacioDesde(java.sql.Timestamp dataCreacioDesde) {
-    this.dataCreacioDesde = dataCreacioDesde;
-  }
-
-
-  private java.sql.Timestamp dataCreacioFins;
-
-  public java.sql.Timestamp getDataCreacioFins() {
-    return this.dataCreacioFins;
-  }
-
-  public void setDataCreacioFins(java.sql.Timestamp dataCreacioFins) {
-    this.dataCreacioFins = dataCreacioFins;
-  }
-
-
   private java.lang.Integer solicitantTipusAdminIDDesde;
 
   public java.lang.Integer getSolicitantTipusAdminIDDesde() {
@@ -241,6 +219,50 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
   }
 
 
+  private java.sql.Timestamp datafinalitzacioDesde;
+
+  public java.sql.Timestamp getDatafinalitzacioDesde() {
+    return this.datafinalitzacioDesde;
+  }
+
+  public void setDatafinalitzacioDesde(java.sql.Timestamp datafinalitzacioDesde) {
+    this.datafinalitzacioDesde = datafinalitzacioDesde;
+  }
+
+
+  private java.sql.Timestamp datafinalitzacioFins;
+
+  public java.sql.Timestamp getDatafinalitzacioFins() {
+    return this.datafinalitzacioFins;
+  }
+
+  public void setDatafinalitzacioFins(java.sql.Timestamp datafinalitzacioFins) {
+    this.datafinalitzacioFins = datafinalitzacioFins;
+  }
+
+
+  private java.sql.Timestamp dataCreacioDesde;
+
+  public java.sql.Timestamp getDataCreacioDesde() {
+    return this.dataCreacioDesde;
+  }
+
+  public void setDataCreacioDesde(java.sql.Timestamp dataCreacioDesde) {
+    this.dataCreacioDesde = dataCreacioDesde;
+  }
+
+
+  private java.sql.Timestamp dataCreacioFins;
+
+  public java.sql.Timestamp getDataCreacioFins() {
+    return this.dataCreacioFins;
+  }
+
+  public void setDataCreacioFins(java.sql.Timestamp dataCreacioFins) {
+    this.dataCreacioFins = dataCreacioFins;
+  }
+
+
   private java.lang.Integer estatDesde;
 
   public java.lang.Integer getEstatDesde() {
@@ -285,28 +307,6 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
   }
 
 
-  private java.sql.Timestamp datafinalitzacioDesde;
-
-  public java.sql.Timestamp getDatafinalitzacioDesde() {
-    return this.datafinalitzacioDesde;
-  }
-
-  public void setDatafinalitzacioDesde(java.sql.Timestamp datafinalitzacioDesde) {
-    this.datafinalitzacioDesde = datafinalitzacioDesde;
-  }
-
-
-  private java.sql.Timestamp datafinalitzacioFins;
-
-  public java.sql.Timestamp getDatafinalitzacioFins() {
-    return this.datafinalitzacioFins;
-  }
-
-  public void setDatafinalitzacioFins(java.sql.Timestamp datafinalitzacioFins) {
-    this.datafinalitzacioFins = datafinalitzacioFins;
-  }
-
-
   public InstanciaGenericaFilterForm() {
   }
   
@@ -316,8 +316,6 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
     this.instanciaGenericaIDFins = __toClone.instanciaGenericaIDFins;
     this.numRegistre = __toClone.numRegistre;
     this.uuid = __toClone.uuid;
-    this.dataCreacioDesde = __toClone.dataCreacioDesde;
-    this.dataCreacioFins = __toClone.dataCreacioFins;
     this.solicitantTipusAdminIDDesde = __toClone.solicitantTipusAdminIDDesde;
     this.solicitantTipusAdminIDFins = __toClone.solicitantTipusAdminIDFins;
     this.solicitantAdminID = __toClone.solicitantAdminID;
@@ -332,12 +330,14 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
     this.idiomaID = __toClone.idiomaID;
     this.exposa = __toClone.exposa;
     this.solicita = __toClone.solicita;
+    this.datafinalitzacioDesde = __toClone.datafinalitzacioDesde;
+    this.datafinalitzacioFins = __toClone.datafinalitzacioFins;
+    this.dataCreacioDesde = __toClone.dataCreacioDesde;
+    this.dataCreacioFins = __toClone.dataCreacioFins;
     this.estatDesde = __toClone.estatDesde;
     this.estatFins = __toClone.estatFins;
     this.error = __toClone.error;
     this.exception = __toClone.exception;
-    this.datafinalitzacioDesde = __toClone.datafinalitzacioDesde;
-    this.datafinalitzacioFins = __toClone.datafinalitzacioFins;
     this.mapOfValuesForSolicitantPersonaFisica = __toClone.mapOfValuesForSolicitantPersonaFisica;
     this.mapOfValuesForSolicitantTipusAdminID = __toClone.mapOfValuesForSolicitantTipusAdminID;
     this.mapOfIdiomaForIdiomaID = __toClone.mapOfIdiomaForIdiomaID;
@@ -347,7 +347,7 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NUMREGISTRE ,DATACREACIO ,SOLICITANTADMINID ,SOLICITANTLLINATGE1 ,SOLICITANTLLINATGE2 ,SOLICITANTRAOSOCIAL ,SOLICITANTEMAIL ,ESTAT }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { NUMREGISTRE ,SOLICITANTADMINID ,SOLICITANTLLINATGE1 ,SOLICITANTLLINATGE2 ,SOLICITANTRAOSOCIAL ,SOLICITANTEMAIL ,DATACREACIO ,ESTAT }));
   }
 
   @Override

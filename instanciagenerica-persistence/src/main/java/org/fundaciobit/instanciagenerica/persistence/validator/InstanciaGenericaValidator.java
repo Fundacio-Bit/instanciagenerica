@@ -32,10 +32,6 @@ public class InstanciaGenericaValidator<I extends InstanciaGenerica>
     ,org.fundaciobit.instanciagenerica.model.dao.IInstanciaGenericaManager __instanciaGenericaManager) {
 
     // Valors Not Null
-    __vr.rejectIfEmptyOrWhitespace(__target__,DATACREACIO, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATACREACIO)));
-
     __vr.rejectIfEmptyOrWhitespace(__target__,SOLICITANTPERSONAFISICA, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SOLICITANTPERSONAFISICA)));
@@ -71,6 +67,10 @@ public class InstanciaGenericaValidator<I extends InstanciaGenerica>
     __vr.rejectIfEmptyOrWhitespace(__target__,SOLICITA, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SOLICITA)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,DATACREACIO, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATACREACIO)));
 
     // Check size
     if (__vr.getFieldErrorCount(NUMREGISTRE) == 0) {

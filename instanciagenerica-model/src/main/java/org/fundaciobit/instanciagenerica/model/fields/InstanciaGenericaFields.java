@@ -15,7 +15,6 @@ public interface InstanciaGenericaFields extends java.io.Serializable {
 	 public static final LongField INSTANCIAGENERICAID = new LongField(_TABLE_MODEL, "instanciaGenericaID", "instanciagenericaid");  // PK
 	 public static final StringField NUMREGISTRE = new StringField(_TABLE_MODEL, "numRegistre", "numregistre");
 	 public static final StringField UUID = new StringField(_TABLE_MODEL, "uuid", "uuid");
-	 public static final TimestampField DATACREACIO = new TimestampField(_TABLE_MODEL, "dataCreacio", "datacreacio");
 	 public static final BooleanField SOLICITANTPERSONAFISICA = new BooleanField(_TABLE_MODEL, "solicitantPersonaFisica", "solicitantpersonafisica");
 	 public static final IntegerField SOLICITANTTIPUSADMINID = new IntegerField(_TABLE_MODEL, "solicitantTipusAdminID", "solicitanttipusadminid");
 	 public static final StringField SOLICITANTADMINID = new StringField(_TABLE_MODEL, "solicitantAdminID", "solicitantadminid");
@@ -39,17 +38,17 @@ public interface InstanciaGenericaFields extends java.io.Serializable {
 	 public static final LongField FITXER7ID = new LongField(_TABLE_MODEL, "fitxer7ID", "fitxer7id");
 	 public static final LongField FITXER8ID = new LongField(_TABLE_MODEL, "fitxer8ID", "fitxer8id");
 	 public static final LongField FITXER9ID = new LongField(_TABLE_MODEL, "fitxer9ID", "fitxer9id");
+	 public static final TimestampField DATAFINALITZACIO = new TimestampField(_TABLE_MODEL, "datafinalitzacio", "datafinalitzacio");
+	 public static final TimestampField DATACREACIO = new TimestampField(_TABLE_MODEL, "dataCreacio", "datacreacio");
 	 public static final IntegerField ESTAT = new IntegerField(_TABLE_MODEL, "estat", "estat");
 	 public static final StringField ERROR = new StringField(_TABLE_MODEL, "error", "error");
 	 public static final StringField EXCEPTION = new StringField(_TABLE_MODEL, "exception", "exception");
-	 public static final TimestampField DATAFINALITZACIO = new TimestampField(_TABLE_MODEL, "datafinalitzacio", "datafinalitzacio");
 
 
   public static final Field<?>[] ALL_INSTANCIAGENERICA_FIELDS = {
     INSTANCIAGENERICAID,
     NUMREGISTRE,
     UUID,
-    DATACREACIO,
     SOLICITANTPERSONAFISICA,
     SOLICITANTTIPUSADMINID,
     SOLICITANTADMINID,
@@ -73,10 +72,11 @@ public interface InstanciaGenericaFields extends java.io.Serializable {
     FITXER7ID,
     FITXER8ID,
     FITXER9ID,
+    DATAFINALITZACIO,
+    DATACREACIO,
     ESTAT,
     ERROR,
-    EXCEPTION,
-    DATAFINALITZACIO
+    EXCEPTION
   };
 
 

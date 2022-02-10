@@ -94,52 +94,6 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.DATACREACIO)}">
-            <%-- FILTRE DATE --%>
-            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="instanciaGenerica.dataCreacio" />:</span>
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              <div id="dataCreacioDesde" class="input-append">
-                <form:input cssClass="input-large" path="dataCreacioDesde" />
-                <span class="add-on">
-                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                  </i>
-                </span>
-              </div>
-              <script type="text/javascript">                
-                $(function() {
-                  $('#dataCreacioDesde').datetimepicker({
-                    language: '${lang}',
-                    pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
-                    format:  '${gen:getJSDateTimePattern()}',
-                    pickTime: true,
-                    weekStart: ${gen:getFirstDayOfTheWeek()}
-                  });
-                });
-              </script>
-              <span class="add-on"><fmt:message key="genapp.to" /></span>              
-              <div id="dataCreacioFins" class="input-append">
-                <form:input cssClass="input-large" path="dataCreacioFins" />
-                <span class="add-on">
-                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                  </i>
-                </span>
-              </div>
-              <script type="text/javascript">                
-                $(function() {
-                  $('#dataCreacioFins').datetimepicker({
-                    language: '${lang}',
-                    pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
-                    format:  '${gen:getJSDateTimePattern()}',
-                    pickTime: true,
-                    weekStart: ${gen:getFirstDayOfTheWeek()}
-                  });
-                });
-              </script>
-            </div>
-
-    
-        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.SOLICITANTPERSONAFISICA)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
@@ -332,50 +286,6 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.ESTAT)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="instanciaGenerica.estat" />:</span>
-
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="estatDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="estatFins" />
-
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.ERROR)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="instanciaGenerica.error" var="error" />
-              <fmt:message key="genapp.form.searchby" var="cercapererror" >                
-                 <fmt:param value="${error}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${error}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapererror}" path="error" />
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.EXCEPTION)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="instanciaGenerica.exception" var="exception" />
-              <fmt:message key="genapp.form.searchby" var="cercaperexception" >                
-                 <fmt:param value="${exception}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${exception}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperexception}" path="exception" />
-            </div>
-
-
-        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.DATAFINALITZACIO)}">
             <%-- FILTRE DATE --%>
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
@@ -421,6 +331,96 @@
             </div>
 
     
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.DATACREACIO)}">
+            <%-- FILTRE DATE --%>
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="instanciaGenerica.dataCreacio" />:</span>
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              <div id="dataCreacioDesde" class="input-append">
+                <form:input cssClass="input-large" path="dataCreacioDesde" />
+                <span class="add-on">
+                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+              </div>
+              <script type="text/javascript">                
+                $(function() {
+                  $('#dataCreacioDesde').datetimepicker({
+                    language: '${lang}',
+                    pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
+                    format:  '${gen:getJSDateTimePattern()}',
+                    pickTime: true,
+                    weekStart: ${gen:getFirstDayOfTheWeek()}
+                  });
+                });
+              </script>
+              <span class="add-on"><fmt:message key="genapp.to" /></span>              
+              <div id="dataCreacioFins" class="input-append">
+                <form:input cssClass="input-large" path="dataCreacioFins" />
+                <span class="add-on">
+                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+              </div>
+              <script type="text/javascript">                
+                $(function() {
+                  $('#dataCreacioFins').datetimepicker({
+                    language: '${lang}',
+                    pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
+                    format:  '${gen:getJSDateTimePattern()}',
+                    pickTime: true,
+                    weekStart: ${gen:getFirstDayOfTheWeek()}
+                  });
+                });
+              </script>
+            </div>
+
+    
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.ESTAT)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="instanciaGenerica.estat" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="estatDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="estatFins" />
+
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.ERROR)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="instanciaGenerica.error" var="error" />
+              <fmt:message key="genapp.form.searchby" var="cercapererror" >                
+                 <fmt:param value="${error}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${error}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapererror}" path="error" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,InstanciaGenericaFields.EXCEPTION)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="instanciaGenerica.exception" var="exception" />
+              <fmt:message key="genapp.form.searchby" var="cercaperexception" >                
+                 <fmt:param value="${exception}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${exception}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperexception}" path="exception" />
+            </div>
+
+
         </c:if>
 
       <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

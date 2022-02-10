@@ -23,10 +23,6 @@ public class InstanciaGenericaQueryPath extends org.fundaciobit.genapp.common.qu
     return new StringField(getQueryPath(), InstanciaGenericaFields.UUID);
   }
 
-  public TimestampField DATACREACIO() {
-    return new TimestampField(getQueryPath(), InstanciaGenericaFields.DATACREACIO);
-  }
-
   public BooleanField SOLICITANTPERSONAFISICA() {
     return new BooleanField(getQueryPath(), InstanciaGenericaFields.SOLICITANTPERSONAFISICA);
   }
@@ -119,6 +115,14 @@ public class InstanciaGenericaQueryPath extends org.fundaciobit.genapp.common.qu
     return new LongField(getQueryPath(), InstanciaGenericaFields.FITXER9ID);
   }
 
+  public TimestampField DATAFINALITZACIO() {
+    return new TimestampField(getQueryPath(), InstanciaGenericaFields.DATAFINALITZACIO);
+  }
+
+  public TimestampField DATACREACIO() {
+    return new TimestampField(getQueryPath(), InstanciaGenericaFields.DATACREACIO);
+  }
+
   public IntegerField ESTAT() {
     return new IntegerField(getQueryPath(), InstanciaGenericaFields.ESTAT);
   }
@@ -129,10 +133,6 @@ public class InstanciaGenericaQueryPath extends org.fundaciobit.genapp.common.qu
 
   public StringField EXCEPTION() {
     return new StringField(getQueryPath(), InstanciaGenericaFields.EXCEPTION);
-  }
-
-  public TimestampField DATAFINALITZACIO() {
-    return new TimestampField(getQueryPath(), InstanciaGenericaFields.DATAFINALITZACIO);
   }
 
 
