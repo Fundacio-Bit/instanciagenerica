@@ -119,6 +119,7 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 		return __tmp;
 	}
 
+	@Override
 	public List<StringKeyValue> getReferenceListForSolicitantTipusAdminID(HttpServletRequest request, ModelAndView mav,
 			Where where) throws I18NException {
 		List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
