@@ -352,7 +352,7 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
 
   @Override
   public List<Field<?>> getDefaultGroupByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { SOLICITANTPERSONAFISICA ,SOLICITANTTIPUSADMINID ,IDIOMAID }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { SOLICITANTPERSONAFISICA ,SOLICITANTTIPUSADMINID ,IDIOMAID ,DATACREACIO }));
   }
 
 
