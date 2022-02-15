@@ -185,8 +185,15 @@ public class InstanciaGenericaController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
-
-      fillValuesToGroupByItemsBoolean("personafisica", groupByItemsMap, SOLICITANTPERSONAFISICA);
+    // Field solicitantPersonaFisica
+    {
+      _listSKV = getReferenceListForSolicitantPersonaFisica(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForSolicitantPersonaFisica(_tmp);
+      if (filterForm.getGroupByFields().contains(SOLICITANTPERSONAFISICA)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, SOLICITANTPERSONAFISICA, false);
+      };
+    }
 
     // Field solicitantTipusAdminID
     {
@@ -223,6 +230,7 @@ public class InstanciaGenericaController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
+    __mapping.put(SOLICITANTPERSONAFISICA, filterForm.getMapOfValuesForSolicitantPersonaFisica());
     __mapping.put(SOLICITANTTIPUSADMINID, filterForm.getMapOfValuesForSolicitantTipusAdminID());
     __mapping.put(IDIOMAID, filterForm.getMapOfIdiomaForIdiomaID());
     exportData(request, response, dataExporterID, filterForm,
@@ -748,7 +756,8 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForSolicitantPersonaFisica(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    __tmp.add(new StringKeyValue("personafisica" , "personafisica"));
+    __tmp.add(new StringKeyValue("false" , I18NUtils.tradueix("personafisica.false")));
+    __tmp.add(new StringKeyValue("true" , I18NUtils.tradueix("personafisica.true")));
     return __tmp;
   }
 
