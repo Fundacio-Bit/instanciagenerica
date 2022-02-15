@@ -54,7 +54,11 @@
 				<li class="nav-item"><a
 					class="nav-link ${(pipella eq 'admin')?'active' : '' }"
 					href="<c:url value="/canviarPipella/admin"/>"><fmt:message
-							key="menu.admin" /></a></li>
+							key="menu.admin" /> 
+							 <c:set var = "numAvisos" value = "${sessionScope.numAvisos}"/>
+							<c:if test="${numAvisos > 0}">
+							<span class="badge badge-danger">${numAvisos}</span>
+						</c:if> </a></li>
 			</sec:authorize>
 
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
