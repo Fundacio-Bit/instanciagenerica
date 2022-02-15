@@ -100,11 +100,13 @@
     </definition>
  -->    
 <!--     
-    <definition name="instanciaGenericaFormAdmin" extends="admin">
-        <put-attribute name="titol" value="instanciaGenerica.instanciaGenerica" />
-        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/instanciaGenericaForm.jsp" />
-    </definition>
      -->
+    <definition name="detallsregistre" extends="admin">
+        <put-attribute name="titol" value="instanciaGenerica.instanciaGenerica" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/admin/detallsregistre.jsp" />
+    </definition>
+     
+     
     <definition name="instanciaGenericaListAdmin" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/instanciaGenericaList.jsp" />
     </definition>

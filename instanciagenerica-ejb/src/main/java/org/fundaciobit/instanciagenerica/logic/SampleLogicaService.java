@@ -1,7 +1,5 @@
 package org.fundaciobit.instanciagenerica.logic;
 
-import java.util.Set;
-
 import javax.ejb.Local;
 /*
 import org.fundaciobit.instanciagenerica.ejb.AnnexService;

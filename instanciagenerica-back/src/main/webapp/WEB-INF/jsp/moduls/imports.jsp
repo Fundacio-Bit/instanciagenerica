@@ -6,7 +6,7 @@
 <title>Benvingut a InstanciaGenerica</title>
 
 
-    <link rel="icon" type="image/vnd.microsoft.icon" href="<c:url value="/img/favicon.ico"/>">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="<c:url value="/img/app-logo.ico"/>">
     
     <!-- CSS -->
     <link href="<c:url value="/css/styles.css"/>" rel="stylesheet">

@@ -1,35 +1,23 @@
 package org.fundaciobit.instanciagenerica.back.controller.admin;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
-import org.fundaciobit.genapp.common.web.form.AdditionalField;
-import org.fundaciobit.instanciagenerica.back.controller.AbstractInstanciaGenericaController;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaFilterForm;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaForm;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
-import org.fundaciobit.instanciagenerica.model.IInstanciaGenericaDaoManagers;
-import org.fundaciobit.instanciagenerica.model.dao.IInstanciaGenericaManager;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
-import org.fundaciobit.instanciagenerica.model.fields.IdiomaFields;
 import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
-import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

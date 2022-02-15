@@ -3,7 +3,6 @@ package org.fundaciobit.instanciagenerica.back.controller.admin;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +11,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.form.AdditionalField;
-import org.fundaciobit.instanciagenerica.back.controller.AbstractInstanciaGenericaController;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaFilterForm;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaForm;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
@@ -20,10 +19,17 @@ import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
+import es.caib.regweb3.ws.api.v3.AnexoWs;
+import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
+import es.caib.regweb3.ws.api.v3.AsientoWs;
+import es.caib.regweb3.ws.api.v3.FileInfoWs;
 
 /**
  * 
@@ -53,6 +59,8 @@ public class InstanciaGenericaProvesAdminController extends InstanciaGenericaAdm
 
 		if (instanciaGenericaFilterForm.isNou()) {
 
+			instanciaGenericaFilterForm.addHiddenField(InstanciaGenericaFields.SOLICITANTEMAIL);
+
 			// Telefon columna final
 			AdditionalField<Long, String> adfield5 = new AdditionalField<Long, String>();
 			adfield5.setPosition(NOU_TELEFON_COLUMN);
@@ -76,6 +84,15 @@ public class InstanciaGenericaProvesAdminController extends InstanciaGenericaAdm
 
 			instanciaGenericaFilterForm.addAdditionalButton(
 					new AdditionalButton("fas fa-star", "mostrarinstancies", "javascript:ferSubmit()", "btn-primary"));
+
+			// instanciaGenericaFilterForm.addAdditionalButtonByPK(, null);
+
+			instanciaGenericaFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-registered",
+					"dadesregistre", getContextWeb() + "/veureDetallsRegistre/{0}", "btn-info"));
+
+			// new AdditionalButton("fas fa-star", "dadesregistre",
+			// "javascript:dadesRegistre()", "btn-primary"));
+
 			// new AdditionalButton("class del icono de fontawesome5", "codigo del boton
 			// (traducciones)" , "javascript:funcion definida en el jsp modificable()",
 			// "class de bootstrap 4 (color)"));
@@ -124,6 +141,7 @@ public class InstanciaGenericaProvesAdminController extends InstanciaGenericaAdm
 
 			map.put(key, value);
 		}
+
 	}
 
 	@RequestMapping(value = "/feralgunacosaambseleccionats", method = RequestMethod.POST)
@@ -154,7 +172,7 @@ public class InstanciaGenericaProvesAdminController extends InstanciaGenericaAdm
 
 		log.info("Final delete web");
 	}
-	
+
 	@Override
 	public boolean isActiveDelete() {
 		return true;
