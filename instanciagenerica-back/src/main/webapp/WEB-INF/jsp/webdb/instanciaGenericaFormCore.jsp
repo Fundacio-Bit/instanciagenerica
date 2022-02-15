@@ -405,7 +405,7 @@
           <td id="instanciaGenerica_fitxer1ID_columnvalueid">
               <form:errors path="instanciaGenerica.fitxer1ID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER1ID)}" >
-              <a target="_blank" href="<c:url value="${ige:fileUrl(fitxer1ID.fitxer1ID)}"/>">${fitxer1ID.fitxer1ID.nom}</a>
+              <a target="_blank" href="<c:url value="${ige:fileUrl(__theForm.instanciaGenerica.fitxer1)}"/>">${__theForm.instanciaGenerica.fitxer1.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER1ID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -461,7 +461,7 @@
           <td id="instanciaGenerica_fitxer2ID_columnvalueid">
               <form:errors path="instanciaGenerica.fitxer2ID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER2ID)}" >
-              <a target="_blank" href="<c:url value="${ige:fileUrl(fitxer2ID.fitxer2ID)}"/>">${fitxer2ID.fitxer2ID.nom}</a>
+              <a target="_blank" href="<c:url value="${ige:fileUrl(__theForm.instanciaGenerica.fitxer2)}"/>">${__theForm.instanciaGenerica.fitxer2.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER2ID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -517,7 +517,7 @@
           <td id="instanciaGenerica_fitxer3ID_columnvalueid">
               <form:errors path="instanciaGenerica.fitxer3ID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER3ID)}" >
-              <a target="_blank" href="<c:url value="${ige:fileUrl(fitxer3ID.fitxer3ID)}"/>">${fitxer3ID.fitxer3ID.nom}</a>
+              <a target="_blank" href="<c:url value="${ige:fileUrl(__theForm.instanciaGenerica.fitxer3)}"/>">${__theForm.instanciaGenerica.fitxer3.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER3ID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -573,7 +573,7 @@
           <td id="instanciaGenerica_fitxer4ID_columnvalueid">
               <form:errors path="instanciaGenerica.fitxer4ID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER4ID)}" >
-              <a target="_blank" href="<c:url value="${ige:fileUrl(fitxer4ID.fitxer4ID)}"/>">${fitxer4ID.fitxer4ID.nom}</a>
+              <a target="_blank" href="<c:url value="${ige:fileUrl(__theForm.instanciaGenerica.fitxer4)}"/>">${__theForm.instanciaGenerica.fitxer4.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER4ID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -629,7 +629,7 @@
           <td id="instanciaGenerica_fitxer5ID_columnvalueid">
               <form:errors path="instanciaGenerica.fitxer5ID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER5ID)}" >
-              <a target="_blank" href="<c:url value="${ige:fileUrl(fitxer5ID.fitxer5ID)}"/>">${fitxer5ID.fitxer5ID.nom}</a>
+              <a target="_blank" href="<c:url value="${ige:fileUrl(__theForm.instanciaGenerica.fitxer5)}"/>">${__theForm.instanciaGenerica.fitxer5.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER5ID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -685,7 +685,7 @@
           <td id="instanciaGenerica_fitxer6ID_columnvalueid">
               <form:errors path="instanciaGenerica.fitxer6ID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER6ID)}" >
-              <a target="_blank" href="<c:url value="${ige:fileUrl(fitxer6ID.fitxer6ID)}"/>">${fitxer6ID.fitxer6ID.nom}</a>
+              <a target="_blank" href="<c:url value="${ige:fileUrl(__theForm.instanciaGenerica.fitxer6)}"/>">${__theForm.instanciaGenerica.fitxer6.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER6ID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -741,7 +741,7 @@
           <td id="instanciaGenerica_fitxer7ID_columnvalueid">
               <form:errors path="instanciaGenerica.fitxer7ID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER7ID)}" >
-              <a target="_blank" href="<c:url value="${ige:fileUrl(fitxer7ID.fitxer7ID)}"/>">${fitxer7ID.fitxer7ID.nom}</a>
+              <a target="_blank" href="<c:url value="${ige:fileUrl(__theForm.instanciaGenerica.fitxer7)}"/>">${__theForm.instanciaGenerica.fitxer7.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER7ID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -797,7 +797,7 @@
           <td id="instanciaGenerica_fitxer8ID_columnvalueid">
               <form:errors path="instanciaGenerica.fitxer8ID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER8ID)}" >
-              <a target="_blank" href="<c:url value="${ige:fileUrl(fitxer8ID.fitxer8ID)}"/>">${fitxer8ID.fitxer8ID.nom}</a>
+              <a target="_blank" href="<c:url value="${ige:fileUrl(__theForm.instanciaGenerica.fitxer8)}"/>">${__theForm.instanciaGenerica.fitxer8.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER8ID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -853,7 +853,7 @@
           <td id="instanciaGenerica_fitxer9ID_columnvalueid">
               <form:errors path="instanciaGenerica.fitxer9ID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER9ID)}" >
-              <a target="_blank" href="<c:url value="${ige:fileUrl(fitxer9ID.fitxer9ID)}"/>">${fitxer9ID.fitxer9ID.nom}</a>
+              <a target="_blank" href="<c:url value="${ige:fileUrl(__theForm.instanciaGenerica.fitxer9)}"/>">${__theForm.instanciaGenerica.fitxer9.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.FITXER9ID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
