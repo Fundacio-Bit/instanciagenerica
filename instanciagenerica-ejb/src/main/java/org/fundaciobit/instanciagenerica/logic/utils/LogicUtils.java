@@ -1,10 +1,7 @@
 package org.fundaciobit.instanciagenerica.logic.utils;
 
-import java.util.Locale;
 
 import org.apache.log4j.Logger;
-import org.fundaciobit.genapp.common.i18n.I18NException;
-
 import org.fundaciobit.instanciagenerica.commons.utils.Configuracio;
 import org.fundaciobit.instanciagenerica.commons.utils.StaticVersion;
 

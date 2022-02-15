@@ -1,12 +1,9 @@
 package org.fundaciobit.instanciagenerica.back.utils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import org.fundaciobit.instanciagenerica.commons.utils.Configuracio;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.StringKeyValue;

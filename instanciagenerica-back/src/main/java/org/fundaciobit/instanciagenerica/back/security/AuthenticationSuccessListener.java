@@ -5,20 +5,15 @@ import java.util.Comparator;
 import java.util.HashSet;
 
 import org.apache.log4j.Logger;
-import org.fundaciobit.instanciagenerica.back.security.LoginInfo;
-
-import org.fundaciobit.instanciagenerica.back.security.LoginInfo;
+import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-
-import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 
 /**
  * 

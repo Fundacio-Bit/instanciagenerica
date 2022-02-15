@@ -1,34 +1,23 @@
 package org.fundaciobit.instanciagenerica.back.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.LongField;
-import org.fundaciobit.genapp.common.query.StringField;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
-import org.fundaciobit.genapp.common.web.form.AdditionalField;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.controller.webdb.InstanciaGenericaController;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaFilterForm;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaForm;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
-import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.instanciagenerica.model.fields.IdiomaFields;
 import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -141,6 +130,8 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 //		}
 
 		InstanciaGenericaForm instanciaGenericaForm = super.getInstanciaGenericaForm(_jpa, __isView, request, mav);
+		instanciaGenericaForm.setAttachedAdditionalJspCode(true);
+		
 
 		if (__isView) {
 			log.info("Vista de Instancia Generica amb id="
@@ -156,8 +147,10 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 						"Per poder veure informació de la seva instancia guardi's aquesta URL: " + url);
 			}
 
-		} else if (instanciaGenericaForm.isNou()) {
-			log.info("Formulari per nou element");
+		} 
+		
+		if (instanciaGenericaForm.isNou()) {
+			log.info("ABSTRACT: Formulari per nou element");
 
 			instanciaGenericaForm.addHelpToField(SOLICITANTPERSONAFISICA,
 					I18NUtils.tradueix("solicitantpersonafisica.ajuda"));
@@ -190,6 +183,8 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 		return instanciaGenericaForm;
 	}
 
+	
+	
 	@Override
 	public List<StringKeyValue> getReferenceListForIdiomaID(HttpServletRequest request, ModelAndView mav, Where where)
 			throws I18NException {

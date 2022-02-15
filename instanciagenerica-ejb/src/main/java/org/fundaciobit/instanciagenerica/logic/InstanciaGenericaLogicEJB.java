@@ -6,18 +6,15 @@ import javax.ejb.Stateless;
 import javax.transaction.Status;
 import javax.transaction.TransactionSynchronizationRegistry;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 
@@ -34,11 +31,15 @@ import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 
 import es.caib.regweb3.ws.api.v3.AnexoWs;
 import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
+import es.caib.regweb3.ws.api.v3.AsientoWs;
 import es.caib.regweb3.ws.api.v3.DatosInteresadoWs;
+import es.caib.regweb3.ws.api.v3.FileContentWs;
 import es.caib.regweb3.ws.api.v3.InteresadoWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
-import es.caib.regweb3.ws.api.v3.TipoDocumentalWs;
+
+import es.caib.regweb3.ws.api.v3.WsI18NException;
+import es.caib.regweb3.ws.api.v3.WsValidationException;
 
 import org.fundaciobit.instanciagenerica.commons.utils.Configuracio;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
@@ -76,9 +77,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 	@Override
 	public InstanciaGenerica registrarInstanciaGenerica(InstanciaGenerica ig) throws I18NException {
 
-		String endpoint = Configuracio.getRegistreUrl();
-		String usr_app = Configuracio.getRegistreUser(); // username application
-		String pwd_app = Configuracio.getRegistrePass(); // password application
 		String codiDir3 = Configuracio.getRegistreEntidad();
 
 		String oficinaDestiCodi = Configuracio.getRegistreOficinaDestiCodi();
@@ -90,9 +88,8 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		boolean justificant = false;
 		boolean distribuir = false;
 
-		InfoRegistre ir = cridadaRegistre(endpoint, usr_app, pwd_app, codiDir3, justificant, distribuir,
-				oficinaDestiCodi, oficinaDestiDenominacio, unitatTramitacioDestiCodi, unitatTramitacioDestiDenominacio,
-				ig);
+		InfoRegistre ir = cridadaRegistre(codiDir3, justificant, distribuir, oficinaDestiCodi, oficinaDestiDenominacio,
+				unitatTramitacioDestiCodi, unitatTramitacioDestiDenominacio, ig);
 
 		if (ir.getEstat() == InfoRegistre.ESTAT_ERROR) {
 			ig.setEstat(Constants.ESTAT_ERROR);
@@ -110,25 +107,20 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		return ig;
 	}
 
-	public InfoRegistre cridadaRegistre(String endpoint, String usr_app, String pwd_app, String codiDir3,
-			boolean justificant, boolean distribuir, String oficinaDestiCodi, String oficinaDestiDenominacio,
-			String unitatTramitacioDestiCodi, String unitatTramitacioDestiDenominacio, InstanciaGenerica ig) {
+	public InfoRegistre cridadaRegistre(String codiDir3, boolean justificant, boolean distribuir,
+			String oficinaDestiCodi, String oficinaDestiDenominacio, String unitatTramitacioDestiCodi,
+			String unitatTramitacioDestiDenominacio, InstanciaGenerica ig) {
 
 		try {
-			URL wsdl = new URL(endpoint + "?wsdl");
 
-			RegWebAsientoRegistralWsService asientoService = new RegWebAsientoRegistralWsService(wsdl);
-			RegWebAsientoRegistralWs asientoApi = asientoService.getRegWebAsientoRegistralWs();
+			log.info("Cridam API per REGISTRAR INSTANCIA");
 
-			// Adreça servidor
-			Map<String, Object> reqContext = ((BindingProvider) asientoApi).getRequestContext();
-
-			reqContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
-			reqContext.put(BindingProvider.USERNAME_PROPERTY, usr_app);
-			reqContext.put(BindingProvider.PASSWORD_PROPERTY, pwd_app);
+			RegWebAsientoRegistralWs asientoApi = getApiRegistre();
+			log.info("JA TENIM API per REGISTRAR INSTANCIA");
 
 			// Codi dir3 de l'entitat de registre.fundaciobit.org
 			Long idSesion = asientoApi.obtenerSesionRegistro(codiDir3);
+			log.info("	->	idSession: " + idSesion);
 
 			// TODO Posar tots els camps.
 			AsientoRegistralWs asientoRegistral = new AsientoRegistralWs();
@@ -140,7 +132,8 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			asientoRegistral.setCodigoEntidadRegistralProcesado(null);
 			asientoRegistral.setCodigoSia(null);// Codi del tràmit administratiu corresponent a l’assentament registral.
 												// https://administracionelectronica.gob.es/ctt/sia
-			asientoRegistral.setCodigoUsuario(usr_app);
+
+			asientoRegistral.setCodigoUsuario(Configuracio.getRegistreUser());
 
 //			asientoRegistral.setDecodificacionEntidadRegistralProcesado(codiDir3);
 			asientoRegistral.setEntidadCodigo(codiDir3);
@@ -157,7 +150,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 			asientoRegistral.setExpone(ig.getExposa());
 
-			Long idioma = ig.getIdiomaID().equals("ca") ? 1L : 2L;
+			final Long idioma = ig.getIdiomaID().equals("ca") ? 1L : 2L;
 			asientoRegistral.setIdioma(idioma);// Vol un long, el nostre idioma es un String
 
 			asientoRegistral.setLibroCodigo(null); // Codi del llibre a on es vol fer l’assentament.
@@ -247,19 +240,24 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			Fitxer[] fitxers = new Fitxer[] { ig.getFitxer1(), ig.getFitxer2(), ig.getFitxer3(), ig.getFitxer4(),
 					ig.getFitxer5(), ig.getFitxer6(), ig.getFitxer7(), ig.getFitxer8(), ig.getFitxer9() };
 
+			int idx = 0;
 			for (Fitxer f : fitxers) {
 				if (f != null) {
-
+					idx++;
 					AnexoWs anex = new AnexoWs();
+
+					byte[] fichero = FileSystemManager.getFileContent(f.getFitxerID());
 
 					anex.setConfidencial(false);
 					anex.setCsv(null);
 					anex.setFechaCaptura(new Timestamp(System.currentTimeMillis()));
-					anex.setFicheroAnexado(FileSystemManager.getFileContent(f.getFitxerID()));
+
+					anex.setFicheroAnexado(fichero);
+
 					anex.setFirmaAnexada(null);
 					anex.setHash(null);
 					anex.setJustificante(false);
-					anex.setModoFirma(0);
+					anex.setModoFirma(0); // 0: Document sense firmar
 					anex.setNombreFicheroAnexado(f.getNom());
 					anex.setNombreFirmaAnexada(null);
 					anex.setObservaciones(null);
@@ -272,15 +270,24 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 					anex.setTitulo(f.getNom());
 					anex.setValidezDocumento("01");
 
+					log.info("	-> Afegirem el fitxer numero " + idx);
 					asientoRegistral.getAnexos().add(anex);
+					log.info("	-> Hem afegit el fitxer numero (" + idx + "): "
+							+ asientoRegistral.getAnexos().get(idx - 1));
+
 				}
 			}
 
-			asientoRegistral.setVersion(null); // ersió de la aplicació que fa l’assentament. Camp intern que es omplit
+			asientoRegistral.setVersion(null); // Versió de la aplicació que fa l’assentament. Camp intern que es omplit
 												// per REGWEB3.
 
-			AsientoRegistralWs asiento = asientoApi.crearAsientoRegistral(idSesion, codiDir3, asientoRegistral, null,
-					justificant, distribuir);
+			log.info("REGISTRAM AMB API");
+
+			final Long tipoOperacion = null;
+			AsientoRegistralWs asiento = asientoApi.crearAsientoRegistral(idSesion, codiDir3, asientoRegistral,
+					tipoOperacion, justificant, distribuir);
+
+			log.info("HA RETORNAT AIXÓ: " + asiento);
 
 			String numRegF = asiento.getNumeroRegistroFormateado();
 
@@ -296,14 +303,15 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 				return new InfoRegistre(asiento.getCodigoError(), asiento.getDescripcionError());
 			}
 
-		} catch (Exception e) {
+		} catch (Throwable e) {
 
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
 			String sStackTrace = sw.toString(); // stack trace as a string
-
-			return new InfoRegistre("Error no contrrolat fent cridada a registre: " + e.getMessage(), sStackTrace);
+			String msg = "Error no contrrolat fent cridada a registre: " + e.getMessage();
+			log.error(msg, e);
+			return new InfoRegistre(msg, sStackTrace);
 		}
 
 	}
@@ -495,7 +503,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		ig.setSolicitantTelefon(900000000 + rnd.nextInt(100000000) + "");
 
 		String correo = nom + "." + llinatge;
-		String cadenaNormalize = Normalizer.normalize(correo, Normalizer.Form.NFD);   
+		String cadenaNormalize = Normalizer.normalize(correo, Normalizer.Form.NFD);
 		correo = cadenaNormalize.replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 
 		ig.setSolicitantEmail(correo + "@common.com");
@@ -506,4 +514,115 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		return ig;
 	}
 
+	@Override
+	public AsientoRegistralWs obtenerAsiento(String numRegF) throws I18NException {
+		log.info("Comença obtenerAsiento");
+
+		AsientoRegistralWs as;
+
+		try {
+			// TODO XXXXXXXXXXX GESIONAR NULL
+			log.info("Cridam API per obtenir asiento");
+			String codiDir3 = Configuracio.getRegistreEntidad();
+			final boolean conAnexos = true;
+			final Long tipoRegistro = 1L; // 1 Entrada - 2 Sortida
+
+			as = getApiRegistre().obtenerAsientoRegistral(codiDir3, numRegF, tipoRegistro, conAnexos);
+
+			log.info("Ja tenim asiento: " + as);
+
+		} catch (WsValidationException e) {
+			// TODO XXXXXXXXXXX Mirar que retorna e
+			log.error("Error WsValidationException");
+
+			throw new I18NException("genapp.comodi", "error cridada a registre:" + e.getMessage());
+
+		} catch (WsI18NException e) {
+			// TODO XXXXXXXXXXX Mirar que retorna e
+			log.error("Error WsI18NException ");
+			throw new I18NException("genapp.comodi", "error cridada a registre:" + e.getMessage());
+		}
+
+		return as;
+
+	}
+
+	@Override
+	public AsientoWs obtenerAsientoCiudadano(String numRegF, String nif, String idioma) throws I18NException {
+		log.info("Comença obtenerAsiento");
+
+		AsientoWs as;
+
+		// TODO XXXXXXXXXXX GESIONAR NULL
+		log.info("Cridam API per obtenir asiento");
+		String codiDir3 = Configuracio.getRegistreEntidad();
+
+		as = getApiRegistre().obtenerAsientoCiudadanoCarpeta(codiDir3, nif, numRegF, idioma);
+
+		log.info("Ja tenim asiento: " + as);
+
+		return as;
+
+	}
+
+	@Override
+	public RegWebAsientoRegistralWs getApiRegistre() throws I18NException {
+
+		log.info("Comença getApi()");
+		String endpoint = Configuracio.getRegistreUrl();
+		String usr_app = Configuracio.getRegistreUser(); // username application
+		String pwd_app = Configuracio.getRegistrePass(); // password application
+
+		URL wsdl;
+		try {
+			wsdl = new URL(endpoint + "?wsdl");
+		} catch (MalformedURLException e) {
+
+			throw new I18NException("genapp.comodi",
+					"error amb la URL al servidor de registre (" + endpoint + "): " + e.getMessage());
+		}
+
+		log.info("	-> getApi: tenim parametres: " + endpoint + " - " + usr_app + " - " + pwd_app);
+
+		RegWebAsientoRegistralWsService asientoService = new RegWebAsientoRegistralWsService(wsdl);
+		RegWebAsientoRegistralWs asientoApi = asientoService.getRegWebAsientoRegistralWs();
+
+		// Adreça servidor
+		Map<String, Object> reqContext = ((BindingProvider) asientoApi).getRequestContext();
+
+		reqContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
+		reqContext.put(BindingProvider.USERNAME_PROPERTY, usr_app);
+		reqContext.put(BindingProvider.PASSWORD_PROPERTY, pwd_app);
+
+		log.info("Acaba getApi()");
+
+		return asientoApi;
+
+	}
+
+	@Override
+	public FileContentWs getAnexe(Long idAnexo, String idioma) throws I18NException {
+		log.info("Comença getAnexe");
+
+		FileContentWs f;
+
+		try {
+			// TODO XXXXXXXXXXX GESIONAR NULL
+			log.info("Cridam API per obtenir anexes");
+
+			String entidad = Configuracio.getRegistreEntidad();
+
+			f = getApiRegistre().obtenerAnexoCiudadano(entidad, idAnexo, idioma);
+
+			log.info("Ja tenim anexe: " + f);
+
+		} catch (I18NException e) {
+			// TODO XXXXXXXXXXX Mirar que retorna e
+			log.error("Error WsI18NException ");
+			throw new I18NException("genapp.comodi", "Error cridada a obtenerAnexoCiudadano: " + e.getMessage());
+		}
+
+		return f;
+
+	}
 }

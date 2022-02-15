@@ -2,7 +2,6 @@ package org.fundaciobit.instanciagenerica.back.controller.all;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
 import javax.ejb.EJB;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.controller.AbstractInstanciaGenericaController;
@@ -22,7 +20,6 @@ import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaForm;
 import org.fundaciobit.instanciagenerica.commons.utils.Configuracio;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.model.entity.Fitxer;
-import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 import org.springframework.stereotype.Controller;
@@ -73,8 +70,8 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			HttpServletRequest request, ModelAndView mav) throws I18NException {
 
 		InstanciaGenericaForm instanciaGenericaForm = super.getInstanciaGenericaForm(_jpa, __isView, request, mav);
-
 		mav.addObject("mostrarScript", true);
+		log.info("PUBLIC: mostrarScript = true");
 
 		if (__isView) {
 			InstanciaGenericaJPA ig = instanciaGenericaForm.getInstanciaGenerica();
@@ -123,32 +120,6 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			if (Configuracio.isDesenvolupament()) {
 				ig = instanciaGenericaLogicEjb.generarInstanciaGenericaAleatoria(ig);
 			}
-			
-				/*
-			Set<Field<?>> hidden = new HashSet(Arrays.asList(InstanciaGenericaFields.ALL_INSTANCIAGENERICA_FIELDS));
-
-			hidden.remove(SOLICITANTNOM);
-			hidden.remove(DATACREACIO);
-			
-			instanciaGenericaForm.setHiddenFields(hidden);
-			
-		
-			instanciaGenericaForm.addHiddenField(FITXER1ID);
-			instanciaGenericaForm.addHiddenField(FITXER2ID);
-			instanciaGenericaForm.addHiddenField(FITXER3ID);
-			instanciaGenericaForm.addHiddenField(FITXER4ID);
-			instanciaGenericaForm.addHiddenField(FITXER5ID);
-			instanciaGenericaForm.addHiddenField(FITXER6ID);
-			instanciaGenericaForm.addHiddenField(FITXER7ID);
-			instanciaGenericaForm.addHiddenField(FITXER8ID);
-			instanciaGenericaForm.addHiddenField(FITXER9ID);
-	         
-			instanciaGenericaForm.addHiddenField(InstanciaGenericaFields.SOLICITANTDIRECCIO);
-			
-            instanciaGenericaForm.addHiddenField(SOLICITA);
-            instanciaGenericaForm.addHiddenField(EXPOSA);
-            */
-            
 
 		} else {
 			log.info("PUBLIC: Formulari per editar un element:"
@@ -190,6 +161,10 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 	public void postValidate(HttpServletRequest request, InstanciaGenericaForm instanciaGenericaForm,
 			BindingResult result) throws I18NException {
 
+		log.info("postValidate: Attached JSP Code:" + instanciaGenericaForm.isAttachedAdditionalJspCode());
+		
+		instanciaGenericaForm.setAttachedAdditionalJspCode(true);
+		
 		InstanciaGenericaJPA ig = instanciaGenericaForm.getInstanciaGenerica();
 
 		if (ig.isSolicitantPersonaFisica()) {

@@ -58,4 +58,13 @@
         <function-signature>boolean hasRole(java.lang.String)</function-signature>
 </function>
 
+<function>
+        <name>encriptar</name>
+        <description>Encripta un String</description>
+        <function-class>org.fundaciobit.instanciagenerica.back.controller.admin.InstanciaGenericaAdminController</function-class>
+        <function-signature>java.lang.String encriptar(java.lang.Long)</function-signature>
+</function>
+
+
+
 </taglib>

@@ -10,21 +10,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
 import org.apache.log4j.Logger;
-
 import org.fundaciobit.genapp.common.crypt.AlgorithmEncrypter;
 import org.fundaciobit.genapp.common.crypt.FileIDEncrypter;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.web.exportdata.DataExporterManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-
+import org.fundaciobit.instanciagenerica.commons.utils.Configuracio;
 import org.fundaciobit.instanciagenerica.hibernate.HibernateFileUtil;
-import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.logic.utils.I18NLogicUtils;
 import org.fundaciobit.instanciagenerica.logic.utils.LogicUtils;
+//import org.fundaciobit.instanciagenerica.logic.utils;
+
+
 import org.fundaciobit.pluginsib.core.utils.PluginsManager;
 import org.fundaciobit.pluginsib.exportdata.IExportDataPlugin;
-import org.fundaciobit.instanciagenerica.commons.utils.Configuracio;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
 /**
  * Servlet emprat per inicialitzar el Back
@@ -79,6 +79,7 @@ public class InitServlet extends HttpServlet {
 		// Sistema de Traduccions LOGIC
 		// TODO Moure a logic
 		try {
+			//TODO XXXXXXXXXXXXXXX Aqui le ha liado con los imports, preguntar a Toni
 			Class.forName(I18NLogicUtils.class.getName());
 		} catch (Throwable th) {
 			log.error("Error inicialitzant el sistema de traduccions logic: " + th.getMessage(), th);
