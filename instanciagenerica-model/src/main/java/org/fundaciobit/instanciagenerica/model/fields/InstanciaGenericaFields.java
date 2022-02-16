@@ -38,8 +38,8 @@ public interface InstanciaGenericaFields extends java.io.Serializable {
 	 public static final LongField FITXER7ID = new LongField(_TABLE_MODEL, "fitxer7ID", "fitxer7id");
 	 public static final LongField FITXER8ID = new LongField(_TABLE_MODEL, "fitxer8ID", "fitxer8id");
 	 public static final LongField FITXER9ID = new LongField(_TABLE_MODEL, "fitxer9ID", "fitxer9id");
-	 public static final TimestampField DATAFINALITZACIO = new TimestampField(_TABLE_MODEL, "datafinalitzacio", "datafinalitzacio");
 	 public static final TimestampField DATACREACIO = new TimestampField(_TABLE_MODEL, "dataCreacio", "datacreacio");
+	 public static final TimestampField DATAFINALITZACIO = new TimestampField(_TABLE_MODEL, "datafinalitzacio", "datafinalitzacio");
 	 public static final IntegerField ESTAT = new IntegerField(_TABLE_MODEL, "estat", "estat");
 	 public static final StringField ERROR = new StringField(_TABLE_MODEL, "error", "error");
 	 public static final StringField EXCEPTION = new StringField(_TABLE_MODEL, "exception", "exception");
@@ -72,8 +72,8 @@ public interface InstanciaGenericaFields extends java.io.Serializable {
     FITXER7ID,
     FITXER8ID,
     FITXER9ID,
-    DATAFINALITZACIO,
     DATACREACIO,
+    DATAFINALITZACIO,
     ESTAT,
     ERROR,
     EXCEPTION

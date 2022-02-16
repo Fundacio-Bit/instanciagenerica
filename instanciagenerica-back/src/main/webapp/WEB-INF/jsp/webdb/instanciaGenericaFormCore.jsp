@@ -896,42 +896,6 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.DATAFINALITZACIO)}">
-        <tr id="instanciaGenerica_datafinalitzacio_rowid">
-          <td id="instanciaGenerica_datafinalitzacio_columnlabelid">
-            <label>
-              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.DATAFINALITZACIO])?'instanciaGenerica.datafinalitzacio':__theForm.labels[InstanciaGenericaFields.DATAFINALITZACIO]}" />
-             </label>
-              <c:if test="${not empty __theForm.help[InstanciaGenericaFields.DATAFINALITZACIO]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[InstanciaGenericaFields.DATAFINALITZACIO]}" ></i>
-              </c:if>
-            </td>
-          <td id="instanciaGenerica_datafinalitzacio_columnvalueid">
-    <form:errors path="instanciaGenerica.datafinalitzacio" cssClass="errorField alert alert-danger" />
-            <div class="form-group">
-                <div class="input-group date" id="instanciaGenerica_datafinalitzacio" data-target-input="nearest">
-                      <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.DATAFINALITZACIO)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#instanciaGenerica_datafinalitzacio" path="instanciaGenerica.datafinalitzacio" />
-                    <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.DATAFINALITZACIO)}" >
-                    <div class="input-group-append"  data-target="#instanciaGenerica_datafinalitzacio"  data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                    </c:if>
-                </div>
-            </div>
-        <script type="text/javascript">
-            $(function () {
-                $('#instanciaGenerica_datafinalitzacio').datetimepicker({
-                    format: '${gen:getJSDateTimePattern()}',
-                    locale: '${lang}',
-                    icons: {
-                       time: 'far fa-clock'
-                    }
-                });
-            });
-        </script>           </td>
-        </tr>
-        </c:if>
-        
         <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.DATACREACIO)}">
         <tr id="instanciaGenerica_dataCreacio_rowid">
           <td id="instanciaGenerica_dataCreacio_columnlabelid">
@@ -957,6 +921,42 @@
         <script type="text/javascript">
             $(function () {
                 $('#instanciaGenerica_dataCreacio').datetimepicker({
+                    format: '${gen:getJSDateTimePattern()}',
+                    locale: '${lang}',
+                    icons: {
+                       time: 'far fa-clock'
+                    }
+                });
+            });
+        </script>           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,InstanciaGenericaFields.DATAFINALITZACIO)}">
+        <tr id="instanciaGenerica_datafinalitzacio_rowid">
+          <td id="instanciaGenerica_datafinalitzacio_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[InstanciaGenericaFields.DATAFINALITZACIO])?'instanciaGenerica.datafinalitzacio':__theForm.labels[InstanciaGenericaFields.DATAFINALITZACIO]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[InstanciaGenericaFields.DATAFINALITZACIO]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[InstanciaGenericaFields.DATAFINALITZACIO]}" ></i>
+              </c:if>
+            </td>
+          <td id="instanciaGenerica_datafinalitzacio_columnvalueid">
+    <form:errors path="instanciaGenerica.datafinalitzacio" cssClass="errorField alert alert-danger" />
+            <div class="form-group">
+                <div class="input-group date" id="instanciaGenerica_datafinalitzacio" data-target-input="nearest">
+                      <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.DATAFINALITZACIO)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#instanciaGenerica_datafinalitzacio" path="instanciaGenerica.datafinalitzacio" />
+                    <c:if test="${!gen:contains(__theForm.readOnlyFields ,InstanciaGenericaFields.DATAFINALITZACIO)}" >
+                    <div class="input-group-append"  data-target="#instanciaGenerica_datafinalitzacio"  data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                    </c:if>
+                </div>
+            </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#instanciaGenerica_datafinalitzacio').datetimepicker({
                     format: '${gen:getJSDateTimePattern()}',
                     locale: '${lang}',
                     icons: {

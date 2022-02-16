@@ -219,28 +219,6 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
   }
 
 
-  private java.sql.Timestamp datafinalitzacioDesde;
-
-  public java.sql.Timestamp getDatafinalitzacioDesde() {
-    return this.datafinalitzacioDesde;
-  }
-
-  public void setDatafinalitzacioDesde(java.sql.Timestamp datafinalitzacioDesde) {
-    this.datafinalitzacioDesde = datafinalitzacioDesde;
-  }
-
-
-  private java.sql.Timestamp datafinalitzacioFins;
-
-  public java.sql.Timestamp getDatafinalitzacioFins() {
-    return this.datafinalitzacioFins;
-  }
-
-  public void setDatafinalitzacioFins(java.sql.Timestamp datafinalitzacioFins) {
-    this.datafinalitzacioFins = datafinalitzacioFins;
-  }
-
-
   private java.sql.Timestamp dataCreacioDesde;
 
   public java.sql.Timestamp getDataCreacioDesde() {
@@ -260,6 +238,28 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
 
   public void setDataCreacioFins(java.sql.Timestamp dataCreacioFins) {
     this.dataCreacioFins = dataCreacioFins;
+  }
+
+
+  private java.sql.Timestamp datafinalitzacioDesde;
+
+  public java.sql.Timestamp getDatafinalitzacioDesde() {
+    return this.datafinalitzacioDesde;
+  }
+
+  public void setDatafinalitzacioDesde(java.sql.Timestamp datafinalitzacioDesde) {
+    this.datafinalitzacioDesde = datafinalitzacioDesde;
+  }
+
+
+  private java.sql.Timestamp datafinalitzacioFins;
+
+  public java.sql.Timestamp getDatafinalitzacioFins() {
+    return this.datafinalitzacioFins;
+  }
+
+  public void setDatafinalitzacioFins(java.sql.Timestamp datafinalitzacioFins) {
+    this.datafinalitzacioFins = datafinalitzacioFins;
   }
 
 
@@ -330,10 +330,10 @@ public class InstanciaGenericaFilterForm extends InstanciaGenericaBaseFilterForm
     this.idiomaID = __toClone.idiomaID;
     this.exposa = __toClone.exposa;
     this.solicita = __toClone.solicita;
-    this.datafinalitzacioDesde = __toClone.datafinalitzacioDesde;
-    this.datafinalitzacioFins = __toClone.datafinalitzacioFins;
     this.dataCreacioDesde = __toClone.dataCreacioDesde;
     this.dataCreacioFins = __toClone.dataCreacioFins;
+    this.datafinalitzacioDesde = __toClone.datafinalitzacioDesde;
+    this.datafinalitzacioFins = __toClone.datafinalitzacioFins;
     this.estatDesde = __toClone.estatDesde;
     this.estatFins = __toClone.estatFins;
     this.error = __toClone.error;

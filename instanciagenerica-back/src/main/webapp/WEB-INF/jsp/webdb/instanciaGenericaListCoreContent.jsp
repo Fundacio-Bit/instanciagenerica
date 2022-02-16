@@ -181,11 +181,11 @@
             </c:if>
            </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.DATAFINALITZACIO)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${instanciaGenerica.datafinalitzacio}" /></td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.DATACREACIO)}">
           <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${instanciaGenerica.dataCreacio}" /></td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.DATAFINALITZACIO)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${instanciaGenerica.datafinalitzacio}" /></td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,InstanciaGenericaFields.ESTAT)}">
           <td>
