@@ -1,3 +1,7 @@
+<input id="id_urlnavegador" type="hidden" name="urlnavegador" />
+
+
+
 
 <script type="text/javascript">
 	function onChangeSolicitantPersonaFisica(elem) {
@@ -69,7 +73,18 @@
 	}
 
 	//Per defecte, serà persona fisica
-	configFisicaJuridica(true);
+
+	var isFisicaForm = $("#instanciaGenerica_solicitantPersonaFisica").val();
+	var isFisicaView = document
+			.getElementById("instanciaGenerica.solicitantPersonaFisica");
+
+	if (isFisicaForm != null) {
+		configFisicaJuridica(isFisicaForm == "true");
+	}
+
+	if (isFisicaView != null) {
+		configFisicaJuridica(isFisicaView.value == "true");
+	}
 
 	var fitxrersArray = Array(10).fill("");
 	var contador = 0;
@@ -81,7 +96,27 @@
 		if (i > idx_files) {
 			$("#instanciaGenerica_fitxer" + i + "ID_rowid").hide();
 		}
+
+		console.log($("#fitxer" + i + "ID").val())
+		if ($("#fitxer" + i + "ID").val() != "") {
+			$("#instanciaGenerica_fitxer" + i + "ID_rowid").show();
+
+		}
 	}
+
+	$("#id_urlnavegador").val(getAbsolutePath());
+	
+	function getAbsolutePath() {
+		var loc = window.location;
+		var pathName = loc.pathname.substring(0,
+				loc.pathname.lastIndexOf('/') + 1);
+		
+		var ret = loc.href.substring(0,	loc.href.length	- ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+
+		return ret
+	}
+
+	//cogerURLdelNavegador y poner en input hidden
 </script>
 
 

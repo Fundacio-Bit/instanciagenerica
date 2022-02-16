@@ -1,7 +1,9 @@
 package org.fundaciobit.instanciagenerica.back.controller.all;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.ejb.EJB;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.controller.AbstractInstanciaGenericaController;
@@ -43,8 +46,6 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 	@EJB(mappedName = org.fundaciobit.instanciagenerica.logic.FitxerLogicService.JNDI_NAME)
 	protected org.fundaciobit.instanciagenerica.logic.FitxerLogicService fitxerLogicEjb;
-	
-	
 
 	@Override
 	protected FilesFormManager<Fitxer> getFilesFormManager() {
@@ -76,6 +77,9 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 		if (__isView) {
 			InstanciaGenericaJPA ig = instanciaGenericaForm.getInstanciaGenerica();
 			log.info("PUBLIC: Vista de la InstanciaGenerica ID=" + ig.getInstanciaGenericaID());
+
+//			instanciaGenericaForm.setAttachedAdditionalJspCode(false);
+
 			Set<Field<?>> hidden = new HashSet(Arrays.asList(InstanciaGenericaFields.ALL_INSTANCIAGENERICA_FIELDS));
 
 //			hidden.remove(INSTANCIAGENERICAID);
@@ -83,16 +87,42 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 //			hidden.remove(UUID);
 			hidden.remove(DATACREACIO);
 
-			hidden.remove(SOLICITANTTIPUSADMINID);
-			hidden.remove(SOLICITANTADMINID);
 			hidden.remove(SOLICITANTPERSONAFISICA);
 
-			if (ig.isSolicitantPersonaFisica()) {
-				hidden.remove(SOLICITANTNOM);
-				hidden.remove(SOLICITANTLLINATGE1);
-				hidden.remove(SOLICITANTLLINATGE2);
-			} else {
+			hidden.remove(SOLICITANTTIPUSADMINID);
+			hidden.remove(SOLICITANTADMINID);
+			hidden.remove(SOLICITANTNOM);
+			hidden.remove(SOLICITANTLLINATGE1);
+			hidden.remove(SOLICITANTLLINATGE2);
+
+//			String personaFisica = ig.isSolicitantPersonaFisica() ? "solicitant" : "representant";
+//
+//			instanciaGenericaForm.addLabel(SOLICITANTADMINID, personaFisica + ".adminid");
+//			instanciaGenericaForm.addLabel(SOLICITANTNOM, personaFisica + ".nom");
+//			instanciaGenericaForm.addLabel(SOLICITANTLLINATGE1, personaFisica + ".llinatge1");
+//			instanciaGenericaForm.addLabel(SOLICITANTLLINATGE2, personaFisica + ".llinatge2");
+
+			if (!ig.isSolicitantPersonaFisica()) {
 				hidden.remove(SOLICITANTRAOSOCIAL);
+				hidden.remove(SOLICITANTCIF);
+
+			}
+
+			Map<Field<?>, Long> map = new HashMap<Field<?>, Long>();
+			map.put(InstanciaGenericaFields.FITXER1ID, ig.getFitxer1ID());
+			map.put(InstanciaGenericaFields.FITXER2ID, ig.getFitxer2ID());
+			map.put(InstanciaGenericaFields.FITXER3ID, ig.getFitxer3ID());
+			map.put(InstanciaGenericaFields.FITXER4ID, ig.getFitxer4ID());
+			map.put(InstanciaGenericaFields.FITXER5ID, ig.getFitxer5ID());
+			map.put(InstanciaGenericaFields.FITXER6ID, ig.getFitxer6ID());
+			map.put(InstanciaGenericaFields.FITXER7ID, ig.getFitxer7ID());
+			map.put(InstanciaGenericaFields.FITXER8ID, ig.getFitxer8ID());
+			map.put(InstanciaGenericaFields.FITXER9ID, ig.getFitxer9ID());
+
+			for (Map.Entry<Field<?>, Long> entry : map.entrySet()) {
+				if (entry.getValue() != null) {
+					hidden.remove(entry.getKey());
+				}
 			}
 
 			hidden.remove(SOLICITANTDIRECCIO);
@@ -109,7 +139,6 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 			instanciaGenericaForm.setHiddenFields(hidden);
 
-			
 		}
 
 		if (instanciaGenericaForm.isNou()) {
@@ -129,7 +158,6 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 		return instanciaGenericaForm;
 	}
 
-
 	@Override
 	public boolean isAdmin() {
 		return false;
@@ -144,6 +172,17 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 	// Despres de crear, a on ha d'anar
 	@Override
 	public String getRedirectWhenCreated(HttpServletRequest request, InstanciaGenericaForm instanciaGenericaForm) {
+
+		if (instanciaGenericaForm.getInstanciaGenerica().getEstat() == Constants.ESTAT_ERROR) {
+			HtmlUtils.saveMessageError(request, instanciaGenericaForm.getInstanciaGenerica().getError());
+		} else {
+			String url = request.getParameter("urlnavegador") + "v/"
+					+ instanciaGenericaForm.getInstanciaGenerica().getUuid();
+			HtmlUtils.saveMessageInfo(request, "La seva Instancia Genèrica s'ha creat correctament");
+			HtmlUtils.saveMessageInfo(request,
+					"Per poder veure informació de la seva instancia guardi's aquesta URL: " + url);
+		}
+
 		return "redirect:" + getContextWeb() + "/v/" + instanciaGenericaForm.getInstanciaGenerica().getUuid();
 	}
 
@@ -162,9 +201,9 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			BindingResult result) throws I18NException {
 
 		log.info("postValidate: Attached JSP Code:" + instanciaGenericaForm.isAttachedAdditionalJspCode());
-		
-		instanciaGenericaForm.setAttachedAdditionalJspCode(true);
-		
+
+		instanciaGenericaForm.setAttachedAdditionalJspCode(false);
+
 		InstanciaGenericaJPA ig = instanciaGenericaForm.getInstanciaGenerica();
 
 		if (ig.isSolicitantPersonaFisica()) {
@@ -183,9 +222,9 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 		} else { // persona juridica
 
-			ig.setSolicitantNom(null);
-			ig.setSolicitantLlinatge1(null);
-			ig.setSolicitantLlinatge2(null);
+//			ig.setSolicitantNom(null);
+//			ig.setSolicitantLlinatge1(null);
+//			ig.setSolicitantLlinatge2(null);
 
 			if (ig.getSolicitantRaoSocial() == null || ig.getSolicitantRaoSocial().trim().length() == 0) {
 				result.rejectValue(get(InstanciaGenericaFields.SOLICITANTRAOSOCIAL), "genapp.validation.required",

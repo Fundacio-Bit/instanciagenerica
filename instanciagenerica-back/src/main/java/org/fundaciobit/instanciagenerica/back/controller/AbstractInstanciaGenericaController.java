@@ -132,24 +132,13 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 
 		InstanciaGenericaForm instanciaGenericaForm = super.getInstanciaGenericaForm(_jpa, __isView, request, mav);
 		instanciaGenericaForm.setAttachedAdditionalJspCode(true);
-		
 
 		if (__isView) {
 			log.info("Vista de Instancia Generica amb id="
 					+ instanciaGenericaForm.getInstanciaGenerica().getInstanciaGenericaID());
 			// Ocultar campos que sean de la vista
+		}
 
-			if (instanciaGenericaForm.getInstanciaGenerica().getEstat() == Constants.ESTAT_ERROR) {
-				HtmlUtils.saveMessageError(request, instanciaGenericaForm.getInstanciaGenerica().getError());
-			} else {
-				String url = "";
-				HtmlUtils.saveMessageInfo(request, "La seva Instancia Genèrica s'ha creat correctament");
-				HtmlUtils.saveMessageInfo(request,
-						"Per poder veure informació de la seva instancia guardi's aquesta URL: " + url);
-			}
-
-		} 
-		
 		if (instanciaGenericaForm.isNou()) {
 			log.info("ABSTRACT: Formulari per nou element");
 
@@ -184,8 +173,6 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 		return instanciaGenericaForm;
 	}
 
-	
-	
 	@Override
 	public List<StringKeyValue> getReferenceListForIdiomaID(HttpServletRequest request, ModelAndView mav, Where where)
 			throws I18NException {
