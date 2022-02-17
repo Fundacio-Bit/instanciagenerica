@@ -25,6 +25,7 @@
 				console.log(atributs[1]);
 				var html = "<tr><th>Name</th><th>Value</th></tr>";
 
+				
 				for (var i = 0; i < atributs.length; i++) {
 					var valor = atributs[i].value;
 					html += "<tr><td>" + atributs[i].name + "</td><td>" + valor
