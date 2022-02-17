@@ -82,32 +82,51 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 			Set<Field<?>> hidden = new HashSet(Arrays.asList(InstanciaGenericaFields.ALL_INSTANCIAGENERICA_FIELDS));
 
-//			hidden.remove(INSTANCIAGENERICAID);
+			// ************************** DADES REGISTRE ******************/
 			hidden.remove(NUMREGISTRE);
-//			hidden.remove(UUID);
-			hidden.remove(DATACREACIO);
 
 			hidden.remove(SOLICITANTPERSONAFISICA);
-
+			// ************************** DADES SOLICITANT/REPRESENTAT ***/
 			hidden.remove(SOLICITANTTIPUSADMINID);
 			hidden.remove(SOLICITANTADMINID);
 			hidden.remove(SOLICITANTNOM);
 			hidden.remove(SOLICITANTLLINATGE1);
 			hidden.remove(SOLICITANTLLINATGE2);
 
-//			String personaFisica = ig.isSolicitantPersonaFisica() ? "solicitant" : "representant";
-//
-//			instanciaGenericaForm.addLabel(SOLICITANTADMINID, personaFisica + ".adminid");
-//			instanciaGenericaForm.addLabel(SOLICITANTNOM, personaFisica + ".nom");
-//			instanciaGenericaForm.addLabel(SOLICITANTLLINATGE1, personaFisica + ".llinatge1");
-//			instanciaGenericaForm.addLabel(SOLICITANTLLINATGE2, personaFisica + ".llinatge2");
+			hidden.remove(SOLICITANTDIRECCIO);
+			hidden.remove(SOLICITANTEMAIL);
+			hidden.remove(SOLICITANTTELEFON);
 
+			// ************************** DADES PERSONA FISICA ***********/
 			if (!ig.isSolicitantPersonaFisica()) {
 				hidden.remove(SOLICITANTRAOSOCIAL);
 				hidden.remove(SOLICITANTCIF);
 
 			}
 
+			// ************************** DADES CREACIO INSTANCIA *********/
+			hidden.remove(DATACREACIO);
+			hidden.remove(EXPOSA);
+			hidden.remove(SOLICITA);
+
+			
+			
+			hidden.remove(DATAFINALITZACIO);
+
+			// ************************** DADES ERRORS (if Developer) *****/
+			boolean developer = Configuracio.isDesenvolupament();
+			if (ig.getEstat() == Constants.ESTAT_ERROR) {
+				instanciaGenericaForm.addLabel(DATAFINALITZACIO, "datafinalitzacio.error");
+				if (developer) {
+					hidden.remove(ESTAT);
+					hidden.remove(ERROR);
+					hidden.remove(EXCEPTION);
+				}
+			} else {
+				instanciaGenericaForm.addLabel(DATAFINALITZACIO, "datafinalitzacio.registre");
+			}
+
+			// ************************** DADES ANEXES *******************/
 			Map<Field<?>, Long> map = new HashMap<Field<?>, Long>();
 			map.put(InstanciaGenericaFields.FITXER1ID, ig.getFitxer1ID());
 			map.put(InstanciaGenericaFields.FITXER2ID, ig.getFitxer2ID());
@@ -124,18 +143,6 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 					hidden.remove(entry.getKey());
 				}
 			}
-
-			hidden.remove(SOLICITANTDIRECCIO);
-			hidden.remove(SOLICITANTEMAIL);
-			hidden.remove(SOLICITANTTELEFON);
-
-			boolean developer = false;
-			if (developer && ig.getEstat() == Constants.ESTAT_ERROR) {
-				hidden.remove(ESTAT);
-				hidden.remove(ERROR);
-				hidden.remove(EXCEPTION);
-			}
-			hidden.remove(DATAFINALITZACIO);
 
 			instanciaGenericaForm.setHiddenFields(hidden);
 

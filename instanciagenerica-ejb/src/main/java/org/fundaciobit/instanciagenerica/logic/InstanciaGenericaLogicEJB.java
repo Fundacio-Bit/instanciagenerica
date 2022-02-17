@@ -163,7 +163,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			asientoRegistral.setReferenciaExterna(ig.getInstanciaGenericaID() + "");// Referència externa del tràmit
 																					// (matrícula de
 			// cotxe, rebut,...)
-			asientoRegistral.setResumen("Registre d'una instancia genèrica a al registre de la fundació bit");
+			asientoRegistral.setResumen("Registre de una instancia genèrica a al registre de la fundació bit");
 			asientoRegistral.setSolicita(ig.getSolicita());
 
 			asientoRegistral.setTipoEnvioDocumentacion(null);// Indica si la documentació adjunta al registre s’envia

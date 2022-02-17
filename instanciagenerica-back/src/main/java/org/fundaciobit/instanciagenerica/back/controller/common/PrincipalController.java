@@ -41,14 +41,17 @@ public class PrincipalController {
 
 	}
 
-
+	
 	@RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)
 	public ModelAndView canviarIdioma(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(name = "idioma") String idioma) throws Exception {
-		org.fundaciobit.instanciagenerica.back.utils.InstanciaGenericaSessionLocaleResolver.setLocaleManually(request, idioma);		
-		return new ModelAndView("principal");
+		org.fundaciobit.instanciagenerica.back.utils.InstanciaGenericaSessionLocaleResolver.setLocaleManually(request,
+				idioma);
+		String url = request.getRequestURL().toString();
+		log.info("\nCANVIAR IDIOMA -> url: " + url + "\n");
+		return new ModelAndView(new RedirectView("/public/instanciagenerica/new", true));
+//		return new ModelAndView("principal");
 	}
-
 
 	@RequestMapping(value = "/canviarPipella", method = RequestMethod.GET)
 	public ModelAndView canviarPipella(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -83,7 +83,70 @@
 	}
 
 	if (isFisicaView != null) {
+
+		var seccio1 = [ "solicitantTipusAdminID", "solicitantAdminID",
+				"solicitantPersonaFisica", "solicitantNom",
+				"solicitantLlinatge1", "solicitantLlinatge2" ];
+
+		if (isFisicaView.value != "true") {
+			seccio1.push("solicitantRaoSocial");
+			seccio1.push("solicitantCif");
+		}
+
+		var seccio2 = [ "numRegistre", "datafinalitzacio" ];
+
+		var seccio3 = [ "dataCreacio", "exposa", "solicita" ];
+
+		var seccio4 = [ "solicitantDireccio", "solicitantEmail",
+				"solicitantTelefon" ];
+
+		var seccio5 = [];
+		for (var i = 1; i <= 9; i++) {
+			seccio5.push("fitxer" + i + "ID");
+		}
+		
+		splitTable("Contacte solicitant", seccio4, "infoSolicitantAdicional");
+		splitTable("Annexes", seccio5, "fitxers");
+		splitTable("Resum", seccio3, "infoInstancia");
+		splitTable("Solicitant", seccio1, "infoSolicitant");
+		splitTable("Registre", seccio2, "infoRegistre");
+
 		configFisicaJuridica(isFisicaView.value == "true");
+
+	}
+
+	function splitTable(title, trs, id) {
+
+		var table = document.getElementsByTagName("table")[0];
+		var newtable = table.cloneNode(false);
+		var tbody = document.createElement("tbody");
+
+		for (var i = 0; i < trs.length; i++) {
+
+			trs[i] = document.getElementById("instanciaGenerica_" + trs[i]
+					+ "_rowid");
+			if (trs[i]) {
+				tbody.appendChild(trs[i]);
+			}
+		}
+
+		newtable.setAttribute("id", "seccio_" + id);
+		newtable.appendChild(tbody);
+
+		var p = document.createElement("h3");
+		p.appendChild(document.createTextNode(title));
+		if (table.nextSibling) {
+			table.parentNode.insertBefore(p, table.nextSibling);
+		} else {
+			table.parentNode.appendChild(p);
+		}
+
+		if (p.nextSibling) {
+			table.parentNode.insertBefore(newtable, p.nextSibling);
+		} else {
+			table.parentNode.appendChild(newtable);
+		}
+
 	}
 
 	var fitxrersArray = Array(10).fill("");
@@ -105,13 +168,17 @@
 	}
 
 	$("#id_urlnavegador").val(getAbsolutePath());
-	
+
 	function getAbsolutePath() {
 		var loc = window.location;
 		var pathName = loc.pathname.substring(0,
 				loc.pathname.lastIndexOf('/') + 1);
-		
-		var ret = loc.href.substring(0,	loc.href.length	- ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+
+		var ret = loc.href
+				.substring(
+						0,
+						loc.href.length
+								- ((loc.pathname + loc.search + loc.hash).length - pathName.length));
 
 		return ret
 	}

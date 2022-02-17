@@ -9,12 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.controller.webdb.InstanciaGenericaController;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaFilterForm;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaForm;
-import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.model.fields.IdiomaFields;
 import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
@@ -134,7 +132,7 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 		instanciaGenericaForm.setAttachedAdditionalJspCode(true);
 
 		if (__isView) {
-			log.info("Vista de Instancia Generica amb id="
+			log.info("ABSTRACT: Vista de Instancia Generica amb id="
 					+ instanciaGenericaForm.getInstanciaGenerica().getInstanciaGenericaID());
 			// Ocultar campos que sean de la vista
 		}
