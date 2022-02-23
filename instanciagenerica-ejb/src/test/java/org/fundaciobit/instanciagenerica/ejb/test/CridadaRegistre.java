@@ -51,9 +51,8 @@ public class CridadaRegistre {
 			InstanciaGenericaJPA ig = new InstanciaGenericaJPA();
 			ig = ejb.generarInstanciaGenericaAleatoria(ig);
 
-			InfoRegistre ir = ejb.cridadaRegistre(codiDir3, justificant, distribuir,
-					oficinaDestiCodi, oficinaDestiDenominacio, unitatTramitacioDestiCodi,
-					unitatTramitacioDestiDenominacio, ig);
+			InfoRegistre ir = ejb.cridadaRegistre(codiDir3, justificant, distribuir, oficinaDestiCodi,
+					unitatTramitacioDestiCodi, ig);
 
 			if (ir.getEstat() == InfoRegistre.ESTAT_ERROR) {
 				System.out.println("Error cridant Api: " + ir.getError());

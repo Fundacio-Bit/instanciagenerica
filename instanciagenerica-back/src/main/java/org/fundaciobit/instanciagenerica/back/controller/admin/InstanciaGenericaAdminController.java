@@ -30,6 +30,7 @@ import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.AsientoWs;
 import es.caib.regweb3.ws.api.v3.FileContentWs;
 import es.caib.regweb3.ws.api.v3.FileInfoWs;
+import es.caib.regweb3.ws.api.v3.InteresadoWs;
 
 /**
  * 
@@ -66,24 +67,6 @@ public class InstanciaGenericaAdminController extends AbstractInstanciaGenericaC
 
 		if (instanciaGenericaForm.isNou()) {
 			log.info("ADMIN: Formulari per nou element");
-
-			String valorDado = new Random().nextInt(1000) + "";
-			instanciaGenericaForm.getInstanciaGenerica().setNumRegistre(valorDado);
-
-			instanciaGenericaForm.getInstanciaGenerica().setSolicitantTipusAdminID(0);
-			instanciaGenericaForm.getInstanciaGenerica().setSolicitantAdminID("12345678W"); // DNI
-
-			instanciaGenericaForm.getInstanciaGenerica().setSolicitantNom("Paco");
-			instanciaGenericaForm.getInstanciaGenerica().setSolicitantLlinatge1("Gaita");
-			instanciaGenericaForm.getInstanciaGenerica().setSolicitantLlinatge2("Sureda");
-
-			instanciaGenericaForm.getInstanciaGenerica().setSolicitantDireccio("Casa den Paco");
-			instanciaGenericaForm.getInstanciaGenerica().setSolicitantRaoSocial("INDRA");
-			instanciaGenericaForm.getInstanciaGenerica().setSolicitantTelefon("971971971");
-			instanciaGenericaForm.getInstanciaGenerica().setSolicitantEmail("paco.gaita@admin.com");
-
-			instanciaGenericaForm.getInstanciaGenerica().setExposa("Exposo les meves circunstancies");
-			instanciaGenericaForm.getInstanciaGenerica().setSolicita("Solicit el seguent");
 
 		} else {
 			log.info("ADMIN: Formulari per editar un element:"
@@ -141,10 +124,18 @@ public class InstanciaGenericaAdminController extends AbstractInstanciaGenericaC
 				mav.addObject("as", as);
 				mav.addObject("contexte", getContextWeb());
 
-				for (FileInfoWs item : as.getAnexos()) {
-					// item.getFileID();
-					// item.get();
+				int countPF = 0;
+				int countPJ = 0;
+				for (InteresadoWs item : as.getInteresados()) {
+					if (item.getRepresentante() == null) {
+						countPF++;
+					} else {
+						countPJ++;
+					}
+
 				}
+				mav.addObject("countPF", countPF);
+				mav.addObject("countPJ", countPJ);
 
 				return mav;
 			}

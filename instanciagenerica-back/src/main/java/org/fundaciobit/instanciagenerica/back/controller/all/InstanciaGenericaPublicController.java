@@ -105,7 +105,7 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			}
 
 			// ************************** DADES CREACIO INSTANCIA *********/
-			hidden.remove(DATACREACIO);
+//			hidden.remove(DATACREACIO);
 			hidden.remove(EXPOSA);
 			hidden.remove(SOLICITA);
 

@@ -79,17 +79,13 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 		String codiDir3 = Configuracio.getRegistreEntidad();
 
-		String oficinaDestiCodi = Configuracio.getRegistreOficinaDestiCodi();
-		String oficinaDestiDenominacio = Configuracio.getRegistreOficinaDestiCodi();
-
-		String unitatTramitacioDestiCodi = Configuracio.getRegistreUnitatTramitacioDestiCodi();
-		String unitatTramitacioDestiDenominacio = Configuracio.getRegistreUnitatTramitacioDestiDenominacio();
+		String oficinaCodi = Configuracio.getRegistreOficinaDestiCodi();
+		String unitatTramitacioCodi = Configuracio.getRegistreUnitatTramitacioDestiCodi();
 
 		boolean justificant = false;
 		boolean distribuir = false;
 
-		InfoRegistre ir = cridadaRegistre(codiDir3, justificant, distribuir, oficinaDestiCodi, oficinaDestiDenominacio,
-				unitatTramitacioDestiCodi, unitatTramitacioDestiDenominacio, ig);
+		InfoRegistre ir = cridadaRegistre(codiDir3, justificant, distribuir, oficinaCodi, unitatTramitacioCodi, ig);
 
 		if (ir.getEstat() == InfoRegistre.ESTAT_ERROR) {
 			ig.setEstat(Constants.ESTAT_ERROR);
@@ -107,9 +103,17 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		return ig;
 	}
 
-	public InfoRegistre cridadaRegistre(String codiDir3, boolean justificant, boolean distribuir,
-			String oficinaDestiCodi, String oficinaDestiDenominacio, String unitatTramitacioDestiCodi,
-			String unitatTramitacioDestiDenominacio, InstanciaGenerica ig) {
+	public InfoRegistre cridadaRegistre(String codiDir3, boolean justificant, boolean distribuir, String oficinaCodi_,
+			String unitatCodi_, InstanciaGenerica ig) {
+
+		String entitatCodi = codiDir3;
+
+		String entitatRegistralIniciCodi = oficinaCodi_;
+		String entitatRegistralOrigenCodi = oficinaCodi_;
+		String entitatRegistralDestiCodi = oficinaCodi_;
+
+		String unitatTramitacioOrigenCodi = unitatCodi_;
+		String unitatTramitacioDestiCodi = unitatCodi_;
 
 		try {
 
@@ -119,12 +123,12 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			log.info("JA TENIM API per REGISTRAR INSTANCIA");
 
 			// Codi dir3 de l'entitat de registre.fundaciobit.org
-			Long idSesion = asientoApi.obtenerSesionRegistro(codiDir3);
+			Long idSesion = asientoApi.obtenerSesionRegistro(entitatCodi);
 			log.info("	->	idSession: " + idSesion);
 
 			// TODO Posar tots els camps.
 			AsientoRegistralWs asientoRegistral = new AsientoRegistralWs();
-			asientoRegistral.setAplicacion("instanciagenerica");
+			asientoRegistral.setAplicacion(null);
 			asientoRegistral.setAplicacionTelematica(null);
 			asientoRegistral.setCodigoAsunto(null);
 			asientoRegistral.setCodigoAsuntoDenominacion(null);
@@ -135,18 +139,18 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 			asientoRegistral.setCodigoUsuario(Configuracio.getRegistreUser());
 
-//			asientoRegistral.setDecodificacionEntidadRegistralProcesado(codiDir3);
-			asientoRegistral.setEntidadCodigo(codiDir3);
-			asientoRegistral.setEntidadDenominacion("fundaciobit");
+			asientoRegistral.setDecodificacionEntidadRegistralProcesado(codiDir3);
+			asientoRegistral.setEntidadCodigo(entitatCodi);
+			asientoRegistral.setEntidadDenominacion(null);
 
-			asientoRegistral.setEntidadRegistralDestinoCodigo(oficinaDestiCodi);
-			asientoRegistral.setEntidadRegistralDestinoDenominacion(oficinaDestiDenominacio);
+			asientoRegistral.setEntidadRegistralDestinoCodigo(entitatRegistralDestiCodi);
+			asientoRegistral.setEntidadRegistralDestinoDenominacion(null);
 
-			asientoRegistral.setEntidadRegistralInicioCodigo(oficinaDestiCodi);
-			asientoRegistral.setEntidadRegistralInicioDenominacion(oficinaDestiDenominacio);
+			asientoRegistral.setEntidadRegistralInicioCodigo(entitatRegistralIniciCodi);
+			asientoRegistral.setEntidadRegistralInicioDenominacion(null);
 
-			asientoRegistral.setEntidadRegistralOrigenCodigo(oficinaDestiCodi);
-			asientoRegistral.setEntidadRegistralOrigenDenominacion(oficinaDestiDenominacio);
+			asientoRegistral.setEntidadRegistralOrigenCodigo(entitatRegistralOrigenCodi);
+			asientoRegistral.setEntidadRegistralOrigenDenominacion(null);
 
 			asientoRegistral.setExpone(ig.getExposa());
 
@@ -175,65 +179,107 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			asientoRegistral.setTipoTransporte(null); // Forma d'arribada de l’assentament de tipus «Entrada»
 
 			asientoRegistral.setUnidadTramitacionDestinoCodigo(unitatTramitacioDestiCodi);
-			asientoRegistral.setUnidadTramitacionDestinoDenominacion(unitatTramitacioDestiDenominacio);
+			asientoRegistral.setUnidadTramitacionDestinoDenominacion(null);
 
-			asientoRegistral.setUnidadTramitacionOrigenCodigo(null);
+			asientoRegistral.setUnidadTramitacionOrigenCodigo(unitatTramitacioOrigenCodi);
 			asientoRegistral.setUnidadTramitacionOrigenDenominacion(null);
 
 			// TODO XXXXXXXXXXXXXX if isPersonaFisica, tratarlo de una manera, else, de
 			// otra.
-			DatosInteresadoWs d = new DatosInteresadoWs();
-			d.setApellido1(ig.getSolicitantLlinatge1());
-			d.setApellido2(ig.getSolicitantLlinatge2());
-
-			d.setCanal(null);
-			d.setCodigoDire(null);
-			d.setCp(null);
-
-			d.setDireccion(ig.getSolicitantDireccio());
-			d.setDireccionElectronica(ig.getSolicitantEmail());
-			d.setDocumento(ig.getSolicitantAdminID());
-			d.setEmail(ig.getSolicitantEmail());
-
-			d.setLocalidad(null);
-			d.setNombre(ig.getSolicitantNom());
-
-			d.setObservaciones(null);
-			d.setPais(null);
-			d.setProvincia(null);
-
-			d.setRazonSocial(ig.getSolicitantRaoSocial());
-			d.setTelefono(ig.getSolicitantTelefon());
-
-			String tipusAdminId;
-			switch (ig.getSolicitantTipusAdminID()) {
-			case 1:
-				tipusAdminId = "N";// NIF
-				break;
-			case 2:
-				tipusAdminId = "E";// NIE
-				break;
-			case 3:
-				tipusAdminId = "P";// Passaport
-				break;
-			case 4:
-				tipusAdminId = "X";// Altres
-				break;
-			case 5:
-				tipusAdminId = "C";// CIF
-				break;
-			default:
-				tipusAdminId = "O";// Codi d'origen
-				break;
-			}
-
-			d.setTipoDocumentoIdentificacion(tipusAdminId);
-
-			Long tipus = ig.isSolicitantPersonaFisica() ? 2L : 3L;
-			d.setTipoInteresado(2L);
+			String[] tipus = { "", "N", "E", "P", "X", "C", "0" };
 
 			InteresadoWs i = new InteresadoWs();
-			i.setInteresado(d);
+
+			if (ig.isSolicitantPersonaFisica()) {
+				DatosInteresadoWs interesado = new DatosInteresadoWs();
+
+				interesado.setTipoInteresado(2L);
+				interesado.setApellido1(ig.getSolicitantLlinatge1());
+				interesado.setApellido2(ig.getSolicitantLlinatge2());
+
+				interesado.setCanal(null);
+				interesado.setCodigoDire(null);
+				interesado.setCp(null);
+
+				interesado.setDireccion(ig.getSolicitantDireccio());
+				interesado.setDireccionElectronica(ig.getSolicitantEmail());
+				interesado.setDocumento(ig.getSolicitantAdminID());
+				interesado.setEmail(ig.getSolicitantEmail());
+
+				interesado.setLocalidad(null);
+				interesado.setNombre(ig.getSolicitantNom());
+
+				interesado.setObservaciones(null);
+				interesado.setPais(null);
+				interesado.setProvincia(null);
+
+				interesado.setRazonSocial(ig.getSolicitantRaoSocial());
+				interesado.setTelefono(ig.getSolicitantTelefon());
+
+				String tipusAdminId = tipus[ig.getSolicitantTipusAdminID()];
+				interesado.setTipoDocumentoIdentificacion(tipusAdminId);
+
+				i.setInteresado(interesado);
+				i.setRepresentante(null);
+			} else {
+				DatosInteresadoWs interesado = new DatosInteresadoWs();
+				DatosInteresadoWs representante = new DatosInteresadoWs();
+
+				interesado.setTipoInteresado(3L);
+				interesado.setApellido1(null);
+				interesado.setApellido2(null);
+
+				interesado.setCanal(null);
+				interesado.setCodigoDire(null);
+				interesado.setCp(null);
+
+				interesado.setDireccion(ig.getSolicitantDireccio());
+				interesado.setDireccionElectronica(null);
+				interesado.setDocumento(ig.getSolicitantCif());
+				interesado.setEmail(null);
+
+				interesado.setLocalidad(null);
+				interesado.setNombre(null);
+
+				interesado.setObservaciones(null);
+				interesado.setPais(null);
+				interesado.setProvincia(null);
+
+				interesado.setRazonSocial(ig.getSolicitantRaoSocial());
+				interesado.setTelefono(ig.getSolicitantTelefon());
+				interesado.setTipoDocumentoIdentificacion("C");
+
+				////////////////////////////////////////////////////////////////////////////
+
+				representante.setTipoInteresado(2L);
+				representante.setApellido1(ig.getSolicitantLlinatge1());
+				representante.setApellido2(ig.getSolicitantLlinatge2());
+
+				representante.setCanal(null);
+				representante.setCodigoDire(null);
+				representante.setCp(null);
+
+				representante.setDireccion(ig.getSolicitantDireccio());
+				representante.setDireccionElectronica(ig.getSolicitantEmail());
+				representante.setDocumento(ig.getSolicitantAdminID());
+				representante.setEmail(ig.getSolicitantEmail());
+
+				representante.setLocalidad(null);
+				representante.setNombre(ig.getSolicitantNom());
+
+				representante.setObservaciones(null);
+				representante.setPais(null);
+				representante.setProvincia(null);
+
+				representante.setRazonSocial(null);
+				representante.setTelefono(null);
+
+				String tipusAdminId2 = tipus[ig.getSolicitantTipusAdminID()];
+				representante.setTipoDocumentoIdentificacion(tipusAdminId2);
+
+				i.setInteresado(interesado);// Empresa
+				i.setRepresentante(representante);// Persona
+			}
 
 			asientoRegistral.getInteresados().add(i);
 
@@ -479,7 +525,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 		Random rnd = new Random();
 
-		ig.setSolicitantTipusAdminID(rnd.nextInt(2)); // DNI
+		ig.setSolicitantTipusAdminID(1); // DNI
 
 		char[] c = { (char) ('A' + rnd.nextInt(26)) };
 		String s = "" + c[0] + "";
@@ -499,7 +545,14 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		ig.setIdiomaID("ca");
 
 		ig.setSolicitantDireccio("Casa den " + nom);
-		ig.setSolicitantRaoSocial("INDRA");
+
+		String[] empresas = { "INDRA", "Apple", "Amazon", "Google", "Fundacio BIT", "Gambas Angulo",
+				"Colchones Rivolvo", "Tonys", "Suministros Lomar S.L." };
+		String raoSocial = empresas[rnd.nextInt(empresas.length)];
+		ig.setSolicitantRaoSocial(raoSocial);
+
+		String[] cifs = { "S0794867B", "B67657189", "B13829940", "D48465058", "N4957698F", "G19819226", "N1350140H" };
+		ig.setSolicitantCif(cifs[rnd.nextInt(cifs.length)]);
 		ig.setSolicitantTelefon(900000000 + rnd.nextInt(100000000) + "");
 
 		String correo = nom + "." + llinatge;

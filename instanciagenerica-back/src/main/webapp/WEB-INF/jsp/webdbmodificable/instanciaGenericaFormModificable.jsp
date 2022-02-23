@@ -1,12 +1,10 @@
 <input id="id_urlnavegador" type="hidden" name="urlnavegador" />
 
-
-
-
 <script type="text/javascript">
 	function onChangeSolicitantPersonaFisica(elem) {
 		var personaFisica = (elem.value == "true");
-		configFisicaJuridica(personaFisica);
+		//		configFisicaJuridica(personaFisica);
+		setPersonaFisica(personaFisica);
 	}
 
 	function configFisicaJuridica(personaFisica) {
@@ -31,14 +29,11 @@
 			$(id).html(html);
 		});
 
-		var aEsconder = [ "solicitantRaoSocial", "solicitantCif" ];
-		$.each(aEsconder, function(key, value) {
-			var id = "#instanciaGenerica_" + value + "_rowid";
-			if (personaFisica)
-				$(id).hide();
-			else
-				$(id).show();
-		});
+		if (personaFisica)
+			$("#seccio_entitat").hide();
+		else
+			$("#seccio_entitat").show();
+
 	}
 
 	function veureFitxerId(event) {
@@ -72,82 +67,136 @@
 
 	}
 
+	function splitTable(secciones, tag, rowformat) {
+
+		console.log(secciones);
+		for (var j = 0; j < secciones.length; j++) {
+
+			var seccion = secciones[j];
+			console.log(seccion);
+			var rows = seccion.elems;
+
+			var div = document.createElement("div");
+			var tbody = document.createElement("tbody");
+
+			var table = document.getElementsByTagName("table")[0];
+			var newtable = table.cloneNode(false);
+
+			var idx = 0;
+			for (var i = 0; i < rows.length; i++) {
+				var rowid = rowformat.replace("XXXXX", rows[i]);
+				rows[i] = document.getElementById(rowid);
+
+				if (rows[i]) {
+					tbody.appendChild(rows[i]);
+					idx++;
+				}
+			}
+
+			if (idx > 0) {
+				div.setAttribute("id", "seccio_" + seccion.id);
+
+				newtable.appendChild(tbody);
+
+				var p = document.createElement(tag);
+				p.innerHTML = seccion.title;
+
+				div.appendChild(p);
+				div.appendChild(newtable);
+
+				table.parentNode.appendChild(div);
+			}
+		}
+	}
+
+	//cogerURLdelNavegador y poner en input hidden
+	function getAbsolutePath() {
+		var loc = window.location;
+		var pathName = loc.pathname.substring(0,
+				loc.pathname.lastIndexOf('/') + 1);
+
+		var ret = loc.href
+				.substring(
+						0,
+						loc.href.length
+								- ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+
+		return ret
+	}
+
+	function setPersonaFisica(personaFisica) {
+
+		var h4 = document.getElementById("seccio_solicitant").children[0];
+		var cadenaNueva;
+		if (personaFisica) {
+			cadenaNueva = '<fmt:message key="solicitant"/>';
+			$("#seccio_entitat").hide();
+		} else {
+			cadenaNueva = '<fmt:message key="representant"/>';
+			$("#seccio_entitat").show();
+		}
+
+		h4.innerHTML = cadenaNueva;
+	}
 	//Per defecte, serà persona fisica
 
+	var personaFisica = false;
 	var isFisicaForm = $("#instanciaGenerica_solicitantPersonaFisica").val();
 	var isFisicaView = document
 			.getElementById("instanciaGenerica.solicitantPersonaFisica");
 
 	if (isFisicaForm != null) {
-		configFisicaJuridica(isFisicaForm == "true");
+		personaFisica = isFisicaForm == "true";
 	}
 
 	if (isFisicaView != null) {
-
-		var seccio1 = [ "solicitantTipusAdminID", "solicitantAdminID",
-				"solicitantPersonaFisica", "solicitantNom",
-				"solicitantLlinatge1", "solicitantLlinatge2" ];
-
-		if (isFisicaView.value != "true") {
-			seccio1.push("solicitantRaoSocial");
-			seccio1.push("solicitantCif");
-		}
-
-		var seccio2 = [ "numRegistre", "datafinalitzacio" ];
-
-		var seccio3 = [ "dataCreacio", "exposa", "solicita" ];
-
-		var seccio4 = [ "solicitantDireccio", "solicitantEmail",
-				"solicitantTelefon" ];
-
-		var seccio5 = [];
-		for (var i = 1; i <= 9; i++) {
-			seccio5.push("fitxer" + i + "ID");
-		}
-		
-		splitTable("Contacte solicitant", seccio4, "infoSolicitantAdicional");
-		splitTable("Annexes", seccio5, "fitxers");
-		splitTable("Resum", seccio3, "infoInstancia");
-		splitTable("Solicitant", seccio1, "infoSolicitant");
-		splitTable("Registre", seccio2, "infoRegistre");
-
-		configFisicaJuridica(isFisicaView.value == "true");
-
+		personaFisica = isFisicaView.value == "true"
 	}
 
-	function splitTable(title, trs, id) {
+	var secciones = [
+			{
+				title : "<fmt:message key='solicitant'/>",
+				elems : [ "solicitantPersonaFisica", "solicitantTipusAdminID",
+						"solicitantAdminID", "solicitantNom",
+						"solicitantLlinatge1", "solicitantLlinatge2" ],
+				id : "solicitant"
+			},
+			{
+				title : "<fmt:message key='seccio.entitat'/>",
+				elems : [ "solicitantRaoSocial", "solicitantCif" ],
+				id : "entitat"
+			},
+			{
+				title : "<fmt:message key='seccio.registre'/>",
+				elems : [ "numRegistre", "datafinalitzacio" ],
+				id : "registre"
+			},
+			{
+				title : "<fmt:message key='seccio.resum'/>",
+				elems : [ "idiomaID", "exposa", "solicita" ],
+				id : "resum"
+			},
+			{
+				title : "<fmt:message key='seccio.contacte'/>",
+				elems : [ "solicitantEmail", "solicitantTelefon",
+						"solicitantDireccio" ],
+				id : "contacte"
+			}, {
+				title : "<fmt:message key='seccio.anexes'/>",
+				elems : [],
+				id : "anexes"
+			} ];
 
-		var table = document.getElementsByTagName("table")[0];
-		var newtable = table.cloneNode(false);
-		var tbody = document.createElement("tbody");
-
-		for (var i = 0; i < trs.length; i++) {
-
-			trs[i] = document.getElementById("instanciaGenerica_" + trs[i]
-					+ "_rowid");
-			if (trs[i]) {
-				tbody.appendChild(trs[i]);
-			}
-		}
-
-		newtable.setAttribute("id", "seccio_" + id);
-		newtable.appendChild(tbody);
-
-		var p = document.createElement("h3");
-		p.appendChild(document.createTextNode(title));
-		if (table.nextSibling) {
-			table.parentNode.insertBefore(p, table.nextSibling);
-		} else {
-			table.parentNode.appendChild(p);
-		}
-
-		if (p.nextSibling) {
-			table.parentNode.insertBefore(newtable, p.nextSibling);
-		} else {
-			table.parentNode.appendChild(newtable);
-		}
-
+	for (var i = 1; i <= 9; i++) {
+		secciones[secciones.length - 1].elems.push("fitxer" + i + "ID");
 	}
+
+	splitTable(secciones, "h4", "instanciaGenerica_XXXXX_rowid");
+
+	$("#id_urlnavegador").val(getAbsolutePath());
+
+	//	configFisicaJuridica(personaFisica);
+	setPersonaFisica(personaFisica);
 
 	var fitxrersArray = Array(10).fill("");
 	var contador = 0;
@@ -166,24 +215,6 @@
 
 		}
 	}
-
-	$("#id_urlnavegador").val(getAbsolutePath());
-
-	function getAbsolutePath() {
-		var loc = window.location;
-		var pathName = loc.pathname.substring(0,
-				loc.pathname.lastIndexOf('/') + 1);
-
-		var ret = loc.href
-				.substring(
-						0,
-						loc.href.length
-								- ((loc.pathname + loc.search + loc.hash).length - pathName.length));
-
-		return ret
-	}
-
-	//cogerURLdelNavegador y poner en input hidden
 </script>
 
 

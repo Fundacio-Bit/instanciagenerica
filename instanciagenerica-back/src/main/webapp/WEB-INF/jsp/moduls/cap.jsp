@@ -93,8 +93,7 @@
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
 						<c:forEach var="idioma" items="${idiomes}" varStatus="status">
-							<a class="dropdown-item"
-								href="<c:url value="/canviarIdioma/${idioma}"></c:url>"> <img
+							<a class="dropdown-item" href="?lang=${idioma}"> <img
 								src="<c:url value="/img/${idioma}_petit_${lang eq idioma? 'on' : 'off'}.gif"/>"
 								alt="${idioma}" width="17" height="14" border="0" /> <fmt:message
 									key="idioma.${idioma}" />
@@ -186,6 +185,7 @@
 							});
 		});
 	</script>
+
 	<div id="xrkn"
 		style="position: absolute; width: 500px; height: 530px; top: 150px; left: 300px; z-index: 1000; visibility: hidden;">
 	</div>
