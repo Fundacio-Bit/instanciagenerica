@@ -231,7 +231,6 @@
 		</table>
 	</c:if>
 
-
 	<c:if test="${countPJ > 0 }">
 
 		<h5>Persona Jurididca</h5>
