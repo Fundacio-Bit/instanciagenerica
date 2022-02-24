@@ -91,61 +91,7 @@ public class InstanciaGenericaAdminController extends AbstractInstanciaGenericaC
 		return true;
 	}
 
-	@RequestMapping(value = "/veureDetallsRegistre/{instanciaGenericaID}", method = RequestMethod.GET)
-	public ModelAndView veureDetallsRegistre(@PathVariable("instanciaGenericaID") java.lang.Long instanciaGenericaID,
-			HttpServletRequest request, HttpServletResponse response) {
 
-		try {
-			InstanciaGenerica ig = instanciaGenericaLogicEjb.findByPrimaryKey(instanciaGenericaID);
-
-			String numRegF = ig.getNumRegistre();
-			String idioma = ig.getIdiomaID();
-			String document = ig.getSolicitantAdminID();
-
-			if (numRegF == null) {
-				HtmlUtils.saveMessageError(request, "Error. Numero de registre no pot ser null.");
-
-			} else {
-
-				AsientoRegistralWs ar = instanciaGenericaLogicEjb.obtenerAsiento(numRegF);
-				AsientoWs as = instanciaGenericaLogicEjb.obtenerAsientoCiudadano(numRegF, document, idioma);
-
-				// TODO XXXXXXXXXXX GESIONAR NULL
-				// log.error("\" -> Ha habido un error");
-
-				log.info("		-> Número de registro: " + ar.getNumeroRegistroFormateado());
-
-				ModelAndView mav = new ModelAndView("detallsregistre");
-				mav.addObject("ar", ar);
-				mav.addObject("presencial", ar.isPresencial());
-
-				mav.addObject("as", as);
-				mav.addObject("contexte", getContextWeb());
-
-				int countPF = 0;
-				int countPJ = 0;
-				for (InteresadoWs item : as.getInteresados()) {
-					if (item.getRepresentante() == null) {
-						countPF++;
-					} else {
-						countPJ++;
-					}
-				}
-				mav.addObject("countPF", countPF);
-				mav.addObject("countPJ", countPJ);
-
-				return mav;
-			}
-		} catch (I18NException e) {
-			// TODO XXXXXXXXXXX Provar aquest tros de codi
-			HtmlUtils.saveMessageError(request,
-					"Error intentant obtennir informació d'un registre: " + I18NUtils.getMessage(e));
-		}
-
-		ModelAndView mav = new ModelAndView(new RedirectView(getContextWeb() + "/list", true));
-		return mav;
-
-	}
 
 	public static String encriptar(Long msg) {
 		return HibernateFileUtil.encryptString(String.valueOf(msg));

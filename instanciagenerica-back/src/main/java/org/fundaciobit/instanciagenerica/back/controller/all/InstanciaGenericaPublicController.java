@@ -15,6 +15,7 @@ import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
+import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.controller.AbstractInstanciaGenericaController;
 import org.fundaciobit.instanciagenerica.back.controller.InstanciaGenericaFilesFormManager;
@@ -109,11 +110,8 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			hidden.remove(EXPOSA);
 			hidden.remove(SOLICITA);
 
-			
-			
-			hidden.remove(DATAFINALITZACIO);
-
 			// ************************** DADES ERRORS (if Developer) *****/
+			hidden.remove(DATAFINALITZACIO);
 			boolean developer = Configuracio.isDesenvolupament();
 			if (ig.getEstat() == Constants.ESTAT_ERROR) {
 				instanciaGenericaForm.addLabel(DATAFINALITZACIO, "datafinalitzacio.error");
@@ -145,6 +143,10 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			}
 
 			instanciaGenericaForm.setHiddenFields(hidden);
+
+			String uuid = instanciaGenericaForm.getInstanciaGenerica().getUuid();
+			instanciaGenericaForm.addAdditionalButton(new AdditionalButton("fas fa-star", "mostrarinstancies",
+					getContextWeb() + "/veureDetallsRegistre/{0}", "btn-primary"));
 
 		}
 
@@ -207,15 +209,11 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 	public void postValidate(HttpServletRequest request, InstanciaGenericaForm instanciaGenericaForm,
 			BindingResult result) throws I18NException {
 
-		log.info("postValidate: Attached JSP Code:" + instanciaGenericaForm.isAttachedAdditionalJspCode());
-
-		instanciaGenericaForm.setAttachedAdditionalJspCode(false);
-
 		InstanciaGenericaJPA ig = instanciaGenericaForm.getInstanciaGenerica();
 
 		if (ig.isSolicitantPersonaFisica()) {
 
-			ig.setSolicitantRaoSocial(null);
+//			ig.setSolicitantRaoSocial(null);
 
 			if (ig.getSolicitantNom() == null || ig.getSolicitantNom().trim().length() == 0) {
 				result.rejectValue(get(InstanciaGenericaFields.SOLICITANTNOM), "genapp.validation.required",
@@ -236,6 +234,11 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			if (ig.getSolicitantRaoSocial() == null || ig.getSolicitantRaoSocial().trim().length() == 0) {
 				result.rejectValue(get(InstanciaGenericaFields.SOLICITANTRAOSOCIAL), "genapp.validation.required",
 						new String[] { I18NUtils.tradueix(get(InstanciaGenericaFields.SOLICITANTRAOSOCIAL)) }, null);
+			}
+
+			if (ig.getSolicitantCif() == null || ig.getSolicitantCif().trim().length() == 0) {
+				result.rejectValue(get(InstanciaGenericaFields.SOLICITANTCIF), "genapp.validation.required",
+						new String[] { I18NUtils.tradueix(get(InstanciaGenericaFields.SOLICITANTCIF)) }, null);
 			}
 		}
 	}

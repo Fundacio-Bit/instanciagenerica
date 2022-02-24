@@ -6,13 +6,100 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Lato'
+	rel='stylesheet' type='text/css'>
 </head>
 <body>
-
-	<button>
-		<a href="/instanciagenerica/admin/instanciagenericaproves/list/1">Atras</a>
+	<button onclick="history.back()" class="boton btn-3 btn-sep icon">
+		<fmt:message key="atras" />
 	</button>
 
+	<style>
+/* General button style */
+.boton {
+	border: none;
+	font-family: 'Lato';
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	cursor: pointer;
+	/* 	padding: 25px 80px;
+ */
+	display: inline-block;
+	margin-top: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.boton:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+/* Pseudo elements for icons */
+.boton:before {
+	font-family: 'FontAwesome';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	position: relative;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Icon separator */
+.btn-sep {
+	/* 	padding: 25px 60px 25px 120px;
+ */
+	padding: 0.5rem 1rem 0.5rem 2.5rem;
+}
+
+.btn-sep:before {
+	background: rgba(0, 0, 0, 0.15);
+}
+
+/* Button 3 */
+.btn-3 {
+	background: #3498db;
+	color: #fff;
+}
+
+.btn-3:hover {
+	background: #2980b9;
+}
+
+.btn-3:before {
+	height: 100%;
+	left: 0;
+	line-height: 2;
+	font-size: 130%;
+	width: 2rem;
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.icon:before {
+	content: "\f100";
+}
+</style>
 	<table id="mytable"
 		class="tdformlabel table-sm table table-bordered table-striped marTop10 table-genapp">
 		<tbody>

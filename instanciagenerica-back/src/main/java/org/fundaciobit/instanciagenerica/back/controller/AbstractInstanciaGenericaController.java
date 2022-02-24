@@ -5,18 +5,29 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.controller.webdb.InstanciaGenericaController;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaFilterForm;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaForm;
+import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.instanciagenerica.model.fields.IdiomaFields;
 import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
+import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
+import es.caib.regweb3.ws.api.v3.AsientoWs;
+import es.caib.regweb3.ws.api.v3.InteresadoWs;
 
 /**
  * 
@@ -189,4 +200,59 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 		return false;
 	}
 
+	@RequestMapping(value = "/veureDetallsRegistre/{instanciaGenericaID}", method = RequestMethod.GET)
+	public ModelAndView veureDetallsRegistre(@PathVariable("instanciaGenericaID") java.lang.Long instanciaGenericaID,
+			HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+			InstanciaGenerica ig = instanciaGenericaLogicEjb.findByPrimaryKey(instanciaGenericaID);
+
+			String numRegF = ig.getNumRegistre();
+			String idioma = ig.getIdiomaID();
+			String document = ig.getSolicitantAdminID();
+
+			if (numRegF == null) {
+				HtmlUtils.saveMessageError(request, "Error. Numero de registre no pot ser null.");
+
+			} else {
+
+				AsientoRegistralWs ar = instanciaGenericaLogicEjb.obtenerAsiento(numRegF);
+				AsientoWs as = instanciaGenericaLogicEjb.obtenerAsientoCiudadano(numRegF, document, idioma);
+
+				// TODO XXXXXXXXXXX GESIONAR NULL
+				// log.error("\" -> Ha habido un error");
+
+				log.info("		-> Número de registro: " + ar.getNumeroRegistroFormateado());
+
+				ModelAndView mav = new ModelAndView("detallsregistre");
+				mav.addObject("ar", ar);
+				mav.addObject("presencial", ar.isPresencial());
+
+				mav.addObject("as", as);
+				mav.addObject("contexte", getContextWeb());
+
+				int countPF = 0;
+				int countPJ = 0;
+				for (InteresadoWs item : as.getInteresados()) {
+					if (item.getRepresentante() == null) {
+						countPF++;
+					} else {
+						countPJ++;
+					}
+				}
+				mav.addObject("countPF", countPF);
+				mav.addObject("countPJ", countPJ);
+
+				return mav;
+			}
+		} catch (I18NException e) {
+			// TODO XXXXXXXXXXX Provar aquest tros de codi
+			HtmlUtils.saveMessageError(request,
+					"Error intentant obtennir informació d'un registre: " + I18NUtils.getMessage(e));
+		}
+
+		ModelAndView mav = new ModelAndView(new RedirectView(getContextWeb() + "/list", true));
+		return mav;
+
+	}
 }

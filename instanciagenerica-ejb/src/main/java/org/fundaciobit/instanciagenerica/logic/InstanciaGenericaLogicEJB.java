@@ -35,6 +35,7 @@ import es.caib.regweb3.ws.api.v3.AsientoWs;
 import es.caib.regweb3.ws.api.v3.DatosInteresadoWs;
 import es.caib.regweb3.ws.api.v3.FileContentWs;
 import es.caib.regweb3.ws.api.v3.InteresadoWs;
+import es.caib.regweb3.ws.api.v3.JustificanteWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
 
@@ -305,6 +306,9 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 			AsientoRegistralWs as = asientoApi.obtenerAsientoRegistral(codiDir3, numRegF, 1L, false);
 
+			JustificanteWs ju = asientoApi.obtenerJustificante(codiDir3, numRegF, 1L);
+			ju.getJustificante();
+			
 			if (as.getEstado() == 1) {
 				return new InfoRegistre(asiento.getNumeroRegistroFormateado());
 			} else {

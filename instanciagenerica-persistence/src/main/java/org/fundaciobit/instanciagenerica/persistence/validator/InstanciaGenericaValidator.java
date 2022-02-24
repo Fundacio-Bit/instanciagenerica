@@ -140,6 +140,17 @@ public class InstanciaGenericaValidator<I extends InstanciaGenerica>
       }
     }
 
+    if (__vr.getFieldErrorCount(SOLICITANTCIF) == 0) {
+      String val = __target__.getSolicitantCif();
+      if (val != null && val.trim().length() != 0) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("([A-z])(\\d{7})([0-9A-J])");
+        if (!p.matcher(val).matches()) {
+          __vr.rejectValue(SOLICITANTCIF, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SOLICITANTCIF)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(SOLICITANTRAOSOCIAL) == 0) {
       java.lang.String __solicitantraosocial = __target__.getSolicitantRaoSocial();
       if (__solicitantraosocial!= null && __solicitantraosocial.length() > 100) {
