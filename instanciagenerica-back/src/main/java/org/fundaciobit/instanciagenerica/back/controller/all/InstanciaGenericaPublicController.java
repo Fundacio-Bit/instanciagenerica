@@ -101,11 +101,11 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 			if (!ig.isSolicitantPersonaFisica()) {
 				hidden.remove(SOLICITANTRAOSOCIAL);
 				hidden.remove(SOLICITANTCIF);
-
 			}
 
 			// ************************** DADES CREACIO INSTANCIA *********/
 //			hidden.remove(DATACREACIO);
+			hidden.remove(IDIOMAID);
 			hidden.remove(EXPOSA);
 			hidden.remove(SOLICITA);
 

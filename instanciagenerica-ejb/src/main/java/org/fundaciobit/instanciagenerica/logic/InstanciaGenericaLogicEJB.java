@@ -122,7 +122,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			RegWebAsientoRegistralWs asientoApi = getApiRegistre();
 			log.info("JA TENIM API per REGISTRAR INSTANCIA");
 
-			// Codi dir3 de l'entitat de registre.fundaciobit.org
 			Long idSesion = asientoApi.obtenerSesionRegistro(entitatCodi);
 			log.info("	->	idSession: " + idSesion);
 
@@ -134,8 +133,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			asientoRegistral.setCodigoAsuntoDenominacion(null);
 
 			asientoRegistral.setCodigoEntidadRegistralProcesado(null);
-			asientoRegistral.setCodigoSia(null);// Codi del tràmit administratiu corresponent a l’assentament registral.
-												// https://administracionelectronica.gob.es/ctt/sia
+			asientoRegistral.setCodigoSia(null);
 
 			asientoRegistral.setCodigoUsuario(Configuracio.getRegistreUser());
 
@@ -157,7 +155,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			final Long idioma = ig.getIdiomaID().equals("ca") ? 1L : 2L;
 			asientoRegistral.setIdioma(idioma);// Vol un long, el nostre idioma es un String
 
-			asientoRegistral.setLibroCodigo(null); // Codi del llibre a on es vol fer l’assentament.
+			asientoRegistral.setLibroCodigo(null);
 			asientoRegistral.setNumeroExpediente(null);// Número de l'expedient a que fa referència l'assentament.
 			asientoRegistral.setNumeroTransporte(null);// Número del transport d'entrada.
 			asientoRegistral.setObservaciones(null);
@@ -190,95 +188,67 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 			InteresadoWs i = new InteresadoWs();
 
+			DatosInteresadoWs persona = new DatosInteresadoWs();
+
+			persona.setTipoInteresado(2L);
+			persona.setApellido1(ig.getSolicitantLlinatge1());
+			persona.setApellido2(ig.getSolicitantLlinatge2());
+
+			persona.setCanal(null);
+			persona.setCodigoDire(null);
+			persona.setCp(null);
+
+			persona.setDireccion(ig.getSolicitantDireccio());
+			persona.setDireccionElectronica(ig.getSolicitantEmail());
+			persona.setDocumento(ig.getSolicitantAdminID());
+			persona.setEmail(ig.getSolicitantEmail());
+
+			persona.setLocalidad(null);
+			persona.setNombre(ig.getSolicitantNom());
+
+			persona.setObservaciones(null);
+			persona.setPais(null);
+			persona.setProvincia(null);
+
+			persona.setRazonSocial(ig.getSolicitantRaoSocial());
+			persona.setTelefono(ig.getSolicitantTelefon());
+
+			String tipusAdminId = tipus[ig.getSolicitantTipusAdminID()];
+			persona.setTipoDocumentoIdentificacion(tipusAdminId);
+
 			if (ig.isSolicitantPersonaFisica()) {
-				DatosInteresadoWs interesado = new DatosInteresadoWs();
 
-				interesado.setTipoInteresado(2L);
-				interesado.setApellido1(ig.getSolicitantLlinatge1());
-				interesado.setApellido2(ig.getSolicitantLlinatge2());
-
-				interesado.setCanal(null);
-				interesado.setCodigoDire(null);
-				interesado.setCp(null);
-
-				interesado.setDireccion(ig.getSolicitantDireccio());
-				interesado.setDireccionElectronica(ig.getSolicitantEmail());
-				interesado.setDocumento(ig.getSolicitantAdminID());
-				interesado.setEmail(ig.getSolicitantEmail());
-
-				interesado.setLocalidad(null);
-				interesado.setNombre(ig.getSolicitantNom());
-
-				interesado.setObservaciones(null);
-				interesado.setPais(null);
-				interesado.setProvincia(null);
-
-				interesado.setRazonSocial(ig.getSolicitantRaoSocial());
-				interesado.setTelefono(ig.getSolicitantTelefon());
-
-				String tipusAdminId = tipus[ig.getSolicitantTipusAdminID()];
-				interesado.setTipoDocumentoIdentificacion(tipusAdminId);
-
-				i.setInteresado(interesado);
+				i.setInteresado(persona);
 				i.setRepresentante(null);
 			} else {
-				DatosInteresadoWs interesado = new DatosInteresadoWs();
-				DatosInteresadoWs representante = new DatosInteresadoWs();
+				DatosInteresadoWs entidad = new DatosInteresadoWs();
 
-				interesado.setTipoInteresado(3L);
-				interesado.setApellido1(null);
-				interesado.setApellido2(null);
+				entidad.setTipoInteresado(3L);
+				entidad.setApellido1(null);
+				entidad.setApellido2(null);
 
-				interesado.setCanal(null);
-				interesado.setCodigoDire(null);
-				interesado.setCp(null);
+				entidad.setCanal(null);
+				entidad.setCodigoDire(null);
+				entidad.setCp(null);
 
-				interesado.setDireccion(ig.getSolicitantDireccio());
-				interesado.setDireccionElectronica(null);
-				interesado.setDocumento(ig.getSolicitantCif());
-				interesado.setEmail(null);
+				entidad.setDireccion(ig.getSolicitantDireccio());
+				entidad.setDireccionElectronica(null);
+				entidad.setDocumento(ig.getSolicitantCif());
+				entidad.setEmail(null);
 
-				interesado.setLocalidad(null);
-				interesado.setNombre(null);
+				entidad.setLocalidad(null);
+				entidad.setNombre(null);
 
-				interesado.setObservaciones(null);
-				interesado.setPais(null);
-				interesado.setProvincia(null);
+				entidad.setObservaciones(null);
+				entidad.setPais(null);
+				entidad.setProvincia(null);
 
-				interesado.setRazonSocial(ig.getSolicitantRaoSocial());
-				interesado.setTelefono(ig.getSolicitantTelefon());
-				interesado.setTipoDocumentoIdentificacion("C");
+				entidad.setRazonSocial(ig.getSolicitantRaoSocial());
+				entidad.setTelefono(ig.getSolicitantTelefon());
+				entidad.setTipoDocumentoIdentificacion("C");
 
-				////////////////////////////////////////////////////////////////////////////
-
-				representante.setTipoInteresado(2L);
-				representante.setApellido1(ig.getSolicitantLlinatge1());
-				representante.setApellido2(ig.getSolicitantLlinatge2());
-
-				representante.setCanal(null);
-				representante.setCodigoDire(null);
-				representante.setCp(null);
-
-				representante.setDireccion(ig.getSolicitantDireccio());
-				representante.setDireccionElectronica(ig.getSolicitantEmail());
-				representante.setDocumento(ig.getSolicitantAdminID());
-				representante.setEmail(ig.getSolicitantEmail());
-
-				representante.setLocalidad(null);
-				representante.setNombre(ig.getSolicitantNom());
-
-				representante.setObservaciones(null);
-				representante.setPais(null);
-				representante.setProvincia(null);
-
-				representante.setRazonSocial(null);
-				representante.setTelefono(null);
-
-				String tipusAdminId2 = tipus[ig.getSolicitantTipusAdminID()];
-				representante.setTipoDocumentoIdentificacion(tipusAdminId2);
-
-				i.setInteresado(interesado);// Empresa
-				i.setRepresentante(representante);// Persona
+				i.setInteresado(entidad);// Empresa
+				i.setRepresentante(persona);
 			}
 
 			asientoRegistral.getInteresados().add(i);
@@ -316,24 +286,16 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 					anex.setTitulo(f.getNom());
 					anex.setValidezDocumento("01");
 
-					log.info("	-> Afegirem el fitxer numero " + idx);
 					asientoRegistral.getAnexos().add(anex);
-					log.info("	-> Hem afegit el fitxer numero (" + idx + "): "
-							+ asientoRegistral.getAnexos().get(idx - 1));
-
 				}
 			}
 
 			asientoRegistral.setVersion(null); // Versió de la aplicació que fa l’assentament. Camp intern que es omplit
 												// per REGWEB3.
 
-			log.info("REGISTRAM AMB API");
-
 			final Long tipoOperacion = null;
 			AsientoRegistralWs asiento = asientoApi.crearAsientoRegistral(idSesion, codiDir3, asientoRegistral,
 					tipoOperacion, justificant, distribuir);
-
-			log.info("HA RETORNAT AIXÓ: " + asiento);
 
 			String numRegF = asiento.getNumeroRegistroFormateado();
 
@@ -517,6 +479,8 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 	@Override
 	public InstanciaGenericaJPA generarInstanciaGenericaAleatoria(InstanciaGenericaJPA ig) {
+		log.info("***************GENERANT INSTANCIA GENERICA ALEATORIA***************");
+
 		String[] nombres = { "Paco", "Alex", "Toni", "Joan", "Marilén", "Óscar", "Pau", "Mateu", "Xavi", "Leo",
 				"Giovanni", "Aragorn", "Naruto", "Sasuke", "Rafa", "Guillem", "Miquel", "Xisco", "David", "Kakashi" };
 		String[] apellidos = { "García", "Pérez", "Gaita", "Macià", "Gonzalez", "Ronaldo", "Nadal", "Trobat", "Trias",
@@ -587,7 +551,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		} catch (WsValidationException e) {
 			// TODO XXXXXXXXXXX Mirar que retorna e
 			log.error("Error WsValidationException");
-
 			throw new I18NException("genapp.comodi", "error cridada a registre:" + e.getMessage());
 
 		} catch (WsI18NException e) {
@@ -602,26 +565,16 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 	@Override
 	public AsientoWs obtenerAsientoCiudadano(String numRegF, String nif, String idioma) throws I18NException {
-		log.info("Comença obtenerAsiento");
-
-		AsientoWs as;
-
 		// TODO XXXXXXXXXXX GESIONAR NULL
-		log.info("Cridam API per obtenir asiento");
+		AsientoWs as;
 		String codiDir3 = Configuracio.getRegistreEntidad();
-
 		as = getApiRegistre().obtenerAsientoCiudadanoCarpeta(codiDir3, nif, numRegF, idioma);
-
-		log.info("Ja tenim asiento: " + as);
-
 		return as;
-
 	}
 
 	@Override
 	public RegWebAsientoRegistralWs getApiRegistre() throws I18NException {
 
-		log.info("Comença getApi()");
 		String endpoint = Configuracio.getRegistreUrl();
 		String usr_app = Configuracio.getRegistreUser(); // username application
 		String pwd_app = Configuracio.getRegistrePass(); // password application
@@ -635,8 +588,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 					"error amb la URL al servidor de registre (" + endpoint + "): " + e.getMessage());
 		}
 
-		log.info("	-> getApi: tenim parametres: " + endpoint + " - " + usr_app + " - " + pwd_app);
-
 		RegWebAsientoRegistralWsService asientoService = new RegWebAsientoRegistralWsService(wsdl);
 		RegWebAsientoRegistralWs asientoApi = asientoService.getRegWebAsientoRegistralWs();
 
@@ -647,28 +598,20 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		reqContext.put(BindingProvider.USERNAME_PROPERTY, usr_app);
 		reqContext.put(BindingProvider.PASSWORD_PROPERTY, pwd_app);
 
-		log.info("Acaba getApi()");
-
 		return asientoApi;
 
 	}
 
 	@Override
 	public FileContentWs getAnexe(Long idAnexo, String idioma) throws I18NException {
-		log.info("Comença getAnexe");
 
 		FileContentWs f;
 
 		try {
 			// TODO XXXXXXXXXXX GESIONAR NULL
-			log.info("Cridam API per obtenir anexes");
-
 			String entidad = Configuracio.getRegistreEntidad();
-
 			f = getApiRegistre().obtenerAnexoCiudadano(entidad, idAnexo, idioma);
-
 			log.info("Ja tenim anexe: " + f);
-
 		} catch (I18NException e) {
 			// TODO XXXXXXXXXXX Mirar que retorna e
 			log.error("Error WsI18NException ");

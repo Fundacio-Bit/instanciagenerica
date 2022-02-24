@@ -108,14 +108,12 @@ public class InstanciaGenericaAdminController extends AbstractInstanciaGenericaC
 			} else {
 
 				AsientoRegistralWs ar = instanciaGenericaLogicEjb.obtenerAsiento(numRegF);
-
 				AsientoWs as = instanciaGenericaLogicEjb.obtenerAsientoCiudadano(numRegF, document, idioma);
 
 				// TODO XXXXXXXXXXX GESIONAR NULL
 				// log.error("\" -> Ha habido un error");
 
-				log.info("		-> Número de registro: " + as.getNumeroRegistro());
-				log.info("		-> Número de registro formateado: " + ar.getNumeroRegistroFormateado());
+				log.info("		-> Número de registro: " + ar.getNumeroRegistroFormateado());
 
 				ModelAndView mav = new ModelAndView("detallsregistre");
 				mav.addObject("ar", ar);
@@ -132,7 +130,6 @@ public class InstanciaGenericaAdminController extends AbstractInstanciaGenericaC
 					} else {
 						countPJ++;
 					}
-
 				}
 				mav.addObject("countPF", countPF);
 				mav.addObject("countPJ", countPJ);

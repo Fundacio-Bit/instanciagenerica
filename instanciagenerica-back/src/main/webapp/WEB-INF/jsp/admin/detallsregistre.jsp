@@ -13,7 +13,7 @@
 		<a href="/instanciagenerica/admin/instanciagenericaproves/list/1">Atras</a>
 	</button>
 
-	<table
+	<table id="mytable"
 		class="tdformlabel table-sm table table-bordered table-striped marTop10 table-genapp">
 		<tbody>
 		</tbody>
