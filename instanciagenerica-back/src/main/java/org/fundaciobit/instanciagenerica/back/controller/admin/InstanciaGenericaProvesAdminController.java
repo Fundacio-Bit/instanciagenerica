@@ -87,8 +87,8 @@ public class InstanciaGenericaProvesAdminController extends InstanciaGenericaAdm
 
 			// instanciaGenericaFilterForm.addAdditionalButtonByPK(, null);
 
-			instanciaGenericaFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-registered",
-					"dadesregistre", getContextWeb() + "/veureDetallsRegistre/{0}", "btn-info"));
+			instanciaGenericaFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-file",
+					"detallsregistre", getContextWeb() + "/veureDetallsRegistre/{0}", "btn-info"));
 
 			// new AdditionalButton("fas fa-star", "dadesregistre",
 			// "javascript:dadesRegistre()", "btn-primary"));
