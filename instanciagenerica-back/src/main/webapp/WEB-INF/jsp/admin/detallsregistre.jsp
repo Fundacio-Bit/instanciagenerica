@@ -13,7 +13,7 @@
 	rel='stylesheet' type='text/css'>
 </head>
 <body>
-	<button onclick="history.back()" class="boton btn-3 btn-sep icon">
+	<button id="back-buton" class="boton btn-3 btn-sep icon">
 		<fmt:message key="atras" />
 	</button>
 
@@ -107,6 +107,13 @@
 	</table>
 
 	<script type="text/javascript">
+
+		document.getElementById("back-buton").onclick = function() {
+//			window.location.pathname = "${pathname}";
+			window.location.pathname="<%=request.getContextPath()%>
+		${contexte}/v/${uuid}";
+		};
+
 		var secciones = [ {
 			title : "Seccion 0",
 			elems : [],
@@ -385,6 +392,13 @@
 		</table>
 	</c:if>
 
+
+	<h4>
+		<a
+			href="<c:url value="${contexte}/descarregarJustificant/${instanciaGenericaID}"/>">
+			<fmt:message key="justificant" />
+		</a>
+	</h4>
 	<script type="text/javascript">
 		adaptaCampos();
 	</script>

@@ -50,7 +50,7 @@
 		<li style="list-style-type: disc; list-style-position: inside;">
 			<a href="<c:url value="/public/instanciagenerica/new"/>"> <span
 				style="${(fn:contains(url, 'instanciagenerica/new'))? "font-weight:bold;" : ""}">
-					Afegir instancia</span>
+					<fmt:message key="afegirinstancia" /></span>
 		</a>
 		</li>
 

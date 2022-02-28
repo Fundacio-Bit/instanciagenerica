@@ -88,7 +88,7 @@ public class InstanciaGenericaProvesAdminController extends InstanciaGenericaAdm
 			// instanciaGenericaFilterForm.addAdditionalButtonByPK(, null);
 
 			instanciaGenericaFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-file",
-					"detallsregistre", getContextWeb() + "/veureDetallsRegistre/{0}", "btn-info"));
+					"detallsregistre", getContextWeb() + "/veureDetallsRegistre/{0}/1", "btn-info"));
 
 			// new AdditionalButton("fas fa-star", "dadesregistre",
 			// "javascript:dadesRegistre()", "btn-primary"));
@@ -161,6 +161,13 @@ public class InstanciaGenericaProvesAdminController extends InstanciaGenericaAdm
 		String redirect = getRedirectWhenDelete(request, null, null);
 
 		return redirect;
+	}
+
+	@RequestMapping(value = "/v/{uuid}", method = RequestMethod.GET)
+	public ModelAndView veureInstanciaGenericaUuidGet(@PathVariable("uuid") String uuid, HttpServletRequest request,
+			HttpServletResponse response) throws I18NException {
+
+		return new ModelAndView(new RedirectView(getContextWeb() + "/list", true));
 	}
 
 	@Override

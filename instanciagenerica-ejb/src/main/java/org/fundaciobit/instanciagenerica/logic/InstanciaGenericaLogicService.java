@@ -11,6 +11,7 @@ import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.AsientoWs;
 import es.caib.regweb3.ws.api.v3.FileContentWs;
+import es.caib.regweb3.ws.api.v3.JustificanteWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 
 /**
@@ -37,4 +38,5 @@ public interface InstanciaGenericaLogicService extends InstanciaGenericaService 
 
 	public FileContentWs getAnexe(Long idAnexo, String idioma) throws I18NException;
 
+	public JustificanteWs getJustificant(String numRegF) throws I18NException;
 }

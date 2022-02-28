@@ -6,12 +6,28 @@
 <div class="clear"></div>
 <div class="spacer"></div>
 
+<style>
+.about {
+	width: 70%;
+}
+</style>
 <div>
 	<br />
 	<center>
 		<img src="<c:url value="/img/app-logo.png"/>" width="60px"
 			height="60px" alt="InstanciaGenerica" title="InstanciaGenerica" /> <br />
-		<br /> This page is generated automatically. Please edit. <br /> <br />
+		<br>
+
+		<p class="about">
+			<fmt:message key="about.text.1" />
+		</p>
+		<br>
+		<p class="about">
+			<fmt:message key="about.text.2" />
+			<fmt:message key="afegirinstancia" />
+		</p>
+
+
 		<table border="0">
 			<tr>
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -23,9 +39,8 @@
 				</a></td>
 			</tr>
 		</table>
-		<br />
+		<br>
 	</center>
-
 </div>
 
 <br />
@@ -33,17 +48,14 @@
 <br />
 
 <c:if test="${ige:isDesenvolupament()}">
-	Only in Development Mode
-	<br>
+	<div>
+		Only in Development Mode <br> Username: ${loginInfo.username}<br />
+		&#36;{ige:hasRole(ROLE_ADMIN)}= ${ige:hasRole('ROLE_ADMIN')}<br />
+		&#36;{ige:hasRole(ROLE_USER) }= ${ige:hasRole('ROLE_USER') }<br />
+		Locale =
+		<%=LocaleContextHolder.getLocale()%>
+		<br> lang = ${lang} <br />
 
-	Username: ${loginInfo.username}<br />
-	&#36;{ige:hasRole(ROLE_ADMIN)}= ${ige:hasRole('ROLE_ADMIN')}<br />
-	&#36;{ige:hasRole(ROLE_USER) }= ${ige:hasRole('ROLE_USER') }<br />
-	Locale = <%=LocaleContextHolder.getLocale()%>
-	<br>
-
-	lang = ${lang} <br />
-
-
+	</div>
 
 </c:if>

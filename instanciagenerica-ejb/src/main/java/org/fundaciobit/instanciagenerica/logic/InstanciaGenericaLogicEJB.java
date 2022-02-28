@@ -306,9 +306,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 			AsientoRegistralWs as = asientoApi.obtenerAsientoRegistral(codiDir3, numRegF, 1L, false);
 
-			JustificanteWs ju = asientoApi.obtenerJustificante(codiDir3, numRegF, 1L);
-			ju.getJustificante();
-			
 			if (as.getEstado() == 1) {
 				return new InfoRegistre(asiento.getNumeroRegistroFormateado());
 			} else {
@@ -623,6 +620,26 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		}
 
 		return f;
+
+	}
+
+	@Override
+	public JustificanteWs getJustificant(String numRegF) throws I18NException {
+
+		JustificanteWs j;
+
+		try {
+			// TODO XXXXXXXXXXX GESIONAR NULL
+			String codiDir3 = Configuracio.getRegistreEntidad();
+			j = getApiRegistre().obtenerJustificante(codiDir3, numRegF, 1L);
+			log.info("Ja tenim justificant: " + j);
+		} catch (Exception e) {
+			// TODO XXXXXXXXXXX Mirar que retorna e
+			log.error("Error WsI18NException ");
+			throw new I18NException("genapp.comodi", "Error cridada a obtenerAnexoCiudadano: " + e.getMessage());
+		}
+
+		return j;
 
 	}
 }

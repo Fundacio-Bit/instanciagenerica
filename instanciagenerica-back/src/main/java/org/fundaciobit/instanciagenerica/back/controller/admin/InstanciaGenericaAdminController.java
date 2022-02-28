@@ -31,6 +31,7 @@ import es.caib.regweb3.ws.api.v3.AsientoWs;
 import es.caib.regweb3.ws.api.v3.FileContentWs;
 import es.caib.regweb3.ws.api.v3.FileInfoWs;
 import es.caib.regweb3.ws.api.v3.InteresadoWs;
+import es.caib.regweb3.ws.api.v3.JustificanteWs;
 
 /**
  * 
@@ -91,14 +92,48 @@ public class InstanciaGenericaAdminController extends AbstractInstanciaGenericaC
 		return true;
 	}
 
-
-
 	public static String encriptar(Long msg) {
 		return HibernateFileUtil.encryptString(String.valueOf(msg));
 	}
 
 	public static Long desencriptar(String msg) {
 		return Long.parseLong(HibernateFileUtil.decryptString(msg));
+	}
+
+	@RequestMapping("/descarregarJustificant/{InstanciaGenericaID}")
+	public void descarregarJustificant(@PathVariable("InstanciaGenericaID") Long InstanciaGenericaID,
+			HttpServletRequest request, HttpServletResponse response) {
+		try {
+			InstanciaGenerica ig = instanciaGenericaLogicEjb.findByPrimaryKey(InstanciaGenericaID);
+
+			String numRegF = ig.getNumRegistre();
+
+			if (numRegF == null) {
+				HtmlUtils.saveMessageError(request, "Error. Numero de registre no pot ser null.");
+
+			} else {
+				JustificanteWs just = instanciaGenericaLogicEjb.getJustificant(numRegF);
+				byte[] contingut = just.getJustificante();
+				OutputStream output = null;
+
+				String filename = "Justificant registra InstanciaGenerica-" + InstanciaGenericaID;
+
+				response.setContentType("application/pdf");
+				response.setHeader("Content-Disposition", "inline; filename=\"" + filename + "\"");
+				response.setContentLength((int) contingut.length);
+
+				output = response.getOutputStream();
+
+				output.write(contingut);
+				output.close();
+			}
+		} catch (I18NException e) {
+			// TODO XXXXXXXXXXX Provar aquest tros de codi
+			HtmlUtils.saveMessageError(request, "Error intentant obtennir Justificant: " + I18NUtils.getMessage(e));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			HtmlUtils.saveMessageError(request, "Error intentant obtennir Justificant: " + e.getMessage());
+		}
 	}
 
 	@RequestMapping("/descarregarFitxer/{idFitxer}")
@@ -157,7 +192,6 @@ public class InstanciaGenericaAdminController extends AbstractInstanciaGenericaC
 			}
 		}
 		log.info("\nSe acabó descarregarFitxer");
-
 	}
 
 }

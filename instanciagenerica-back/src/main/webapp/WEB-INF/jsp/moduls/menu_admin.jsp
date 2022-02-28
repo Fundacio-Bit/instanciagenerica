@@ -28,7 +28,7 @@
 		<li style="list-style-type: disc; list-style-position: inside;">
 			<a href="<c:url value="/admin/instanciagenerica/list"/>"> <span
 				style="${(fn:contains(url, 'instanciagenerica/list'))? "
-				font-weight:bold;" : ""}">Llistar instancies</span>
+				font-weight:bold;" : ""}"><fmt:message key="llistarinstancies" /></span>
 		</a>
 		</li>
 
@@ -39,7 +39,7 @@
 				<a href="<c:url value="/admin/instanciagenericaproves/list"/>">
 					<span
 					style="${(fn:contains(url, 'instanciagenericaproves/list'))? "
-					font-weight:bold;" : ""}">Proves Llistar instancies</span>
+					font-weight:bold;" : ""}"><fmt:message key="llistarinstancies.proves" /></span>
 			</a>
 			</li>
 		</c:if>
@@ -48,7 +48,7 @@
 		<li style="list-style-type: disc; list-style-position: inside;">
 			<a href="<c:url value="/admin/instanciagenericaerrors/list"/>"> <span
 				style="${(fn:contains(url, 'instanciagenericaerrors/list'))? "
-				font-weight:bold;" : ""}">Instancies no registrades</span>
+				font-weight:bold;" : ""}"><fmt:message key="instanciesnoregistrades" /></span>
 		</a>
 		</li>
 

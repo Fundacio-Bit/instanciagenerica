@@ -146,8 +146,7 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 			String uuid = instanciaGenericaForm.getInstanciaGenerica().getUuid();
 			instanciaGenericaForm.addAdditionalButton(new AdditionalButton("fas fa-file", "detallsregistre",
-					getContextWeb() + "/veureDetallsRegistre/{0}", "btn-primary"));
-
+					getContextWeb() + "/veureDetallsRegistre/{0}/2", "btn-primary"));
 		}
 
 		if (instanciaGenericaForm.isNou()) {

@@ -200,9 +200,9 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 		return false;
 	}
 
-	@RequestMapping(value = "/veureDetallsRegistre/{instanciaGenericaID}", method = RequestMethod.GET)
+	@RequestMapping(value = "/veureDetallsRegistre/{instanciaGenericaID}/{toAdmin}", method = RequestMethod.GET)
 	public ModelAndView veureDetallsRegistre(@PathVariable("instanciaGenericaID") java.lang.Long instanciaGenericaID,
-			HttpServletRequest request, HttpServletResponse response) {
+			@PathVariable("toAdmin") java.lang.Long toAdmin, HttpServletRequest request, HttpServletResponse response) {
 
 		try {
 			InstanciaGenerica ig = instanciaGenericaLogicEjb.findByPrimaryKey(instanciaGenericaID);
@@ -230,6 +230,8 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 
 				mav.addObject("as", as);
 				mav.addObject("contexte", getContextWeb());
+				mav.addObject("uuid", ig.getUuid());
+				mav.addObject("instanciaGenericaID", ig.getInstanciaGenericaID());
 
 				int countPF = 0;
 				int countPJ = 0;
