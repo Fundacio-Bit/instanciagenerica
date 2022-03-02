@@ -17,13 +17,10 @@ import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 public class CridadaRegistre {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		pruebas();
-
+		pruebasRegistro();
 	}
 
-	public static void pruebas() {
+	public static void pruebasRegistro() {
 
 		try {
 			Properties prop = new Properties();
@@ -66,7 +63,6 @@ public class CridadaRegistre {
 
 			e.printStackTrace();
 		}
-
 //		asientoApi.obtenerAsientoRegistral("A04003003","INNO-E-352/2019", "INNO", 1, 0));
 	}
 

@@ -528,7 +528,8 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 		ig.setExposa("Expongo mis circunstancias");
 		ig.setSolicita("Solicito que se cumplan mis demandas");
-
+		
+		
 		return ig;
 	}
 

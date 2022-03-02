@@ -61,7 +61,7 @@
 <function>
         <name>encriptar</name>
         <description>Encripta un String</description>
-        <function-class>org.fundaciobit.instanciagenerica.back.controller.admin.InstanciaGenericaAdminController</function-class>
+        <function-class>org.fundaciobit.instanciagenerica.back.controller.AbstractInstanciaGenericaController</function-class>
         <function-signature>java.lang.String encriptar(java.lang.Long)</function-signature>
 </function>
 
