@@ -26,8 +26,7 @@
 			</div>
 
 			<div class="logoGovern">
-				<img src="<c:url value="/img/app-logo.png"/>"
-					alt="InstanciaGenerica" width="60px" height="60px"
+				<img src="<c:url value="/img/app-logo.png"/>" alt="InstanciaGenerica"
 					title="InstanciaGenerica" />
 			</div>
 
@@ -36,20 +35,10 @@
 			</div>
 			<div>
 				<div>
-
-					<c:if test="${ empty loginInfo  }">
-						<%-- 						<strong class="subtitol llevarMobil"><fmt:message key="usuariNoRegistrat" /> </strong>
- --%>
-					</c:if>
-
-					<c:if test="${ not empty loginInfo  }">
-						<strong class="subtitol llevarMobil"><fmt:message
-								key="usuari" />: </strong>
-
-						<span class="subtitolMay"> <%=request.getUserPrincipal() == null ? "" : request.getUserPrincipal().getName()%>
-							| <%=request.getRemoteUser()%>
-						</span>
-					</c:if>
+					<strong class="subtitol llevarMobil"><fmt:message
+							key="usuari" />: </strong> <span class="subtitolMay"> <%=request.getUserPrincipal()== null? "ANONIM": request.getUserPrincipal().getName()%>
+						| <%= request.getRemoteUser() %>
+					</span>
 				</div>
 			</div>
 		</div>
@@ -76,13 +65,9 @@
                              --%>
 
 				<%
-				// TODO XYZ ZZZ Això ho ha de collir dels idiomes de la BBDD
-				java.util.List<String> idiomes = new java.util.ArrayList<String>();
-				idiomes.add("ca");
-				idiomes.add("es");
-				/*                                 idiomes.add("en");
-				 */ session.setAttribute("idiomes", idiomes);
-				%>
+                                // TODO XYZ ZZZ Això ho ha de collir dels idiomes de la BBDD
+
+                            %>
 				<li class="dropdown colorVerd">
 
 					<button class="btn colorVerd dropdown-toggle" type="button"
@@ -92,13 +77,18 @@
 						<fmt:message key="idiomes" />
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-						<c:forEach var="idioma" items="${idiomes}" varStatus="status">
-							<a class="dropdown-item" href="?lang=${idioma}"> <img
-								src="<c:url value="/img/${idioma}_petit_${lang eq idioma? 'on' : 'off'}.gif"/>"
-								alt="${idioma}" width="17" height="14" border="0" /> <fmt:message
-									key="idioma.${idioma}" />
+						<c:forEach var="idioma" items="${idiomes}"
+							varStatus="status">
+							<c:set var="idiomaID" value="${idioma.idiomaID}" />
+							<a class="dropdown-item"
+								href="?lang=${idiomaID}">
+
+								<img
+								src="<c:url value="/img/${idiomaID}_petit_${lang eq idiomaID? 'on' : 'off'}.gif"/>"
+								alt="${idiomaID}" width="17" height="14" border="0" />${idioma.nom}
 							</a>
 						</c:forEach>
+
 					</div>
 				</li>
 
@@ -184,7 +174,6 @@
 							});
 		});
 	</script>
-
 	<div id="xrkn"
 		style="position: absolute; width: 500px; height: 530px; top: 150px; left: 300px; z-index: 1000; visibility: hidden;">
 	</div>

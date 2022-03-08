@@ -198,7 +198,7 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 
 	@Override
 	public boolean isActiveFormEdit() {
-		return false;
+		return true;
 	}
 
 	@Override

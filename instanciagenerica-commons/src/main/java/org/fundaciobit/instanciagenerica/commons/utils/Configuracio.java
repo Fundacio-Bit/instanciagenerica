@@ -141,4 +141,9 @@ public class Configuracio implements Constants {
 		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.unitattramitacio.codi");
 	}
 
+	public static File getPlantillaFitxerResum() {
+		String path = getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "plantilla_fitxer_resum");
+		return new File(path);
+	}
+
 }

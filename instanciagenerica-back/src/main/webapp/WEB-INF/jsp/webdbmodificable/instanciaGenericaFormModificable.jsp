@@ -67,48 +67,6 @@
 
 	}
 
-	function splitTable(secciones, tag, rowformat) {
-
-		console.log(secciones);
-		for (var j = 0; j < secciones.length; j++) {
-
-			var seccion = secciones[j];
-			console.log(seccion);
-			var rows = seccion.elems;
-
-			var div = document.createElement("div");
-			var tbody = document.createElement("tbody");
-
-			var table = document.getElementsByTagName("table")[0];
-			var newtable = table.cloneNode(false);
-
-			var idx = 0;
-			for (var i = 0; i < rows.length; i++) {
-				var rowid = rowformat.replace("XXXXX", rows[i]);
-				rows[i] = document.getElementById(rowid);
-
-				if (rows[i]) {
-					tbody.appendChild(rows[i]);
-					idx++;
-				}
-			}
-
-			if (idx > 0) {
-				div.setAttribute("id", "seccio_" + seccion.id);
-
-				newtable.appendChild(tbody);
-
-				var p = document.createElement(tag);
-				p.innerHTML = seccion.title;
-
-				div.appendChild(p);
-				div.appendChild(newtable);
-
-				table.parentNode.appendChild(div);
-			}
-		}
-	}
-
 	//cogerURLdelNavegador y poner en input hidden
 	function getAbsolutePath() {
 		var loc = window.location;
@@ -153,46 +111,6 @@
 		personaFisica = isFisicaView.value == "true"
 	}
 
-	var secciones = [
-			{
-				title : "<fmt:message key='solicitant'/>",
-				elems : [ "solicitantPersonaFisica", "solicitantTipusAdminID",
-						"solicitantAdminID", "solicitantNom",
-						"solicitantLlinatge1", "solicitantLlinatge2" ],
-				id : "solicitant"
-			},
-			{
-				title : "<fmt:message key='seccio.entitat'/>",
-				elems : [ "solicitantRaoSocial", "solicitantCif" ],
-				id : "entitat"
-			},
-			{
-				title : "<fmt:message key='seccio.registre'/>",
-				elems : [ "numRegistre", "datafinalitzacio" ],
-				id : "registre"
-			},
-			{
-				title : "<fmt:message key='seccio.resum'/>",
-				elems : [ "idiomaID", "exposa", "solicita" ],
-				id : "resum"
-			},
-			{
-				title : "<fmt:message key='seccio.contacte'/>",
-				elems : [ "solicitantEmail", "solicitantTelefon",
-						"solicitantDireccio" ],
-				id : "contacte"
-			}, {
-				title : "<fmt:message key='seccio.anexes'/>",
-				elems : [],
-				id : "anexes"
-			} ];
-
-	for (var i = 1; i <= 9; i++) {
-		secciones[secciones.length - 1].elems.push("fitxer" + i + "ID");
-	}
-
-	splitTable(secciones, "h4", "instanciaGenerica_XXXXX_rowid");
-
 	$("#id_urlnavegador").val(getAbsolutePath());
 
 	//	configFisicaJuridica(personaFisica);
@@ -212,7 +130,6 @@
 		console.log($("#fitxer" + i + "ID").val())
 		if ($("#fitxer" + i + "ID").val() != "") {
 			$("#instanciaGenerica_fitxer" + i + "ID_rowid").show();
-
 		}
 	}
 </script>

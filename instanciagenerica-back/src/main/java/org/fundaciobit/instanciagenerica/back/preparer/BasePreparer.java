@@ -6,16 +6,17 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.security.RunAs;
-import javax.ejb.EJB;
+import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.apache.tiles.Attribute;
 import org.apache.tiles.AttributeContext;
 import org.apache.tiles.preparer.PreparerException;
 import org.apache.tiles.preparer.ViewPreparer;
 import org.apache.tiles.request.Request;
-
+import org.fundaciobit.instanciagenerica.ejb.IdiomaService;
+import org.fundaciobit.instanciagenerica.model.entity.Idioma;
+import org.fundaciobit.instanciagenerica.model.fields.IdiomaFields;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -24,9 +25,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.fundaciobit.instanciagenerica.back.security.LoginInfo;
 
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
-import org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicService;
-import org.fundaciobit.instanciagenerica.logic.utils.EjbManager;
-import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
 
 /**
  * @author anadal
@@ -38,8 +36,7 @@ public class BasePreparer implements ViewPreparer, Constants {
 
 	protected final Logger log = Logger.getLogger(getClass());
 
-	@EJB(mappedName = org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicService.JNDI_NAME)
-	protected org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicService instanciaGenericaLogicEjb;
+	protected static IdiomaService idiomaService;
 
 	@Override
 	public void execute(Request tilesRequest, AttributeContext attributeContext) throws PreparerException {
@@ -48,11 +45,11 @@ public class BasePreparer implements ViewPreparer, Constants {
 
 		// Informació de Login
 		try {
-			LoginInfo loginInfo = LoginInfo.getInstance();
-			// Posa dins la sessió la informació de Login
-			request.put("loginInfo", loginInfo);
-		} catch (Exception e) {
-			// Anònim
+    		LoginInfo loginInfo = LoginInfo.getInstance();
+    		// Posa dins la sessió la informació de Login
+    		request.put("loginInfo", loginInfo);
+		} catch(Exception e) {
+		    // Anònim
 		}
 
 		// URL
@@ -86,44 +83,29 @@ public class BasePreparer implements ViewPreparer, Constants {
 		request.put("onlylang", loc.getLanguage()); // només el LANG
 
 		// Pipella
-
 		request.put("pipella", attributeContext.getAttribute("pipella"));
 
 		// TODO GENAPP
 		// Warning for each ROLE
-
-		// AVIS ERRORS REGISTRE
-
-		// Avisos Back
-		try {
-			Attribute at = attributeContext.getAttribute("pipella");
-			log.info("Preparer: at=" + at);
-
-			if (at != null && "admin".equals(at.toString())) {
-				// Consulta per obtenir el numero d'errors
-				log.info("Preparer: som ADMIN");
-				// CONSULTA
-
-				InstanciaGenericaLogicService instanciaGenericaLogicEjb = EjbManager.getInstanciaGenericaLogicEJB();
-
-				log.info("instanciaGenericaLogicEjb: " + instanciaGenericaLogicEjb);
-
-				Long numAvisos = instanciaGenericaLogicEjb
-						.count(InstanciaGenericaFields.ESTAT.equal(Constants.ESTAT_ERROR));
-
-				log.info("Preparer: numAvisos=" + numAvisos);
-
-				httpRequest.getSession().setAttribute("numAvisos", numAvisos);
-			}
-		} catch (Throwable e) {
-			log.error("Preparer:: Error fent la consulta de instancies no registrades: " + e.getMessage(), e);
-		}
 
 		// Avisos
 		Map<String, Long> avisos = new HashMap<String, Long>();
 		// avisos.put(rol, <<Number of warnings>>);
 		request.put("avisos", avisos);
 
+		// Idiomes
+		try {
+			if (idiomaService == null) {
+				idiomaService = (IdiomaService) new InitialContext().lookup(IdiomaService.JNDI_NAME);
+			}
+
+			List<Idioma> idiomes = idiomaService.select(IdiomaFields.SUPORTAT.equal(true));
+			httpRequest.getSession().setAttribute("idiomes", idiomes);
+
+		} catch (Throwable e) {
+			log.error("Preparer:: Error agafant idiomes de la base de dades: " + e.getMessage(), e);
+		}
+		
 		if (attributeContext.getAttribute("menu") != null) {
 			request.put("menu_tile", attributeContext.getAttribute("menu").toString());
 		}

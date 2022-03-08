@@ -12,11 +12,18 @@
   <form:hidden path="nou" />
   
   <%@include file="instanciaGenericaFormCorePre.jsp" %>
+
   <%@include file="instanciaGenericaFormCore.jsp" %>
 
   <%@include file="instanciaGenericaFormCorePost.jsp" %>
 
   <%@include file="instanciaGenericaFormButtons.jsp" %>
+
+  <c:if test="${not empty instanciaGenericaForm.sections}">
+     <c:set var="__basename" value="instanciaGenerica" scope="page" />
+     <%@include file="sections.jsp"%>
+  </c:if>
+
 
   <c:if test="${instanciaGenericaForm.attachedAdditionalJspCode}">
      <%@include file="../webdbmodificable/instanciaGenericaFormModificable.jsp" %>

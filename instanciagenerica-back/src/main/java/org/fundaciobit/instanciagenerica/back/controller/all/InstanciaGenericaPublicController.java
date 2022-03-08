@@ -16,6 +16,7 @@ import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+import org.fundaciobit.genapp.common.web.form.Section;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.instanciagenerica.back.controller.AbstractInstanciaGenericaController;
 import org.fundaciobit.instanciagenerica.back.controller.InstanciaGenericaFilesFormManager;
@@ -163,6 +164,52 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 					+ instanciaGenericaForm.getInstanciaGenerica().getInstanciaGenericaID());
 		}
 
+		if (__isView || instanciaGenericaForm.isNou()) {
+			final Section solicitant = new Section("solicitant", "solicitant", 
+					InstanciaGenericaFields.SOLICITANTPERSONAFISICA, 
+					InstanciaGenericaFields.SOLICITANTTIPUSADMINID,
+					InstanciaGenericaFields.SOLICITANTADMINID,
+					InstanciaGenericaFields.SOLICITANTNOM,
+					InstanciaGenericaFields.SOLICITANTLLINATGE1,
+					InstanciaGenericaFields.SOLICITANTLLINATGE2);
+			
+			final Section entitat = new Section("entitat", "seccio.entitat", 
+					InstanciaGenericaFields.SOLICITANTRAOSOCIAL, 
+					InstanciaGenericaFields.SOLICITANTCIF);
+			
+			final Section registre = new Section("registre", "seccio.registre", 
+					InstanciaGenericaFields.NUMREGISTRE, 
+					InstanciaGenericaFields.DATAFINALITZACIO);
+
+			final Section resum = new Section("resum", "seccio.resum", 
+					InstanciaGenericaFields.IDIOMAID, 
+					InstanciaGenericaFields.EXPOSA, 
+					InstanciaGenericaFields.SOLICITA);
+
+			final Section contacte = new Section("contacte", "seccio.contacte", 
+					InstanciaGenericaFields.SOLICITANTTELEFON, 
+					InstanciaGenericaFields.SOLICITANTEMAIL, 
+					InstanciaGenericaFields.SOLICITANTDIRECCIO);
+
+			final Section anexes = new Section("anexes", "seccio.anexes", 
+					InstanciaGenericaFields.FITXER1ID,
+					InstanciaGenericaFields.FITXER2ID,
+					InstanciaGenericaFields.FITXER3ID,
+					InstanciaGenericaFields.FITXER4ID,
+					InstanciaGenericaFields.FITXER5ID,
+					InstanciaGenericaFields.FITXER6ID,
+					InstanciaGenericaFields.FITXER7ID,
+					InstanciaGenericaFields.FITXER8ID,
+					InstanciaGenericaFields.FITXER9ID);
+
+			instanciaGenericaForm.addSection(solicitant);
+			instanciaGenericaForm.addSection(entitat);
+			instanciaGenericaForm.addSection(registre);
+			instanciaGenericaForm.addSection(resum);
+			instanciaGenericaForm.addSection(contacte);
+			instanciaGenericaForm.addSection(anexes);
+		}
+
 		return instanciaGenericaForm;
 	}
 
@@ -201,6 +248,11 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 	@Override
 	public boolean isActiveFormView() {
+		return true;
+	}
+
+	@Override
+	public boolean isActiveFormEdit() {
 		return true;
 	}
 
