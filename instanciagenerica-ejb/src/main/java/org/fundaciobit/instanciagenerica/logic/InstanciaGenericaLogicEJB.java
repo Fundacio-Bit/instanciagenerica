@@ -35,6 +35,7 @@ import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.instanciagenerica.model.entity.Fitxer;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
+import org.fundaciobit.instanciagenerica.persistence.FitxerJPA;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 
 import com.itextpdf.text.DocumentException;
@@ -58,6 +59,7 @@ import es.caib.regweb3.ws.api.v3.WsValidationException;
 import org.fundaciobit.instanciagenerica.commons.utils.Configuracio;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.ejb.InstanciaGenericaEJB;
+import org.fundaciobit.instanciagenerica.logic.utils.GeneradorDocuments;
 
 /**
  * 
@@ -92,13 +94,19 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		File plantillaPdf = Configuracio.getPlantillaFitxerResum();
 		File dstPDF = FileSystemManager.getFile(idfitxer);
 
-		generarDocumento(instance, plantillaPdf, dstPDF);
+		GeneradorDocuments.generarDocumento(instance, plantillaPdf, dstPDF);
 		fdb.setTamany(dstPDF.length());
 		fitxerLogicEjb.update(fdb);
 
+		log.info("fitxer9 pre: " + ig.getFitxer9());
+		
 		instance.setFitxer9ID(idfitxer);
 		update(ig);
+		log.info("fitxer9 post: " + ig.getFitxer9());
 
+		((InstanciaGenericaJPA) instance).setFitxer9((FitxerJPA) fdb);
+		
+		log.info("fitxer9 post set: " + ig.getFitxer9());
 		return ig;
 	}
 
@@ -668,87 +676,4 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 		return j;
 	}
-
-	public void generarDocumento(InstanciaGenerica ig, File plantillaPdf, File fileDst) throws I18NException {
-
-		log.info("Start");
-		try {
-			PdfReader reader = new PdfReader(new FileInputStream(plantillaPdf));
-			PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(fileDst), '\0', false);
-			AcroFields fields = stamper.getAcroFields();
-
-			log.info("Empezamos a poner parametros");
-			String nomDest = ig.getSolicitantNom();
-			boolean isPersonaFisica = ig.isSolicitantPersonaFisica();
-
-			log.info("personaFisica: " + isPersonaFisica);
-
-			String[] tipusAdminId = { "DNI", "NIE", "Passport", "Otros" };
-
-			fields.setField("SOLICITANT.NOM",
-					nomDest + " " + ig.getSolicitantLlinatge1() + " " + ig.getSolicitantLlinatge2());
-//			fields.setField("SOLICITANT.LLINATGES", );
-			fields.setField("SOLICITANT.NIF",
-					"(" + tipusAdminId[ig.getSolicitantTipusAdminID()] + "): " + ig.getSolicitantAdminID());
-
-			fields.setField("SOLICITANT.MAIL", ig.getSolicitantEmail());
-			fields.setField("SOLICITANT.TELEFON", ig.getSolicitantTelefon());
-			fields.setField("SOLICITANT.DIRECCIO", ig.getSolicitantDireccio());
-
-			if (!isPersonaFisica) {
-				fields.setField("ENTITAT.RAOSOCIAL", ig.getSolicitantRaoSocial());
-				fields.setField("ENTITAT.CIF", "(CIF): " + ig.getSolicitantCif());
-			} else {
-				fields.setField("ENTITAT.RAOSOCIAL", "-");
-				fields.setField("ENTITAT.CIF", "-");
-			}
-
-			DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY - HH:mm:ss");
-//			DateFormat dateFormat = new SimpleDateFormat("", new Locale ("ca"));
-			fields.setField("REGISTRE.DATA", dateFormat.format(ig.getDatafinalitzacio()));
-
-//			fields.setField("REGISTRE.DATA", ig.getDatafinalitzacio().toGMTString());
-			fields.setField("REGISTRE.NUMERO", ig.getNumRegistre());
-
-			fields.setField("EXPOSA", ig.getExposa());
-			fields.setField("SOLICITA", ig.getSolicita());
-
-			Fitxer[] fitxers = { ig.getFitxer1(), ig.getFitxer2(), ig.getFitxer3(), ig.getFitxer4(), ig.getFitxer5(),
-					ig.getFitxer6(), ig.getFitxer7(), ig.getFitxer8(), ig.getFitxer9() };
-
-			String cadena = "";
-			int idx = 0;
-			for (Fitxer fitxer : fitxers) {
-				if (fitxer != null) {
-					idx++;
-					cadena += idx + ". " + fitxer.getNom() + "\n";
-				}
-			}
-			if (idx == 0) {
-				cadena = "No hi ha anexes";
-			}
-			fields.setField("ANEXES", cadena);
-
-			fields.setField("URL",
-					"http://localhost:8080/instanciagenerica/public/instanciagenerica/v/" + ig.getUuid());
-
-			dateFormat = new SimpleDateFormat("EEEEE dd 'de' MMMM 'de' YYYY", new Locale("ca"));
-			fields.setField("DATA", dateFormat.format(new Timestamp(System.currentTimeMillis())));
-
-			stamper.setFormFlattening(true);
-			stamper.close();
-			log.info("Fin");
-
-		} catch (FileNotFoundException e) {
-			log.error("Error de FileNotFoundException");
-			throw new I18NException("genapp.comodi", "Error cridada a generarDocumento: " + e.getMessage());
-		} catch (IOException e) {
-			log.error("Error de IOException");
-			throw new I18NException("genapp.comodi", "Error cridada a generarDocumento: " + e.getMessage());
-		} catch (DocumentException e) {
-			log.error("Error de DocumentException");
-			throw new I18NException("genapp.comodi", "Error cridada a generarDocumento: " + e.getMessage());
-		}
-	}
-
 }
