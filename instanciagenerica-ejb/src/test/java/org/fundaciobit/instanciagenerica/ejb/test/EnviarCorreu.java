@@ -55,7 +55,8 @@ public class EnviarCorreu {
 		// Així es com s'ha de cridar desde TEST
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "mail.fundaciobit.org");
-//Posar: totes 
+		
+		//Posar: totes 
 
 		Session session = Session.getDefaultInstance(props, null);
 

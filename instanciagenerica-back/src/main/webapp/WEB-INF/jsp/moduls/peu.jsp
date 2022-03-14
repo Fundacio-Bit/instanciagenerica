@@ -46,7 +46,7 @@
 		</div>
 
 		<!-- Dreta -->
-		<div class="col-4 pt-2 text-right" >
+<%-- 		<div class="col-4 pt-2 text-right" >
 			<a href="http://otaeweb.ibit.org/" style="padding-top: 10px" target="_blank"> <img
 				src="<c:url value="/img/fundaciobit-logo-peu.png"/>"
 				alt="Fundacio Bit" />
@@ -56,7 +56,7 @@
 			<small><a href="#modalAjuda" role="button"
 				data-toggle="modal"><fmt:message key="ajuda.necessitau" /></a></small>
 		</div>
-
+ --%>
 	</div>
 
 	

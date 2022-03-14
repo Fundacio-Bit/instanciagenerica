@@ -47,7 +47,7 @@ function reassignAction() {
     </div>
 
 
-    <div class="col-6 text-center" id="${formName}_pagination_center">
+    <div class="col-6 text-left" id="${formName}_pagination_center">
         <c:if test="${not empty __theFilterForm.itemsPerPage}">
 
             <c:url var="firstUrl" value="${contexte}/list/1" />

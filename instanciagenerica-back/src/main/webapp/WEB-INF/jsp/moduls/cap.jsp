@@ -77,16 +77,18 @@
 						<fmt:message key="idiomes" />
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-						<c:forEach var="idioma" items="${idiomes}"
-							varStatus="status">
+						<c:forEach var="idioma" items="${idiomes}" varStatus="status">
+						
 							<c:set var="idiomaID" value="${idioma.idiomaID}" />
+							
 							<a class="dropdown-item"
 								href="?lang=${idiomaID}">
-
 								<img
 								src="<c:url value="/img/${idiomaID}_petit_${lang eq idiomaID? 'on' : 'off'}.gif"/>"
 								alt="${idiomaID}" width="17" height="14" border="0" />${idioma.nom}
 							</a>
+							
+							
 						</c:forEach>
 
 					</div>
