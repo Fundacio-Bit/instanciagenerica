@@ -24,8 +24,6 @@ public interface InstanciaGenericaLogicService extends InstanciaGenericaService 
 
 	public static final String JNDI_NAME = "java:app/instanciagenerica-ejb/InstanciaGenericaLogicEJB!org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicService";
 
-	public InstanciaGenerica registrarInstanciaGenerica(InstanciaGenerica ig) throws I18NException;
-
 	public void deleteFull(InstanciaGenerica instanciaGenerica) throws I18NException;
 
 	public InstanciaGenericaJPA generarInstanciaGenericaAleatoria(InstanciaGenericaJPA ig);

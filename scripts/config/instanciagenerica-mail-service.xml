@@ -20,16 +20,16 @@
         <property name="mail.user" value="nobody"/>
 
         <!-- Change to the mail server  -->
-        <property name="mail.pop3.host" value="localhost"/>
+        <property name="mail.pop3.host" value="mail.fundaciobit.org"/>
 
         <!-- Change to the SMTP gateway server -->
-        <property name="mail.smtp.host" value="localhost"/>
+        <property name="mail.smtp.host" value="mail.fundaciobit.org"/>
 
         <!-- The mail server port -->
         <property name="mail.smtp.port" value="25"/>
 
         <!-- Change to the address mail will be from  -->
-        <property name="mail.from" value="instanciagenerica@instanciagenerica.com"/>
+        <property name="mail.from" value="otae@fundaciobit.org"/>
 
         <!-- Enable debugging output from the javamail classes -->
         <property name="mail.debug" value="false"/>

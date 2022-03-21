@@ -11,11 +11,22 @@ import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import org.fundaciobit.instanciagenerica.commons.utils.Constants;
+import org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicEJB;
+import org.fundaciobit.instanciagenerica.logic.utils.EmailUtil;
+import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
+import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 /**
  * 
@@ -54,71 +65,38 @@ public class EnviarCorreu {
 
 		// Així es com s'ha de cridar desde TEST
 		Properties props = new Properties();
+		props.put("mail.store.protocol", "pop3");
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.user", "nobody");
+		props.put("mail.pop3.host", "mail.fundaciobit.org");
 		props.put("mail.smtp.host", "mail.fundaciobit.org");
-		
-		//Posar: totes 
+		props.put("mail.smtp.port", "25");
+		props.put("mail.from", "otae@fundaciobit.org");
+		props.put("mail.debug", "false");
 
 		Session session = Session.getDefaultInstance(props, null);
 
 		boolean debug = true;
 		session.setDebug(debug);
 
-		pruebasCorreo(session);
+		InstanciaGenericaLogicEJB ejb = new InstanciaGenericaLogicEJB();
 
-	}
+		InstanciaGenericaJPA ig = new InstanciaGenericaJPA();
+		ig = ejb.generarInstanciaGenericaAleatoria(ig);
 
-	public static void pruebasCorreo(Session session) {
-		// TODO Auto-generated method stub
+		ig.setDataCreacio(new Timestamp(System.currentTimeMillis()));
+		ig.setDatafinalitzacio(new Timestamp(System.currentTimeMillis()));
+		ig.setNumRegistre("GOIB-E-93/2022");
+		ig.setUuid("f503843d1ba7403d8bee05941cd088cf");
+		ig.setError(
+				"Error no contrrolat fent cridada a registre: Document(interesado.documento): El NIE no té format correcte (LLETRA(X,Y,Z) + 7 DÍGITS + LLETRA)");
 
-		String subject = "Asumpte de prova";
-		String message = "Aquest es un missatge de prova per comprobar el funcionament del correu";
-		boolean isHtml = false;
+//		String[] destinataris = { "ptrias@fundaciobit.org", "anadal@fundaciobit.org", "atrobat@fundaciobit.org" };
+		String[] destinataris = {"ptrias@fundaciobit.org"};
 		String from = "ptrias@fundaciobit.org";
-		String[] recipients = { "ptrias@fundaciobit.org" };
 
-		try {
-			postMail(subject, message, isHtml, from, recipients, session);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		EmailUtil.enviarCorreuInstancia(session, ig, from, destinataris);
 	}
 
-	public static void postMail(String subject, String message, boolean isHtml, String from, String[] recipients,
-			Session session) throws Exception {
-
-		// Creamos el mensaje
-		MimeMessage msg = new MimeMessage(session);
-
-		InternetAddress addressFrom = new InternetAddress(from);
-		msg.setFrom(addressFrom);
-
-		// Indicamos los destinatarios
-		InternetAddress[] addressTo = new InternetAddress[recipients.length];
-		for (int i = 0; i < recipients.length; i++) {
-			addressTo[i] = new InternetAddress(recipients[i]);
-		}
-
-		final RecipientType type = RecipientType.TO;
-
-		msg.setRecipients(type, addressTo);
-
-		// Configuramos el asunto
-		msg.setSubject(subject, "UTF-8");
-		msg.setSentDate(new Date());
-
-		// Configuramos el contenido
-		if (isHtml) {
-			msg.setHeader("Content-Type", "text/html;charset=utf-8");
-			// URL urlToAdd = new URL(url); msg.setDataHandler(new DataHandler(urlToAdd));
-			msg.setContent(message, "text/html;charset=utf-8");
-		} else {
-			msg.setContent(message, "text/plain" /* ; charset=UTF-8" */);
-		}
-
-		// Mandamos el mail
-		Transport.send(msg);
-
-	}
 
 }

@@ -2,12 +2,19 @@
 package org.fundaciobit.instanciagenerica.logic;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBContext;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+import javax.mail.Session;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.transaction.Status;
 import javax.transaction.TransactionSynchronizationRegistry;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -59,7 +66,9 @@ import es.caib.regweb3.ws.api.v3.WsValidationException;
 import org.fundaciobit.instanciagenerica.commons.utils.Configuracio;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.ejb.InstanciaGenericaEJB;
+import org.fundaciobit.instanciagenerica.logic.utils.EmailUtil;
 import org.fundaciobit.instanciagenerica.logic.utils.GeneradorDocuments;
+import org.fundaciobit.instanciagenerica.logic.utils.I18NLogicUtils;
 
 /**
  * 
@@ -67,6 +76,7 @@ import org.fundaciobit.instanciagenerica.logic.utils.GeneradorDocuments;
  *
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements InstanciaGenericaLogicService {
 
 	@EJB(mappedName = org.fundaciobit.instanciagenerica.logic.FitxerLogicService.JNDI_NAME)
@@ -75,19 +85,124 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 	@Resource(mappedName = "java:comp/TransactionSynchronizationRegistry")
 	protected TransactionSynchronizationRegistry transactionSynchronizationRegistry;
 
+	public static final String MAIL_SERVICE = "java:/org.fundaciobit.instanciagenerica.mail";
+
+	@Resource
+	private EJBContext context;
+
 	@Override
 	@PermitAll
 	public InstanciaGenerica create(InstanciaGenerica instance) throws I18NException {
 
-		// Generam UUID per referenciar desde part publica
-		String uuid = java.util.UUID.randomUUID().toString();
-		instance.setUuid(uuid.replace("-", ""));
+		boolean isOk = false;
+//		try {
 
-		InstanciaGenerica ig = super.create(instance);
+			// Generam UUID per referenciar desde part publica
+			String uuid = java.util.UUID.randomUUID().toString();
+			instance.setUuid(uuid.replace("-", ""));
+			instance.setInstanciaGenericaID(0);
 
-		registrarInstanciaGenerica(ig);
+//			((InstanciaGenericaJPA) instance).setFitxer9(null);
+//			((InstanciaGenericaJPA) instance).setFitxer9ID(null);
 
-		// Generam fitxer resum de la instancia generica
+			InstanciaGenericaJPA igjpa = (InstanciaGenericaJPA) instance;
+			log.info("\n\n\n\n\n\n\n\n\n\n\n\n" + igjpa + "\n"
+					 + "InstanciaGenericaID: \t" + igjpa.getInstanciaGenericaID() + "\n"
+					 + "NumRegistre: \t" + igjpa.getNumRegistre() + "\n"
+					 + "Uuid: \t" + igjpa.getUuid() + "\n"
+					 + "isSolicitantPersonaFisica: \t" + igjpa.isSolicitantPersonaFisica() + "\n"
+					 + "SolicitantTipusAdminID: \t" + igjpa.getSolicitantTipusAdminID() + "\n"
+					 + "SolicitantAdminID: \t" + igjpa.getSolicitantAdminID() + "\n"
+					 + "SolicitantNom: \t" + igjpa.getSolicitantNom() + "\n"
+					 + "SolicitantLlinatge1: \t" + igjpa.getSolicitantLlinatge1() + "\n"
+					 + "SolicitantLlinatge2: \t" + igjpa.getSolicitantLlinatge2() + "\n"
+					 + "SolicitantRaoSocial: \t" + igjpa.getSolicitantRaoSocial() + "\n"
+					 + "SolicitantEmail: \t" + igjpa.getSolicitantEmail() + "\n"
+					 + "SolicitantDireccio: \t" + igjpa.getSolicitantDireccio() + "\n"
+					 + "SolicitantTelefon: \t" + igjpa.getSolicitantTelefon() + "\n"
+					 + "IdiomaID: \t" + igjpa.getIdiomaID() + "\n"
+					 + "Exposa: \t" + igjpa.getExposa() + "\n"
+					 + "Solicita: \t" + igjpa.getSolicita() + "\n"
+					 + "Fitxer1ID: \t" + igjpa.getFitxer1ID() + "\n"
+					 + "Fitxer1: \t" + igjpa.getFitxer1() + "\n"
+					 + "Fitxer2ID: \t" + igjpa.getFitxer2ID() + "\n"
+					 + "Fitxer2: \t" + igjpa.getFitxer2() + "\n"
+					 + "Fitxer3ID: \t" + igjpa.getFitxer3ID() + "\n"
+					 + "Fitxer3: \t" + igjpa.getFitxer3() + "\n"
+					 + "Fitxer4ID: \t" + igjpa.getFitxer4ID() + "\n"
+					 + "Fitxer4: \t" + igjpa.getFitxer4() + "\n"
+					 + "Fitxer5ID: \t" + igjpa.getFitxer5ID() + "\n"
+					 + "Fitxer5: \t" + igjpa.getFitxer5() + "\n"
+					 + "Fitxer6ID: \t" + igjpa.getFitxer6ID() + "\n"
+					 + "Fitxer6: \t" + igjpa.getFitxer6() + "\n"
+					 + "Fitxer7ID: \t" + igjpa.getFitxer7ID() + "\n"
+					 + "Fitxer7: \t" + igjpa.getFitxer7() + "\n"
+					 + "Fitxer8ID: \t" + igjpa.getFitxer8ID() + "\n"
+					 + "Fitxer8: \t" + igjpa.getFitxer8() + "\n"
+					 + "Fitxer9ID: \t" + igjpa.getFitxer9ID() + "\n"
+					 + "Fitxer9: \t" + igjpa.getFitxer9() + "\n"
+					 + "DataCreacio: \t" + igjpa.getDataCreacio() + "\n"
+					 + "Estat: \t" + igjpa.getEstat() + "\n"
+					 + "Error: \t" + igjpa.getError() + "\n"
+					 + "Exception: \t" + igjpa.getException() + "\n"
+					 + "Datafinalitzacio: \t" + igjpa.getDatafinalitzacio() + "\n"
+
+ 					 + "\n\n\n\n\n\n\n\n\n\n\n\n\n");
+
+			instance = super.create(instance);
+
+			registrarInstanciaGenerica(instance);
+			generaResum(instance);
+			enviaCorreu(instance);
+
+			this.update(instance);
+
+			isOk = true;
+//		} finally {
+//			if (!isOk) {
+//				log.error("\n\n+++++++++++ ROLLBACKING ***********\n\n");
+//				context.setRollbackOnly();
+//			} else {
+//				log.error("\n\n+++++++++++ CREATED OK ***********\n\n");
+//			}
+//		}
+
+		return instance;
+	}
+
+	protected void enviaCorreu(InstanciaGenerica instance) {
+		String[] destinataris = { "ptrias@fundaciobit.org" };
+		String from = "ptrias@fundaciobit.org";
+
+		int ESTAT_ENVIAT = 1;
+		int ESTAT_NO_ENVIAT = -1;
+
+		try {
+			Context ctx = new InitialContext();
+			Session session = (javax.mail.Session) ctx.lookup(Constants.MAIL_SERVICE);
+
+			EmailUtil.enviarCorreuInstancia(session, instance, from, destinataris);
+
+			instance.setEstat(ESTAT_ENVIAT);
+
+		} catch (NamingException e) {
+			instance.setEstat(ESTAT_NO_ENVIAT);
+
+			String sStackTrace = exceptionToString(e);
+			String msg = "Error obtenint session: " + e.getMessage();
+			log.error(msg, e);
+
+		} catch (I18NException e) {
+			instance.setEstat(ESTAT_NO_ENVIAT);
+
+			String sStackTrace = exceptionToString(e);
+			String msg = "Error amb correus: " + e.getMessage();
+			log.error(msg, e);
+		}
+	}
+
+	protected void generaResum(InstanciaGenerica instance) throws I18NException {
+		// Generam fitxer resum de la instancia generica (ja registrada)
 		Fitxer fdb = fitxerLogicEjb.create("resum.pdf", "application/pdf", 0, null);
 		Long idfitxer = fdb.getFitxerID();
 
@@ -98,20 +213,12 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		fdb.setTamany(dstPDF.length());
 		fitxerLogicEjb.update(fdb);
 
-		log.info("fitxer9 pre: " + ig.getFitxer9());
-		
 		instance.setFitxer9ID(idfitxer);
-		update(ig);
-		log.info("fitxer9 post: " + ig.getFitxer9());
-
-		((InstanciaGenericaJPA) instance).setFitxer9((FitxerJPA) fdb);
-		
-		log.info("fitxer9 post set: " + ig.getFitxer9());
-		return ig;
+//		this.update(instance);
+//		((InstanciaGenericaJPA) instance).setFitxer9((FitxerJPA) fdb);
 	}
 
-	@Override
-	public InstanciaGenerica registrarInstanciaGenerica(InstanciaGenerica ig) throws I18NException {
+	protected InstanciaGenerica registrarInstanciaGenerica(InstanciaGenerica ig) throws I18NException {
 
 		String codiDir3 = Configuracio.getRegistreEntidad();
 
@@ -123,24 +230,17 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 		InfoRegistre ir = cridadaRegistre(codiDir3, justificant, distribuir, oficinaCodi, unitatTramitacioCodi, ig);
 
-		if (ir.getEstat() == InfoRegistre.ESTAT_ERROR) {
-			ig.setEstat(Constants.ESTAT_ERROR);
-			ig.setError(ir.getError());
-			ig.setException(ir.getExccepcio());
-
-			// Aqui habría que añadir un mensaje de "Error con llamada a registro"
-		} else {
-			ig.setEstat(Constants.ESTAT_FINALITZAT);
-			ig.setNumRegistre(ir.getNumRegistre());
-		}
+		ig.setEstat(Constants.ESTAT_FINALITZAT);
+		ig.setNumRegistre(ir.getNumRegistre());
 		ig.setDatafinalitzacio(new Timestamp(System.currentTimeMillis()));
 
-		this.update(ig);
+//		this.update(ig);
+
 		return ig;
 	}
 
 	public InfoRegistre cridadaRegistre(String codiDir3, boolean justificant, boolean distribuir, String oficinaCodi_,
-			String unitatCodi_, InstanciaGenerica ig) {
+			String unitatCodi_, InstanciaGenerica ig) throws I18NException {
 
 		String entitatCodi = codiDir3;
 
@@ -152,7 +252,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 		String unitatTramitacioDestiCodi = unitatCodi_;
 
 		try {
-
 			log.info("Cridam API per REGISTRAR INSTANCIA");
 
 			RegWebAsientoRegistralWs asientoApi = getApiRegistre();
@@ -161,7 +260,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			Long idSesion = asientoApi.obtenerSesionRegistro(entitatCodi);
 			log.info("	->	idSession: " + idSesion);
 
-			// TODO Posar tots els camps.
 			AsientoRegistralWs asientoRegistral = new AsientoRegistralWs();
 			asientoRegistral.setAplicacion(null);
 			asientoRegistral.setAplicacionTelematica(null);
@@ -218,8 +316,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			asientoRegistral.setUnidadTramitacionOrigenCodigo(unitatTramitacioOrigenCodi);
 			asientoRegistral.setUnidadTramitacionOrigenDenominacion(null);
 
-			// TODO XXXXXXXXXXXXXX if isPersonaFisica, tratarlo de una manera, else, de
-			// otra.
 			String[] tipus = { "", "N", "E", "P", "X", "C", "0" };
 
 			InteresadoWs i = new InteresadoWs();
@@ -336,29 +432,49 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			String numRegF = asiento.getNumeroRegistroFormateado();
 
 			if (numRegF == null) {
-				return new InfoRegistre("El numero de registre retornat es null", null);
+				return null;
+//				return new InfoRegistre("El numero de registre retornat es null", null);
 			}
 
 			AsientoRegistralWs as = asientoApi.obtenerAsientoRegistral(codiDir3, numRegF, 1L, false);
 
 			if (as.getEstado() == 1) {
 				return new InfoRegistre(asiento.getNumeroRegistroFormateado());
-			} else {
-				return new InfoRegistre(asiento.getCodigoError(), asiento.getDescripcionError());
 			}
 
-		} catch (Throwable e) {
+		} catch (WsValidationException e) {
+			log.error("Error WsValidationException");
+			throw new I18NException("genapp.comodi", "error cridada a registre:" + e.getMessage());
 
-			StringWriter sw = new StringWriter();
-			PrintWriter pw = new PrintWriter(sw);
-			e.printStackTrace(pw);
-			String sStackTrace = sw.toString(); // stack trace as a string
-			String msg = "Error no contrrolat fent cridada a registre: " + e.getMessage();
-			log.error(msg, e);
-			return new InfoRegistre(msg, sStackTrace);
+		} catch (WsI18NException e) {
+			log.error("Error WsI18NException ");
+			throw new I18NException("genapp.comodi", "error cridada a registre:" + e.getMessage());
+
+		} catch (IOException e) {
+			// No s'ha trobat alguns dels fitxers anexes a FileSystemManager
+			log.error("Error IOException ");
+			throw new I18NException("genapp.comodi", "error cridada a registre:" + e.getMessage());
 		}
-
+		return null;
 	}
+
+	/*
+	 *
+	 * } catch (Throwable e) {
+	 * 
+	 * String sStackTrace = exceptionToString(e); String msg =
+	 * "Error no contrrolat fent cridada a registre: " + e.getMessage();
+	 * log.error(msg, e); return new InfoRegistre(msg, sStackTrace); }
+	 * 
+	 */
+	public String exceptionToString(Throwable e) {
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		e.printStackTrace(pw);
+		String sStackTrace = sw.toString(); // stack trace as a string
+		return sStackTrace;
+	}
+
 //	public InfoRegistre cridarAPIRegistre(InstanciaGenerica ig) {
 //		// Pot pasar 3 coses: Ok, Error, Exception
 //
@@ -585,12 +701,10 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			log.info("Ja tenim asiento: " + as);
 
 		} catch (WsValidationException e) {
-			// TODO XXXXXXXXXXX Mirar que retorna e
 			log.error("Error WsValidationException");
 			throw new I18NException("genapp.comodi", "error cridada a registre:" + e.getMessage());
 
 		} catch (WsI18NException e) {
-			// TODO XXXXXXXXXXX Mirar que retorna e
 			log.error("Error WsI18NException ");
 			throw new I18NException("genapp.comodi", "error cridada a registre:" + e.getMessage());
 		}
@@ -649,7 +763,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			f = getApiRegistre().obtenerAnexoCiudadano(entidad, idAnexo, idioma);
 			log.info("Ja tenim anexe: " + f);
 		} catch (I18NException e) {
-			// TODO XXXXXXXXXXX Mirar que retorna e
 			log.error("Error WsI18NException ");
 			throw new I18NException("genapp.comodi", "Error cridada a obtenerAnexoCiudadano: " + e.getMessage());
 		}
@@ -669,7 +782,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			j = getApiRegistre().obtenerJustificante(codiDir3, numRegF, 1L);
 			log.info("Ja tenim justificant: " + j);
 		} catch (Exception e) {
-			// TODO XXXXXXXXXXX Mirar que retorna e
 			log.error("Error WsI18NException ");
 			throw new I18NException("genapp.comodi", "Error cridada a obtenerAnexoCiudadano: " + e.getMessage());
 		}

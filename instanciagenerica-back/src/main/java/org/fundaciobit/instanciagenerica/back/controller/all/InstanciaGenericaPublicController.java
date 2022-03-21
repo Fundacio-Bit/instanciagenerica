@@ -113,17 +113,7 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 			// ************************** DADES ERRORS (if Developer) *****/
 			hidden.remove(DATAFINALITZACIO);
-			boolean developer = Configuracio.isDesenvolupament();
-			if (ig.getEstat() == Constants.ESTAT_ERROR) {
-				instanciaGenericaForm.addLabel(DATAFINALITZACIO, "datafinalitzacio.error");
-				if (developer) {
-					hidden.remove(ESTAT);
-					hidden.remove(ERROR);
-					hidden.remove(EXCEPTION);
-				}
-			} else {
-				instanciaGenericaForm.addLabel(DATAFINALITZACIO, "datafinalitzacio.registre");
-			}
+			instanciaGenericaForm.addLabel(DATAFINALITZACIO, "datafinalitzacio.registre");
 
 			// ************************** DADES ANEXES *******************/
 			Map<Field<?>, Long> map = new HashMap<Field<?>, Long>();
@@ -165,42 +155,29 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 		}
 
 		if (__isView || instanciaGenericaForm.isNou()) {
-			final Section solicitant = new Section("solicitant", "solicitant", 
-					InstanciaGenericaFields.SOLICITANTPERSONAFISICA, 
-					InstanciaGenericaFields.SOLICITANTTIPUSADMINID,
-					InstanciaGenericaFields.SOLICITANTADMINID,
-					InstanciaGenericaFields.SOLICITANTNOM,
-					InstanciaGenericaFields.SOLICITANTLLINATGE1,
-					InstanciaGenericaFields.SOLICITANTLLINATGE2);
-			
-			final Section entitat = new Section("entitat", "seccio.entitat", 
-					InstanciaGenericaFields.SOLICITANTRAOSOCIAL, 
-					InstanciaGenericaFields.SOLICITANTCIF);
-			
-			final Section registre = new Section("registre", "seccio.registre", 
-					InstanciaGenericaFields.NUMREGISTRE, 
+			final Section solicitant = new Section("solicitant", "solicitant",
+					InstanciaGenericaFields.SOLICITANTPERSONAFISICA, InstanciaGenericaFields.SOLICITANTTIPUSADMINID,
+					InstanciaGenericaFields.SOLICITANTADMINID, InstanciaGenericaFields.SOLICITANTNOM,
+					InstanciaGenericaFields.SOLICITANTLLINATGE1, InstanciaGenericaFields.SOLICITANTLLINATGE2);
+
+			final Section entitat = new Section("entitat", "seccio.entitat",
+					InstanciaGenericaFields.SOLICITANTRAOSOCIAL, InstanciaGenericaFields.SOLICITANTCIF);
+
+			final Section registre = new Section("registre", "seccio.registre", InstanciaGenericaFields.NUMREGISTRE,
 					InstanciaGenericaFields.DATAFINALITZACIO);
 
-			final Section resum = new Section("resum", "seccio.resum", 
-					InstanciaGenericaFields.IDIOMAID, 
-					InstanciaGenericaFields.EXPOSA, 
-					InstanciaGenericaFields.SOLICITA);
+			final Section resum = new Section("resum", "seccio.resum", InstanciaGenericaFields.IDIOMAID,
+					InstanciaGenericaFields.EXPOSA, InstanciaGenericaFields.SOLICITA);
 
-			final Section contacte = new Section("contacte", "seccio.contacte", 
-					InstanciaGenericaFields.SOLICITANTTELEFON, 
-					InstanciaGenericaFields.SOLICITANTEMAIL, 
+			final Section contacte = new Section("contacte", "seccio.contacte",
+					InstanciaGenericaFields.SOLICITANTTELEFON, InstanciaGenericaFields.SOLICITANTEMAIL,
 					InstanciaGenericaFields.SOLICITANTDIRECCIO);
 
-			final Section anexes = new Section("anexes", "seccio.anexes", 
-					InstanciaGenericaFields.FITXER1ID,
-					InstanciaGenericaFields.FITXER2ID,
-					InstanciaGenericaFields.FITXER3ID,
-					InstanciaGenericaFields.FITXER4ID,
-					InstanciaGenericaFields.FITXER5ID,
-					InstanciaGenericaFields.FITXER6ID,
-					InstanciaGenericaFields.FITXER7ID,
-					InstanciaGenericaFields.FITXER8ID,
-					InstanciaGenericaFields.FITXER9ID);
+			final Section anexes = new Section("anexes", "seccio.anexes", InstanciaGenericaFields.FITXER1ID,
+					InstanciaGenericaFields.FITXER2ID, InstanciaGenericaFields.FITXER3ID,
+					InstanciaGenericaFields.FITXER4ID, InstanciaGenericaFields.FITXER5ID,
+					InstanciaGenericaFields.FITXER6ID, InstanciaGenericaFields.FITXER7ID,
+					InstanciaGenericaFields.FITXER8ID, InstanciaGenericaFields.FITXER9ID);
 
 			instanciaGenericaForm.addSection(solicitant);
 			instanciaGenericaForm.addSection(entitat);
@@ -228,16 +205,17 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 	@Override
 	public String getRedirectWhenCreated(HttpServletRequest request, InstanciaGenericaForm instanciaGenericaForm) {
 
-		if (instanciaGenericaForm.getInstanciaGenerica().getEstat() == Constants.ESTAT_ERROR) {
-			HtmlUtils.saveMessageError(request, instanciaGenericaForm.getInstanciaGenerica().getError());
-		} else {
+		if (instanciaGenericaForm.getInstanciaGenerica().getEstat() == 1) {
+
 			String url = request.getParameter("urlnavegador") + "v/"
 					+ instanciaGenericaForm.getInstanciaGenerica().getUuid();
 			HtmlUtils.saveMessageInfo(request, "La seva Instancia Genèrica s'ha creat correctament");
 			HtmlUtils.saveMessageInfo(request,
 					"Per poder veure informació de la seva instancia guardi's aquesta URL: " + url);
+		} else {
+			HtmlUtils.saveMessageError(request, "No s'ha pogut enviar al seu correu la informació de la seva instancia genèrica.");
+			
 		}
-
 		return "redirect:" + getContextWeb() + "/v/" + instanciaGenericaForm.getInstanciaGenerica().getUuid();
 	}
 

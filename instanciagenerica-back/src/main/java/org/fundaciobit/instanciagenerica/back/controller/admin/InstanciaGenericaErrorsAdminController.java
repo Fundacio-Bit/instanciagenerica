@@ -67,8 +67,9 @@ public class InstanciaGenericaErrorsAdminController extends InstanciaGenericaAdm
 
 			instanciaGenericaFilterForm.addLabel(InstanciaGenericaFields.DATAFINALITZACIO, "datafinalitzacio");
 			
-			instanciaGenericaFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-redo",
-					"regisitre.reintentar", getContextWeb() + "/reintentarregistre/{0}", "btn-primary"));
+//			instanciaGenericaFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-redo",
+//					"regisitre.reintentar", getContextWeb() + "/reintentarregistre/{0}", "btn-primary"));
+
 			// new AdditionalButton("class del icono de fontawesome5", "codigo del boton
 			// (traducciones)" , "javascript:funcion definida en el jsp modificable()",
 			// "class de bootstrap 4 (color)"));
@@ -93,23 +94,23 @@ public class InstanciaGenericaErrorsAdminController extends InstanciaGenericaAdm
 		return "instancesnoregistrades.plural";
 	}
 
-	@RequestMapping(value = "/reintentarregistre/{instanciaGenericaID}", method = RequestMethod.GET)
-	public String reintentarRegistre(@PathVariable("instanciaGenericaID") java.lang.Long instanciaGenericaID,
-			HttpServletRequest request, HttpServletResponse response) throws I18NException {
-
-		InstanciaGenerica ig = instanciaGenericaLogicEjb.findByPrimaryKey(instanciaGenericaID);
-
-		ig = instanciaGenericaLogicEjb.registrarInstanciaGenerica(ig);
-
-		if (ig.getEstat() == Constants.ESTAT_ERROR) {
-			HtmlUtils.saveMessageError(request, "No s'ha pogut registrar la seva Instancia Genèrica (ID="
-					+ ig.getInstanciaGenericaID() + "). Error:" + ig.getError());
-		} else {
-			HtmlUtils.saveMessageSuccess(request,
-					"La instancia ID=" + ig.getInstanciaGenericaID() + " s'ha registrat correctament");
-		}
-
-		return "redirect:" + getContextWeb() + "/list";
-	}
+//	@RequestMapping(value = "/reintentarregistre/{instanciaGenericaID}", method = RequestMethod.GET)
+//	public String reintentarRegistre(@PathVariable("instanciaGenericaID") java.lang.Long instanciaGenericaID,
+//			HttpServletRequest request, HttpServletResponse response) throws I18NException {
+//
+//		InstanciaGenerica ig = instanciaGenericaLogicEjb.findByPrimaryKey(instanciaGenericaID);
+//
+//		ig = instanciaGenericaLogicEjb.registrarInstanciaGenerica(ig);
+//
+//		if (ig.getEstat() == Constants.ESTAT_ERROR) {
+//			HtmlUtils.saveMessageError(request, "No s'ha pogut registrar la seva Instancia Genèrica (ID="
+//					+ ig.getInstanciaGenericaID() + "). Error:" + ig.getError());
+//		} else {
+//			HtmlUtils.saveMessageSuccess(request,
+//					"La instancia ID=" + ig.getInstanciaGenericaID() + " s'ha registrat correctament");
+//		}
+//
+//		return "redirect:" + getContextWeb() + "/list";
+//	}
 
 }
