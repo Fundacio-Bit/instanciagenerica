@@ -81,7 +81,7 @@ public class InstanciaGenericaErrorsAdminController extends InstanciaGenericaAdm
 
 	@Override
 	public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
-		return InstanciaGenericaFields.ESTAT.equal(Constants.ESTAT_ERROR);
+		return InstanciaGenericaFields.ESTAT.equal(Constants.ESTAT_NO_ENVIAT);
 	}
 
 	@Override

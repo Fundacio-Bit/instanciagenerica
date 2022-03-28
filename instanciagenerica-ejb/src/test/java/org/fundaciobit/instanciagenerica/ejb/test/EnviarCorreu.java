@@ -21,6 +21,7 @@ import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicEJB;
 import org.fundaciobit.instanciagenerica.logic.utils.EmailUtil;
@@ -95,7 +96,12 @@ public class EnviarCorreu {
 		String[] destinataris = {"ptrias@fundaciobit.org"};
 		String from = "ptrias@fundaciobit.org";
 
-		EmailUtil.enviarCorreuInstancia(session, ig, from, destinataris);
+		try {
+			EmailUtil.enviarCorreuInstancia(session, ig, from, destinataris);
+		} catch (I18NException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 

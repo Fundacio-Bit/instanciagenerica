@@ -205,16 +205,44 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 	@Override
 	public String getRedirectWhenCreated(HttpServletRequest request, InstanciaGenericaForm instanciaGenericaForm) {
 
-		if (instanciaGenericaForm.getInstanciaGenerica().getEstat() == 1) {
+		String url = request.getParameter("urlnavegador") + "v/"
+				+ instanciaGenericaForm.getInstanciaGenerica().getUuid();
 
-			String url = request.getParameter("urlnavegador") + "v/"
-					+ instanciaGenericaForm.getInstanciaGenerica().getUuid();
-			HtmlUtils.saveMessageInfo(request, "La seva Instancia Genèrica s'ha creat correctament");
-			HtmlUtils.saveMessageInfo(request,
-					"Per poder veure informació de la seva instancia guardi's aquesta URL: " + url);
+		HtmlUtils.saveMessageInfo(request, "La seva Instancia Genèrica s'ha creat correctament");
+		HtmlUtils.saveMessageInfo(request,
+				"Per poder veure informació de la seva instancia guardi's aquesta URL: " + url);
+
+		String correuEnviat = "S'ha enviat al seu correu la informació de la seva instancia genèrica.";
+		String correuNoEnviat = "No s'ha pogut enviar al seu correu la informació de la seva instancia genèrica.";
+//		String resumOk;
+		String resumNoGenerat = "No s'ha pogut genera el fixer resum de la seva instancia";
+
+		switch (instanciaGenericaForm.getInstanciaGenerica().getEstat()) {
+		case Constants.ESTAT_OK:
+			HtmlUtils.saveMessageInfo(request, correuEnviat);
+
+			break;
+		case Constants.ESTAT_NO_ENVIAT:
+			HtmlUtils.saveMessageError(request, correuNoEnviat);
+			break;
+
+		case Constants.ESTAT_NO_RESUM:
+			HtmlUtils.saveMessageInfo(request, correuEnviat);
+			HtmlUtils.saveMessageError(request, resumNoGenerat);
+
+			break;
+
+		case Constants.ESTAT_NO_ENVIAT_NO_RESUM:
+			HtmlUtils.saveMessageError(request, correuNoEnviat);
+			HtmlUtils.saveMessageError(request, resumNoGenerat);
+			break;
+
+		}
+
+		if (instanciaGenericaForm.getInstanciaGenerica().getEstat() == Constants.ESTAT_OK) {
+
 		} else {
-			HtmlUtils.saveMessageError(request, "No s'ha pogut enviar al seu correu la informació de la seva instancia genèrica.");
-			
+
 		}
 		return "redirect:" + getContextWeb() + "/v/" + instanciaGenericaForm.getInstanciaGenerica().getUuid();
 	}

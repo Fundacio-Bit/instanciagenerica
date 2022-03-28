@@ -24,8 +24,9 @@ public interface Constants {
 	public static final String ROLE_EJB_BASIC_ACCESS = IGE_USER;
 
 	// CONSTANTS DE ESTAT DE INSTANCIAGENERICA
-	public static final int ESTAT_CREAT = 0;
-	public static final int ESTAT_FINALITZAT = 1;
-	public static final int ESTAT_ERROR = 2;
-	
+	public static final int ESTAT_OK = 0;
+	public static final int ESTAT_NO_ENVIAT = 1;
+	public static final int ESTAT_NO_RESUM = 2;
+	public static final int ESTAT_NO_ENVIAT_NO_RESUM = 3;
+
 }

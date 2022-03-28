@@ -94,110 +94,106 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 	@PermitAll
 	public InstanciaGenerica create(InstanciaGenerica instance) throws I18NException {
 
-		boolean isOk = false;
-//		try {
+		// Generam UUID per referenciar desde part publica
+		String uuid = java.util.UUID.randomUUID().toString();
+		instance.setUuid(uuid.replace("-", ""));
 
-			// Generam UUID per referenciar desde part publica
-			String uuid = java.util.UUID.randomUUID().toString();
-			instance.setUuid(uuid.replace("-", ""));
-			instance.setInstanciaGenericaID(0);
+		instance.setInstanciaGenericaID(0);
 
-//			((InstanciaGenericaJPA) instance).setFitxer9(null);
-//			((InstanciaGenericaJPA) instance).setFitxer9ID(null);
+		InstanciaGenericaJPA igjpa = (InstanciaGenericaJPA) instance;
+		log.info("\n\n\n\n\n\n\n\n\n\n\n\n" + igjpa + "\n" + "InstanciaGenericaID: \t" + igjpa.getInstanciaGenericaID()
+				+ "\n" + "NumRegistre: \t" + igjpa.getNumRegistre() + "\n" + "Uuid: \t" + igjpa.getUuid() + "\n"
+				+ "isSolicitantPersonaFisica: \t" + igjpa.isSolicitantPersonaFisica() + "\n"
+				+ "SolicitantTipusAdminID: \t" + igjpa.getSolicitantTipusAdminID() + "\n" + "SolicitantAdminID: \t"
+				+ igjpa.getSolicitantAdminID() + "\n" + "SolicitantNom: \t" + igjpa.getSolicitantNom() + "\n"
+				+ "SolicitantLlinatge1: \t" + igjpa.getSolicitantLlinatge1() + "\n" + "SolicitantLlinatge2: \t"
+				+ igjpa.getSolicitantLlinatge2() + "\n" + "SolicitantRaoSocial: \t" + igjpa.getSolicitantRaoSocial()
+				+ "\n" + "SolicitantEmail: \t" + igjpa.getSolicitantEmail() + "\n" + "SolicitantDireccio: \t"
+				+ igjpa.getSolicitantDireccio() + "\n" + "SolicitantTelefon: \t" + igjpa.getSolicitantTelefon() + "\n"
+				+ "IdiomaID: \t" + igjpa.getIdiomaID() + "\n" + "Exposa: \t" + igjpa.getExposa() + "\n" + "Solicita: \t"
+				+ igjpa.getSolicita() + "\n" + "Fitxer1ID: \t" + igjpa.getFitxer1ID() + "\n" + "Fitxer1: \t"
+				+ igjpa.getFitxer1() + "\n" + "Fitxer2ID: \t" + igjpa.getFitxer2ID() + "\n" + "Fitxer2: \t"
+				+ igjpa.getFitxer2() + "\n" + "Fitxer3ID: \t" + igjpa.getFitxer3ID() + "\n" + "Fitxer3: \t"
+				+ igjpa.getFitxer3() + "\n" + "Fitxer4ID: \t" + igjpa.getFitxer4ID() + "\n" + "Fitxer4: \t"
+				+ igjpa.getFitxer4() + "\n" + "Fitxer5ID: \t" + igjpa.getFitxer5ID() + "\n" + "Fitxer5: \t"
+				+ igjpa.getFitxer5() + "\n" + "Fitxer6ID: \t" + igjpa.getFitxer6ID() + "\n" + "Fitxer6: \t"
+				+ igjpa.getFitxer6() + "\n" + "Fitxer7ID: \t" + igjpa.getFitxer7ID() + "\n" + "Fitxer7: \t"
+				+ igjpa.getFitxer7() + "\n" + "Fitxer8ID: \t" + igjpa.getFitxer8ID() + "\n" + "Fitxer8: \t"
+				+ igjpa.getFitxer8() + "\n" + "Fitxer9ID: \t" + igjpa.getFitxer9ID() + "\n" + "Fitxer9: \t"
+				+ igjpa.getFitxer9() + "\n" + "DataCreacio: \t" + igjpa.getDataCreacio() + "\n" + "Estat: \t"
+				+ igjpa.getEstat() + "\n" + "Error: \t" + igjpa.getError() + "\n" + "Exception: \t"
+				+ igjpa.getException() + "\n" + "Datafinalitzacio: \t" + igjpa.getDatafinalitzacio() + "\n"
 
-			InstanciaGenericaJPA igjpa = (InstanciaGenericaJPA) instance;
-			log.info("\n\n\n\n\n\n\n\n\n\n\n\n" + igjpa + "\n"
-					 + "InstanciaGenericaID: \t" + igjpa.getInstanciaGenericaID() + "\n"
-					 + "NumRegistre: \t" + igjpa.getNumRegistre() + "\n"
-					 + "Uuid: \t" + igjpa.getUuid() + "\n"
-					 + "isSolicitantPersonaFisica: \t" + igjpa.isSolicitantPersonaFisica() + "\n"
-					 + "SolicitantTipusAdminID: \t" + igjpa.getSolicitantTipusAdminID() + "\n"
-					 + "SolicitantAdminID: \t" + igjpa.getSolicitantAdminID() + "\n"
-					 + "SolicitantNom: \t" + igjpa.getSolicitantNom() + "\n"
-					 + "SolicitantLlinatge1: \t" + igjpa.getSolicitantLlinatge1() + "\n"
-					 + "SolicitantLlinatge2: \t" + igjpa.getSolicitantLlinatge2() + "\n"
-					 + "SolicitantRaoSocial: \t" + igjpa.getSolicitantRaoSocial() + "\n"
-					 + "SolicitantEmail: \t" + igjpa.getSolicitantEmail() + "\n"
-					 + "SolicitantDireccio: \t" + igjpa.getSolicitantDireccio() + "\n"
-					 + "SolicitantTelefon: \t" + igjpa.getSolicitantTelefon() + "\n"
-					 + "IdiomaID: \t" + igjpa.getIdiomaID() + "\n"
-					 + "Exposa: \t" + igjpa.getExposa() + "\n"
-					 + "Solicita: \t" + igjpa.getSolicita() + "\n"
-					 + "Fitxer1ID: \t" + igjpa.getFitxer1ID() + "\n"
-					 + "Fitxer1: \t" + igjpa.getFitxer1() + "\n"
-					 + "Fitxer2ID: \t" + igjpa.getFitxer2ID() + "\n"
-					 + "Fitxer2: \t" + igjpa.getFitxer2() + "\n"
-					 + "Fitxer3ID: \t" + igjpa.getFitxer3ID() + "\n"
-					 + "Fitxer3: \t" + igjpa.getFitxer3() + "\n"
-					 + "Fitxer4ID: \t" + igjpa.getFitxer4ID() + "\n"
-					 + "Fitxer4: \t" + igjpa.getFitxer4() + "\n"
-					 + "Fitxer5ID: \t" + igjpa.getFitxer5ID() + "\n"
-					 + "Fitxer5: \t" + igjpa.getFitxer5() + "\n"
-					 + "Fitxer6ID: \t" + igjpa.getFitxer6ID() + "\n"
-					 + "Fitxer6: \t" + igjpa.getFitxer6() + "\n"
-					 + "Fitxer7ID: \t" + igjpa.getFitxer7ID() + "\n"
-					 + "Fitxer7: \t" + igjpa.getFitxer7() + "\n"
-					 + "Fitxer8ID: \t" + igjpa.getFitxer8ID() + "\n"
-					 + "Fitxer8: \t" + igjpa.getFitxer8() + "\n"
-					 + "Fitxer9ID: \t" + igjpa.getFitxer9ID() + "\n"
-					 + "Fitxer9: \t" + igjpa.getFitxer9() + "\n"
-					 + "DataCreacio: \t" + igjpa.getDataCreacio() + "\n"
-					 + "Estat: \t" + igjpa.getEstat() + "\n"
-					 + "Error: \t" + igjpa.getError() + "\n"
-					 + "Exception: \t" + igjpa.getException() + "\n"
-					 + "Datafinalitzacio: \t" + igjpa.getDatafinalitzacio() + "\n"
+				+ "\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
- 					 + "\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		instance = super.create(instance);
 
-			instance = super.create(instance);
+		registrarInstanciaGenerica(instance);
 
-			registrarInstanciaGenerica(instance);
+		int estat = Constants.ESTAT_NO_ENVIAT_NO_RESUM;
+		
+		try {
 			generaResum(instance);
+			estat = Constants.ESTAT_NO_ENVIAT;
+
+		} catch (I18NException e) {
+			String sStackTrace = exceptionToString(e);
+			String msg = "Error generant resum: " + e.getMessage();
+			log.error(msg, e);
+
+		} catch (Throwable t) {
+			// Aquest Throwable es per els casos d'errors RuntimeException
+			// El motiu es que hi ha errors que poden sortir com NullPointer, que no han de
+			// fer enrere el registre
+
+			String sStackTrace = exceptionToString(t);
+			String msg = "RuntimeException generant resum: " + t.getMessage();
+			log.error(msg, t);
+		}
+
+		try {
 			enviaCorreu(instance);
+			if (estat == Constants.ESTAT_NO_ENVIAT) {
+				estat = Constants.ESTAT_OK;
+			}else {
+				estat = Constants.ESTAT_NO_RESUM;
+			}
 
-			this.update(instance);
+		} catch (I18NException e) {
+			String sStackTrace = exceptionToString(e);
+			String msg = "Error amb correu: " + e.getMessage();
+			log.error(msg, e);
 
-			isOk = true;
-//		} finally {
-//			if (!isOk) {
-//				log.error("\n\n+++++++++++ ROLLBACKING ***********\n\n");
-//				context.setRollbackOnly();
-//			} else {
-//				log.error("\n\n+++++++++++ CREATED OK ***********\n\n");
-//			}
-//		}
+		} catch (Throwable t) {
+			// Aquest Throwable es per els casos d'errors RuntimeException
+			// El motiu es que hi ha errors que poden sortir com NullPointer, que no han de
+			// fer enrere el registre
+
+			String sStackTrace = exceptionToString(t);
+			String msg = "RuntimeException amb correu: " + t.getMessage();
+			log.error(msg, t);
+		}
+		
+		instance.setEstat(estat);
+		this.update(instance);
 
 		return instance;
+
 	}
 
-	protected void enviaCorreu(InstanciaGenerica instance) {
+	protected void enviaCorreu(InstanciaGenerica instance) throws I18NException {
 		String[] destinataris = { "ptrias@fundaciobit.org" };
 		String from = "ptrias@fundaciobit.org";
-
-		int ESTAT_ENVIAT = 1;
-		int ESTAT_NO_ENVIAT = -1;
 
 		try {
 			Context ctx = new InitialContext();
 			Session session = (javax.mail.Session) ctx.lookup(Constants.MAIL_SERVICE);
+//			Session session = (javax.mail.Session) ctx.lookup("hola");
 
 			EmailUtil.enviarCorreuInstancia(session, instance, from, destinataris);
 
-			instance.setEstat(ESTAT_ENVIAT);
-
 		} catch (NamingException e) {
-			instance.setEstat(ESTAT_NO_ENVIAT);
-
-			String sStackTrace = exceptionToString(e);
-			String msg = "Error obtenint session: " + e.getMessage();
-			log.error(msg, e);
-
-		} catch (I18NException e) {
-			instance.setEstat(ESTAT_NO_ENVIAT);
-
-			String sStackTrace = exceptionToString(e);
-			String msg = "Error amb correus: " + e.getMessage();
-			log.error(msg, e);
+			throw new I18NException("genapp.comodi", "error amb Session del correu:" + e.getMessage());
 		}
 	}
 
@@ -230,7 +226,7 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 
 		InfoRegistre ir = cridadaRegistre(codiDir3, justificant, distribuir, oficinaCodi, unitatTramitacioCodi, ig);
 
-		ig.setEstat(Constants.ESTAT_FINALITZAT);
+//		ig.setEstat(Constants.ESTAT_FINALITZAT);
 		ig.setNumRegistre(ir.getNumRegistre());
 		ig.setDatafinalitzacio(new Timestamp(System.currentTimeMillis()));
 
