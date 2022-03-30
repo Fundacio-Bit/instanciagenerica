@@ -208,11 +208,12 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 		String url = request.getParameter("urlnavegador") + "v/"
 				+ instanciaGenericaForm.getInstanciaGenerica().getUuid();
 
-		HtmlUtils.saveMessageInfo(request, "La seva Instancia Genèrica s'ha creat correctament");
+//		HtmlUtils.saveMessageInfo(request, "La seva Instancia Genèrica s'ha creat correctament");
 		HtmlUtils.saveMessageInfo(request,
-				"Per poder veure informació de la seva instancia guardi's aquesta URL: " + url);
+				"<div>Per poder veure informació de la seva instancia guardi's aquesta URL:</div><b>" + url + "</b>");
 
-		String correuEnviat = "S'ha enviat al seu correu la informació de la seva instancia genèrica.";
+		String correuEnviat = "<div>S'ha enviat la informació de la seva instancia genèrica al seu correu <i>("+ instanciaGenericaForm.getInstanciaGenerica().getSolicitantEmail() + ")</i></div>";
+
 		String correuNoEnviat = "No s'ha pogut enviar al seu correu la informació de la seva instancia genèrica.";
 //		String resumOk;
 		String resumNoGenerat = "No s'ha pogut genera el fixer resum de la seva instancia";
