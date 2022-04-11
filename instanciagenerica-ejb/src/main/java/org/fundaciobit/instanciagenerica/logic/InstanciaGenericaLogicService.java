@@ -37,4 +37,6 @@ public interface InstanciaGenericaLogicService extends InstanciaGenericaService 
 	public FileContentWs getAnexe(Long idAnexo, String idioma) throws I18NException;
 
 	public JustificanteWs getJustificant(String numRegF) throws I18NException;
+	
+	
 }

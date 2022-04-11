@@ -137,13 +137,6 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 	@Override
 	public InstanciaGenericaForm getInstanciaGenericaForm(InstanciaGenericaJPA _jpa, boolean __isView,
 			HttpServletRequest request, ModelAndView mav) throws I18NException {
-//
-//		Boolean initialized = (Boolean) session.getAttribute("inicialitzat");
-//
-//		if (initialized == null) {
-//			HtmlUtils.saveMessageInfo(request, "MessageInfo : Benvingut a InstanciaGenerica");
-//			session.setAttribute("inicialitzat", true);
-//		}
 
 		InstanciaGenericaForm instanciaGenericaForm = super.getInstanciaGenericaForm(_jpa, __isView, request, mav);
 		instanciaGenericaForm.setAttachedAdditionalJspCode(true);
