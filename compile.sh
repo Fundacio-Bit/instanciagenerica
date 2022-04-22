@@ -18,7 +18,7 @@ if [ $? == 0 ]; then
   
     echo on
     echo --------- COPIANT EAR ---------
-    cp ./ear/target/instanciagenerica.ear $INSTANCIAGENERICA_DEPLOY_DIR
+    cp ./instanciagenerica-ear/target/instanciagenerica.ear $INSTANCIAGENERICA_DEPLOY_DIR
 
   fi
 fi
