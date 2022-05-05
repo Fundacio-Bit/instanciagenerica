@@ -21,7 +21,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name = "Traduccio")
 @Table(name = "ige_traduccio" , indexes = { 
         @Index(name="ige_traduccio_pk_i", columnList = "traduccioid")})
 @SequenceGenerator(name="TRADUCCIO_SEQ", sequenceName="ige_traduccio_seq", allocationSize=1, initialValue=1000)

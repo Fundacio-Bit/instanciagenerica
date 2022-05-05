@@ -17,7 +17,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name = "InstanciaGenerica")
 @Table(name = "ige_instanciagenerica" , indexes = { 
         @Index(name="ige_instanciagenerica_pk_i", columnList = "instanciagenericaid"),
         @Index(name="ige_instgen_idiomaid_fk_i", columnList = "idiomaid"),

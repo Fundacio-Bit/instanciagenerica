@@ -15,7 +15,7 @@ import java.util.Set;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name = "Fitxer")
 @Table(name = "ige_fitxer" , indexes = { 
         @Index(name="ige_fitxer_pk_i", columnList = "fitxerid")})
 @SequenceGenerator(name="FITXER_SEQ", sequenceName="ige_fitxer_seq", allocationSize=1, initialValue=1000)
