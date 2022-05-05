@@ -1,10 +1,12 @@
 package org.fundaciobit.instanciagenerica.commons.utils;
 
+import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -31,16 +33,19 @@ public class Configuracio implements Constants {
 		if (fileProperties.isEmpty()) {
 			// matches the property name as defined in the system-properties element in
 			// WildFly
-			String propertyFile = System.getProperty(Constants.INSTANCIAGENERICA_PROPERTY_BASE + "properties");
-			File file = new File(propertyFile);
-
-			String propertySystemFile = System
-					.getProperty(Constants.INSTANCIAGENERICA_PROPERTY_BASE + "system.properties");
-			File systemFile = new File(propertySystemFile);
-
 			try {
-				fileProperties.load(new FileInputStream(file));
-				fileProperties.load(new FileInputStream(systemFile));
+				String property = Constants.INSTANCIAGENERICA_PROPERTY_BASE + "properties";
+				loadPropertyFile(property);
+
+				String propertySystem = Constants.INSTANCIAGENERICA_PROPERTY_BASE + "system.properties";
+				loadPropertyFile(propertySystem);
+
+			} catch (FileNotFoundException e) {
+				LOG.error("El Fitxer de propietats no está definit", e);
+
+			} catch (NullPointerException e) {
+				LOG.error("Propietat sense valor", e);
+
 			} catch (IOException e) {
 				LOG.error("No es pot carregar algun dels fitxers de propietats ... ", e);
 			}
@@ -48,6 +53,20 @@ public class Configuracio implements Constants {
 
 		return fileProperties;
 
+	}
+
+	public static void loadPropertyFile(String property) throws FileNotFoundException, IOException {
+		String propertyFile = System.getProperty(property);
+
+		if (propertyFile.equals("")) {
+			throw new NullPointerException("No esta definida la propietat: " + property);
+		}
+
+		File File = new File(propertyFile);
+		if (!File.exists()) {
+			throw new FileNotFoundException(File.getAbsolutePath());
+		}
+		fileProperties.load(new FileInputStream(File));
 	}
 
 	public static Properties getSystemAndFileProperties() {
@@ -117,6 +136,7 @@ public class Configuracio implements Constants {
 		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "filesystemmanagerclass");
 	}
 
+
 	public static String getRegistreUrl() {
 		return getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "registre.url");
 	}
@@ -144,6 +164,5 @@ public class Configuracio implements Constants {
 	public static File getPlantillaFitxerResum() {
 		String path = getProperty(INSTANCIAGENERICA_PROPERTY_BASE + "plantilla_fitxer_resum");
 		return new File(path);
-	}
-
+	}	
 }
