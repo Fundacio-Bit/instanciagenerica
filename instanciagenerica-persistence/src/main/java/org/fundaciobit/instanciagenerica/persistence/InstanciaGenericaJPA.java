@@ -7,10 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import org.hibernate.annotations.Type;
@@ -18,7 +18,18 @@ import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "ige_instanciagenerica" )
+@Table(name = "ige_instanciagenerica" , indexes = { 
+        @Index(name="ige_instanciagenerica_pk_i", columnList = "instanciagenericaid"),
+        @Index(name="ige_instgen_idiomaid_fk_i", columnList = "idiomaid"),
+        @Index(name="ige_instgen_fitxer1id_fk_i", columnList = "fitxer1id"),
+        @Index(name="ige_instgen_fitxer2id_fk_i", columnList = "fitxer2id"),
+        @Index(name="ige_instgen_fitxer3id_fk_i", columnList = "fitxer3id"),
+        @Index(name="ige_instgen_fitxer4id_fk_i", columnList = "fitxer4id"),
+        @Index(name="ige_instgen_fitxer5id_fk_i", columnList = "fitxer5id"),
+        @Index(name="ige_instgen_fitxer6id_fk_i", columnList = "fitxer6id"),
+        @Index(name="ige_instgen_fitxer7id_fk_i", columnList = "fitxer7id"),
+        @Index(name="ige_instgen_fitxer8id_fk_i", columnList = "fitxer8id"),
+        @Index(name="ige_instgen_fitxer9id_fk_i", columnList = "fitxer9id")})
 @SequenceGenerator(name="INSTANCIAGENERICA_SEQ", sequenceName="ige_instanciagenerica_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class InstanciaGenericaJPA implements InstanciaGenerica {
@@ -30,7 +41,6 @@ private static final long serialVersionUID = 389380649L;
   /** Clau primaria */
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="INSTANCIAGENERICA_SEQ")
-    @Index(name="ige_instanciagenerica_pk_i")
     @Column(name="instanciagenericaid",nullable = false,length = 19)
     long instanciaGenericaID;
 
@@ -81,7 +91,6 @@ private static final long serialVersionUID = 389380649L;
     java.lang.String solicitantTelefon;
 
   /** Idioma en que del que esta exposat */
-    @Index(name="ige_instgen_idiomaid_fk_i")
     @Column(name="idiomaid",nullable = false,length = 20)
     java.lang.String idiomaID;
 
@@ -95,39 +104,30 @@ private static final long serialVersionUID = 389380649L;
     @Type(type = "org.hibernate.type.TextType")
     java.lang.String solicita;
 
-    @Index(name="ige_instgen_fitxer1id_fk_i")
     @Column(name="fitxer1id",length = 19)
     java.lang.Long fitxer1ID;
 
-    @Index(name="ige_instgen_fitxer2id_fk_i")
     @Column(name="fitxer2id",length = 19)
     java.lang.Long fitxer2ID;
 
-    @Index(name="ige_instgen_fitxer3id_fk_i")
     @Column(name="fitxer3id",length = 19)
     java.lang.Long fitxer3ID;
 
-    @Index(name="ige_instgen_fitxer4id_fk_i")
     @Column(name="fitxer4id",length = 19)
     java.lang.Long fitxer4ID;
 
-    @Index(name="ige_instgen_fitxer5id_fk_i")
     @Column(name="fitxer5id",length = 19)
     java.lang.Long fitxer5ID;
 
-    @Index(name="ige_instgen_fitxer6id_fk_i")
     @Column(name="fitxer6id",length = 19)
     java.lang.Long fitxer6ID;
 
-    @Index(name="ige_instgen_fitxer7id_fk_i")
     @Column(name="fitxer7id",length = 19)
     java.lang.Long fitxer7ID;
 
-    @Index(name="ige_instgen_fitxer8id_fk_i")
     @Column(name="fitxer8id",length = 19)
     java.lang.Long fitxer8ID;
 
-    @Index(name="ige_instgen_fitxer9id_fk_i")
     @Column(name="fitxer9id",length = 19)
     java.lang.Long fitxer9ID;
 
@@ -524,8 +524,7 @@ private static final long serialVersionUID = 389380649L;
 // IMP Field:idiomaid | Table: ige_idioma | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="ige_instgen_idioma_idioma_fk")
-    @JoinColumn(name = "idiomaid", referencedColumnName ="idiomaID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "idiomaid", referencedColumnName ="idiomaID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="ige_instgen_idioma_idioma_fk"))
     private IdiomaJPA idioma;
 
     public IdiomaJPA getIdioma() {
@@ -539,8 +538,7 @@ private static final long serialVersionUID = 389380649L;
 // IMP Field:fitxerid | Table: ige_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="ige_instgen_fitxer_fitxer1_fk")
-    @JoinColumn(name = "fitxer1id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "fitxer1id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="ige_instgen_fitxer_fitxer1_fk"))
     private FitxerJPA fitxer1;
 
     public FitxerJPA getFitxer1() {
@@ -554,8 +552,7 @@ private static final long serialVersionUID = 389380649L;
 // IMP Field:fitxerid | Table: ige_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="ige_instgen_fitxer_fitxer2_fk")
-    @JoinColumn(name = "fitxer2id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "fitxer2id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="ige_instgen_fitxer_fitxer2_fk"))
     private FitxerJPA fitxer2;
 
     public FitxerJPA getFitxer2() {
@@ -569,8 +566,7 @@ private static final long serialVersionUID = 389380649L;
 // IMP Field:fitxerid | Table: ige_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="ige_instgen_fitxer_fitxer3_fk")
-    @JoinColumn(name = "fitxer3id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "fitxer3id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="ige_instgen_fitxer_fitxer3_fk"))
     private FitxerJPA fitxer3;
 
     public FitxerJPA getFitxer3() {
@@ -584,8 +580,7 @@ private static final long serialVersionUID = 389380649L;
 // IMP Field:fitxerid | Table: ige_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="ige_instgen_fitxer_fitxer4_fk")
-    @JoinColumn(name = "fitxer4id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "fitxer4id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="ige_instgen_fitxer_fitxer4_fk"))
     private FitxerJPA fitxer4;
 
     public FitxerJPA getFitxer4() {
@@ -599,8 +594,7 @@ private static final long serialVersionUID = 389380649L;
 // IMP Field:fitxerid | Table: ige_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="ige_instgen_fitxer_fitxer5_fk")
-    @JoinColumn(name = "fitxer5id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "fitxer5id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="ige_instgen_fitxer_fitxer5_fk"))
     private FitxerJPA fitxer5;
 
     public FitxerJPA getFitxer5() {
@@ -614,8 +608,7 @@ private static final long serialVersionUID = 389380649L;
 // IMP Field:fitxerid | Table: ige_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="ige_instgen_fitxer_fitxer6_fk")
-    @JoinColumn(name = "fitxer6id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "fitxer6id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="ige_instgen_fitxer_fitxer6_fk"))
     private FitxerJPA fitxer6;
 
     public FitxerJPA getFitxer6() {
@@ -629,8 +622,7 @@ private static final long serialVersionUID = 389380649L;
 // IMP Field:fitxerid | Table: ige_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="ige_instgen_fitxer_fitxer7_fk")
-    @JoinColumn(name = "fitxer7id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "fitxer7id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="ige_instgen_fitxer_fitxer7_fk"))
     private FitxerJPA fitxer7;
 
     public FitxerJPA getFitxer7() {
@@ -644,8 +636,7 @@ private static final long serialVersionUID = 389380649L;
 // IMP Field:fitxerid | Table: ige_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="ige_instgen_fitxer_fitxer8_fk")
-    @JoinColumn(name = "fitxer8id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "fitxer8id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="ige_instgen_fitxer_fitxer8_fk"))
     private FitxerJPA fitxer8;
 
     public FitxerJPA getFitxer8() {
@@ -659,8 +650,7 @@ private static final long serialVersionUID = 389380649L;
 // IMP Field:fitxerid | Table: ige_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="ige_instgen_fitxer_fitxer9_fk")
-    @JoinColumn(name = "fitxer9id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "fitxer9id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="ige_instgen_fitxer_fitxer9_fk"))
     private FitxerJPA fitxer9;
 
     public FitxerJPA getFitxer9() {

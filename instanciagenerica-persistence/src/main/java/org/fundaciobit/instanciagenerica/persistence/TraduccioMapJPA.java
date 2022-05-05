@@ -3,10 +3,13 @@ package org.fundaciobit.instanciagenerica.persistence;
 import org.fundaciobit.instanciagenerica.model.entity.*;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.Index;
 
 
 @javax.persistence.Embeddable
-@Table(name = "ige_traducciomap" )
+@Table(name = "ige_traducciomap" , indexes = { 
+        @Index(name="ige_traducciomap_pk_i", columnList = "traducciomapid"),
+        @Index(name="ige_traducciomap_idiomaid_fk_i", columnList = "idiomaid")})
 @javax.xml.bind.annotation.XmlRootElement
 public class TraduccioMapJPA implements TraduccioMap {
 

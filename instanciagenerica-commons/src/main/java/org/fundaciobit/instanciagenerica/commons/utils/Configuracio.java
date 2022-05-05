@@ -41,7 +41,7 @@ public class Configuracio implements Constants {
 				loadPropertyFile(propertySystem);
 
 			} catch (FileNotFoundException e) {
-				LOG.error("El Fitxer de propietats no está definit", e);
+				LOG.error("El fitxer de propietats no esta definit", e);
 
 			} catch (NullPointerException e) {
 				LOG.error("Propietat sense valor", e);
