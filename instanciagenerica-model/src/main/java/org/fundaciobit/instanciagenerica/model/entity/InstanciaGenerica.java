@@ -2,8 +2,8 @@ package org.fundaciobit.instanciagenerica.model.entity;
 
 public interface InstanciaGenerica extends org.fundaciobit.genapp.common.IGenAppEntity {
 
-	public long getInstanciaGenericaID();
-	public void setInstanciaGenericaID(long _instanciaGenericaID_);
+	public java.lang.Long getInstanciaGenericaID();
+	public void setInstanciaGenericaID(java.lang.Long _instanciaGenericaID_);
 
 	public java.lang.String getNumRegistre();
 	public void setNumRegistre(java.lang.String _numRegistre_);

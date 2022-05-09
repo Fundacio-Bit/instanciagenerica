@@ -42,7 +42,7 @@ private static final long serialVersionUID = 389380649L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="INSTANCIAGENERICA_SEQ")
     @Column(name="instanciagenericaid",nullable = false,length = 19)
-    long instanciaGenericaID;
+    java.lang.Long instanciaGenericaID;
 
   /** Numero de registre de la instancia, corporatiu */
     @Column(name="numregistre",length = 50)
@@ -157,7 +157,7 @@ private static final long serialVersionUID = 389380649L;
   }
 
   /** Constructor amb tots els camps  */
-  public InstanciaGenericaJPA(long instanciaGenericaID , java.lang.String numRegistre , java.lang.String uuid , boolean solicitantPersonaFisica , int solicitantTipusAdminID , java.lang.String solicitantAdminID , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantCif , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , java.sql.Timestamp dataCreacio , java.sql.Timestamp datafinalitzacio , int estat , java.lang.String error , java.lang.String exception) {
+  public InstanciaGenericaJPA(java.lang.Long instanciaGenericaID , java.lang.String numRegistre , java.lang.String uuid , boolean solicitantPersonaFisica , int solicitantTipusAdminID , java.lang.String solicitantAdminID , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantCif , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , java.sql.Timestamp dataCreacio , java.sql.Timestamp datafinalitzacio , int estat , java.lang.String error , java.lang.String exception) {
     this.instanciaGenericaID=instanciaGenericaID;
     this.numRegistre=numRegistre;
     this.uuid=uuid;
@@ -224,7 +224,7 @@ private static final long serialVersionUID = 389380649L;
     this.exception=exception;
 }
   /** Constructor dels valors Not Null */
-  public InstanciaGenericaJPA(long instanciaGenericaID , boolean solicitantPersonaFisica , int solicitantTipusAdminID , java.lang.String solicitantAdminID , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.sql.Timestamp dataCreacio) {
+  public InstanciaGenericaJPA(java.lang.Long instanciaGenericaID , boolean solicitantPersonaFisica , int solicitantTipusAdminID , java.lang.String solicitantAdminID , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.sql.Timestamp dataCreacio) {
     this.instanciaGenericaID=instanciaGenericaID;
     this.solicitantPersonaFisica=solicitantPersonaFisica;
     this.solicitantTipusAdminID=solicitantTipusAdminID;
@@ -289,10 +289,10 @@ private static final long serialVersionUID = 389380649L;
     this.setFitxer9(FitxerJPA.toJPA(__bean.getFitxer9()));
 	}
 
-	public long getInstanciaGenericaID() {
+	public java.lang.Long getInstanciaGenericaID() {
 		return(instanciaGenericaID);
 	};
-	public void setInstanciaGenericaID(long _instanciaGenericaID_) {
+	public void setInstanciaGenericaID(java.lang.Long _instanciaGenericaID_) {
 		this.instanciaGenericaID = _instanciaGenericaID_;
 	};
 
@@ -514,7 +514,12 @@ private static final long serialVersionUID = 389380649L;
     if (__obj != null && __obj instanceof InstanciaGenerica) {
       InstanciaGenerica __instance = (InstanciaGenerica)__obj;
       __result = true;
-      __result = __result && (this.getInstanciaGenericaID() == __instance.getInstanciaGenericaID()) ;
+      if (this.getInstanciaGenericaID() == null) {
+        __result = __result && (__instance.getInstanciaGenericaID() == null);
+      } else {
+        __result = __result && this.getInstanciaGenericaID().equals(__instance.getInstanciaGenericaID()) ;
+      }
+
     } else {
       __result = false;
     }
