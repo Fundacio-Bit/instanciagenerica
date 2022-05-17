@@ -79,7 +79,6 @@ public class InitServlet extends HttpServlet {
 		// Sistema de Traduccions LOGIC
 		// TODO Moure a logic
 		try {
-			//TODO XXXXXXXXXXXXXXX Aqui le ha liado con los imports, preguntar a Toni
 			Class.forName(I18NLogicUtils.class.getName());
 		} catch (Throwable th) {
 			log.error("Error inicialitzant el sistema de traduccions logic: " + th.getMessage(), th);

@@ -65,14 +65,14 @@ public class InstanciaGenericaJPAManager
 
 
 
- public void delete(java.lang.Long _instanciaGenericaID_) {
+ public void delete(long _instanciaGenericaID_) {
    delete(findByPrimaryKey(_instanciaGenericaID_));
  }
 
 
 
 
-    public InstanciaGenerica findByPrimaryKey(java.lang.Long _instanciaGenericaID_) {
+    public InstanciaGenerica findByPrimaryKey(long _instanciaGenericaID_) {
         return __em.find(InstanciaGenericaJPA.class, _instanciaGenericaID_);  
     }
     @Override

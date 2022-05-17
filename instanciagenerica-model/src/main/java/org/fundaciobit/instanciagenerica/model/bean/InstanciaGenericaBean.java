@@ -10,7 +10,7 @@ public class InstanciaGenericaBean implements InstanciaGenerica {
 
 private static final long serialVersionUID = -814318814L;
 
-	java.lang.Long instanciaGenericaID;// PK
+	long instanciaGenericaID;// PK
 	java.lang.String numRegistre;
 	java.lang.String uuid;
 	boolean solicitantPersonaFisica;
@@ -48,7 +48,7 @@ private static final long serialVersionUID = -814318814L;
   }
 
   /** Constructor amb tots els camps  */
-  public InstanciaGenericaBean(java.lang.Long instanciaGenericaID , java.lang.String numRegistre , java.lang.String uuid , boolean solicitantPersonaFisica , int solicitantTipusAdminID , java.lang.String solicitantAdminID , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantCif , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , java.sql.Timestamp dataCreacio , java.sql.Timestamp datafinalitzacio , int estat , java.lang.String error , java.lang.String exception) {
+  public InstanciaGenericaBean(long instanciaGenericaID , java.lang.String numRegistre , java.lang.String uuid , boolean solicitantPersonaFisica , int solicitantTipusAdminID , java.lang.String solicitantAdminID , java.lang.String solicitantNom , java.lang.String solicitantLlinatge1 , java.lang.String solicitantLlinatge2 , java.lang.String solicitantCif , java.lang.String solicitantRaoSocial , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID , java.lang.Long fitxer4ID , java.lang.Long fitxer5ID , java.lang.Long fitxer6ID , java.lang.Long fitxer7ID , java.lang.Long fitxer8ID , java.lang.Long fitxer9ID , java.sql.Timestamp dataCreacio , java.sql.Timestamp datafinalitzacio , int estat , java.lang.String error , java.lang.String exception) {
     this.instanciaGenericaID=instanciaGenericaID;
     this.numRegistre=numRegistre;
     this.uuid=uuid;
@@ -115,7 +115,7 @@ private static final long serialVersionUID = -814318814L;
     this.exception=exception;
 }
   /** Constructor dels valors Not Null */
-  public InstanciaGenericaBean(java.lang.Long instanciaGenericaID , boolean solicitantPersonaFisica , int solicitantTipusAdminID , java.lang.String solicitantAdminID , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.sql.Timestamp dataCreacio) {
+  public InstanciaGenericaBean(long instanciaGenericaID , boolean solicitantPersonaFisica , int solicitantTipusAdminID , java.lang.String solicitantAdminID , java.lang.String solicitantDireccio , java.lang.String solicitantEmail , java.lang.String solicitantTelefon , java.lang.String idiomaID , java.lang.String exposa , java.lang.String solicita , java.sql.Timestamp dataCreacio) {
     this.instanciaGenericaID=instanciaGenericaID;
     this.solicitantPersonaFisica=solicitantPersonaFisica;
     this.solicitantTipusAdminID=solicitantTipusAdminID;
@@ -180,10 +180,10 @@ private static final long serialVersionUID = -814318814L;
     this.setFitxer9(FitxerBean.toBean(__bean.getFitxer9()));
 	}
 
-	public java.lang.Long getInstanciaGenericaID() {
+	public long getInstanciaGenericaID() {
 		return(instanciaGenericaID);
 	};
-	public void setInstanciaGenericaID(java.lang.Long _instanciaGenericaID_) {
+	public void setInstanciaGenericaID(long _instanciaGenericaID_) {
 		this.instanciaGenericaID = _instanciaGenericaID_;
 	};
 
