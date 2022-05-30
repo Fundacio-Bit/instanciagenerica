@@ -58,7 +58,7 @@ public class FileDownloadController {
 			// TODO TRADUIR Identificador no trobar
 			String msg = "Identificador no s'ha pogut desencriptar";
 			response.setHeader("MsgInstanciaGenerica", msg);
-			response.sendError(response.SC_NOT_FOUND);
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 		} else {
 			fullDownload(arxiuId, filename, contentType, response);
 		}
@@ -83,7 +83,7 @@ public class FileDownloadController {
 				// TODO TRADUIR Fitxer no trobat
 				String msg = "Fitxer amb ID=" + arxiuId + " no existeix.";
 				response.setHeader("MsgInstanciaGenerica", msg);
-				response.sendError(response.SC_NOT_FOUND);
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 				return;
 			}
 
@@ -111,9 +111,9 @@ public class FileDownloadController {
 			log.error(msg, e);
 			response.setHeader("MsgInstanciaGenerica", msg);
 			try {
-				response.sendError(response.SC_NOT_FOUND);
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			} catch (IOException e1) {
-				response.setStatus(response.SC_NOT_FOUND);
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
 		}
 	}

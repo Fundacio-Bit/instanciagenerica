@@ -82,7 +82,7 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 //			instanciaGenericaForm.setAttachedAdditionalJspCode(false);
 
-			Set<Field<?>> hidden = new HashSet(Arrays.asList(InstanciaGenericaFields.ALL_INSTANCIAGENERICA_FIELDS));
+			Set<Field<?>> hidden = new HashSet<Field<?>>(Arrays.asList(InstanciaGenericaFields.ALL_INSTANCIAGENERICA_FIELDS));
 
 			// ************************** DADES REGISTRE ******************/
 			hidden.remove(NUMREGISTRE);
@@ -135,7 +135,7 @@ public class InstanciaGenericaPublicController extends AbstractInstanciaGenerica
 
 			instanciaGenericaForm.setHiddenFields(hidden);
 
-			String uuid = instanciaGenericaForm.getInstanciaGenerica().getUuid();
+//			String uuid = instanciaGenericaForm.getInstanciaGenerica().getUuid();
 			instanciaGenericaForm.addAdditionalButton(new AdditionalButton("fas fa-file", "detallsregistre",
 					getContextWeb() + "/veureDetallsRegistre/{0}/2", "btn-primary"));
 		}

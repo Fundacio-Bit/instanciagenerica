@@ -1,13 +1,10 @@
 package org.fundaciobit.instanciagenerica.logic.utils;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -17,12 +14,8 @@ import javax.mail.Transport;
 import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.instanciagenerica.commons.utils.Constants;
-import org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicEJB.InfoRegistre;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 

@@ -59,6 +59,7 @@ public class AuthenticationSuccessListener implements
       }
     }
 
+    log.info("containsRoleUser: " + containsRoleUser + ", containsRoleAdmin: " + containsRoleAdmin);
 
     // TODO GENAPP Obtenir idioma de l'usuari. Null = idioma per defecte.
     String language = null;

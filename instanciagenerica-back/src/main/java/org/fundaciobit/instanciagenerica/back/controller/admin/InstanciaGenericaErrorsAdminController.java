@@ -5,22 +5,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.genapp.common.web.HtmlUtils;
-import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaFilterForm;
 import org.fundaciobit.instanciagenerica.back.form.webdb.InstanciaGenericaForm;
 import org.fundaciobit.instanciagenerica.commons.utils.Constants;
-import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.instanciagenerica.model.fields.InstanciaGenericaFields;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,7 +45,7 @@ public class InstanciaGenericaErrorsAdminController extends InstanciaGenericaAdm
 
 		if (instanciaGenericaFilterForm.isNou()) {
 
-			Set<Field<?>> hidden = new HashSet(Arrays.asList(InstanciaGenericaFields.ALL_INSTANCIAGENERICA_FIELDS));
+			Set<Field<?>> hidden = new HashSet<Field<?>>(Arrays.asList(InstanciaGenericaFields.ALL_INSTANCIAGENERICA_FIELDS));
 			hidden.remove(InstanciaGenericaFields.INSTANCIAGENERICAID);
 			hidden.remove(InstanciaGenericaFields.DATACREACIO);
 			hidden.remove(InstanciaGenericaFields.DATAFINALITZACIO);

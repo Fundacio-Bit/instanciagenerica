@@ -1,8 +1,5 @@
 package org.fundaciobit.instanciagenerica.commons.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,8 +12,6 @@ import java.util.Properties;
  * 
  */
 public class Configuracio implements Constants {
-
-	private static final Logger LOG = LoggerFactory.getLogger(Configuracio.class);
 
 	private static final Properties fileProperties = new Properties();
 
@@ -49,12 +44,12 @@ public class Configuracio implements Constants {
 
 		if (propertyFile == null) {
 			throw new RuntimeException("No existeix la propietat: " + property
-					+ " al fitxer standalone.xml. S'hauria d'incloure aquesta propietat a l'etiqueta <system-properties> del fitxer standalone");
+					+ " al fitxer 'standalone'. S'hauria d'incloure aquesta propietat a l'etiqueta <system-properties> del fitxer standalone");
 		}
 
 		if (propertyFile.trim().length() == 0) {
 			throw new RuntimeException("La propietat: " + property
-					+ " del fitxer standalone.xml no te valor. Se li ha de posar el fitxer corresponent a la propietat al fitxer standalone");
+					+ " del fitxer 'standalone' no té valor. Se li ha de posar el fitxer corresponent a la propietat al fitxer standalone");
 		}
 
 		File File = new File(propertyFile);

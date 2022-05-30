@@ -342,9 +342,9 @@ public abstract class AbstractInstanciaGenericaController extends InstanciaGener
 			log.error(msg, e);
 			response.setHeader("MsgInstanciaGenerica", msg);
 			try {
-				response.sendError(response.SC_NOT_FOUND);
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			} catch (IOException e1) {
-				response.setStatus(response.SC_NOT_FOUND);
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			}
 		} catch (I18NException e) {
 			log.error("Error WsI18NException ");

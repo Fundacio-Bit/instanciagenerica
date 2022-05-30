@@ -3,11 +3,9 @@ package org.fundaciobit.instanciagenerica.logic;
 
 import javax.ejb.Stateless;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.instanciagenerica.model.entity.Fitxer;
-import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.ejb.FitxerEJB;
 
 /**

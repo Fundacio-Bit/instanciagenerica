@@ -1,33 +1,14 @@
 package org.fundaciobit.instanciagenerica.ejb.test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.Message.RecipientType;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.logic.InstanciaGenericaLogicEJB;
 import org.fundaciobit.instanciagenerica.logic.utils.EmailUtil;
-import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
-import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 /**
  * 

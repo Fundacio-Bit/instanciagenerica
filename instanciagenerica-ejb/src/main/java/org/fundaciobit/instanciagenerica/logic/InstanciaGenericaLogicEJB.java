@@ -3,7 +3,6 @@ package org.fundaciobit.instanciagenerica.logic;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBContext;
-import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -15,20 +14,15 @@ import javax.transaction.Status;
 import javax.transaction.TransactionSynchronizationRegistry;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.Normalizer;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -42,13 +36,7 @@ import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.instanciagenerica.model.entity.Fitxer;
 import org.fundaciobit.instanciagenerica.model.entity.InstanciaGenerica;
-import org.fundaciobit.instanciagenerica.persistence.FitxerJPA;
 import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
-
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.AcroFields;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
 
 import es.caib.regweb3.ws.api.v3.AnexoWs;
 import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
@@ -68,7 +56,6 @@ import org.fundaciobit.instanciagenerica.commons.utils.Constants;
 import org.fundaciobit.instanciagenerica.ejb.InstanciaGenericaEJB;
 import org.fundaciobit.instanciagenerica.logic.utils.EmailUtil;
 import org.fundaciobit.instanciagenerica.logic.utils.GeneradorDocuments;
-import org.fundaciobit.instanciagenerica.logic.utils.I18NLogicUtils;
 
 /**
  * 
@@ -137,7 +124,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			estat = Constants.ESTAT_NO_ENVIAT;
 
 		} catch (I18NException e) {
-			String sStackTrace = exceptionToString(e);
 			String msg = "Error generant resum: " + e.getMessage();
 			log.error(msg, e);
 
@@ -146,7 +132,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			// El motiu es que hi ha errors que poden sortir com NullPointer, que no han de
 			// fer enrere el registre
 
-			String sStackTrace = exceptionToString(t);
 			String msg = "RuntimeException generant resum: " + t.getMessage();
 			log.error(msg, t);
 		}
@@ -160,7 +145,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			}
 
 		} catch (I18NException e) {
-			String sStackTrace = exceptionToString(e);
 			String msg = "Error amb correu: " + e.getMessage();
 			log.error(msg, e);
 
@@ -169,7 +153,6 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			// El motiu es que hi ha errors que poden sortir com NullPointer, que no han de
 			// fer enrere el registre
 
-			String sStackTrace = exceptionToString(t);
 			String msg = "RuntimeException amb correu: " + t.getMessage();
 			log.error(msg, t);
 		}
@@ -384,10 +367,10 @@ public class InstanciaGenericaLogicEJB extends InstanciaGenericaEJB implements I
 			Fitxer[] fitxers = new Fitxer[] { ig.getFitxer1(), ig.getFitxer2(), ig.getFitxer3(), ig.getFitxer4(),
 					ig.getFitxer5(), ig.getFitxer6(), ig.getFitxer7(), ig.getFitxer8(), ig.getFitxer9() };
 
-			int idx = 0;
+//			int idx = 0;
 			for (Fitxer f : fitxers) {
 				if (f != null) {
-					idx++;
+//					idx++;
 					AnexoWs anex = new AnexoWs();
 
 					byte[] fichero = FileSystemManager.getFileContent(f.getFitxerID());

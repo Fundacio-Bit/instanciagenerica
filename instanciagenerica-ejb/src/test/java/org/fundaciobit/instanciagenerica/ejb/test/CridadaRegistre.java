@@ -35,7 +35,7 @@ public class CridadaRegistre {
 			String oficinaDestiDenominacio = prop.getProperty("oficinadesti.denominacio");
 
 			String unitatTramitacioDestiCodi = prop.getProperty("unitattramitacio.codi");
-			String unitatTramitacioDestiDenominacio = prop.getProperty("unitattramitacio.denominacio");
+//			String unitatTramitacioDestiDenominacio = prop.getProperty("unitattramitacio.denominacio");
 
 			System.out.println(endpoint + "\n" + usr_app + "\n" + pwd_app + "\n" + codiDir3 + "\n" + oficinaDestiCodi
 					+ "\n" + oficinaDestiDenominacio);
