@@ -1,5 +1,7 @@
 package org.fundaciobit.instanciagenerica.ejb.test;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Timestamp;
 import java.util.Properties;
 
@@ -18,21 +20,6 @@ import org.fundaciobit.instanciagenerica.persistence.InstanciaGenericaJPA;
 
 public class EnviarCorreu {
 
-	public static final String PORTAFIB_PROPERTY_BASE = "es.caib.portafib.";
-	public static final String MAIL_SERVICE = "java:/org.fundaciobit.instanciagenerica.mail";
-
-	// TRUE ROLES
-	public static final String PFI_ADMIN = "PFI_ADMIN";
-	public static final String PFI_USER = "PFI_USER";
-
-	// VIRTUAL SECURITY ROLES
-	public static final String ROLE_ADMIN = "ROLE_ADMIN";
-	public static final String ROLE_USER = "ROLE_USER";
-
-	// EJB HIGH LEVEL ROLES
-	public static final String ROLE_EJB_FULL_ACCESS = PFI_ADMIN;
-	public static final String ROLE_EJB_BASIC_ACCESS = PFI_USER;
-
 	public static void main(String[] args) {
 
 		// Generar javax.mail.Session a mà. Metode generic que jo li pasi
@@ -46,17 +33,13 @@ public class EnviarCorreu {
 //		Session session = (javax.mail.Session) ctx.lookup(MAIL_SERVICE);
 
 		// Així es com s'ha de cridar desde TEST
-		Properties props = new Properties();
-		props.put("mail.store.protocol", "pop3");
-		props.put("mail.transport.protocol", "smtp");
-		props.put("mail.user", "nobody");
-		props.put("mail.pop3.host", "mail.fundaciobit.org");
-		props.put("mail.smtp.host", "mail.fundaciobit.org");
-		props.put("mail.smtp.port", "25");
-		props.put("mail.from", "otae@fundaciobit.org");
-		props.put("mail.debug", "false");
 
-		Session session = Session.getDefaultInstance(props, null);
+	    try {
+	        
+	    Properties props = new Properties();
+        props.load(new FileInputStream(new File("mail.properties")));
+
+        Session session = Session.getDefaultInstance(props, null);
 
 		boolean debug = true;
 		session.setDebug(debug);
@@ -73,13 +56,11 @@ public class EnviarCorreu {
 		ig.setError(
 				"Error no contrrolat fent cridada a registre: Document(interesado.documento): El NIE no té format correcte (LLETRA(X,Y,Z) + 7 DÍGITS + LLETRA)");
 
-//		String[] destinataris = { "ptrias@fundaciobit.org", "anadal@fundaciobit.org", "atrobat@fundaciobit.org" };
-		String[] destinataris = {"ptrias@fundaciobit.org"};
-		String from = "ptrias@fundaciobit.org";
+		String from = props.getProperty("mail.from");
+		String[] destinataris = {props.getProperty("mail.to")};
 
-		try {
-			EmailUtil.enviarCorreuInstancia(session, ig, from, destinataris);
-		} catch (I18NException e) {
+		EmailUtil.enviarCorreuInstancia(session, ig, from, destinataris);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

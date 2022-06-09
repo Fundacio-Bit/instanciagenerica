@@ -1,0 +1,12 @@
+#Dades configuració del correu
+mail.store.protocol=setstoreprotocol       
+mail.transport.protocol=settransportprotocol   
+mail.user=setuser                 
+mail.pop3.host=setpop3host            
+mail.smtp.host=setsmtphost            
+mail.smtp.port=setsmtpport            
+mail.from=setfrom                 
+mail.debug=setdebug                
+
+mail.from=setfrom                 
+mail.to=setto                   
